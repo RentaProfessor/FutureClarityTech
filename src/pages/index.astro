@@ -14,8 +14,10 @@ import Footer from '../components/Footer.astro';
         <!-- Hero Content -->
         <div class="max-w-4xl mx-auto">
           <h1 class="text-4xl sm:text-5xl lg:text-7xl font-bold text-slate-900 mb-6 leading-tight tracking-tight">
-            Web Development that 
-            <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">just works.</span>
+            Transform your business with 
+            <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              <span id="typing-text" class="inline-block min-w-[280px] sm:min-w-[320px] lg:min-w-[400px] text-left">Web Design</span><span id="cursor" class="animate-pulse">|</span>
+            </span>
           </h1>
           <p class="text-xl sm:text-2xl text-slate-600 mb-8 leading-relaxed max-w-3xl mx-auto font-light">
             We build reliable, fast, and beautiful websites for small businesses. 
@@ -415,5 +417,60 @@ import Footer from '../components/Footer.astro';
   </section>
 
   <Footer />
+
+  <script>
+    // Typing effect for hero text
+    document.addEventListener('DOMContentLoaded', function() {
+      const typingElement = document.getElementById('typing-text');
+      const cursor = document.getElementById('cursor');
+      
+      if (!typingElement || !cursor) return;
+      
+      const words = ['Web Design', 'App Development', 'FutureClarity'];
+      let currentWordIndex = 0;
+      let isTyping = true;
+      let charIndex = 0;
+      
+      // Typing speeds (in milliseconds)
+      const typeSpeed = 100;
+      const deleteSpeed = 50;
+      const pauseTime = 2000; // Pause after completing a word
+      const pauseBeforeDelete = 1500; // Pause before starting to delete
+      
+      function typeWriter() {
+        const currentWord = words[currentWordIndex];
+        
+        if (isTyping) {
+          // Typing phase
+          if (charIndex < currentWord.length) {
+            typingElement.textContent = currentWord.substring(0, charIndex + 1);
+            charIndex++;
+            setTimeout(typeWriter, typeSpeed);
+          } else {
+            // Word complete, pause then start deleting
+            setTimeout(() => {
+              isTyping = false;
+              typeWriter();
+            }, pauseBeforeDelete);
+          }
+        } else {
+          // Deleting phase
+          if (charIndex > 0) {
+            typingElement.textContent = currentWord.substring(0, charIndex - 1);
+            charIndex--;
+            setTimeout(typeWriter, deleteSpeed);
+          } else {
+            // Word deleted, move to next word
+            currentWordIndex = (currentWordIndex + 1) % words.length;
+            isTyping = true;
+            setTimeout(typeWriter, pauseTime);
+          }
+        }
+      }
+      
+      // Start the typing effect after a short delay
+      setTimeout(typeWriter, 1000);
+    });
+  </script>
 
 </Layout>
