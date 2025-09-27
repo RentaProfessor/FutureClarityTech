@@ -1,0 +1,471 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="FutureClarity Technologies - Web Development that just works.">
+  <Header />
+  
+  <!-- Hero Section -->
+  <section class="relative min-h-screen flex items-center pt-20 pb-12 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <!-- Hero Content -->
+        <div class="max-w-4xl mx-auto">
+          <h1 class="text-4xl sm:text-5xl lg:text-7xl font-bold text-slate-900 mb-6 leading-tight tracking-tight">
+            Web Development that 
+            <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">just works.</span>
+          </h1>
+          <p class="text-xl sm:text-2xl text-slate-600 mb-8 leading-relaxed max-w-3xl mx-auto font-light">
+            We build reliable, fast, and beautiful websites for small businesses. 
+            No jargon, no complexity—just results that help you grow.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
+            <a href="#contact" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-xl text-lg font-semibold hover:shadow-2xl hover:shadow-blue-500/25 hover:-translate-y-1 transition-all duration-300 text-center">
+              Get a Quote
+            </a>
+            <a href="/portfolio" class="border-2 border-slate-300 text-slate-700 px-8 py-4 rounded-xl text-lg font-semibold hover:border-blue-500 hover:text-blue-600 hover:bg-white transition-all duration-300 text-center">
+              See Our Work
+            </a>
+          </div>
+        </div>
+
+        <!-- Simple Visual Element -->
+        <div class="mt-16 lg:mt-20">
+          <div class="relative max-w-4xl mx-auto">
+            <div class="bg-white/80 backdrop-blur-sm rounded-3xl shadow-2xl p-8 border border-white/20">
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="text-center p-6 rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-100">
+                  <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl mx-auto mb-4 flex items-center justify-center">
+                    <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20" style="width: 1.5rem; height: 1.5rem;">
+                      <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd" />
+                    </svg>
+                  </div>
+                  <h3 class="font-semibold text-slate-900 mb-2">Fast</h3>
+                  <p class="text-sm text-slate-600">Lightning-fast websites</p>
+                </div>
+                <div class="text-center p-6 rounded-2xl bg-gradient-to-br from-purple-50 to-pink-100">
+                  <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl mx-auto mb-4 flex items-center justify-center">
+                    <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20" style="width: 1.5rem; height: 1.5rem;">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                    </svg>
+                  </div>
+                  <h3 class="font-semibold text-slate-900 mb-2">Reliable</h3>
+                  <p class="text-sm text-slate-600">Built to last and perform</p>
+                </div>
+                <div class="text-center p-6 rounded-2xl bg-gradient-to-br from-green-50 to-emerald-100">
+                  <div class="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl mx-auto mb-4 flex items-center justify-center">
+                    <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20" style="width: 1.5rem; height: 1.5rem;">
+                      <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+                    </svg>
+                  </div>
+                  <h3 class="font-semibold text-slate-900 mb-2">Support</h3>
+                  <p class="text-sm text-slate-600">Always here to help</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Services Section -->
+  <section id="services" class="py-20 lg:py-32 bg-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-20">
+        <h2 class="text-4xl sm:text-5xl font-bold text-slate-900 mb-6">What We Do</h2>
+        <p class="text-xl text-slate-600 max-w-3xl mx-auto font-light">
+          We offer focused services that deliver exactly what your business needs to succeed online.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Web Design & Development -->
+        <div class="group bg-slate-50 rounded-3xl p-8 hover:bg-white hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-500 border border-slate-200/50">
+          <div class="w-14 h-14 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+            <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 20 20" style="width: 1.75rem; height: 1.75rem;">
+              <path fill-rule="evenodd" d="M3 5a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2h-2.22l.123.489.804.804A1 1 0 0113 18H7a1 1 0 01-.707-1.707l.804-.804L7.22 15H5a2 2 0 01-2-2V5zm5.771 7H5V5h10v7H8.771z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold text-slate-900 mb-4">Web Design & Development</h3>
+          <p class="text-slate-600 mb-6 leading-relaxed">
+            Custom websites that look great and work perfectly. From simple landing pages to complex e-commerce sites.
+          </p>
+          <div class="space-y-3">
+            <div class="flex items-center text-slate-700">
+              <div class="w-2 h-2 bg-blue-500 rounded-full mr-3"></div>
+              <span class="text-sm font-medium">Responsive design</span>
+            </div>
+            <div class="flex items-center text-slate-700">
+              <div class="w-2 h-2 bg-purple-500 rounded-full mr-3"></div>
+              <span class="text-sm font-medium">Fast loading</span>
+            </div>
+            <div class="flex items-center text-slate-700">
+              <div class="w-2 h-2 bg-indigo-500 rounded-full mr-3"></div>
+              <span class="text-sm font-medium">SEO optimized</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- App Development -->
+        <div class="group bg-slate-50 rounded-3xl p-8 hover:bg-white hover:shadow-2xl hover:shadow-purple-500/10 transition-all duration-500 border border-slate-200/50">
+          <div class="w-14 h-14 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+            <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 20 20" style="width: 1.75rem; height: 1.75rem;">
+              <path fill-rule="evenodd" d="M7 2a2 2 0 00-2 2v12a2 2 0 002 2h6a2 2 0 002-2V4a2 2 0 00-2-2H7zm3 14a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold text-slate-900 mb-4">App Development</h3>
+          <p class="text-slate-600 mb-6 leading-relaxed">
+            Mobile and web applications that solve real business problems. Built for performance and user experience.
+          </p>
+          <div class="space-y-3">
+            <div class="flex items-center text-slate-700">
+              <div class="w-2 h-2 bg-purple-500 rounded-full mr-3"></div>
+              <span class="text-sm font-medium">Cross-platform</span>
+            </div>
+            <div class="flex items-center text-slate-700">
+              <div class="w-2 h-2 bg-pink-500 rounded-full mr-3"></div>
+              <span class="text-sm font-medium">User-friendly</span>
+            </div>
+            <div class="flex items-center text-slate-700">
+              <div class="w-2 h-2 bg-violet-500 rounded-full mr-3"></div>
+              <span class="text-sm font-medium">Scalable</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Optional Add-ons -->
+        <div class="group bg-slate-50 rounded-3xl p-8 hover:bg-white hover:shadow-2xl hover:shadow-emerald-500/10 transition-all duration-500 border border-slate-200/50">
+          <div class="w-14 h-14 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+            <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 20 20" style="width: 1.75rem; height: 1.75rem;">
+              <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold text-slate-900 mb-4">Optional Add-ons</h3>
+          <p class="text-slate-600 mb-6 leading-relaxed">
+            Additional services to keep your digital presence running smoothly and growing.
+          </p>
+          <div class="space-y-3">
+            <div class="flex items-center text-slate-700">
+              <div class="w-2 h-2 bg-emerald-500 rounded-full mr-3"></div>
+              <span class="text-sm font-medium">Maintenance & updates</span>
+            </div>
+            <div class="flex items-center text-slate-700">
+              <div class="w-2 h-2 bg-teal-500 rounded-full mr-3"></div>
+              <span class="text-sm font-medium">Social media integration</span>
+            </div>
+            <div class="flex items-center text-slate-700">
+              <div class="w-2 h-2 bg-cyan-500 rounded-full mr-3"></div>
+              <span class="text-sm font-medium">Third-party integrations</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process Section -->
+  <section id="process" class="py-12 sm:py-16 lg:py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">How We Work</h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          A simple, transparent process that keeps you informed every step of the way.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div class="text-center">
+          <div class="w-20 h-20 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold text-white">1</div>
+          <h3 class="text-xl font-bold text-gray-900 mb-4">Scope</h3>
+          <p class="text-gray-600">We discuss your needs, goals, and timeline to create a clear project plan.</p>
+        </div>
+        <div class="text-center">
+          <div class="w-20 h-20 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold text-white">2</div>
+          <h3 class="text-xl font-bold text-gray-900 mb-4">Design</h3>
+          <p class="text-gray-600">We create mockups and prototypes for your approval before any coding begins.</p>
+        </div>
+        <div class="text-center">
+          <div class="w-20 h-20 bg-gradient-to-r from-pink-500 to-red-500 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold text-white">3</div>
+          <h3 class="text-xl font-bold text-gray-900 mb-4">Build</h3>
+          <p class="text-gray-600">We develop your project with regular updates and opportunities for feedback.</p>
+        </div>
+        <div class="text-center">
+          <div class="w-20 h-20 bg-gradient-to-r from-green-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold text-white">4</div>
+          <h3 class="text-xl font-bold text-gray-900 mb-4">Test</h3>
+          <p class="text-gray-600">We thoroughly test everything and launch your project when you're completely satisfied.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Industries Section -->
+  <section class="py-12 sm:py-16 lg:py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Industries We Serve</h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          We work with small businesses across various industries to create digital solutions that drive growth.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 sm:gap-8">
+        <div class="text-center">
+          <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+            </svg>
+          </div>
+          <h3 class="font-semibold text-gray-900">E-commerce</h3>
+        </div>
+        <div class="text-center">
+          <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+            </svg>
+          </div>
+          <h3 class="font-semibold text-gray-900">Real Estate</h3>
+        </div>
+        <div class="text-center">
+          <div class="w-16 h-16 bg-gradient-to-r from-pink-500 to-red-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+            </svg>
+          </div>
+          <h3 class="font-semibold text-gray-900">Hospitality</h3>
+        </div>
+        <div class="text-center">
+          <div class="w-16 h-16 bg-gradient-to-r from-red-500 to-orange-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+          </div>
+          <h3 class="font-semibold text-gray-900">Restaurants</h3>
+        </div>
+        <div class="text-center">
+          <div class="w-16 h-16 bg-gradient-to-r from-orange-500 to-yellow-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+            </svg>
+          </div>
+          <h3 class="font-semibold text-gray-900">Retail</h3>
+        </div>
+        <div class="text-center">
+          <div class="w-16 h-16 bg-gradient-to-r from-yellow-500 to-green-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V8a2 2 0 012-2V6" />
+            </svg>
+          </div>
+          <h3 class="font-semibold text-gray-900">Professional Services</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="py-12 sm:py-16 lg:py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">Why Choose FutureClarity?</h2>
+          <p class="text-lg text-gray-600 mb-6">
+            We believe in reliability, simplicity, and focusing on what matters most to small businesses. 
+            No overcomplicated solutions, no unnecessary features—just clean, effective websites and apps 
+            that help you connect with your customers and grow your business.
+          </p>
+          <p class="text-lg text-gray-600 mb-8">
+            Our small team means you work directly with the people building your project. 
+            We're responsive, transparent, and committed to delivering exactly what you need, when you need it.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a href="#contact" class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:shadow-xl hover:-translate-y-1 transition-all duration-300 text-center">
+              Start Your Project
+            </a>
+            <a href="/portfolio" class="border-2 border-blue-500 text-blue-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-500 hover:text-white transition-all duration-300 text-center">
+              View Our Work
+            </a>
+          </div>
+        </div>
+        <div class="relative">
+          <div class="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-8">
+            <div class="space-y-6">
+              <div class="flex items-center space-x-4">
+                <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+                  <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="font-semibold text-gray-900">Reliable & Fast</h3>
+                  <p class="text-gray-600">Built for performance and uptime</p>
+                </div>
+              </div>
+              <div class="flex items-center space-x-4">
+                <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
+                  <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="font-semibold text-gray-900">Quick Delivery</h3>
+                  <p class="text-gray-600">Get your project done on time</p>
+                </div>
+              </div>
+              <div class="flex items-center space-x-4">
+                <div class="w-12 h-12 bg-gradient-to-r from-pink-500 to-red-500 rounded-full flex items-center justify-center">
+                  <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M12 2.25a9.75 9.75 0 100 19.5 9.75 9.75 0 000-19.5z" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="font-semibold text-gray-900">Ongoing Support</h3>
+                  <p class="text-gray-600">We're here when you need us</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-12 sm:py-16 lg:py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Get In Touch</h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          Ready to start your project? Have questions? We'd love to hear from you.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Contact Form -->
+        <div class="bg-white rounded-2xl p-8 shadow-lg">
+          <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">Send us a message</h3>
+          <form id="contact-form" class="space-y-6 max-w-md mx-auto">
+            <div>
+              <label for="email" class="block text-sm font-medium text-gray-700 mb-2 text-center">Email</label>
+              <input type="email" id="email" name="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-base" placeholder="your@email.com" style="font-size: 16px;">
+            </div>
+            <div>
+              <label for="message" class="block text-sm font-medium text-gray-700 mb-2 text-center">Message</label>
+              <textarea id="message" name="message" rows="6" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-base resize-none" placeholder="Tell us about your project..." style="font-size: 16px;"></textarea>
+            </div>
+            <button type="submit" class="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-4 rounded-lg text-lg font-semibold hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+              Send Message
+            </button>
+          </form>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="space-y-8">
+          <div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-6">Contact Information</h3>
+            <div class="space-y-6">
+              <div class="flex items-center space-x-4">
+                <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+                  <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-gray-900">Email</h4>
+                  <p class="text-gray-600">hello@futureclarity.com</p>
+                </div>
+              </div>
+              <div class="flex items-center space-x-4">
+                <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
+                  <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-gray-900">Phone</h4>
+                  <p class="text-gray-600">+1 (555) 123-4567</p>
+                </div>
+              </div>
+              <div class="flex items-center space-x-4">
+                <div class="w-12 h-12 bg-gradient-to-r from-pink-500 to-red-500 rounded-full flex items-center justify-center">
+                  <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-gray-900">Hours</h4>
+                  <p class="text-gray-600">Mon-Fri: 9 AM - 6 PM EST</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl p-6 text-white">
+            <h4 class="text-xl font-bold mb-2">Ready to get started?</h4>
+            <p class="mb-4">Let's discuss your project and see how we can help your business grow.</p>
+            <a href="#contact" class="inline-block bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-200">
+              Get a Quote
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+
+  <script>
+    // Contact form handling
+    document.addEventListener('DOMContentLoaded', function() {
+      const contactForm = document.getElementById('contact-form');
+      const submitButton = contactForm?.querySelector('button[type="submit"]');
+      const originalButtonText = submitButton?.textContent;
+      
+      if (contactForm && submitButton) {
+        contactForm.addEventListener('submit', async function(e) {
+          e.preventDefault();
+          
+          // Show loading state
+          submitButton.textContent = 'Sending...';
+          submitButton.disabled = true;
+          
+          const formData = new FormData(contactForm);
+          const data = {
+            email: formData.get('email'),
+            message: formData.get('message')
+          };
+          
+          try {
+            const response = await fetch('/api/contact', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(data)
+            });
+            
+            const result = await response.json();
+            
+            if (response.ok) {
+              // Success
+              alert('Thank you! Your message has been sent successfully.');
+              contactForm.reset();
+            } else {
+              // Error from server
+              alert(result.error || 'Sorry, there was an error sending your message. Please try again.');
+            }
+          } catch (error) {
+            console.error('Contact form error:', error);
+            alert('Sorry, there was an error sending your message. Please try again.');
+          } finally {
+            // Reset button state
+            submitButton.textContent = originalButtonText;
+            submitButton.disabled = false;
+          }
+        });
+      }
+    });
+  </script>
+</Layout>
