@@ -14,9 +14,12 @@ import Footer from '../components/Footer.astro';
         <!-- Hero Content -->
         <div class="max-w-4xl mx-auto">
           <h1 class="text-4xl sm:text-5xl lg:text-7xl font-bold text-slate-900 mb-6 leading-tight tracking-tight">
-            Transform your business with<br>
-            <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              <span id="typing-text" class="inline-block min-w-[280px] sm:min-w-[320px] lg:min-w-[400px] text-left">Web Design</span><span id="cursor" class="animate-pulse">|</span>
+            Transform your business with 
+            <span class="relative inline-block">
+              <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                <span id="typing-text" class="absolute left-0 top-0 whitespace-nowrap">Web Design</span><span id="cursor" class="absolute animate-pulse" style="left: 0;">|</span>
+              </span>
+              <span class="invisible">Web Design</span>
             </span>
           </h1>
           <p class="text-xl sm:text-2xl text-slate-600 mb-8 leading-relaxed max-w-3xl mx-auto font-light">
@@ -443,7 +446,13 @@ import Footer from '../components/Footer.astro';
         if (isTyping) {
           // Typing phase
           if (charIndex < currentWord.length) {
-            typingElement.textContent = currentWord.substring(0, charIndex + 1);
+            const displayText = currentWord.substring(0, charIndex + 1);
+            typingElement.textContent = displayText;
+            
+            // Position cursor after the text
+            const textWidth = typingElement.offsetWidth;
+            cursor.style.left = textWidth + 'px';
+            
             charIndex++;
             setTimeout(typeWriter, typeSpeed);
           } else {
@@ -456,7 +465,13 @@ import Footer from '../components/Footer.astro';
         } else {
           // Deleting phase
           if (charIndex > 0) {
-            typingElement.textContent = currentWord.substring(0, charIndex - 1);
+            const displayText = currentWord.substring(0, charIndex - 1);
+            typingElement.textContent = displayText;
+            
+            // Position cursor after the text
+            const textWidth = typingElement.offsetWidth;
+            cursor.style.left = textWidth + 'px';
+            
             charIndex--;
             setTimeout(typeWriter, deleteSpeed);
           } else {
