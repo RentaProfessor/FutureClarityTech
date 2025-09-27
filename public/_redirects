@@ -1,6 +1,6 @@
 # Redirects for Cloudflare Pages
-# Handle SPA routing - redirect all non-file requests to index.html
-/*    /index.html   200
-
-# Specific redirects
+# Specific page redirects
 /portfolio    /portfolio/index.html   200
+
+# Fallback for any other routes - serve index.html for client-side routing
+/*    /index.html   200
