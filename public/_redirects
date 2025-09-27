@@ -1,0 +1,6 @@
+# Redirects for Cloudflare Pages
+# Handle SPA routing - redirect all non-file requests to index.html
+/*    /index.html   200
+
+# Specific redirects
+/portfolio    /portfolio/index.html   200
