@@ -455,6 +455,31 @@ textarea:focus {
     -webkit-overflow-scrolling: touch;
     overflow-scrolling: touch;
   }
+
+  /* Mobile hero section optimization */
+  [data-mobile-compact] {
+    min-height: auto !important;
+    padding-top: 4rem !important;
+    padding-bottom: 1.5rem !important;
+  }
+
+  /* Reduce hero content spacing on mobile */
+  [data-mobile-compact] h1 {
+    margin-bottom: 1rem !important;
+    line-height: 1.1 !important;
+  }
+
+  [data-mobile-compact] p {
+    margin-bottom: 1.5rem !important;
+  }
+
+  /* Ensure mobile hero doesn't take full viewport */
+  @media (max-width: 768px) {
+    [data-mobile-compact] {
+      justify-content: flex-start !important;
+      padding-top: max(4rem, env(safe-area-inset-top) + 3rem) !important;
+    }
+  }
 }
 
 /* Desktop optimizations */
