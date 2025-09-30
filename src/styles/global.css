@@ -225,6 +225,10 @@ textarea:focus {
     border-radius: 0.75rem !important;
     -webkit-appearance: none;
     appearance: none;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    display: block !important;
+    width: 100% !important;
   }
 
   /* Mobile grid adjustments */
@@ -578,6 +582,22 @@ textarea:focus {
     max-width: 100% !important;
     margin-left: 0 !important;
     margin-right: 0 !important;
+  }
+
+  /* Ensure form is perfectly centered */
+  form {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    width: 100% !important;
+  }
+
+  /* Ensure form inputs are perfectly centered */
+  form > div {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
   }
 
   /* Remove all transform effects on mobile to prevent scrolling issues */
