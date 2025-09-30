@@ -458,26 +458,29 @@ textarea:focus {
 
   /* Mobile hero section optimization */
   .mobile-hero-optimized {
-    min-height: auto !important;
+    min-height: 100vh !important;
+    min-height: 100svh !important;
   }
 
   [data-mobile-compact] {
-    min-height: auto !important;
-    padding-top: 2rem !important;
-    padding-bottom: 1rem !important;
+    min-height: 100vh !important;
+    min-height: 100svh !important;
+    padding-top: 7rem !important;
+    padding-bottom: 2rem !important;
     justify-content: flex-start !important;
   }
 
   /* Reduce hero content spacing on mobile */
   [data-mobile-compact] h1 {
-    margin-bottom: 0.75rem !important;
+    margin-bottom: 1rem !important;
     line-height: 1.1 !important;
-    font-size: 1.75rem !important;
+    font-size: 2rem !important;
+    margin-top: 1rem !important;
   }
 
   [data-mobile-compact] p {
-    margin-bottom: 1rem !important;
-    font-size: 1rem !important;
+    margin-bottom: 1.5rem !important;
+    font-size: 1.125rem !important;
   }
 
   /* Mobile services section optimization */
@@ -569,11 +572,27 @@ textarea:focus {
     scroll-behavior: auto !important;
   }
 
-  /* Ensure mobile hero doesn't take full viewport */
+  /* Ensure mobile hero has proper spacing */
   @media (max-width: 768px) {
     [data-mobile-compact] {
       justify-content: flex-start !important;
-      padding-top: max(2rem, env(safe-area-inset-top) + 1rem) !important;
+      padding-top: max(7rem, env(safe-area-inset-top) + 6rem) !important;
+      min-height: 100vh !important;
+      min-height: 100svh !important;
+    }
+    
+    /* Ensure hero section is visible on page load */
+    body {
+      scroll-padding-top: 0 !important;
+    }
+    
+    /* Prevent auto-scroll to other sections */
+    section {
+      scroll-margin-top: 0 !important;
+    }
+    
+    #services {
+      scroll-margin-top: 4rem !important;
     }
   }
 }

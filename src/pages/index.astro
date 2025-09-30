@@ -8,7 +8,7 @@ import Footer from '../components/Footer.astro';
   <Header />
   
   <!-- Hero Section -->
-  <section class="relative pt-4 sm:pt-20 md:pt-5 pb-4 sm:pb-8 md:pb-8 md:min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 flex flex-col justify-start md:justify-center safe-area-top mobile-hero-optimized" style="min-height: auto; min-height: 100svh;" data-mobile-compact>
+  <section class="relative pt-24 sm:pt-24 md:pt-5 pb-8 sm:pb-8 md:pb-8 md:min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 flex flex-col justify-start md:justify-center safe-area-top mobile-hero-optimized" style="min-height: auto; min-height: 100svh;" data-mobile-compact>
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mobile-container-padding">
       <div class="text-center">
         <!-- Hero Content -->
@@ -403,6 +403,34 @@ import Footer from '../components/Footer.astro';
   <Footer />
 
   <script>
+    // Prevent scroll restoration from browser
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    
+    // Force immediate scroll to top BEFORE page render
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    
+    // Ensure page loads at top on mobile and prevent auto-scroll
+    document.addEventListener('DOMContentLoaded', function() {
+      // Force scroll to top on mobile
+      if (window.innerWidth < 768) {
+        window.scrollTo(0, 0);
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+        
+        // Prevent any delayed scrolling
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+        }, 0);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+        }, 100);
+      }
+    });
+
     // Typing effect for hero text
     document.addEventListener('DOMContentLoaded', function() {
       const typingElement = document.getElementById('typing-text');
