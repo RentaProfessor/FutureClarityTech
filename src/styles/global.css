@@ -264,6 +264,10 @@ textarea:focus {
     margin-bottom: 1rem !important;
   }
 
+  .mobile-mb-4 {
+    margin-bottom: 1rem !important;
+  }
+  
   .mobile-mb-6 {
     margin-bottom: 1.5rem !important;
   }
@@ -286,11 +290,11 @@ textarea:focus {
 
   /* Mobile card optimizations */
   .mobile-card-spacing {
-    margin-bottom: 1.5rem !important;
+    margin-bottom: 1rem !important;
   }
 
   .mobile-card-padding {
-    padding: 1.25rem !important;
+    padding: 1rem !important;
   }
 
   /* Mobile text sizing */
@@ -490,7 +494,22 @@ textarea:focus {
   }
 
   .mobile-services-grid {
-    gap: 1rem !important;
+    gap: 0.75rem !important;
+  }
+  
+  /* Compact mobile service cards */
+  .mobile-services-grid > div {
+    padding: 1rem !important;
+  }
+  
+  .mobile-services-grid h3 {
+    font-size: 1.125rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+  
+  .mobile-services-grid p {
+    font-size: 0.875rem !important;
+    margin-bottom: 0.75rem !important;
   }
 
   /* Mobile process grid optimization */
@@ -511,6 +530,28 @@ textarea:focus {
   .mobile-about-grid {
     gap: 1.5rem !important;
   }
+  
+  /* Hide feature cards on mobile to reduce scroll */
+  .mobile-hide-feature-cards {
+    display: none !important;
+  }
+  
+  /* Mobile footer optimization */
+  .mobile-footer-fix {
+    background: #1e293b !important;
+  }
+  
+  .mobile-footer-fix * {
+    color: white !important;
+  }
+  
+  .mobile-footer-fix a {
+    color: #e2e8f0 !important;
+  }
+  
+  .mobile-footer-fix a:hover {
+    color: white !important;
+  }
 
   /* Mobile industries grid optimization */
   .mobile-industries-grid {
@@ -525,6 +566,18 @@ textarea:focus {
 
   .mobile-contact-grid {
     gap: 1.5rem !important;
+  }
+  
+  /* Fix contact form centering on mobile */
+  .mobile-form-container {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  
+  .mobile-form-width {
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
   }
 
   /* Remove all transform effects on mobile to prevent scrolling issues */
