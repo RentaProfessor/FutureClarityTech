@@ -220,7 +220,7 @@ textarea:focus {
   /* Mobile form improvements - prevents zoom on iOS */
   .form-input-mobile {
     font-size: 16px !important; /* Prevents zoom on iOS */
-    padding: 0.875rem 1rem !important;
+    padding: 0.875rem 0.875rem !important;
     min-height: 48px !important;
     border-radius: 0.75rem !important;
     -webkit-appearance: none;
@@ -584,21 +584,6 @@ textarea:focus {
     margin-right: 0 !important;
   }
 
-  /* Ensure form is perfectly centered on mobile only */
-  .mobile-form-container form {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    width: 100% !important;
-  }
-
-  /* Ensure form inputs are perfectly centered on mobile only */
-  .mobile-form-container form > div {
-    width: 100% !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-  }
 
   /* Remove all transform effects on mobile to prevent scrolling issues */
   .group:hover {
