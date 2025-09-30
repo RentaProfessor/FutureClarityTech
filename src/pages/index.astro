@@ -8,7 +8,7 @@ import Footer from '../components/Footer.astro';
   <Header />
   
   <!-- Hero Section -->
-  <section class="relative pt-16 sm:pt-20 md:pt-5 pb-6 sm:pb-8 md:pb-8 md:min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 flex flex-col justify-center safe-area-top" style="min-height: auto; min-height: 100svh;" data-mobile-compact>
+  <section class="relative pt-4 sm:pt-20 md:pt-5 pb-4 sm:pb-8 md:pb-8 md:min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 flex flex-col justify-start md:justify-center safe-area-top mobile-hero-optimized" style="min-height: auto; min-height: 100svh;" data-mobile-compact>
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mobile-container-padding">
       <div class="text-center">
         <!-- Hero Content -->
@@ -78,13 +78,13 @@ import Footer from '../components/Footer.astro';
 
 
   <!-- Services Section -->
-  <section id="services" class="py-8 sm:py-12 md:py-0 bg-white mobile-section-padding" style="scroll-margin-top: 5rem;">
+  <section id="services" class="py-6 sm:py-12 md:py-16 bg-white mobile-services-section" style="scroll-margin-top: 5rem;">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mobile-container-padding">
-      <div class="text-center mb-6 sm:mb-8 md:mb-3 mobile-mb-8">
-        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-4 md:mb-6 mobile-text-center">What We Do</h2>
+      <div class="text-center mb-6 sm:mb-8 md:mb-12 mobile-mb-6">
+        <h2 class="text-2xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-3 md:mb-6 mobile-text-center">What We Do</h2>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mobile-grid-1">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8 mobile-services-grid">
         <!-- Web Design & Development -->
         <div class="group bg-slate-50 rounded-2xl sm:rounded-3xl p-6 sm:p-8 hover:bg-white hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-500 border border-slate-200/50 mobile-card-padding mobile-card-spacing">
           <div class="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl sm:rounded-2xl flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300">
@@ -168,16 +168,16 @@ import Footer from '../components/Footer.astro';
       </div>
 
       <!-- Process Steps - Desktop: directly under services, Mobile: with header -->
-      <div class="mt-8 sm:mt-10 md:mt-5 mobile-mt-8">
+      <div class="mt-6 sm:mt-10 md:mt-16 mobile-mt-6">
         <!-- Mobile header (hidden on desktop) -->
-        <div class="text-center mb-8 sm:mb-10 md:hidden mobile-mb-8">
-          <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 sm:mb-4 mobile-text-center">How We Work</h2>
-          <p class="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto mobile-text-center">
+        <div class="text-center mb-6 sm:mb-10 md:hidden mobile-mb-6">
+          <h2 class="text-xl sm:text-3xl font-bold text-gray-900 mb-2 sm:mb-4 mobile-text-center">How We Work</h2>
+          <p class="text-base sm:text-xl text-gray-600 max-w-3xl mx-auto mobile-text-center">
             A simple, transparent process that keeps you informed every step of the way.
           </p>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-6 sm:gap-6 md:gap-6 mobile-grid-1">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 sm:gap-6 md:gap-6 mobile-process-grid">
         <div class="text-center mobile-card-spacing">
           <div class="w-16 h-16 sm:w-18 sm:h-18 md:w-20 md:h-20 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 text-xl sm:text-2xl font-bold text-white">1</div>
           <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4 mobile-text-center">Consultation</h3>
@@ -208,10 +208,10 @@ import Footer from '../components/Footer.astro';
   </section>
 
   <!-- About & Industries Combined Section -->
-  <section id="about" class="py-8 sm:py-12 lg:py-16 bg-gray-50 mobile-section-padding" style="scroll-margin-top: 2.675rem;">
+  <section id="about" class="py-6 sm:py-12 lg:py-16 bg-gray-50 mobile-about-section" style="scroll-margin-top: 2.675rem;">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mobile-container-padding">
       <!-- Why Choose FutureClarity -->
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center mb-12 sm:mb-16 lg:mb-20 mobile-grid-1">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-12 items-center mb-8 sm:mb-16 lg:mb-20 mobile-about-grid">
         <div>
           <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 sm:mb-6 mobile-text-center">Why Choose FutureClarity?</h2>
           <p class="text-base sm:text-lg text-gray-600 mb-4 sm:mb-6 mobile-text-center">
@@ -274,14 +274,14 @@ import Footer from '../components/Footer.astro';
       </div>
 
       <!-- Industries We Serve -->
-      <div class="text-center mb-8 sm:mb-12 mobile-mb-8">
-        <h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-3 sm:mb-4 mobile-text-center">Trusted by Businesses Across Industries</h3>
-        <p class="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto mobile-text-center">
+      <div class="text-center mb-6 sm:mb-12 mobile-mb-6">
+        <h3 class="text-lg sm:text-2xl md:text-3xl font-bold text-gray-900 mb-2 sm:mb-4 mobile-text-center">Trusted by Businesses Across Industries</h3>
+        <p class="text-sm sm:text-lg text-gray-600 max-w-2xl mx-auto mobile-text-center">
           From e-commerce to professional services, we create digital solutions that drive growth.
         </p>
       </div>
 
-      <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 mobile-grid-2">
+      <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 lg:gap-8 mobile-industries-grid">
         <div class="text-center group mobile-card-spacing">
           <div class="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl sm:rounded-2xl flex items-center justify-center mx-auto mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300">
             <svg class="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -319,16 +319,16 @@ import Footer from '../components/Footer.astro';
   </section>
 
   <!-- Contact Section -->
-  <section id="contact" class="py-12 sm:py-16 lg:py-20 bg-white mobile-section-padding safe-area-bottom" style="scroll-margin-top: -1.5rem;">
+  <section id="contact" class="py-8 sm:py-16 lg:py-20 bg-white mobile-contact-section safe-area-bottom" style="scroll-margin-top: -1.5rem;">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mobile-container-padding">
-      <div class="text-center mb-8 sm:mb-12 md:mb-16 mobile-mb-8">
-        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 mobile-text-center">Get In Touch</h2>
-        <p class="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto mobile-text-center">
+      <div class="text-center mb-6 sm:mb-12 md:mb-16 mobile-mb-6">
+        <h2 class="text-xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2 sm:mb-4 mobile-text-center">Get In Touch</h2>
+        <p class="text-base sm:text-xl text-gray-600 max-w-3xl mx-auto mobile-text-center">
           Ready to start your project? Have questions? We'd love to hear from you.
         </p>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 mobile-grid-1">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-8 mobile-contact-grid">
         <!-- Contact Form -->
         <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-lg mobile-card-padding">
           <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6 text-center mobile-text-center">Send us a message</h3>

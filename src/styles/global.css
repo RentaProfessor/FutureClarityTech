@@ -457,27 +457,123 @@ textarea:focus {
   }
 
   /* Mobile hero section optimization */
+  .mobile-hero-optimized {
+    min-height: auto !important;
+  }
+
   [data-mobile-compact] {
     min-height: auto !important;
-    padding-top: 4rem !important;
-    padding-bottom: 1.5rem !important;
+    padding-top: 2rem !important;
+    padding-bottom: 1rem !important;
+    justify-content: flex-start !important;
   }
 
   /* Reduce hero content spacing on mobile */
   [data-mobile-compact] h1 {
-    margin-bottom: 1rem !important;
+    margin-bottom: 0.75rem !important;
     line-height: 1.1 !important;
+    font-size: 1.75rem !important;
   }
 
   [data-mobile-compact] p {
-    margin-bottom: 1.5rem !important;
+    margin-bottom: 1rem !important;
+    font-size: 1rem !important;
+  }
+
+  /* Mobile services section optimization */
+  .mobile-services-section {
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+  }
+
+  .mobile-services-grid {
+    gap: 1rem !important;
+  }
+
+  /* Mobile process grid optimization */
+  .mobile-process-grid {
+    gap: 1rem !important;
+  }
+
+  .mobile-process-grid .mobile-card-spacing {
+    margin-bottom: 1rem !important;
+  }
+
+  /* Mobile about section optimization */
+  .mobile-about-section {
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+  }
+
+  .mobile-about-grid {
+    gap: 1.5rem !important;
+  }
+
+  /* Mobile industries grid optimization */
+  .mobile-industries-grid {
+    gap: 0.75rem !important;
+  }
+
+  /* Mobile contact section optimization */
+  .mobile-contact-section {
+    padding-top: 1.5rem !important;
+    padding-bottom: 2rem !important;
+  }
+
+  .mobile-contact-grid {
+    gap: 1.5rem !important;
+  }
+
+  /* Remove all transform effects on mobile to prevent scrolling issues */
+  .group:hover {
+    transform: none !important;
+  }
+
+  /* Disable all hover effects on mobile */
+  .group:hover .group-hover\\:scale-110 {
+    transform: none !important;
+  }
+
+  /* Disable all parallax and transform effects on mobile */
+  * {
+    transform: none !important;
+    will-change: auto !important;
+    backface-visibility: visible !important;
+  }
+
+  /* Re-enable necessary transforms for buttons and links */
+  button, a {
+    transform: none !important;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease !important;
+  }
+
+  /* Prevent any scrolling issues */
+  html {
+    scroll-behavior: auto !important;
+    -webkit-overflow-scrolling: auto !important;
+  }
+
+  body {
+    overflow-x: hidden !important;
+    -webkit-overflow-scrolling: auto !important;
+  }
+
+  /* Fix viewport issues */
+  .mobile-viewport-fix {
+    min-height: auto !important;
+    height: auto !important;
+  }
+
+  /* Disable smooth scrolling on mobile */
+  * {
+    scroll-behavior: auto !important;
   }
 
   /* Ensure mobile hero doesn't take full viewport */
   @media (max-width: 768px) {
     [data-mobile-compact] {
       justify-content: flex-start !important;
-      padding-top: max(4rem, env(safe-area-inset-top) + 3rem) !important;
+      padding-top: max(2rem, env(safe-area-inset-top) + 1rem) !important;
     }
   }
 }
