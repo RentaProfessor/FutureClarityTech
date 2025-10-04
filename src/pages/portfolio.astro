@@ -145,38 +145,54 @@ const websiteDemos = [
 
               <!-- Mobile: Static Preview Container -->
               <div class="relative md:hidden" style="padding-bottom: 75%; height: 0; overflow: hidden; background: #f8f9fa;">
-                {demo.name === "Demo Grill" ? (
-                  <!-- Demo Grill Mobile Video -->
-                  <video 
-                    class="absolute top-0 left-0 w-full h-full object-cover"
-                    autoplay 
-                    muted 
-                    loop 
-                    playsinline
-                    title={`${demo.name} Website Preview`}
-                  >
-                    <source src="/DEMOGRILLLOOPRECORDINGMOBILEONLY.mp4" type="video/mp4" />
-                  </video>
-                ) : demo.name === "Hollow Coffee" ? (
-                  <!-- Hollow Coffee Mobile Video -->
-                  <video 
-                    class="absolute top-0 left-0 w-full h-full object-cover"
-                    autoplay 
-                    muted 
-                    loop 
-                    playsinline
-                    title={`${demo.name} Website Preview`}
-                  >
-                    <source src="/HOLLOWCOFFELOOPMOBILEONLY.mp4" type="video/mp4" />
-                  </video>
-                ) : (
-                  <!-- White Squirrel Mobile Image -->
-                  <img 
-                    src="/WhiteSquirrelScreenshotmobileonly.png" 
-                    alt={`${demo.name} Website Preview`}
-                    class="absolute top-0 left-0 w-full h-full object-cover"
-                  />
-                )}
+                <div class="absolute inset-0 w-full h-full">
+                  <!-- Loading State for All Mobile Frames -->
+                  <div id={`mobile-loading-${demo.id}`} class="absolute inset-0 w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                    <div class="text-center">
+                      <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-3"></div>
+                      <p class="text-gray-600 text-xs font-medium">Loading preview...</p>
+                    </div>
+                  </div>
+                  
+                  {demo.name === "Demo Grill" ? (
+                    <!-- Demo Grill Mobile Video -->
+                    <video 
+                      id={`mobile-video-${demo.id}`}
+                      class="absolute top-0 left-0 w-full h-full object-contain opacity-0 transition-opacity duration-500"
+                      autoplay 
+                      muted 
+                      loop 
+                      playsinline
+                      title={`${demo.name} Website Preview`}
+                      onloadeddata={`setTimeout(() => { document.getElementById('mobile-loading-${demo.id}').style.display = 'none'; document.getElementById('mobile-video-${demo.id}').style.opacity = '1'; }, 2000);`}
+                    >
+                      <source src="/DEMOGRILLLOOPRECORDINGMOBILEONLY.mp4" type="video/mp4" />
+                    </video>
+                  ) : demo.name === "Hollow Coffee" ? (
+                    <!-- Hollow Coffee Mobile Video -->
+                    <video 
+                      id={`mobile-video-${demo.id}`}
+                      class="absolute top-0 left-0 w-full h-full object-contain opacity-0 transition-opacity duration-500"
+                      autoplay 
+                      muted 
+                      loop 
+                      playsinline
+                      title={`${demo.name} Website Preview`}
+                      onloadeddata={`setTimeout(() => { document.getElementById('mobile-loading-${demo.id}').style.display = 'none'; document.getElementById('mobile-video-${demo.id}').style.opacity = '1'; }, 2000);`}
+                    >
+                      <source src="/HOLLOWCOFFELOOPMOBILEONLY.mp4" type="video/mp4" />
+                    </video>
+                  ) : (
+                    <!-- White Squirrel Mobile Image -->
+                    <img 
+                      id={`mobile-image-${demo.id}`}
+                      src="/WhiteSquirrelScreenshotmobileonly.png" 
+                      alt={`${demo.name} Website Preview`}
+                      class="absolute top-0 left-0 w-full h-full object-cover opacity-0 transition-opacity duration-500"
+                      onload={`setTimeout(() => { document.getElementById('mobile-loading-${demo.id}').style.display = 'none'; document.getElementById('mobile-image-${demo.id}').style.opacity = '1'; }, 2000);`}
+                    />
+                  )}
+                </div>
                 
                 <!-- Clickable overlay -->
                 <a 
