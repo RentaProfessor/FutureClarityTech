@@ -9,28 +9,28 @@ const websiteDemos = [
     id: 1,
     name: "The White Squirrel",
     url: "https://www.thewhitesquirrelllc.com/",
-    description: "Landing page for The White Squirrel, an Oberlin gift shop",
+    description: "Oberlin gift shop landing page",
     type: "website"
   },
   {
     id: 2,
     name: "Captain Fripp's Lost Treasures",
     url: "https://apps.apple.com/us/app/captain-fripps-lost-treasures/id6752260563",
-    description: "Custom recreational application for Fripp Island resort",
+    description: "Custom recreational app for Fripp Island",
     type: "app"
   },
   {
     id: 3,
     name: "Demo Grill",
     url: "https://demo-grill.pages.dev/",
-    description: "Professional restaurant website with integrated online ordering system",
+    description: "Restaurant website with online ordering",
     type: "website"
   },
   {
     id: 4,
     name: "Hollow Coffee",
     url: "https://coffee-web.pages.dev/",
-    description: "Coffee shop website with menu and locations",
+    description: "Coffee shop website with menu",
     type: "website"
   }
 ];
@@ -77,7 +77,7 @@ const websiteDemos = [
         {websiteDemos.map((demo) => (
           <div class="bg-white rounded-2xl shadow-lg overflow-hidden mobile-card-spacing">
             <!-- Simple Professional Header -->
-            <div class="bg-white border-b border-gray-200 p-4 sm:p-6">
+            <div class="bg-white border-b border-gray-200 p-4 sm:p-6 min-h-[120px] flex flex-col justify-center">
               <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-1 mobile-text-center">{demo.name}</h3>
               <p class="text-gray-600 text-sm sm:text-base mobile-text-center">{demo.description}</p>
             </div>
@@ -110,8 +110,8 @@ const websiteDemos = [
                 ></a>
               </div>
             ) : (
-              <!-- Website iframe Container with Loading Buffer -->
-              <div class="relative iframe-container" style="padding-bottom: 75%; height: 0; overflow: hidden; background: #f8f9fa;">
+              <!-- Desktop: Website iframe Container with Loading Buffer -->
+              <div class="relative iframe-container hidden md:block" style="padding-bottom: 75%; height: 0; overflow: hidden; background: #f8f9fa;">
                 <!-- Loading State -->
                 <div id={`loading-${demo.id}`} class="absolute inset-0 w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
                   <div class="text-center">
@@ -130,8 +130,53 @@ const websiteDemos = [
                   sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
                   style="transform: scale(0.5); transform-origin: top left; width: 200%; height: 200%; pointer-events: none; overflow: hidden;"
                   scrolling="no"
-                  onload={`setTimeout(() => { document.getElementById('loading-${demo.id}').style.display = 'none'; document.getElementById('iframe-${demo.id}').style.opacity = '1'; }, 4000);`}
+                  onload={`setTimeout(() => { document.getElementById('loading-${demo.id}').style.display = 'none'; document.getElementById('iframe-${demo.id}').style.opacity = '1'; }, 2000);`}
                 ></iframe>
+                
+                <!-- Clickable overlay -->
+                <a 
+                  href={demo.url} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  class="absolute inset-0 w-full h-full z-10 cursor-pointer"
+                  title={`Visit ${demo.name} website`}
+                ></a>
+              </div>
+
+              <!-- Mobile: Static Preview Container -->
+              <div class="relative md:hidden" style="padding-bottom: 75%; height: 0; overflow: hidden; background: #f8f9fa;">
+                {demo.name === "Demo Grill" ? (
+                  <!-- Demo Grill Mobile Video -->
+                  <video 
+                    class="absolute top-0 left-0 w-full h-full object-cover"
+                    autoplay 
+                    muted 
+                    loop 
+                    playsinline
+                    title={`${demo.name} Website Preview`}
+                  >
+                    <source src="/DEMOGRILLLOOPRECORDINGMOBILEONLY.mp4" type="video/mp4" />
+                  </video>
+                ) : demo.name === "Hollow Coffee" ? (
+                  <!-- Hollow Coffee Mobile Video -->
+                  <video 
+                    class="absolute top-0 left-0 w-full h-full object-cover"
+                    autoplay 
+                    muted 
+                    loop 
+                    playsinline
+                    title={`${demo.name} Website Preview`}
+                  >
+                    <source src="/HOLLOWCOFFELOOPMOBILEONLY.mp4" type="video/mp4" />
+                  </video>
+                ) : (
+                  <!-- White Squirrel Mobile Image -->
+                  <img 
+                    src="/WhiteSquirrelScreenshotmobileonly.png" 
+                    alt={`${demo.name} Website Preview`}
+                    class="absolute top-0 left-0 w-full h-full object-cover"
+                  />
+                )}
                 
                 <!-- Clickable overlay -->
                 <a 
@@ -145,12 +190,12 @@ const websiteDemos = [
             )}
             
             <!-- Demo Footer -->
-            <div class="p-4 sm:p-6 bg-gray-50">
+            <div class="p-4 sm:p-6 bg-gray-50 flex justify-center">
               <a 
                 href={demo.url} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                class="inline-flex items-center justify-center w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold hover:shadow-lg hover:-translate-y-1 transition-all duration-300 mobile-touch-action min-h-[44px]"
+                class="inline-flex items-center justify-center w-full max-w-xs bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold hover:shadow-lg hover:-translate-y-1 transition-all duration-300 mobile-touch-action min-h-[44px]"
               >
                 {demo.type === "app" ? "Download App" : "View Full Site"}
                 <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
