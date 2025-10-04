@@ -407,6 +407,23 @@ import Footer from '../components/Footer.astro';
     if ('scrollRestoration' in history) {
       history.scrollRestoration = 'manual';
     }
+
+    // Handle scroll parameter from portfolio page
+    window.addEventListener('load', function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const scrollTo = urlParams.get('scroll');
+      
+      if (scrollTo === 'contact') {
+        setTimeout(() => {
+          const contactElement = document.getElementById('contact');
+          if (contactElement) {
+            contactElement.scrollIntoView({ behavior: 'smooth' });
+            // Clean up the URL
+            window.history.replaceState({}, document.title, window.location.pathname);
+          }
+        }, 300);
+      }
+    });
     
     // Force immediate scroll to top BEFORE page render
     window.scrollTo(0, 0);
