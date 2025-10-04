@@ -737,13 +737,18 @@ textarea:focus {
     }
     
     #services {
-      scroll-margin-top: 4rem !important;
+      scroll-margin-top: 0 !important;
     }
   }
 }
 
 /* Desktop optimizations */
 @media (min-width: 1024px) {
+  /* Ensure services section has proper scroll margin on desktop */
+  #services {
+    scroll-margin-top: 4rem !important;
+  }
+  
   .desktop-padding {
     padding-left: 2rem;
     padding-right: 2rem;

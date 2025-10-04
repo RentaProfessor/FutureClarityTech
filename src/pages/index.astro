@@ -78,7 +78,7 @@ import Footer from '../components/Footer.astro';
 
 
   <!-- Services Section -->
-  <section id="services" class="py-6 sm:py-12 md:py-16 bg-white mobile-services-section" style="scroll-margin-top: 5rem;">
+  <section id="services" class="py-6 sm:py-12 md:py-16 bg-white mobile-services-section" style="scroll-margin-top: 4rem;">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mobile-container-padding">
       <div class="text-center mb-4 sm:mb-8 md:mb-12 mobile-mb-4">
         <h2 class="text-2xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-2 md:mb-6 mobile-text-center">What We Do</h2>
@@ -208,7 +208,7 @@ import Footer from '../components/Footer.astro';
   </section>
 
   <!-- About & Industries Combined Section -->
-  <section id="about" class="py-6 sm:py-12 lg:py-16 bg-gray-50 mobile-about-section" style="scroll-margin-top: 2.675rem;">
+  <section id="about" class="py-6 sm:py-12 lg:py-16 bg-gray-50 mobile-about-section" style="scroll-margin-top: 4rem;">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mobile-container-padding">
       <!-- Why Choose FutureClarity -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-12 items-center mb-8 sm:mb-16 lg:mb-20 mobile-about-grid">
@@ -319,7 +319,7 @@ import Footer from '../components/Footer.astro';
   </section>
 
   <!-- Contact Section -->
-  <section id="contact" class="py-8 sm:py-16 lg:py-20 bg-white mobile-contact-section safe-area-bottom" style="scroll-margin-top: -1.5rem;">
+  <section id="contact" class="py-8 sm:py-16 lg:py-20 bg-white mobile-contact-section safe-area-bottom" style="scroll-margin-top: 4rem;">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mobile-container-padding">
       <div class="text-center mb-6 sm:mb-12 md:mb-16 mobile-mb-6">
         <h2 class="text-xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2 sm:mb-4 mobile-text-center">Get In Touch</h2>
@@ -445,6 +445,9 @@ import Footer from '../components/Footer.astro';
         setTimeout(() => {
           window.scrollTo(0, 0);
         }, 100);
+      } else {
+        // Desktop: Stay at top of page - no auto-scroll
+        // Removed automatic scroll to services section
       }
     });
 
