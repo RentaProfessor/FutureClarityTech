@@ -6,6 +6,17 @@ svg {
   vertical-align: middle;
 }
 
+/* Prevent mobile layout issues in iframes - MOBILE ONLY */
+@media (max-width: 768px) {
+  .iframe-container {
+    overflow: hidden !important;
+  }
+  
+  .iframe-container iframe {
+    min-width: 1200px !important;
+  }
+}
+
 /* Custom CSS Variables */
 :root {
   --primary-color: #667eea;

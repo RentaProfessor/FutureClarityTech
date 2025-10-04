@@ -111,7 +111,7 @@ const websiteDemos = [
               </div>
             ) : (
               <!-- Website iframe Container with Loading Buffer -->
-              <div class="relative" style="padding-bottom: 75%; height: 0; overflow: hidden;">
+              <div class="relative iframe-container" style="padding-bottom: 75%; height: 0; overflow: hidden; background: #f8f9fa;">
                 <!-- Loading State -->
                 <div id={`loading-${demo.id}`} class="absolute inset-0 w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
                   <div class="text-center">
@@ -128,7 +128,7 @@ const websiteDemos = [
                   title={`${demo.name} Website Demo`}
                   loading="lazy"
                   sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
-                  style="transform: scale(0.5); transform-origin: top left; width: 200%; height: 200%; pointer-events: none;"
+                  style="transform: scale(0.5); transform-origin: top left; width: 200%; height: 200%; pointer-events: none; overflow: hidden;"
                   scrolling="no"
                   onload={`setTimeout(() => { document.getElementById('loading-${demo.id}').style.display = 'none'; document.getElementById('iframe-${demo.id}').style.opacity = '1'; }, 4000);`}
                 ></iframe>
