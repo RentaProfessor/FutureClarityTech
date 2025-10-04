@@ -156,32 +156,36 @@ const websiteDemos = [
                   
                   {demo.name === "Demo Grill" ? (
                     <!-- Demo Grill Mobile Video -->
-                    <video 
-                      id={`mobile-video-${demo.id}`}
-                      class="absolute top-0 left-0 w-full h-full object-contain opacity-0 transition-opacity duration-500"
-                      autoplay 
-                      muted 
-                      loop 
-                      playsinline
-                      title={`${demo.name} Website Preview`}
-                      onloadeddata={`setTimeout(() => { document.getElementById('mobile-loading-${demo.id}').style.display = 'none'; document.getElementById('mobile-video-${demo.id}').style.opacity = '1'; }, 2000);`}
-                    >
-                      <source src="/DEMOGRILLLOOPRECORDINGMOBILEONLY.mp4" type="video/mp4" />
-                    </video>
+                    <div class="mobile-video-container">
+                      <video 
+                        id={`mobile-video-${demo.id}`}
+                        class="opacity-0 transition-opacity duration-500"
+                        autoplay 
+                        muted 
+                        loop 
+                        playsinline
+                        title={`${demo.name} Website Preview`}
+                        onloadeddata={`setTimeout(() => { document.getElementById('mobile-loading-${demo.id}').style.display = 'none'; document.getElementById('mobile-video-${demo.id}').style.opacity = '1'; }, 2000);`}
+                      >
+                        <source src="/DEMOGRILLLOOPRECORDINGMOBILEONLY.mp4" type="video/mp4" />
+                      </video>
+                    </div>
                   ) : demo.name === "Hollow Coffee" ? (
                     <!-- Hollow Coffee Mobile Video -->
-                    <video 
-                      id={`mobile-video-${demo.id}`}
-                      class="absolute top-0 left-0 w-full h-full object-contain opacity-0 transition-opacity duration-500"
-                      autoplay 
-                      muted 
-                      loop 
-                      playsinline
-                      title={`${demo.name} Website Preview`}
-                      onloadeddata={`setTimeout(() => { document.getElementById('mobile-loading-${demo.id}').style.display = 'none'; document.getElementById('mobile-video-${demo.id}').style.opacity = '1'; }, 2000);`}
-                    >
-                      <source src="/HOLLOWCOFFELOOPMOBILEONLY.mp4" type="video/mp4" />
-                    </video>
+                    <div class="mobile-video-container">
+                      <video 
+                        id={`mobile-video-${demo.id}`}
+                        class="opacity-0 transition-opacity duration-500"
+                        autoplay 
+                        muted 
+                        loop 
+                        playsinline
+                        title={`${demo.name} Website Preview`}
+                        onloadeddata={`setTimeout(() => { document.getElementById('mobile-loading-${demo.id}').style.display = 'none'; document.getElementById('mobile-video-${demo.id}').style.opacity = '1'; }, 2000);`}
+                      >
+                        <source src="/HOLLOWCOFFELOOPMOBILEONLY.mp4" type="video/mp4" />
+                      </video>
+                    </div>
                   ) : (
                     <!-- White Squirrel Mobile Image -->
                     <img 
