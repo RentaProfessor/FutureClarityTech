@@ -1,0 +1,6 @@
+# Redirects for Cloudflare Pages
+# Specific page redirects
+/portfolio    /portfolio/index.html   200
+
+# Fallback for any other routes - serve index.html for client-side routing
+/*    /index.html   200

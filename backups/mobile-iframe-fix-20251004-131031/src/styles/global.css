@@ -1,0 +1,753 @@
+@import "tailwindcss";
+
+/* Ensure SVG icons are properly sized */
+svg {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* Custom CSS Variables */
+:root {
+  --primary-color: #667eea;
+  --secondary-color: #764ba2;
+  --accent-color: #f093fb;
+  --dark-color: #1a1a2e;
+  --light-color: #ffffff;
+  --text-color: #333333;
+  --text-light: #666666;
+  --border-color: #e1e5e9;
+  --success-color: #28a745;
+  --warning-color: #ffc107;
+  --error-color: #dc3545;
+}
+
+/* Custom gradient classes */
+.gradient-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.gradient-secondary {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-hero {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.gradient-dark {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+}
+
+/* Glassmorphism effect */
+.glass {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+}
+
+/* Custom animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.animate-fade-in-right {
+  animation: fadeInRight 0.6s ease-out;
+}
+
+.animate-pulse-slow {
+  animation: pulse 2s infinite;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--secondary-color);
+}
+
+/* Smooth transitions - optimized for mobile */
+* {
+  transition: all 0.3s ease;
+}
+
+/* Disable transitions on mobile for better performance */
+@media (max-width: 768px) {
+  * {
+    transition: none !important;
+  }
+  
+  /* Re-enable specific transitions that enhance UX */
+  button, a, input, textarea {
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease !important;
+  }
+}
+
+/* Focus styles */
+button:focus,
+input:focus,
+textarea:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* Mobile-first responsive design with comprehensive optimizations */
+@media (max-width: 768px) {
+  /* Base mobile utilities */
+  .mobile-padding {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  .mobile-text-center {
+    text-align: center;
+  }
+  
+  .mobile-stack {
+    flex-direction: column;
+  }
+  
+  .mobile-full-width {
+    width: 100%;
+  }
+
+  /* Mobile typography with better scaling */
+  .hero-title {
+    font-size: 2.25rem !important;
+    line-height: 1.1 !important;
+    letter-spacing: -0.025em;
+  }
+
+  .hero-subtitle {
+    font-size: 1.125rem !important;
+    line-height: 1.5 !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  .section-title {
+    font-size: 1.875rem !important;
+    line-height: 1.2 !important;
+    letter-spacing: -0.025em;
+  }
+
+  .card-padding {
+    padding: 1.25rem !important;
+  }
+
+  /* Enhanced button styling for mobile */
+  .button-mobile {
+    padding: 0.875rem 1.5rem !important;
+    font-size: 1rem !important;
+    min-height: 48px !important; /* iOS recommended touch target */
+    border-radius: 0.75rem !important;
+    font-weight: 600 !important;
+  }
+
+  /* Safe area handling for iOS - crucial for notched devices */
+  .safe-area-top {
+    padding-top: max(env(safe-area-inset-top), 1rem);
+  }
+
+  .safe-area-bottom {
+    padding-bottom: max(env(safe-area-inset-bottom), 1rem);
+  }
+
+  .safe-area-left {
+    padding-left: max(env(safe-area-inset-left), 1rem);
+  }
+
+  .safe-area-right {
+    padding-right: max(env(safe-area-inset-right), 1rem);
+  }
+
+  /* Mobile navigation improvements */
+  .mobile-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding-top: env(safe-area-inset-top);
+  }
+
+  /* Mobile form improvements - prevents zoom on iOS */
+  .form-input-mobile {
+    font-size: 16px !important; /* Prevents zoom on iOS */
+    padding: 0.875rem 0.875rem !important;
+    min-height: 48px !important;
+    border-radius: 0.75rem !important;
+    -webkit-appearance: none;
+    appearance: none;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    display: block !important;
+    width: 100% !important;
+  }
+
+  /* Mobile grid adjustments */
+  .mobile-grid-1 {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+
+  .mobile-grid-2 {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.75rem !important;
+  }
+
+  .mobile-grid-3 {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 0.5rem !important;
+  }
+
+  /* Mobile spacing optimizations */
+  .mobile-section-padding {
+    padding-top: 2.5rem !important;
+    padding-bottom: 2.5rem !important;
+  }
+
+  .mobile-container-padding {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  .mobile-hero-padding {
+    padding-top: 4rem !important;
+    padding-bottom: 2rem !important;
+  }
+
+  /* Mobile-specific spacing classes */
+  .mobile-mb-4 {
+    margin-bottom: 1rem !important;
+  }
+
+  .mobile-mb-4 {
+    margin-bottom: 1rem !important;
+  }
+  
+  .mobile-mb-6 {
+    margin-bottom: 1.5rem !important;
+  }
+
+  .mobile-mb-8 {
+    margin-bottom: 2rem !important;
+  }
+
+  .mobile-mt-4 {
+    margin-top: 1rem !important;
+  }
+
+  .mobile-mt-6 {
+    margin-top: 1.5rem !important;
+  }
+
+  .mobile-mt-8 {
+    margin-top: 2rem !important;
+  }
+
+  /* Mobile card optimizations */
+  .mobile-card-spacing {
+    margin-bottom: 1rem !important;
+  }
+
+  .mobile-card-padding {
+    padding: 1rem !important;
+  }
+
+  /* Mobile text sizing */
+  .mobile-text-sm {
+    font-size: 0.875rem !important;
+  }
+
+  .mobile-text-base {
+    font-size: 1rem !important;
+  }
+
+  .mobile-text-lg {
+    font-size: 1.125rem !important;
+  }
+
+  .mobile-text-xl {
+    font-size: 1.25rem !important;
+  }
+
+  /* Mobile layout fixes */
+  .mobile-flex-col {
+    flex-direction: column !important;
+  }
+
+  .mobile-items-center {
+    align-items: center !important;
+  }
+
+  .mobile-justify-center {
+    justify-content: center !important;
+  }
+
+  .mobile-text-center {
+    text-align: center !important;
+  }
+
+  /* Mobile image optimizations */
+  .mobile-img-responsive {
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100% !important;
+  }
+
+  /* Mobile scroll optimizations */
+  .mobile-scroll-smooth {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Mobile touch optimizations */
+  .mobile-touch-action {
+    touch-action: manipulation;
+  }
+
+  /* Mobile hover state removal */
+  .mobile-no-hover:hover {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Mobile performance optimizations */
+  .mobile-will-change {
+    will-change: transform;
+  }
+
+  .mobile-gpu-accelerated {
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+  }
+
+  /* Safari-specific mobile optimizations */
+  .safari-mobile-fix {
+    -webkit-overflow-scrolling: touch;
+    -webkit-transform: translate3d(0, 0, 0);
+  }
+
+  /* Chrome mobile optimizations */
+  .chrome-mobile-fix {
+    will-change: transform;
+    backface-visibility: hidden;
+  }
+
+  /* Fix for iOS Safari address bar issues */
+  .ios-viewport-fix {
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+  }
+
+  /* Fix for mobile keyboard issues */
+  .mobile-keyboard-fix {
+    resize: none;
+    -webkit-user-select: text;
+    user-select: text;
+  }
+
+  /* Mobile-specific animations */
+  @keyframes mobileSlideIn {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  .mobile-slide-in {
+    animation: mobileSlideIn 0.3s ease-out;
+  }
+
+  /* Mobile-specific font rendering */
+  .mobile-font-smooth {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Mobile-specific button styling */
+  .mobile-button-reset {
+    -webkit-appearance: none;
+    appearance: none;
+    border: none;
+    background: none;
+    padding: 0;
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  /* Mobile-specific input styling */
+  .mobile-input-reset {
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 0;
+    box-shadow: none;
+    outline: none;
+  }
+
+  /* Prevent zoom on input focus for iOS */
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="password"],
+  input[type="search"],
+  textarea {
+    font-size: 16px !important;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  /* Fix for mobile tap highlighting */
+  .mobile-tap-highlight-transparent {
+    -webkit-tap-highlight-color: transparent;
+    tap-highlight-color: transparent;
+  }
+
+  /* Mobile-specific scrolling */
+  .mobile-momentum-scroll {
+    -webkit-overflow-scrolling: touch;
+    overflow-scrolling: touch;
+  }
+
+  /* Mobile hero section optimization */
+  .mobile-hero-optimized {
+    min-height: 100vh !important;
+    min-height: 100svh !important;
+  }
+
+  [data-mobile-compact] {
+    min-height: 100vh !important;
+    min-height: 100svh !important;
+    padding-top: 7rem !important;
+    padding-bottom: 2rem !important;
+    justify-content: flex-start !important;
+  }
+
+  /* Reduce hero content spacing on mobile */
+  [data-mobile-compact] h1 {
+    margin-bottom: 1rem !important;
+    line-height: 1.1 !important;
+    font-size: 2rem !important;
+    margin-top: 1rem !important;
+  }
+
+  [data-mobile-compact] p {
+    margin-bottom: 1.5rem !important;
+    font-size: 1.125rem !important;
+  }
+
+  /* Mobile services section optimization */
+  .mobile-services-section {
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+  }
+
+  .mobile-services-grid {
+    gap: 0.75rem !important;
+  }
+  
+  /* Compact mobile service cards */
+  .mobile-services-grid > div {
+    padding: 1rem !important;
+  }
+  
+  .mobile-services-grid h3 {
+    font-size: 1.125rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+  
+  .mobile-services-grid p {
+    font-size: 0.875rem !important;
+    margin-bottom: 0.75rem !important;
+  }
+
+  /* Mobile process grid optimization */
+  .mobile-process-grid {
+    gap: 1rem !important;
+  }
+
+  .mobile-process-grid .mobile-card-spacing {
+    margin-bottom: 1rem !important;
+  }
+
+  /* Mobile about section optimization */
+  .mobile-about-section {
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+  }
+
+  .mobile-about-grid {
+    gap: 1.5rem !important;
+  }
+  
+  /* Hide feature cards on mobile to reduce scroll */
+  .mobile-hide-feature-cards {
+    display: none !important;
+  }
+  
+  /* Mobile footer optimization */
+  .mobile-footer-fix {
+    background: #1e293b !important;
+  }
+  
+  .mobile-footer-fix * {
+    color: white !important;
+  }
+  
+  .mobile-footer-fix a {
+    color: #e2e8f0 !important;
+  }
+  
+  .mobile-footer-fix a:hover {
+    color: white !important;
+  }
+
+  /* Mobile industries grid optimization */
+  .mobile-industries-grid {
+    gap: 0.75rem !important;
+  }
+
+  /* Mobile contact section optimization */
+  .mobile-contact-section {
+    padding-top: 1.5rem !important;
+    padding-bottom: 2rem !important;
+  }
+
+  .mobile-contact-grid {
+    gap: 1.5rem !important;
+  }
+  
+  /* Fix contact form centering on mobile */
+  .mobile-form-container {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  
+  .mobile-form-width {
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+
+  /* Remove all transform effects on mobile to prevent scrolling issues */
+  .group:hover {
+    transform: none !important;
+  }
+
+  /* Disable all hover effects on mobile */
+  .group:hover .group-hover\\:scale-110 {
+    transform: none !important;
+  }
+
+  /* Disable all parallax and transform effects on mobile */
+  * {
+    transform: none !important;
+    will-change: auto !important;
+    backface-visibility: visible !important;
+  }
+
+  /* Re-enable necessary transforms for buttons and links */
+  button, a {
+    transform: none !important;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease !important;
+  }
+
+  /* Prevent any scrolling issues */
+  html {
+    scroll-behavior: auto !important;
+    -webkit-overflow-scrolling: auto !important;
+  }
+
+  body {
+    overflow-x: hidden !important;
+    -webkit-overflow-scrolling: auto !important;
+  }
+
+  /* Fix viewport issues */
+  .mobile-viewport-fix {
+    min-height: auto !important;
+    height: auto !important;
+  }
+
+  /* Disable smooth scrolling on mobile */
+  * {
+    scroll-behavior: auto !important;
+  }
+
+  /* Ensure mobile hero has proper spacing */
+  @media (max-width: 768px) {
+    [data-mobile-compact] {
+      justify-content: flex-start !important;
+      padding-top: max(7rem, env(safe-area-inset-top) + 6rem) !important;
+      min-height: 100vh !important;
+      min-height: 100svh !important;
+    }
+    
+    /* Ensure hero section is visible on page load */
+    body {
+      scroll-padding-top: 0 !important;
+    }
+    
+    /* Prevent auto-scroll to other sections */
+    section {
+      scroll-margin-top: 0 !important;
+    }
+    
+    #services {
+      scroll-margin-top: 4rem !important;
+    }
+  }
+}
+
+/* Desktop optimizations */
+@media (min-width: 1024px) {
+  .desktop-padding {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  
+  .desktop-grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .desktop-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* Desktop-specific optimizations */
+  .hero-title {
+    font-size: 4rem;
+    line-height: 1.1;
+  }
+
+  .hero-subtitle {
+    font-size: 1.25rem;
+    line-height: 1.6;
+  }
+
+  .section-title {
+    font-size: 3rem;
+    line-height: 1.2;
+  }
+
+  .card-padding {
+    padding: 2rem;
+  }
+
+  .button-desktop {
+    padding: 1rem 2rem;
+    font-size: 1.125rem;
+  }
+
+  /* Desktop spacing */
+  .desktop-section-padding {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+
+  .desktop-container-padding {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  /* Desktop grid layouts */
+  .desktop-grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .desktop-grid-6 {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  /* Desktop hover effects */
+  .desktop-hover-lift:hover {
+    transform: translateY(-0.5rem);
+  }
+
+  .desktop-hover-scale:hover {
+    transform: scale(1.02);
+  }
+
+  /* Desktop typography */
+  .desktop-text-large {
+    font-size: 1.125rem;
+    line-height: 1.7;
+  }
+
+  .desktop-text-xl {
+    font-size: 1.25rem;
+    line-height: 1.6;
+  }
+}
+
+/* Large desktop optimizations */
+@media (min-width: 1280px) {
+  .hero-title {
+    font-size: 5rem;
+  }
+
+  .section-title {
+    font-size: 3.5rem;
+  }
+
+  .desktop-section-padding {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+}
