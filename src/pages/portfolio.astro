@@ -3,55 +3,35 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
-// Sample portfolio data - in a real app, this would come from a CMS or API
-const projects = [
+// Website demo data for iframe display
+const websiteDemos = [
   {
     id: 1,
-    name: "Bella Vista Restaurant",
-    description: "Modern restaurant website with online ordering and reservation system",
-    url: "https://bellavista.example.com",
-    image: "https://via.placeholder.com/600x400/667eea/ffffff?text=Bella+Vista+Restaurant",
-    category: "Restaurant"
+    name: "The White Squirrel",
+    url: "https://www.thewhitesquirrelllc.com/",
+    description: "Landing page for The White Squirrel, an Oberlin gift shop",
+    type: "website"
   },
   {
     id: 2,
-    name: "TechStart Solutions",
-    description: "Professional services website with client portal and project management",
-    url: "https://techstart.example.com",
-    image: "https://via.placeholder.com/600x400/764ba2/ffffff?text=TechStart+Solutions",
-    category: "Professional Services"
+    name: "Captain Fripp's Lost Treasures",
+    url: "https://apps.apple.com/us/app/captain-fripps-lost-treasures/id6752260563",
+    description: "Custom recreational application for Fripp Island resort",
+    type: "app"
   },
   {
     id: 3,
-    name: "Green Thumb Garden Center",
-    description: "E-commerce website for garden supplies with inventory management",
-    url: "https://greenthumb.example.com",
-    image: "https://via.placeholder.com/600x400/f093fb/ffffff?text=Green+Thumb+Garden",
-    category: "E-commerce"
+    name: "Demo Grill",
+    url: "https://demo-grill.pages.dev/",
+    description: "Professional restaurant website with integrated online ordering system",
+    type: "website"
   },
   {
     id: 4,
-    name: "Luxury Real Estate",
-    description: "High-end real estate website with property listings and virtual tours",
-    url: "https://luxuryrealestate.example.com",
-    image: "https://via.placeholder.com/600x400/f5576c/ffffff?text=Luxury+Real+Estate",
-    category: "Real Estate"
-  },
-  {
-    id: 5,
-    name: "Cozy Inn Hotel",
-    description: "Hotel booking website with room availability and online reservations",
-    url: "https://cozyinn.example.com",
-    image: "https://via.placeholder.com/600x400/28a745/ffffff?text=Cozy+Inn+Hotel",
-    category: "Hospitality"
-  },
-  {
-    id: 6,
-    name: "Fashion Forward Boutique",
-    description: "Fashion retail website with size guides and wishlist functionality",
-    url: "https://fashionforward.example.com",
-    image: "https://via.placeholder.com/600x400/ffc107/ffffff?text=Fashion+Forward",
-    category: "Retail"
+    name: "Hollow Coffee",
+    url: "https://coffee-web.pages.dev/",
+    description: "Coffee shop website with menu and locations",
+    type: "website"
   }
 ];
 ---
@@ -82,70 +62,89 @@ const projects = [
     </div>
   </section>
 
-  <!-- Portfolio Grid -->
+  <!-- Website Demos Grid -->
   <section class="py-8 sm:py-12 lg:pt-1 lg:pb-20 bg-gray-50 mobile-section-padding">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mobile-container-padding">
       <div class="text-center mb-6 sm:mb-8 md:mb-4 mobile-mb-6">
-        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 mobile-text-center">Featured Projects</h2>
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 mobile-text-center">Our Work & Website Demos</h2>
+        <p class="text-base sm:text-lg text-gray-600 max-w-3xl mx-auto mobile-text-center">
+          Featured client projects and demonstration websites showcasing our capabilities across different industries.
+        </p>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mobile-grid-1">
-        {projects.map((project) => (
-          <div class="bg-white rounded-2xl shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300 overflow-hidden group mobile-card-spacing mobile-no-hover">
-            <!-- Project Preview -->
-            <div class="relative h-48 sm:h-56 md:h-64 bg-gray-100 overflow-hidden">
-              <div class="absolute inset-0 bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center">
-                <div class="text-center p-4 sm:p-6 md:p-8 mobile-card-padding">
-                  <div class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
-                    <svg class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
-                  </div>
-                  <h3 class="text-base sm:text-lg font-semibold text-gray-900 mb-1 sm:mb-2 mobile-text-center">{project.name}</h3>
-                  <p class="text-sm text-gray-600 mobile-text-center">{project.category}</p>
-                </div>
-              </div>
-              
-              <!-- Hover Overlay -->
-              <div class="absolute inset-0 bg-gradient-to-r from-blue-500/90 to-purple-600/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center hidden md:flex">
-                <a 
-                  href={project.url} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  class="bg-white text-blue-600 px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-200 text-sm sm:text-base"
-                >
-                  View Live Site
-                </a>
-              </div>
+      <!-- 2x2 Grid Layout for demos -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mobile-grid-1">
+        {websiteDemos.map((demo) => (
+          <div class="bg-white rounded-2xl shadow-lg overflow-hidden mobile-card-spacing">
+            <!-- Simple Professional Header -->
+            <div class="bg-white border-b border-gray-200 p-4 sm:p-6">
+              <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-1 mobile-text-center">{demo.name}</h3>
+              <p class="text-gray-600 text-sm sm:text-base mobile-text-center">{demo.description}</p>
             </div>
-
-            <!-- Project Info -->
-            <div class="p-4 sm:p-6 mobile-card-padding">
-              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3 mobile-flex-col mobile-items-center">
-                <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-0 mobile-text-center">{project.name}</h3>
-                <span class="px-2 sm:px-3 py-1 bg-gradient-to-r from-blue-100 to-purple-100 text-blue-800 text-xs sm:text-sm font-medium rounded-full">
-                  {project.category}
-                </span>
-              </div>
-              <p class="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4 mobile-text-center">{project.description}</p>
-              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mobile-flex-col mobile-items-center">
+            
+            {demo.type === "app" ? (
+              <!-- App Display (Captain Fripp's) -->
+              <div class="relative bg-gradient-to-br from-indigo-50 to-purple-50" style="padding-bottom: 75%; height: 0; overflow: hidden;">
+                <div class="absolute inset-0 flex flex-col items-center justify-center p-6">
+                  <!-- Larger App Icon -->
+                  <div class="w-32 h-32 sm:w-40 sm:h-40 rounded-3xl mb-4 shadow-lg overflow-hidden">
+                    <img 
+                      src="/captain-fripp-icon.png" 
+                      alt="Captain Fripp's Lost Treasures App Icon"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+                  <!-- App Store Badge -->
+                  <div class="bg-black text-white px-4 py-2 rounded-lg text-sm font-semibold mb-2">
+                    📱 Mobile App
+                  </div>
+                  <p class="text-gray-600 text-center text-sm">Adventure game available on iOS</p>
+                </div>
+                <!-- Clickable overlay for app -->
                 <a 
-                  href={project.url} 
+                  href={demo.url} 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  class="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium transition-colors duration-200 mb-3 sm:mb-0 mobile-touch-action min-h-[44px] px-2 py-1"
-                >
-                  Open Site
-                  <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                  </svg>
-                </a>
-                <div class="flex space-x-2">
-                  <div class="w-2 h-2 bg-green-400 rounded-full"></div>
-                  <div class="w-2 h-2 bg-yellow-400 rounded-full"></div>
-                  <div class="w-2 h-2 bg-red-400 rounded-full"></div>
-                </div>
+                  class="absolute inset-0 w-full h-full z-10 cursor-pointer"
+                  title={`Download ${demo.name} app`}
+                ></a>
               </div>
+            ) : (
+              <!-- Website iframe Container -->
+              <div class="relative" style="padding-bottom: 75%; height: 0; overflow: hidden;">
+                <iframe 
+                  src={demo.url}
+                  class="absolute top-0 left-0 w-full h-full border-0"
+                  title={`${demo.name} Website Demo`}
+                  loading="lazy"
+                  sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
+                  style="transform: scale(0.5); transform-origin: top left; width: 200%; height: 200%; pointer-events: none;"
+                  scrolling="no"
+                ></iframe>
+                <!-- Clickable overlay -->
+                <a 
+                  href={demo.url} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  class="absolute inset-0 w-full h-full z-10 cursor-pointer"
+                  title={`Visit ${demo.name} website`}
+                ></a>
+              </div>
+            )}
+            
+            <!-- Demo Footer -->
+            <div class="p-4 sm:p-6 bg-gray-50">
+              <a 
+                href={demo.url} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold hover:shadow-lg hover:-translate-y-1 transition-all duration-300 mobile-touch-action min-h-[44px]"
+              >
+                {demo.type === "app" ? "Download App" : "View Full Site"}
+                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
             </div>
           </div>
         ))}
