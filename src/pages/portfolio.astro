@@ -10,8 +10,7 @@ const websiteDemos = [
     name: "The White Squirrel",
     url: "https://www.thewhitesquirrelllc.com/",
     description: "Landing page for The White Squirrel, an Oberlin gift shop",
-    type: "website",
-    heroImage: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=600&fit=crop&crop=center"
+    type: "website"
   },
   {
     id: 2,
@@ -25,16 +24,14 @@ const websiteDemos = [
     name: "Demo Grill",
     url: "https://demo-grill.pages.dev/",
     description: "Professional restaurant website with integrated online ordering system",
-    type: "website",
-    heroImage: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=600&fit=crop&crop=center"
+    type: "website"
   },
   {
     id: 4,
     name: "Hollow Coffee",
     url: "https://coffee-web.pages.dev/",
     description: "Coffee shop website with menu and locations",
-    type: "website",
-    heroImage: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800&h=600&fit=crop&crop=center"
+    type: "website"
   }
 ];
 ---
@@ -113,38 +110,30 @@ const websiteDemos = [
                 ></a>
               </div>
             ) : (
-              <!-- Website Display - Mobile: Hero Image, Desktop: iframe -->
+              <!-- Website iframe Container with Loading Buffer -->
               <div class="relative" style="padding-bottom: 75%; height: 0; overflow: hidden;">
-                <!-- Mobile Hero Image (hidden on desktop) -->
-                <div class="md:hidden absolute inset-0 w-full h-full">
-                  <img 
-                    src={demo.heroImage}
-                    alt={`${demo.name} website preview`}
-                    class="w-full h-full object-cover"
-                    loading="lazy"
-                  />
-                  <!-- Mobile overlay with website info -->
-                  <div class="absolute inset-0 bg-black bg-opacity-40 flex items-end">
-                    <div class="p-4 text-white w-full">
-                      <div class="bg-white bg-opacity-90 text-gray-900 px-3 py-2 rounded-lg text-center">
-                        <p class="text-sm font-semibold">📱 Tap to view full website</p>
-                      </div>
-                    </div>
+                <!-- Loading State -->
+                <div id={`loading-${demo.id}`} class="absolute inset-0 w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                  <div class="text-center">
+                    <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+                    <p class="text-gray-600 text-sm font-medium">Loading website preview...</p>
                   </div>
                 </div>
                 
-                <!-- Desktop iframe (hidden on mobile) -->
+                <!-- iframe (hidden initially) -->
                 <iframe 
+                  id={`iframe-${demo.id}`}
                   src={demo.url}
-                  class="hidden md:block absolute top-0 left-0 w-full h-full border-0"
+                  class="absolute top-0 left-0 w-full h-full border-0 opacity-0 transition-opacity duration-500"
                   title={`${demo.name} Website Demo`}
                   loading="lazy"
                   sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
                   style="transform: scale(0.5); transform-origin: top left; width: 200%; height: 200%; pointer-events: none;"
                   scrolling="no"
+                  onload={`setTimeout(() => { document.getElementById('loading-${demo.id}').style.display = 'none'; document.getElementById('iframe-${demo.id}').style.opacity = '1'; }, 4000);`}
                 ></iframe>
                 
-                <!-- Clickable overlay for both mobile and desktop -->
+                <!-- Clickable overlay -->
                 <a 
                   href={demo.url} 
                   target="_blank" 
