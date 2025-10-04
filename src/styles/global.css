@@ -14,13 +14,34 @@ svg {
   
   .iframe-container iframe {
     min-width: 1200px !important;
+    /* Force desktop viewport to show full hero and top bar */
+    width: 1200px !important;
+    height: 800px !important;
+    /* Ensure iframe content renders in desktop mode */
+    zoom: 0.5 !important;
+    transform: scale(0.5) !important;
+    -moz-transform: scale(0.5) !important;
+    -webkit-transform: scale(0.5) !important;
+    transform-origin: top left !important;
+    -moz-transform-origin: top left !important;
+    -webkit-transform-origin: top left !important;
+  }
+  
+  /* Additional iframe styling for desktop view */
+  .iframe-container {
+    position: relative !important;
+    width: 100% !important;
+    height: 0 !important;
+    padding-bottom: 75% !important;
+    overflow: hidden !important;
+    background: #f8f9fa !important;
   }
   
   /* Mobile responsive video container */
   .mobile-video-container {
     position: relative;
     width: 100%;
-    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    padding-bottom: 75%; /* Match iframe container aspect ratio */
     height: 0;
     overflow: hidden;
     background-color: #f8f9fa;
@@ -33,8 +54,21 @@ svg {
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: contain;
-    object-position: center;
+    object-fit: cover;
+    object-position: top center;
+    /* Ensure smooth playback */
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+  }
+  
+  .mobile-video-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
   }
   
   /* Mobile responsive image container */

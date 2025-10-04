@@ -128,7 +128,7 @@ const websiteDemos = [
                   title={`${demo.name} Website Demo`}
                   loading="lazy"
                   sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
-                  style="transform: scale(0.5); transform-origin: top left; width: 200%; height: 200%; pointer-events: none; overflow: hidden;"
+                  style="transform: scale(0.5); transform-origin: top left; width: 200%; height: 200%; pointer-events: none; overflow: hidden; min-width: 1200px;"
                   scrolling="no"
                   onload={`setTimeout(() => { document.getElementById('loading-${demo.id}').style.display = 'none'; document.getElementById('iframe-${demo.id}').style.opacity = '1'; }, 2000);`}
                 ></iframe>
@@ -143,28 +143,47 @@ const websiteDemos = [
                 ></a>
               </div>
 
-              <!-- Mobile: iframe Container (same as desktop) -->
-              <div class="relative iframe-container md:hidden" style="padding-bottom: 75%; height: 0; overflow: hidden; background: #f8f9fa;">
-                <!-- Loading State -->
-                <div id={`mobile-loading-${demo.id}`} class="absolute inset-0 w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
-                  <div class="text-center">
-                    <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-3"></div>
-                    <p class="text-gray-600 text-xs font-medium">Loading website preview...</p>
+              <!-- Mobile: Video Container (replaces iframe) -->
+              <div class="relative mobile-video-container md:hidden" style="padding-bottom: 75%; height: 0; overflow: hidden; background: #f8f9fa;">
+                {demo.name === "Demo Grill" ? (
+                  <video 
+                    class="absolute top-0 left-0 w-full h-full object-cover"
+                    autoplay 
+                    muted 
+                    loop 
+                    playsinline
+                    preload="metadata"
+                  >
+                    <source src="/DEMOGRILLloopMObile.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                ) : demo.name === "Hollow Coffee" ? (
+                  <video 
+                    class="absolute top-0 left-0 w-full h-full object-cover"
+                    autoplay 
+                    muted 
+                    loop 
+                    playsinline
+                    preload="metadata"
+                  >
+                    <source src="/Hollowcoffeeloopmobile.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                ) : demo.name === "The White Squirrel" ? (
+                  <img 
+                    src="/WhiteSquirrelScreenshotmobileonly_compressed.png"
+                    alt={`${demo.name} Website Preview`}
+                    class="absolute top-0 left-0 w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                ) : (
+                  <!-- Fallback for other demos -->
+                  <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                    <div class="text-center">
+                      <p class="text-gray-600 text-sm font-medium">Website Preview</p>
+                    </div>
                   </div>
-                </div>
-                
-                <!-- iframe (hidden initially) -->
-                <iframe 
-                  id={`mobile-iframe-${demo.id}`}
-                  src={demo.url}
-                  class="absolute top-0 left-0 w-full h-full border-0 opacity-0 transition-opacity duration-500"
-                  title={`${demo.name} Website Demo`}
-                  loading="lazy"
-                  sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
-                  style="transform: scale(0.5); transform-origin: top left; width: 200%; height: 200%; pointer-events: none; overflow: hidden;"
-                  scrolling="no"
-                  onload={`setTimeout(() => { document.getElementById('mobile-loading-${demo.id}').style.display = 'none'; document.getElementById('mobile-iframe-${demo.id}').style.opacity = '1'; }, 2000);`}
-                ></iframe>
+                )}
                 
                 <!-- Clickable overlay -->
                 <a 
