@@ -413,11 +413,11 @@ import Footer from '../components/Footer.astro';
       const urlParams = new URLSearchParams(window.location.search);
       const scrollTo = urlParams.get('scroll');
       
-      if (scrollTo === 'contact') {
+      if (scrollTo === 'contact' || scrollTo === 'services' || scrollTo === 'about') {
         setTimeout(() => {
-          const contactElement = document.getElementById('contact');
-          if (contactElement) {
-            contactElement.scrollIntoView({ behavior: 'smooth' });
+          const targetElement = document.getElementById(scrollTo);
+          if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth' });
             // Clean up the URL
             window.history.replaceState({}, document.title, window.location.pathname);
           }

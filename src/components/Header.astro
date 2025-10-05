@@ -63,11 +63,33 @@
 </header>
 
 <script>
-  // Mobile menu toggle
+  // Mobile menu toggle and smart navigation
   document.addEventListener('DOMContentLoaded', function() {
     const mobileMenuButton = document.getElementById('mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
     const mobileMenuLinks = mobileMenu?.querySelectorAll('a');
+    
+    // Smart navigation: if not on main page, convert anchor links to scroll parameter links
+    const isMainPage = window.location.pathname === '/' || window.location.pathname === '/index.html';
+    
+    if (!isMainPage) {
+      // Update desktop navigation links
+      const desktopLinks = document.querySelectorAll('header nav a[href^="#"]');
+      desktopLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href && href !== '#') {
+          link.setAttribute('href', `/?scroll=${href.substring(1)}`);
+        }
+      });
+      
+      // Update mobile navigation links
+      mobileMenuLinks?.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href && href.startsWith('#') && href !== '#') {
+          link.setAttribute('href', `/?scroll=${href.substring(1)}`);
+        }
+      });
+    }
     
     if (mobileMenuButton && mobileMenu) {
       // Toggle menu on button click
