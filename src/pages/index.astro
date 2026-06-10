@@ -2,7 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import Storefront from '../components/Storefront.astro';
+import Workbench from '../components/Workbench.astro';
+import Cassette from '../components/Cassette.astro';
 
 const work = [
   {
@@ -75,7 +76,7 @@ const steps = [
   <section class="overflow-hidden border-b border-line">
     <div class="mx-auto grid max-w-6xl items-center gap-14 px-6 pb-16 pt-32 md:pb-24 md:pt-44 lg:grid-cols-[1.1fr_0.9fr]">
       <div>
-        <p class="eyebrow mb-6" data-reveal>A small web studio</p>
+        <p class="eyebrow mb-6" data-reveal>Websites, apps, and hardware</p>
         <h1
           class="max-w-2xl text-[2.6rem] font-semibold leading-[1.06] tracking-tight sm:text-5xl md:text-6xl"
           data-reveal
@@ -96,8 +97,9 @@ const steps = [
           </span>
         </h1>
         <p class="mt-7 max-w-xl text-lg text-soft" data-reveal style="--reveal-delay: 0.12s">
-          We design and build websites and apps for small businesses. You deal directly with the
-          people doing the work, and you see a working demo before committing to the full build.
+          FutureClarity is a small studio. We design and build websites and apps for small
+          businesses, and we prototype products of our own. Either way, you deal directly with
+          the people doing the work.
         </p>
         <div class="mt-9 flex flex-wrap items-center gap-6" data-reveal style="--reveal-delay: 0.18s">
           <a href="#contact" class="btn">Start a project</a>
@@ -119,7 +121,7 @@ const steps = [
         </p>
       </div>
       <div class="mx-auto w-full max-w-sm lg:max-w-none" data-reveal style="--reveal-delay: 0.15s">
-        <Storefront />
+        <Workbench />
       </div>
     </div>
   </section>
@@ -162,6 +164,35 @@ const steps = [
 
   <!-- floating image that trails the cursor over the work list -->
   <div id="work-preview" aria-hidden="true"><img src="/work/white-squirrel.jpg" alt="" /></div>
+
+  <!-- LegacyTape -->
+  <section id="legacytape" class="scroll-mt-24 border-b border-line">
+    <div class="mx-auto grid max-w-6xl items-center gap-12 px-6 py-16 md:grid-cols-[0.9fr_1.1fr] md:gap-16 md:py-24">
+      <div class="order-last mx-auto w-full max-w-xs md:order-first md:max-w-sm" data-reveal style="--reveal-delay: 0.1s">
+        <Cassette />
+      </div>
+      <div data-reveal>
+        <p class="eyebrow">From the workshop</p>
+        <h2 class="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
+          We build products of our own too.
+        </h2>
+        <p class="mt-4 text-soft">
+          LegacyTape is a retro-inspired recording device, paired with a companion app, that
+          helps grandparents tell their life stories. Guided prompts walk them through each
+          recording session, and the stories come back as a printed book the whole family keeps.
+        </p>
+        <p class="mt-4 text-soft">
+          We're prototyping the hardware now, and early access signups are open.
+        </p>
+        <div class="mt-7 flex flex-wrap items-center gap-6">
+          <a href="https://mylegacytape.com" target="_blank" rel="noopener noreferrer" class="link">
+            Visit mylegacytape.com ↗
+          </a>
+          <span class="font-mono text-xs uppercase tracking-[0.15em] text-faint">Now prototyping</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- Services -->
   <section id="services" class="scroll-mt-24 border-b border-line">
@@ -315,6 +346,10 @@ const steps = [
             a website has one job, bringing in customers, so we keep our builds simple, fast, and
             easy for you to update. If something would add cost without adding customers, we'll
             tell you to skip it.
+          </p>
+          <p>
+            Between client projects we build products of our own. LegacyTape, our recording
+            device for preserving family stories, is the current one.
           </p>
         </div>
       </div>

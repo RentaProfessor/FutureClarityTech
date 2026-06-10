@@ -1,0 +1,80 @@
+---
+// Hand-drawn cassette tape for the LegacyTape section, with slowly turning
+// reels (paused for prefers-reduced-motion) and a pencil lying next to it,
+// for anyone old enough to know what the pencil is for.
+---
+
+<svg
+  viewBox="0 0 320 230"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true"
+  class="cassette"
+>
+  <g stroke="var(--color-ink)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+    <!-- shell -->
+    <path d="M22,32 C20,80 23,140 22,188 L298,188 C299,142 297,82 298,32 Z" />
+    <path d="M22,32 C20,80 23,140 22,188 L298,188 C299,142 297,82 298,32 Z" stroke-width="1.4" opacity="0.22" transform="translate(2.5 2)" />
+    <circle cx="32" cy="42" r="2.4" stroke-width="1.4" />
+    <circle cx="288" cy="42" r="2.4" stroke-width="1.4" />
+    <circle cx="32" cy="178" r="2.4" stroke-width="1.4" />
+    <circle cx="288" cy="178" r="2.4" stroke-width="1.4" />
+
+    <!-- label -->
+    <path d="M42,46 L278,46 L278,118 L42,118 Z" fill="var(--color-paper)" stroke-width="1.8" />
+    <g stroke="none" fill="var(--color-accent)">
+      <rect x="44" y="98" width="232" height="6" fill-opacity="0.9" />
+      <rect x="44" y="106" width="232" height="5" fill-opacity="0.55" />
+      <rect x="44" y="113" width="232" height="3.5" fill-opacity="0.3" />
+    </g>
+
+    <!-- window with reels -->
+    <path d="M94,126 L226,126 L226,168 L94,168 Z" stroke-width="1.8" />
+    <g class="reel" style="transform-origin: 122px 147px;" stroke-width="1.6">
+      <circle cx="122" cy="147" r="14" />
+      <circle cx="122" cy="147" r="8.5" stroke-width="1.2" opacity="0.5" />
+      <path d="M122,133 L122,140" />
+      <path d="M122,154 L122,161" />
+      <path d="M108,147 L115,147" />
+      <path d="M129,147 L136,147" />
+    </g>
+    <g class="reel reel-reverse" style="transform-origin: 198px 147px;" stroke-width="1.6">
+      <circle cx="198" cy="147" r="14" />
+      <circle cx="198" cy="147" r="5.5" stroke-width="1.2" opacity="0.5" />
+      <path d="M198,133 L198,140" />
+      <path d="M198,154 L198,161" />
+      <path d="M184,147 L191,147" />
+      <path d="M205,147 L212,147" />
+    </g>
+    <path d="M136,156 C152,162 168,162 184,156" stroke-width="1.4" opacity="0.6" />
+
+    <!-- head opening -->
+    <path d="M122,172 L198,172 L192,186 L128,186 Z" stroke-width="1.6" />
+    <circle cx="142" cy="179" r="2.6" stroke-width="1.2" />
+    <circle cx="178" cy="179" r="2.6" stroke-width="1.2" />
+
+    <!-- the pencil -->
+    <path d="M226,206 L292,198 L296,205 L230,213 Z" stroke-width="1.6" />
+    <path d="M226,206 L219,211 L230,213 Z" stroke-width="1.4" />
+    <path d="M286,199 L289,206" stroke="var(--color-accent)" stroke-width="2" />
+  </g>
+
+  <!-- lettering -->
+  <text
+    x="160"
+    y="72"
+    text-anchor="middle"
+    font-family="var(--font-display)"
+    font-size="24"
+    font-weight="600"
+    letter-spacing="3"
+    fill="var(--color-ink)">LEGACYTAPE</text>
+  <text
+    x="160"
+    y="90"
+    text-anchor="middle"
+    font-family="var(--font-mono)"
+    font-size="9"
+    letter-spacing="2.5"
+    fill="var(--color-soft)">CHAPTER 1: THE EARLY YEARS</text>
+</svg>

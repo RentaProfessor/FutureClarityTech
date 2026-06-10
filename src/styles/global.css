@@ -209,10 +209,9 @@ body::after {
   }
 }
 
-/* Steam over the coffee mug in the storefront drawing */
+/* Steam over the coffee mug in the workbench drawing */
 .steam {
   animation: steam-drift 3.2s ease-in-out infinite;
-  transform-origin: 200px 336px;
 }
 
 @keyframes steam-drift {
@@ -227,13 +226,30 @@ body::after {
   }
 }
 
+/* Cassette reels turning slowly in the LegacyTape section */
+.reel {
+  transform-box: view-box;
+  animation: reel-spin 9s linear infinite;
+}
+
+.reel-reverse {
+  animation-direction: reverse;
+}
+
+@keyframes reel-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hero-underline path {
     animation: none;
     stroke-dashoffset: 0;
   }
 
-  .steam {
+  .steam,
+  .reel {
     animation: none;
   }
 }

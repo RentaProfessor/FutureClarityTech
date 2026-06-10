@@ -18,8 +18,8 @@ npm run preview  # preview the production build
 ## Where things live
 
 - `src/pages/`: the two routes, `index.astro` (home) and `portfolio.astro` (work)
-- `src/components/`: shared header and footer, plus the hand-drawn storefront
-  illustration (`Storefront.astro`)
+- `src/components/`: shared header and footer, plus the hand-drawn illustrations
+  (`Workbench.astro` in the hero, `Cassette.astro` in the LegacyTape section)
 - `src/layouts/Layout.astro`: HTML shell, meta tags, font loading
 - `src/styles/global.css`: Tailwind import, design tokens (`@theme`), and the
   handful of shared component classes (`.btn`, `.link`, `.field`, `.eyebrow`)

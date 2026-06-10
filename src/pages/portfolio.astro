@@ -7,6 +7,14 @@ import Footer from '../components/Footer.astro';
 // looping screen recording (or a still) since the iframes don't behave there.
 const websiteDemos = [
   {
+    id: 5,
+    name: 'LegacyTape',
+    url: 'https://mylegacytape.com/',
+    description: 'Our own product: a recording device for family stories',
+    tag: 'Our product',
+    type: 'website',
+  },
+  {
     id: 1,
     name: 'The White Squirrel',
     url: 'https://www.thewhitesquirrelllc.com/',
@@ -52,8 +60,9 @@ const websiteDemos = [
         Recent work.
       </h1>
       <p class="mt-6 max-w-2xl text-lg text-soft">
-        Client projects and demo builds. The demos are real, working sites we made to show
-        restaurant and shop owners what they could have, so click around and kick the tires.
+        Client projects, demo builds, and our own product. The demos are real, working sites we
+        made to show restaurant and shop owners what they could have, so click around and kick
+        the tires.
       </p>
     </div>
   </section>
@@ -143,6 +152,13 @@ const websiteDemos = [
                         src="/Whitesquirrel.png"
                         alt={`${demo.name} website`}
                         class="absolute left-0 top-0 h-full w-full object-cover object-top"
+                        loading="lazy"
+                      />
+                    ) : demo.name === 'LegacyTape' ? (
+                      <img
+                        src="/work/legacytape.jpg"
+                        alt="The LegacyTape recorder prototype next to its companion app"
+                        class="absolute left-0 top-0 h-full w-full object-cover"
                         loading="lazy"
                       />
                     ) : (
