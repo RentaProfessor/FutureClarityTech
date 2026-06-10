@@ -1,0 +1,145 @@
+---
+// Hand-drawn storefront illustration for the homepage hero.
+// Single ink-weight line work with rust accents, drawn to match the
+// site's sketch style (wobbly lines, doubled "echo" strokes).
+---
+
+<svg
+  viewBox="0 0 460 500"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true"
+  class="storefront"
+>
+  <g stroke="var(--color-ink)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+    <!-- facade walls -->
+    <path d="M30,92 C28,180 31,330 30,470" />
+    <path d="M430,88 C432,180 429,330 430,470" />
+
+    <!-- sign board -->
+    <path d="M28,34 L432,30 L434,88 L30,92 Z" />
+    <path d="M28,34 L432,30 L434,88 L30,92 Z" stroke-width="1.4" opacity="0.22" transform="translate(2.5 2)" />
+    <path d="M42,46 L420,43 L421,77 L43,80 Z" stroke-width="1.4" opacity="0.55" />
+    <circle cx="37" cy="41" r="1.6" stroke-width="1.2" />
+    <circle cx="424" cy="38" r="1.6" stroke-width="1.2" />
+
+    <!-- awning: rust stripes, then scalloped edge -->
+    <g stroke="none" fill="var(--color-accent)" fill-opacity="0.92">
+      <path d="M22,112 L74,112 L68,164 Q41,177 14,164 Z" />
+      <path d="M126,112 L178,112 L176,164 Q149,177 122,164 Z" />
+      <path d="M230,112 L282,112 L284,164 Q257,177 230,164 Z" />
+      <path d="M334,112 L386,112 L392,164 Q365,177 338,164 Z" />
+    </g>
+    <path d="M22,112 L438,112" />
+    <path d="M24,120 L436,120" stroke-width="1.4" opacity="0.45" />
+    <path d="M22,112 L14,164" />
+    <path d="M438,112 L446,164" />
+    <path d="M14,164 Q41,177 68,164 Q95,177 122,164 Q149,177 176,164 Q203,177 230,164 Q257,177 284,164 Q311,177 338,164 Q365,177 392,164 Q419,177 446,164" />
+
+    <!-- display window -->
+    <path d="M60,200 C58,270 61,340 60,404 L284,404 C285,336 283,266 284,200 Z" />
+    <path d="M60,200 C58,270 61,340 60,404 L284,404 C285,336 283,266 284,200 Z" stroke-width="1.4" opacity="0.22" transform="translate(-2.5 2)" />
+    <path d="M70,210 L274,210 L274,394 L70,394 Z" stroke-width="1.4" opacity="0.55" />
+    <path d="M172,210 C171,270 173,340 172,394" stroke-width="1.6" />
+    <path d="M70,300 L274,302" stroke-width="1.6" />
+    <!-- window sill -->
+    <path d="M52,404 L292,404 L292,418 L52,418 Z" fill="var(--color-paper)" />
+    <!-- glass reflections -->
+    <path d="M90,250 L150,215" stroke-width="1.4" opacity="0.4" />
+    <path d="M100,268 L170,222" stroke-width="1.4" opacity="0.4" />
+
+    <!-- window display: potted plant -->
+    <path d="M92,346 L122,346 L118,370 L96,370 Z" />
+    <path d="M90,340 L124,340 L122,348 L92,348 Z" fill="var(--color-paper)" />
+    <path d="M107,340 C104,326 96,318 90,314" stroke-width="1.6" />
+    <path d="M107,340 C107,324 108,314 112,306" stroke-width="1.6" />
+    <path d="M107,340 C112,328 120,322 126,318" stroke-width="1.6" />
+    <path d="M90,314 Q83,305 89,299 Q97,305 90,314 Z" stroke-width="1.6" />
+    <path d="M112,306 Q108,296 115,291 Q120,299 112,306 Z" stroke-width="1.6" />
+    <path d="M126,318 Q124,308 132,305 Q133,314 126,318 Z" stroke-width="1.6" />
+    <!-- shelf line -->
+    <path d="M70,370 L274,370" stroke-width="1.4" opacity="0.5" />
+
+    <!-- window display: coffee mug with steam -->
+    <path d="M190,350 L190,368 Q190,370 192,370 L206,370 Q208,370 208,368 L208,350 Z" stroke-width="1.8" />
+    <path d="M208,354 C215,354 215,365 208,365" stroke-width="1.8" />
+    <g class="steam" stroke-width="1.4" opacity="0.55">
+      <path d="M196,344 C193,338 199,334 196,328" />
+      <path d="M203,344 C200,338 206,334 203,328" />
+    </g>
+
+    <!-- window display: stacked books -->
+    <path d="M222,358 L266,358 L264,370 L220,370 Z" stroke-width="1.8" />
+    <path d="M226,347 L262,347 L263,358 L224,358 Z" stroke-width="1.8" />
+    <path d="M231,338 L258,338 L257,347 L229,347 Z" stroke-width="1.8" />
+
+    <!-- door, painted rust -->
+    <path d="M310,196 L412,194 L412,470 L310,470 Z" />
+    <path d="M310,196 L412,194 L412,470 L310,470 Z" stroke-width="1.4" opacity="0.22" transform="translate(2.5 -2)" />
+    <path d="M318,204 L404,202 L404,470 L318,470 Z" fill="var(--color-accent)" fill-opacity="0.93" />
+    <path d="M330,218 L392,216 L392,332 L330,334 Z" fill="var(--color-paper)" />
+    <path d="M334,372 L390,370 L390,442 L334,444 Z" stroke="var(--color-accent-deep)" stroke-width="2" />
+    <circle cx="327" cy="354" r="4.2" fill="var(--color-paper)" stroke-width="1.8" />
+
+    <!-- hanging OPEN sign -->
+    <path d="M348,218 L354,242" stroke-width="1.4" />
+    <path d="M382,217 L376,242" stroke-width="1.4" />
+    <path d="M344,242 L388,240 L389,264 L345,266 Z" fill="var(--color-paper)" />
+
+    <!-- doormat -->
+    <path d="M316,480 L406,480 L402,494 L320,494 Z" stroke-width="1.8" />
+    <path d="M324,485 L398,484" stroke-width="1.2" opacity="0.5" />
+    <path d="M323,490 L399,489" stroke-width="1.2" opacity="0.5" />
+
+    <!-- pots on the sidewalk -->
+    <path d="M118,432 L158,432 L152,470 L124,470 Z" />
+    <path d="M114,426 L162,426 L160,436 L116,436 Z" fill="var(--color-paper)" />
+    <path d="M122,420 Q116,398 134,394 Q138,378 152,386 Q166,382 164,402 Q174,412 156,422 Q138,428 122,420 Z" stroke-width="1.8" />
+    <path d="M138,424 C140,414 142,404 148,396" stroke-width="1.2" opacity="0.5" />
+    <path d="M198,448 L228,448 L224,470 L202,470 Z" stroke-width="1.8" />
+    <path d="M213,448 C212,436 214,430 211,423" stroke-width="1.6" />
+    <path d="M211,423 Q204,417 208,410 Q215,414 211,423 Z" stroke-width="1.4" />
+    <path d="M212,430 Q219,426 222,419 Q215,417 212,430 Z" stroke-width="1.4" />
+
+    <!-- shop cat -->
+    <path d="M258,470 C254,446 262,431 277,428" stroke-width="2" />
+    <path d="M277,428 C276,418 292,417 293,427 C293,435 287,439 281,438" stroke-width="2" />
+    <path d="M277,420 L274,411 L282,417" stroke-width="1.6" />
+    <path d="M288,419 L292,410 L294,418" stroke-width="1.6" />
+    <path d="M293,427 C299,440 298,456 296,470" stroke-width="2" />
+    <path d="M285,470 L285,452" stroke-width="1.4" />
+    <path d="M258,468 C244,468 237,457 249,452" stroke-width="1.8" />
+
+    <!-- ground line with hatching -->
+    <path d="M8,470 C120,468 340,472 452,470" />
+    <g stroke-width="1.4" opacity="0.6">
+      <path d="M44,476 L34,486" />
+      <path d="M114,476 L104,486" />
+      <path d="M186,477 L176,487" />
+      <path d="M252,476 L242,486" />
+      <path d="M310,477 L300,487" />
+      <path d="M376,476 L366,486" />
+      <path d="M438,476 L428,486" />
+    </g>
+  </g>
+
+  <!-- lettering -->
+  <text
+    x="230"
+    y="73"
+    text-anchor="middle"
+    font-family="var(--font-display)"
+    font-size="30"
+    font-weight="600"
+    letter-spacing="6"
+    fill="var(--color-ink)">THE LOCAL</text>
+  <text
+    x="366"
+    y="258"
+    text-anchor="middle"
+    font-family="var(--font-mono)"
+    font-size="12"
+    letter-spacing="3"
+    fill="var(--color-ink)"
+    transform="rotate(-2 366 253)">OPEN</text>
+</svg>

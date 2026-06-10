@@ -7,14 +7,6 @@ export default defineConfig({
   output: 'static',
   site: 'https://futureclaritytech.pages.dev',
   vite: {
-    plugins: [
-      tailwindcss({
-        // Ensure Tailwind processes all content files
-        content: [
-          './src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}',
-          './public/**/*.html',
-        ]
-      })
-    ]
-  }
+    plugins: [tailwindcss()],
+  },
 });

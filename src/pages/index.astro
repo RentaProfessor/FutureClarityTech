@@ -2,404 +2,394 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import Storefront from '../components/Storefront.astro';
+
+const work = [
+  {
+    name: 'The White Squirrel',
+    url: 'https://www.thewhitesquirrelllc.com/',
+    blurb: 'Gift shop in Oberlin, Ohio',
+    tag: 'Website',
+    preview: '/work/white-squirrel.jpg',
+    fit: 'cover',
+  },
+  {
+    name: "Captain Fripp's Lost Treasures",
+    url: 'https://apps.apple.com/us/app/captain-fripps-lost-treasures/id6752260563',
+    blurb: 'Recreation app for Fripp Island, South Carolina',
+    tag: 'iOS app',
+    preview: '/captain-fripp-icon.png',
+    fit: 'contain',
+  },
+  {
+    name: 'Demo Grill',
+    url: 'https://demo-grill.pages.dev/',
+    blurb: 'Restaurant site with online ordering',
+    tag: 'Demo build',
+    preview: '/work/demo-grill.jpg',
+    fit: 'cover',
+  },
+  {
+    name: 'CLOTH',
+    url: 'https://clothlandingdemo.pages.dev/',
+    blurb: 'Streetwear storefront',
+    tag: 'Demo build',
+    preview: '/work/cloth.jpg',
+    fit: 'cover',
+  },
+];
+
+const steps = [
+  {
+    n: '1',
+    title: 'Consultation',
+    body: 'We talk through what you need, your timeline, and your budget. Then we collect your content, branding, and anything else the build depends on.',
+  },
+  {
+    n: '2',
+    title: 'Demo',
+    body: 'We build a working demo of your actual site, not a mockup, so you can react to something real before the full build starts.',
+  },
+  {
+    n: '3',
+    title: 'Build',
+    body: 'We build the full site to the spec we agreed on, and keep you posted as it comes together.',
+  },
+  {
+    n: '4',
+    title: 'Review & testing',
+    body: 'You review the finished site, we make the final fixes, and we test everything on real phones and browsers.',
+  },
+  {
+    n: '5',
+    title: 'Launch',
+    body: 'We connect your existing domain or register a new one, set up hosting, and hand everything over.',
+  },
+];
 ---
 
-<Layout title="FutureClarity Technologies - Web Development that just works.">
+<Layout title="FutureClarity Technologies | Web development that just works.">
   <Header />
-  
-  <!-- Hero Section -->
-  <section class="relative pt-24 sm:pt-24 md:pt-5 pb-8 sm:pb-8 md:pb-8 md:min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 flex flex-col justify-start md:justify-center safe-area-top mobile-hero-optimized" style="min-height: auto; min-height: 100svh;" data-mobile-compact>
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mobile-container-padding">
-      <div class="text-center">
-        <!-- Hero Content -->
-        <div class="max-w-4xl mx-auto">
-          <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-slate-900 mb-4 sm:mb-6 leading-tight tracking-tight mobile-text-center">
-            Transform your business with 
-            <span class="relative inline-block">
-              <span class="invisible">Web Design</span>
-              <span class="absolute left-0 top-0 whitespace-nowrap">
-                <span id="typing-text" class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"></span><span id="cursor" class="animate-pulse text-blue-600">|</span>
+
+  <!-- Hero -->
+  <section class="overflow-hidden border-b border-line">
+    <div class="mx-auto grid max-w-6xl items-center gap-14 px-6 pb-16 pt-32 md:pb-24 md:pt-44 lg:grid-cols-[1.1fr_0.9fr]">
+      <div>
+        <p class="eyebrow mb-6" data-reveal>A small web studio</p>
+        <h1
+          class="max-w-2xl text-[2.6rem] font-semibold leading-[1.06] tracking-tight sm:text-5xl md:text-6xl"
+          data-reveal
+          style="--reveal-delay: 0.06s"
+        >
+          Web development that
+          <span class="relative inline-block whitespace-nowrap"
+            >just works.
+            <svg class="hero-underline" viewBox="0 0 320 14" preserveAspectRatio="none" aria-hidden="true">
+              <path
+                d="M4,9 C58,3 104,12 158,7 C212,2 262,11 316,5"
+                fill="none"
+                stroke="var(--color-accent)"
+                stroke-width="5"
+                stroke-linecap="round"
+                pathLength="1"></path>
+            </svg>
+          </span>
+        </h1>
+        <p class="mt-7 max-w-xl text-lg text-soft" data-reveal style="--reveal-delay: 0.12s">
+          We design and build websites and apps for small businesses. You deal directly with the
+          people doing the work, and you see a working demo before committing to the full build.
+        </p>
+        <div class="mt-9 flex flex-wrap items-center gap-6" data-reveal style="--reveal-delay: 0.18s">
+          <a href="#contact" class="btn">Start a project</a>
+          <a href="/portfolio" class="link">See recent work</a>
+        </div>
+        <p
+          class="mt-8 flex items-center gap-2.5 font-mono text-xs uppercase tracking-[0.15em] text-soft"
+          data-reveal
+          style="--reveal-delay: 0.24s"
+        >
+          <svg width="13" height="13" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <g stroke="var(--color-accent)" stroke-width="1.8" stroke-linecap="round">
+              <path d="M7,1.5 L7,12.5"></path>
+              <path d="M2,4.2 L12,9.8"></path>
+              <path d="M12,4.2 L2,9.8"></path>
+            </g>
+          </svg>
+          Taking on new projects
+        </p>
+      </div>
+      <div class="mx-auto w-full max-w-sm lg:max-w-none" data-reveal style="--reveal-delay: 0.15s">
+        <Storefront />
+      </div>
+    </div>
+  </section>
+
+  <!-- Recent work -->
+  <section class="border-b border-line">
+    <div class="mx-auto max-w-6xl px-6 py-16 md:py-20">
+      <div class="flex items-baseline justify-between" data-reveal>
+        <p class="eyebrow">Recent work</p>
+        <a href="/portfolio" class="link text-sm">All work</a>
+      </div>
+      <ul class="mt-8 divide-y divide-line border-y border-line" data-reveal style="--reveal-delay: 0.08s">
+        {
+          work.map((item) => (
+            <li>
+              <a
+                href={item.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-preview={item.preview}
+                data-fit={item.fit}
+                class="group flex flex-col gap-1 py-5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
+              >
+                <span>
+                  <span class="font-display text-xl font-medium text-ink transition-colors group-hover:text-accent">
+                    {item.name}
+                  </span>
+                  <span class="mt-0.5 block text-sm text-soft">{item.blurb}</span>
+                </span>
+                <span class="shrink-0 font-mono text-xs uppercase tracking-[0.15em] text-faint transition-colors group-hover:text-accent">
+                  {item.tag} ↗
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- floating image that trails the cursor over the work list -->
+  <div id="work-preview" aria-hidden="true"><img src="/work/white-squirrel.jpg" alt="" /></div>
+
+  <!-- Services -->
+  <section id="services" class="scroll-mt-24 border-b border-line">
+    <div class="mx-auto max-w-6xl px-6 py-16 md:py-24">
+      <div data-reveal>
+        <p class="eyebrow">Services</p>
+        <h2 class="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">What we do</h2>
+      </div>
+
+      <div class="mt-12 grid gap-12 md:grid-cols-3 md:gap-10">
+        <div data-reveal>
+          <svg width="56" height="56" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+            <g stroke="var(--color-ink)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9,13 C8,26 9,40 8,51 L56,51 C55,38 56,24 56,13 Z"></path>
+              <path d="M8,22 L56,22" stroke-width="1.8"></path>
+              <path d="M14,30 L40,30" stroke-width="1.8" opacity="0.6"></path>
+              <path d="M14,38 L48,38" stroke-width="1.8" opacity="0.6"></path>
+              <path d="M14,45 L32,45" stroke-width="1.8" opacity="0.6"></path>
+            </g>
+            <circle cx="14.5" cy="17.5" r="1.9" fill="var(--color-accent)"></circle>
+            <circle cx="21" cy="17.5" r="1.9" fill="var(--color-accent)"></circle>
+          </svg>
+          <h3 class="mt-5 text-2xl font-medium">Websites</h3>
+          <p class="mt-3 text-soft">
+            Marketing sites, storefronts, menus, booking pages. Built to load fast, read well on a
+            phone, and be easy to keep current.
+          </p>
+          <ul class="mt-5 text-sm text-soft">
+            <li class="border-t border-line py-2.5">Design and build</li>
+            <li class="border-t border-line py-2.5">Online stores</li>
+            <li class="border-t border-line py-2.5">SEO basics done properly</li>
+          </ul>
+        </div>
+
+        <div data-reveal style="--reveal-delay: 0.08s">
+          <svg width="56" height="56" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+            <g stroke="var(--color-ink)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21,7 C20,24 21,42 20,57 L43,57 C44,41 43,22 44,7 Z"></path>
+              <path d="M28,12 L36,12" stroke-width="1.8"></path>
+              <path d="M28,51 L36,51" stroke-width="1.8"></path>
+            </g>
+            <g stroke="var(--color-ink)" stroke-width="1.8">
+              <circle cx="27" cy="25" r="2.6"></circle>
+              <circle cx="37" cy="35" r="2.6"></circle>
+            </g>
+            <circle cx="37" cy="25" r="2.6" fill="var(--color-accent)"></circle>
+            <circle cx="27" cy="35" r="2.6" fill="var(--color-accent)"></circle>
+          </svg>
+          <h3 class="mt-5 text-2xl font-medium">Apps</h3>
+          <p class="mt-3 text-soft">
+            iOS and web apps for when a website isn't enough. We handle design, development, and
+            the App Store release.
+          </p>
+          <ul class="mt-5 text-sm text-soft">
+            <li class="border-t border-line py-2.5">iPhone apps</li>
+            <li class="border-t border-line py-2.5">Web apps</li>
+            <li class="border-t border-line py-2.5">App Store submission</li>
+          </ul>
+        </div>
+
+        <div data-reveal style="--reveal-delay: 0.16s">
+          <svg width="56" height="56" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+            <g stroke="var(--color-ink)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22,30 C20,40 21,48 26,50 L44,50 C49,48 50,38 48,30 Z"></path>
+              <path d="M26,30 C28,20 42,20 44,30" stroke-width="2"></path>
+              <path d="M22,33 L10,22 L14,18 L25,30" stroke-width="2"></path>
+            </g>
+            <g stroke="var(--color-accent)" stroke-width="2" stroke-linecap="round">
+              <path d="M9,28 L8,32"></path>
+              <path d="M13,30 L11,35"></path>
+              <path d="M6,24 L4,27"></path>
+            </g>
+          </svg>
+          <h3 class="mt-5 text-2xl font-medium">Ongoing help</h3>
+          <p class="mt-3 text-soft">
+            After launch we stick around if you want us to. Hosting, content changes, integrations,
+            and a person who answers email.
+          </p>
+          <ul class="mt-5 text-sm text-soft">
+            <li class="border-t border-line py-2.5">Hosting and updates</li>
+            <li class="border-t border-line py-2.5">Small changes, handled quickly</li>
+            <li class="border-t border-line py-2.5">Third-party integrations</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section id="process" class="scroll-mt-24 border-b border-line">
+    <div class="mx-auto max-w-6xl px-6 py-16 md:py-24">
+      <div data-reveal>
+        <p class="eyebrow">Process</p>
+        <h2 class="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">How a project runs</h2>
+        <p class="mt-4 max-w-2xl text-soft">
+          Five steps, no mystery. You know what's happening at every stage, and nothing goes live
+          until you've signed off on it.
+        </p>
+      </div>
+
+      <ol class="mt-12 border-t border-line">
+        {
+          steps.map((step, i) => (
+            <li
+              class="grid grid-cols-[4rem_1fr] gap-x-4 gap-y-2 border-b border-line py-7 md:grid-cols-[5rem_14rem_1fr] md:gap-6"
+              data-reveal
+              style={`--reveal-delay: ${i * 0.05}s`}
+            >
+              <span class="relative inline-flex h-12 w-12 items-center justify-center">
+                <svg class="absolute inset-0 h-full w-full" viewBox="0 0 56 56" fill="none" aria-hidden="true">
+                  <path
+                    d="M28,6 C44,4 52,16 50,30 C48,44 36,52 24,50 C10,48 4,36 8,22 C11,11 18,7 28,6 Z"
+                    stroke="var(--color-ink)"
+                    stroke-width="2"
+                  />
+                  <path
+                    d="M28,6 C44,4 52,16 50,30 C48,44 36,52 24,50 C10,48 4,36 8,22 C11,11 18,7 28,6 Z"
+                    stroke="var(--color-ink)"
+                    stroke-width="1.2"
+                    opacity="0.25"
+                    transform="rotate(7 28 28)"
+                  />
+                </svg>
+                <span class="font-display text-lg font-medium">{step.n}</span>
               </span>
-            </span>
-          </h1>
-          <p class="text-lg sm:text-xl md:text-2xl text-slate-600 mb-6 sm:mb-8 leading-relaxed max-w-3xl mx-auto font-light mobile-text-center">
-            We build reliable, fast, and beautiful websites for small businesses. 
-            No jargon, no complexity—just results that help you grow.
-          </p>
-          <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center max-w-sm sm:max-w-md mx-auto">
-            <a href="#contact" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl text-base sm:text-lg font-semibold hover:shadow-2xl hover:shadow-blue-500/25 hover:-translate-y-1 transition-all duration-300 text-center button-mobile mobile-touch-action min-h-[48px] flex items-center justify-center">
-              Get a Quote
-            </a>
-            <a href="/portfolio" class="border-2 border-slate-300 text-slate-700 px-6 sm:px-8 py-3 sm:py-4 rounded-xl text-base sm:text-lg font-semibold hover:border-blue-500 hover:text-blue-600 hover:bg-white transition-all duration-300 text-center button-mobile mobile-touch-action min-h-[48px] flex items-center justify-center">
-              See Our Work
-            </a>
-          </div>
-        </div>
+              <h3 class="self-center text-xl font-medium">{step.title}</h3>
+              <p class="col-span-2 text-soft md:col-span-1 md:self-center">{step.body}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
 
-        <!-- Simple Visual Element -->
-        <div class="mt-6 sm:mt-8 md:mt-10 lg:mt-12">
-          <div class="relative max-w-4xl mx-auto">
-            <div class="bg-white/80 backdrop-blur-sm rounded-2xl sm:rounded-3xl shadow-2xl p-3 sm:p-4 md:p-8 border border-white/20 mobile-card-padding">
-              <div class="grid grid-cols-3 gap-2 sm:gap-4 md:gap-6 mobile-grid-3">
-                <div class="text-center p-2 sm:p-3 md:p-6 rounded-lg md:rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-100 mobile-card-padding">
-                  <div class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg sm:rounded-xl md:rounded-xl mx-auto mb-2 sm:mb-3 md:mb-4 flex items-center justify-center">
-                    <svg class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd" />
-                    </svg>
-                  </div>
-                  <h3 class="font-semibold text-slate-900 mb-1 sm:mb-1.5 md:mb-2 text-sm sm:text-sm md:text-base">Fast</h3>
-                  <p class="text-xs sm:text-xs md:text-sm text-slate-600 leading-tight">Lightning-fast</p>
-                </div>
-                <div class="text-center p-2 sm:p-3 md:p-6 rounded-lg md:rounded-2xl bg-gradient-to-br from-purple-50 to-pink-100 mobile-card-padding">
-                  <div class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg sm:rounded-xl md:rounded-xl mx-auto mb-2 sm:mb-3 md:mb-4 flex items-center justify-center">
-                    <svg class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                    </svg>
-                  </div>
-                  <h3 class="font-semibold text-slate-900 mb-1 sm:mb-1.5 md:mb-2 text-sm sm:text-sm md:text-base">Reliable</h3>
-                  <p class="text-xs sm:text-xs md:text-sm text-slate-600 leading-tight">Built to last</p>
-                </div>
-                <div class="text-center p-2 sm:p-3 md:p-6 rounded-lg md:rounded-2xl bg-gradient-to-br from-green-50 to-emerald-100 mobile-card-padding">
-                  <div class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-lg sm:rounded-xl md:rounded-xl mx-auto mb-2 sm:mb-3 md:mb-4 flex items-center justify-center">
-                    <svg class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
-                    </svg>
-                  </div>
-                  <h3 class="font-semibold text-slate-900 mb-1 sm:mb-1.5 md:mb-2 text-sm sm:text-sm md:text-base">Support</h3>
-                  <p class="text-xs sm:text-xs md:text-sm text-slate-600 leading-tight">24/7</p>
-                </div>
-              </div>
-            </div>
-          </div>
+  <!-- About -->
+  <section id="about" class="scroll-mt-24 border-b border-line">
+    <div class="mx-auto max-w-6xl px-6 py-16 md:py-24">
+      <div class="grid gap-10 md:grid-cols-2 md:gap-16">
+        <div data-reveal>
+          <p class="eyebrow">About</p>
+          <h2 class="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">Small on purpose.</h2>
+        </div>
+        <div class="space-y-5 text-soft md:pt-12" data-reveal style="--reveal-delay: 0.08s">
+          <p>
+            FutureClarity is a deliberately small studio. The person you talk to on the first call
+            is the person who designs and builds your project. No account managers, no hand-offs,
+            no ticket queue.
+          </p>
+          <p>
+            We work mostly with small businesses: shops, restaurants, local services. At that size
+            a website has one job, bringing in customers, so we keep our builds simple, fast, and
+            easy for you to update. If something would add cost without adding customers, we'll
+            tell you to skip it.
+          </p>
         </div>
       </div>
     </div>
   </section>
 
-
-  <!-- Services Section -->
-  <section id="services" class="py-6 sm:py-12 md:py-16 bg-white mobile-services-section" style="scroll-margin-top: 4rem;">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mobile-container-padding">
-      <div class="text-center mb-4 sm:mb-8 md:mb-12 mobile-mb-4">
-        <h2 class="text-2xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-2 md:mb-6 mobile-text-center">What We Do</h2>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-8 mobile-services-grid">
-        <!-- Web Design & Development -->
-        <div class="group bg-slate-50 rounded-xl sm:rounded-3xl p-4 sm:p-8 hover:bg-white hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-500 border border-slate-200/50 mobile-card-padding mobile-card-spacing">
-          <div class="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl sm:rounded-2xl flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300">
-            <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 20 20" style="width: 1.75rem; height: 1.75rem;">
-              <path fill-rule="evenodd" d="M3 5a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2h-2.22l.123.489.804.804A1 1 0 0113 18H7a1 1 0 01-.707-1.707l.804-.804L7.22 15H5a2 2 0 01-2-2V5zm5.771 7H5V5h10v7H8.771z" clip-rule="evenodd" />
-            </svg>
-          </div>
-          <h3 class="text-xl sm:text-2xl font-bold text-slate-900 mb-3 sm:mb-4 mobile-text-center">Web Design & Development</h3>
-          <p class="text-slate-600 mb-4 sm:mb-6 leading-relaxed mobile-text-center">
-            Custom websites that look great and work perfectly. From simple landing pages to complex e-commerce sites.
+  <!-- Contact -->
+  <section id="contact" class="scroll-mt-24">
+    <div class="mx-auto max-w-6xl px-6 py-16 md:py-24">
+      <div class="relative grid gap-12 md:grid-cols-[1fr_1.2fr] md:gap-16">
+        <div data-reveal>
+          <p class="eyebrow">Contact</p>
+          <h2 class="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
+            Tell us what you're working on.
+          </h2>
+          <p class="mt-4 text-soft">
+            Email, call, or use the form. We read everything and usually reply within a business
+            day, with honest advice and a realistic quote.
           </p>
-          <div class="space-y-3">
-            <div class="flex items-center text-slate-700">
-              <div class="w-2 h-2 bg-blue-500 rounded-full mr-3"></div>
-              <span class="text-sm font-medium">Responsive design</span>
-            </div>
-            <div class="flex items-center text-slate-700">
-              <div class="w-2 h-2 bg-purple-500 rounded-full mr-3"></div>
-              <span class="text-sm font-medium">Fast loading</span>
-            </div>
-            <div class="flex items-center text-slate-700">
-              <div class="w-2 h-2 bg-indigo-500 rounded-full mr-3"></div>
-              <span class="text-sm font-medium">SEO optimized</span>
-            </div>
-          </div>
-        </div>
 
-        <!-- App Development -->
-        <div class="group bg-slate-50 rounded-xl sm:rounded-3xl p-4 sm:p-8 hover:bg-white hover:shadow-2xl hover:shadow-purple-500/10 transition-all duration-500 border border-slate-200/50 mobile-card-padding mobile-card-spacing">
-          <div class="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl sm:rounded-2xl flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300">
-            <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 20 20" style="width: 1.75rem; height: 1.75rem;">
-              <path fill-rule="evenodd" d="M7 2a2 2 0 00-2 2v12a2 2 0 002 2h6a2 2 0 002-2V4a2 2 0 00-2-2H7zm3 14a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
-            </svg>
-          </div>
-          <h3 class="text-xl sm:text-2xl font-bold text-slate-900 mb-3 sm:mb-4 mobile-text-center">App Development</h3>
-          <p class="text-slate-600 mb-4 sm:mb-6 leading-relaxed mobile-text-center">
-            Mobile and web applications that solve real business problems. Built for performance and user experience.
-          </p>
-          <div class="space-y-3">
-            <div class="flex items-center text-slate-700">
-              <div class="w-2 h-2 bg-purple-500 rounded-full mr-3"></div>
-              <span class="text-sm font-medium">Cross-platform</span>
-            </div>
-            <div class="flex items-center text-slate-700">
-              <div class="w-2 h-2 bg-pink-500 rounded-full mr-3"></div>
-              <span class="text-sm font-medium">User-friendly</span>
-            </div>
-            <div class="flex items-center text-slate-700">
-              <div class="w-2 h-2 bg-violet-500 rounded-full mr-3"></div>
-              <span class="text-sm font-medium">Scalable</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Optional Add-ons -->
-        <div class="group bg-slate-50 rounded-xl sm:rounded-3xl p-4 sm:p-8 hover:bg-white hover:shadow-2xl hover:shadow-emerald-500/10 transition-all duration-500 border border-slate-200/50 mobile-card-padding mobile-card-spacing md:col-span-2 lg:col-span-1">
-          <div class="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-xl sm:rounded-2xl flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300">
-            <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 20 20" style="width: 1.75rem; height: 1.75rem;">
-              <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" />
-            </svg>
-          </div>
-          <h3 class="text-xl sm:text-2xl font-bold text-slate-900 mb-3 sm:mb-4 mobile-text-center">Optional Add-ons</h3>
-          <p class="text-slate-600 mb-4 sm:mb-6 leading-relaxed mobile-text-center">
-            Additional services to keep your digital presence running smoothly and growing.
-          </p>
-          <div class="space-y-3">
-            <div class="flex items-center text-slate-700">
-              <div class="w-2 h-2 bg-emerald-500 rounded-full mr-3"></div>
-              <span class="text-sm font-medium">Maintenance & updates</span>
-            </div>
-            <div class="flex items-center text-slate-700">
-              <div class="w-2 h-2 bg-teal-500 rounded-full mr-3"></div>
-              <span class="text-sm font-medium">Social media integration</span>
-            </div>
-            <div class="flex items-center text-slate-700">
-              <div class="w-2 h-2 bg-cyan-500 rounded-full mr-3"></div>
-              <span class="text-sm font-medium">Third-party integrations</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Process Steps - Desktop: directly under services, Mobile: with header -->
-      <div class="mt-6 sm:mt-10 md:mt-16 mobile-mt-6">
-        <!-- Mobile header (hidden on desktop) -->
-        <div class="text-center mb-6 sm:mb-10 md:hidden mobile-mb-6">
-          <h2 class="text-xl sm:text-3xl font-bold text-gray-900 mb-2 sm:mb-4 mobile-text-center">How We Work</h2>
-          <p class="text-base sm:text-xl text-gray-600 max-w-3xl mx-auto mobile-text-center">
-            A simple, transparent process that keeps you informed every step of the way.
-          </p>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 sm:gap-6 md:gap-6 mobile-process-grid">
-        <div class="text-center mobile-card-spacing">
-          <div class="w-16 h-16 sm:w-18 sm:h-18 md:w-20 md:h-20 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 text-xl sm:text-2xl font-bold text-white">1</div>
-          <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4 mobile-text-center">Consultation</h3>
-          <p class="text-sm sm:text-base text-gray-600 mobile-text-center">We discuss your needs, goals, and timeline to create a clear project plan. We also collect crucial data, branding, and information.</p>
-        </div>
-        <div class="text-center mobile-card-spacing">
-          <div class="w-16 h-16 sm:w-18 sm:h-18 md:w-20 md:h-20 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 text-xl sm:text-2xl font-bold text-white">2</div>
-          <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4 mobile-text-center">Demo Prototyping</h3>
-          <p class="text-sm sm:text-base text-gray-600 mobile-text-center">We build a demo site to show you exactly what we're creating and gather comprehensive feedback.</p>
-        </div>
-        <div class="text-center mobile-card-spacing">
-          <div class="w-16 h-16 sm:w-18 sm:h-18 md:w-20 md:h-20 bg-gradient-to-r from-pink-500 to-red-500 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 text-xl sm:text-2xl font-bold text-white">3</div>
-          <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4 mobile-text-center">Build</h3>
-          <p class="text-sm sm:text-base text-gray-600 mobile-text-center">We develop your website to the exact specifications we discussed, ensuring every detail meets your requirements.</p>
-        </div>
-        <div class="text-center mobile-card-spacing">
-          <div class="w-16 h-16 sm:w-18 sm:h-18 md:w-20 md:h-20 bg-gradient-to-r from-red-500 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 text-xl sm:text-2xl font-bold text-white">4</div>
-          <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4 mobile-text-center">Review & Testing</h3>
-          <p class="text-sm sm:text-base text-gray-600 mobile-text-center">We review the completed site with you, get final approval, and conduct thorough testing to ensure everything works perfectly.</p>
-        </div>
-        <div class="text-center mobile-card-spacing">
-          <div class="w-16 h-16 sm:w-18 sm:h-18 md:w-20 md:h-20 bg-gradient-to-r from-orange-500 to-green-500 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 text-xl sm:text-2xl font-bold text-white">5</div>
-          <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4 mobile-text-center">Launch</h3>
-          <p class="text-sm sm:text-base text-gray-600 mobile-text-center">We launch your website and connect it to your existing domain or acquire a new one for you, ensuring everything is optimized.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- About & Industries Combined Section -->
-  <section id="about" class="py-6 sm:py-12 lg:py-16 bg-gray-50 mobile-about-section" style="scroll-margin-top: 4rem;">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mobile-container-padding">
-      <!-- Why Choose FutureClarity -->
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-12 items-center mb-8 sm:mb-16 lg:mb-20 mobile-about-grid">
-        <div>
-          <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 sm:mb-6 mobile-text-center">Why Choose FutureClarity?</h2>
-          <p class="text-base sm:text-lg text-gray-600 mb-4 sm:mb-6 mobile-text-center">
-            We believe in reliability, simplicity, and focusing on what matters most to small businesses. 
-            No overcomplicated solutions, no unnecessary features—just clean, effective websites and apps 
-            that help you connect with your customers and grow your business.
-          </p>
-          <p class="text-base sm:text-lg text-gray-600 mb-6 sm:mb-8 mobile-text-center">
-            Our small team means you work directly with the people building your project. 
-            We're responsive, transparent, and committed to delivering exactly what you need, when you need it.
-          </p>
-          <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 mobile-flex-col">
-            <a href="#contact" class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg font-semibold hover:shadow-xl hover:-translate-y-1 transition-all duration-300 text-center button-mobile mobile-touch-action min-h-[48px] flex items-center justify-center">
-              Start Your Project
-            </a>
-            <a href="/portfolio" class="border-2 border-blue-500 text-blue-600 px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg font-semibold hover:bg-blue-500 hover:text-white transition-all duration-300 text-center button-mobile mobile-touch-action min-h-[48px] flex items-center justify-center">
-              View Our Work
-            </a>
-          </div>
-        </div>
-        <div class="relative mt-8 lg:mt-0 mobile-hide-feature-cards">
-          <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-lg mobile-card-padding">
-            <div class="space-y-6">
-              <div class="flex items-center space-x-4">
-                <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
-                  <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <div>
-                  <h3 class="font-semibold text-gray-900">Reliable & Fast</h3>
-                  <p class="text-gray-600">Built for performance and uptime</p>
-                </div>
-              </div>
-              <div class="flex items-center space-x-4">
-                <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
-                  <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
-                </div>
-                <div>
-                  <h3 class="font-semibold text-gray-900">Quick Delivery</h3>
-                  <p class="text-gray-600">Get your project done on time</p>
-                </div>
-              </div>
-              <div class="flex items-center space-x-4">
-                <div class="w-12 h-12 bg-gradient-to-r from-pink-500 to-red-500 rounded-full flex items-center justify-center">
-                  <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M12 2.25a9.75 9.75 0 100 19.5 9.75 9.75 0 000-19.5z" />
-                  </svg>
-                </div>
-                <div>
-                  <h3 class="font-semibold text-gray-900">Ongoing Support</h3>
-                  <p class="text-gray-600">We're here when you need us</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Industries We Serve -->
-      <div class="text-center mb-6 sm:mb-12 mobile-mb-6">
-        <h3 class="text-lg sm:text-2xl md:text-3xl font-bold text-gray-900 mb-2 sm:mb-4 mobile-text-center">Trusted by Businesses Across Industries</h3>
-        <p class="text-sm sm:text-lg text-gray-600 max-w-2xl mx-auto mobile-text-center">
-          From e-commerce to professional services, we create digital solutions that drive growth.
-        </p>
-      </div>
-
-      <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 lg:gap-8 mobile-industries-grid">
-        <div class="text-center group mobile-card-spacing">
-          <div class="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl sm:rounded-2xl flex items-center justify-center mx-auto mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300">
-            <svg class="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-            </svg>
-          </div>
-          <h4 class="text-sm sm:text-base font-semibold text-gray-900 mobile-text-center">E-commerce</h4>
-        </div>
-        <div class="text-center group mobile-card-spacing">
-          <div class="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl sm:rounded-2xl flex items-center justify-center mx-auto mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300">
-            <svg class="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-            </svg>
-          </div>
-          <h4 class="text-sm sm:text-base font-semibold text-gray-900 mobile-text-center">Hospitality</h4>
-        </div>
-        <div class="text-center group mobile-card-spacing">
-          <div class="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-gradient-to-r from-pink-500 to-red-500 rounded-xl sm:rounded-2xl flex items-center justify-center mx-auto mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300">
-            <svg class="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-            </svg>
-          </div>
-          <h4 class="text-sm sm:text-base font-semibold text-gray-900 mobile-text-center">Retail</h4>
-        </div>
-        <div class="text-center group mobile-card-spacing">
-          <div class="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-gradient-to-r from-red-500 to-orange-500 rounded-xl sm:rounded-2xl flex items-center justify-center mx-auto mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300">
-            <svg class="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V8a2 2 0 012-2V6" />
-            </svg>
-          </div>
-          <h4 class="text-sm sm:text-base font-semibold text-gray-900 mobile-text-center">Professional Services</h4>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section id="contact" class="py-8 sm:py-16 lg:py-20 bg-white mobile-contact-section safe-area-bottom" style="scroll-margin-top: 4rem;">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mobile-container-padding">
-      <div class="text-center mb-6 sm:mb-12 md:mb-16 mobile-mb-6">
-        <h2 class="text-xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2 sm:mb-4 mobile-text-center">Get In Touch</h2>
-        <p class="text-base sm:text-xl text-gray-600 max-w-3xl mx-auto mobile-text-center">
-          Ready to start your project? Have questions? We'd love to hear from you.
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-8 mobile-contact-grid">
-        <!-- Contact Form -->
-        <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-lg mobile-card-padding">
-          <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6 text-center mobile-text-center">Send us a message</h3>
-          <form action="https://formspree.io/f/movkledr" method="POST" class="space-y-4 sm:space-y-6 max-w-md mx-auto">
+          <dl class="mt-10 space-y-6">
             <div>
-              <label for="name" class="block text-sm font-medium text-gray-700 mb-2 text-center mobile-text-center">Name</label>
-              <input type="text" id="name" name="name" required class="w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-base form-input-mobile mobile-touch-action" placeholder="Your name" style="font-size: 16px; -webkit-appearance: none; appearance: none;">
+              <dt class="font-mono text-xs uppercase tracking-[0.15em] text-faint">Email</dt>
+              <dd class="mt-1">
+                <a href="mailto:futureclaritytechnologies@gmail.com" class="link break-all">
+                  futureclaritytechnologies@gmail.com
+                </a>
+              </dd>
             </div>
             <div>
-              <label for="email" class="block text-sm font-medium text-gray-700 mb-2 text-center mobile-text-center">Your email:</label>
-              <input type="email" id="email" name="email" required class="w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-base form-input-mobile mobile-touch-action" placeholder="your@email.com" style="font-size: 16px; -webkit-appearance: none; appearance: none;">
+              <dt class="font-mono text-xs uppercase tracking-[0.15em] text-faint">Phone</dt>
+              <dd class="mt-1"><a href="tel:+18185850475" class="link">+1 (818) 585-0475</a></dd>
             </div>
-            <div>
-              <label for="message" class="block text-sm font-medium text-gray-700 mb-2 text-center mobile-text-center">Your message:</label>
-              <textarea id="message" name="message" rows="5" required class="w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 text-base resize-none form-input-mobile mobile-touch-action" placeholder="Tell us about your project..." style="font-size: 16px; -webkit-appearance: none; appearance: none;"></textarea>
-            </div>
-            <button type="submit" class="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-3 sm:py-4 rounded-lg text-base sm:text-lg font-semibold hover:shadow-xl hover:-translate-y-1 transition-all duration-300 button-mobile mobile-touch-action min-h-[48px] flex items-center justify-center">
-              Send
-            </button>
-          </form>
+          </dl>
+
+          <svg
+            class="mt-10 hidden h-20 w-28 md:block"
+            viewBox="0 0 120 90"
+            fill="none"
+            aria-hidden="true"
+          >
+            <g stroke="var(--color-ink)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.55">
+              <path d="M10,14 C52,8 88,30 100,66"></path>
+              <path d="M86,62 L101,68 L104,51"></path>
+            </g>
+          </svg>
         </div>
 
-        <!-- Contact Info -->
-        <div class="space-y-6 sm:space-y-8 mt-8 lg:mt-0">
+        <form
+          action="https://formspree.io/f/movkledr"
+          method="POST"
+          class="space-y-5 border border-line bg-card p-6 sm:p-8"
+          data-reveal
+          style="--reveal-delay: 0.08s"
+        >
           <div>
-            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6 mobile-text-center">Contact Information</h3>
-            <div class="space-y-4 sm:space-y-6">
-              <div class="flex items-center space-x-3 sm:space-x-4 mobile-flex-col mobile-items-center lg:flex-row lg:items-center lg:text-left">
-                <div class="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center flex-shrink-0">
-                  <svg class="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
-                </div>
-                <div class="mobile-text-center lg:text-left">
-                  <h4 class="font-semibold text-gray-900 text-sm sm:text-base">Email</h4>
-                  <p class="text-gray-600 text-sm sm:text-base">futureclaritytechnologies@gmail.com</p>
-                </div>
-              </div>
-              <div class="flex items-center space-x-3 sm:space-x-4 mobile-flex-col mobile-items-center lg:flex-row lg:items-center lg:text-left">
-                <div class="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center flex-shrink-0">
-                  <svg class="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                  </svg>
-                </div>
-                <div class="mobile-text-center lg:text-left">
-                  <h4 class="font-semibold text-gray-900 text-sm sm:text-base">Phone</h4>
-                  <p class="text-gray-600 text-sm sm:text-base">+1 (818) 585-0475</p>
-                </div>
-              </div>
-              <div class="flex items-center space-x-3 sm:space-x-4 mobile-flex-col mobile-items-center lg:flex-row lg:items-center lg:text-left">
-                <div class="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-pink-500 to-red-500 rounded-full flex items-center justify-center flex-shrink-0">
-                  <svg class="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <div class="mobile-text-center lg:text-left">
-                  <h4 class="font-semibold text-gray-900 text-sm sm:text-base">Hours</h4>
-                  <p class="text-gray-600 text-sm sm:text-base">24/7</p>
-                </div>
-              </div>
-            </div>
+            <label for="name" class="mb-1.5 block text-sm font-medium">Name</label>
+            <input type="text" id="name" name="name" required class="field" placeholder="Your name" />
           </div>
-
-          <div class="bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl p-4 sm:p-6 text-white mobile-card-padding mobile-text-center">
-            <h4 class="text-lg sm:text-xl font-bold mb-2 mobile-text-center">Ready to get started?</h4>
-            <p class="mb-3 sm:mb-4 text-sm sm:text-base mobile-text-center">Let's discuss your project and see how we can help your business grow.</p>
-            <a href="#contact" class="inline-block bg-white text-blue-600 px-5 sm:px-6 py-2.5 sm:py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-200 button-mobile mobile-touch-action min-h-[44px] flex items-center justify-center text-sm sm:text-base">
-              Get a Quote
-            </a>
+          <div>
+            <label for="email" class="mb-1.5 block text-sm font-medium">Email</label>
+            <input type="email" id="email" name="email" required class="field" placeholder="you@example.com" />
           </div>
-        </div>
+          <div>
+            <label for="message" class="mb-1.5 block text-sm font-medium">Message</label>
+            <textarea
+              id="message"
+              name="message"
+              rows="6"
+              required
+              class="field resize-none"
+              placeholder="What are you building, and when do you need it?"></textarea>
+          </div>
+          <button type="submit" class="btn w-full sm:w-auto">Send message</button>
+        </form>
       </div>
     </div>
   </section>
@@ -407,112 +397,56 @@ import Footer from '../components/Footer.astro';
   <Footer />
 
   <script>
-    // Prevent scroll restoration from browser
-    if ('scrollRestoration' in history) {
-      history.scrollRestoration = 'manual';
-    }
+    // Links from other pages arrive as /?scroll=<section-id>
+    window.addEventListener('load', function () {
+      const scrollTo = new URLSearchParams(window.location.search).get('scroll');
 
-    // Handle scroll parameter from portfolio page
-    window.addEventListener('load', function() {
-      const urlParams = new URLSearchParams(window.location.search);
-      const scrollTo = urlParams.get('scroll');
-      
-      if (scrollTo === 'contact' || scrollTo === 'services' || scrollTo === 'about') {
-        setTimeout(() => {
-          const targetElement = document.getElementById(scrollTo);
-          if (targetElement) {
-            targetElement.scrollIntoView({ behavior: 'smooth' });
-            // Clean up the URL
+      if (scrollTo) {
+        const target = document.getElementById(scrollTo);
+        if (target) {
+          setTimeout(() => {
+            target.scrollIntoView({ behavior: 'smooth' });
             window.history.replaceState({}, document.title, window.location.pathname);
-          }
-        }, 300);
-      }
-    });
-    
-    // Force immediate scroll to top BEFORE page render
-    window.scrollTo(0, 0);
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
-    
-    // Ensure page loads at top on mobile and prevent auto-scroll
-    document.addEventListener('DOMContentLoaded', function() {
-      // Force scroll to top on mobile
-      if (window.innerWidth < 768) {
-        window.scrollTo(0, 0);
-        document.documentElement.scrollTop = 0;
-        document.body.scrollTop = 0;
-        
-        // Prevent any delayed scrolling
-        setTimeout(() => {
-          window.scrollTo(0, 0);
-        }, 0);
-        setTimeout(() => {
-          window.scrollTo(0, 0);
-        }, 100);
-      } else {
-        // Desktop: Stay at top of page - no auto-scroll
-        // Removed automatic scroll to services section
-      }
-    });
-
-    // Typing effect for hero text
-    document.addEventListener('DOMContentLoaded', function() {
-      const typingElement = document.getElementById('typing-text');
-      const cursor = document.getElementById('cursor');
-      
-      if (!typingElement || !cursor) return;
-      
-      // Different word arrays for mobile vs desktop
-      const isMobile = window.innerWidth < 768; // md breakpoint
-      const words = isMobile 
-        ? ['Web Design', 'FutureClarity'] 
-        : ['Web Design', 'App Development', 'FutureClarity'];
-      let currentWordIndex = 0;
-      let isTyping = true;
-      let charIndex = 0;
-      
-      // Typing speeds (in milliseconds)
-      const typeSpeed = 100;
-      const deleteSpeed = 50;
-      const pauseTime = 2000; // Pause after completing a word
-      const pauseBeforeDelete = 1500; // Pause before starting to delete
-      
-      function typeWriter() {
-        const currentWord = words[currentWordIndex];
-        
-        if (isTyping) {
-          // Typing phase
-          if (charIndex < currentWord.length) {
-            const displayText = currentWord.substring(0, charIndex + 1);
-            if (typingElement) typingElement.textContent = displayText;
-            charIndex++;
-            setTimeout(typeWriter, typeSpeed);
-          } else {
-            // Word complete, pause then start deleting
-            setTimeout(() => {
-              isTyping = false;
-              typeWriter();
-            }, pauseBeforeDelete);
-          }
-        } else {
-          // Deleting phase
-          if (charIndex > 0) {
-            const displayText = currentWord.substring(0, charIndex - 1);
-            if (typingElement) typingElement.textContent = displayText;
-            charIndex--;
-            setTimeout(typeWriter, deleteSpeed);
-          } else {
-            // Word deleted, move to next word
-            currentWordIndex = (currentWordIndex + 1) % words.length;
-            isTyping = true;
-            setTimeout(typeWriter, pauseTime);
-          }
+          }, 100);
         }
       }
-      
-      // Start the typing effect immediately
-      setTimeout(typeWriter, 500);
     });
-  </script>
 
+    // Floating preview that trails the cursor over the work list.
+    // Mouse only: skipped entirely on touch devices.
+    (function () {
+      const box = document.getElementById('work-preview');
+      const img = box?.querySelector('img');
+      if (!box || !img || !window.matchMedia('(pointer: fine)').matches) return;
+
+      let raf = 0;
+      const W = 300;
+      const H = 225;
+      const PAD = 16;
+
+      function follow(e: MouseEvent) {
+        cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(() => {
+          let x = e.clientX + 28;
+          let y = e.clientY - H / 2;
+          if (x + W + PAD > window.innerWidth) x = e.clientX - W - 28;
+          y = Math.max(PAD, Math.min(y, window.innerHeight - H - PAD));
+          if (box) {
+            box.style.left = x + 'px';
+            box.style.top = y + 'px';
+          }
+        });
+      }
+
+      document.querySelectorAll<HTMLElement>('[data-preview]').forEach((row) => {
+        row.addEventListener('mouseenter', () => {
+          if (img && row.dataset.preview) img.src = row.dataset.preview;
+          box.classList.toggle('contain', row.dataset.fit === 'contain');
+          box.classList.add('active');
+        });
+        row.addEventListener('mouseleave', () => box.classList.remove('active'));
+        row.addEventListener('mousemove', follow);
+      });
+    })();
+  </script>
 </Layout>

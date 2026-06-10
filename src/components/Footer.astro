@@ -1,55 +1,65 @@
 ---
-// Footer component
+// Site footer. Anchor links get the same /?scroll= rewrite as the header.
 ---
 
-<footer class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white safe-area-bottom mobile-footer-fix">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 mobile-container-padding">
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 mobile-grid-1">
-      <!-- Company Info -->
-      <div class="col-span-1 sm:col-span-2 md:col-span-2 mobile-text-center sm:text-left">
-        <h3 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 mobile-text-center text-white">FutureClarity</h3>
-        <p class="text-gray-200 mb-4 sm:mb-6 max-w-md mobile-text-center sm:text-left">
-          Web development that just works. We build reliable, fast, and beautiful websites for small businesses.
+<footer class="overflow-hidden bg-ink text-paper">
+  <div class="mx-auto max-w-6xl px-6 pb-14 pt-12">
+    <p
+      aria-hidden="true"
+      class="select-none whitespace-nowrap font-display font-semibold leading-none tracking-tight text-[#2c2723]"
+      style="font-size: clamp(3.5rem, 12.5vw, 10.5rem);"
+    >
+      FutureClarity
+    </p>
+
+    <div class="mt-14 grid gap-10 md:grid-cols-[2fr_1fr_1fr]">
+      <div>
+        <p class="font-display text-xl font-semibold tracking-tight">FutureClarity</p>
+        <p class="mt-3 max-w-sm text-sm text-stone-400">
+          A small web studio. We design and build fast, reliable websites and apps for small businesses.
         </p>
       </div>
 
-      <!-- Quick Links -->
-      <div class="mobile-text-center sm:text-left">
-        <h4 class="text-base sm:text-lg font-semibold mb-3 sm:mb-4 mobile-text-center text-white">Quick Links</h4>
-        <ul class="space-y-2">
-          <li><a href="#services" class="text-gray-100 hover:text-white transition-colors duration-200 mobile-touch-action py-1 px-2 text-sm sm:text-base">Services</a></li>
-          <li><a href="/portfolio" class="text-gray-100 hover:text-white transition-colors duration-200 mobile-touch-action py-1 px-2 text-sm sm:text-base">Portfolio</a></li>
-          <li><a href="#process" class="text-gray-100 hover:text-white transition-colors duration-200 mobile-touch-action py-1 px-2 text-sm sm:text-base">Process</a></li>
-          <li><a href="#about" class="text-gray-100 hover:text-white transition-colors duration-200 mobile-touch-action py-1 px-2 text-sm sm:text-base">About</a></li>
+      <div>
+        <p class="font-mono text-xs uppercase tracking-[0.18em] text-stone-400">Pages</p>
+        <ul class="mt-4 space-y-2 text-sm">
+          <li><a href="/portfolio" class="text-stone-300 transition-colors hover:text-paper">Work</a></li>
+          <li><a href="#services" class="text-stone-300 transition-colors hover:text-paper">Services</a></li>
+          <li><a href="#process" class="text-stone-300 transition-colors hover:text-paper">Process</a></li>
+          <li><a href="#about" class="text-stone-300 transition-colors hover:text-paper">About</a></li>
+          <li><a href="#contact" class="text-stone-300 transition-colors hover:text-paper">Contact</a></li>
         </ul>
       </div>
 
-      <!-- Contact Info -->
-      <div class="mobile-text-center sm:text-left">
-        <h4 class="text-base sm:text-lg font-semibold mb-3 sm:mb-4 mobile-text-center text-white">Contact</h4>
-        <ul class="space-y-2 text-gray-100 text-sm sm:text-base">
-          <li class="mobile-text-center sm:text-left">futureclaritytechnologies@gmail.com</li>
-          <li class="mobile-text-center sm:text-left">+1 (818) 585-0475</li>
-          <li class="mobile-text-center sm:text-left">Available 24/7</li>
+      <div>
+        <p class="font-mono text-xs uppercase tracking-[0.18em] text-stone-400">Contact</p>
+        <ul class="mt-4 space-y-2 text-sm text-stone-300">
+          <li>
+            <a href="mailto:futureclaritytechnologies@gmail.com" class="break-all transition-colors hover:text-paper">
+              futureclaritytechnologies@gmail.com
+            </a>
+          </li>
+          <li>
+            <a href="tel:+18185850475" class="transition-colors hover:text-paper">+1 (818) 585-0475</a>
+          </li>
         </ul>
       </div>
     </div>
 
-    <div class="border-t border-gray-600 mt-6 sm:mt-8 pt-4 sm:pt-8 text-center">
-      <p class="text-sm sm:text-base mobile-text-center text-gray-100">&copy; {new Date().getFullYear()} FutureClarity Technologies LLC. All rights reserved.</p>
+    <div class="mt-12 flex flex-col gap-2 border-t border-white/10 pt-6 text-xs text-stone-400 sm:flex-row sm:items-center sm:justify-between">
+      <p>&copy; {new Date().getFullYear()} FutureClarity Technologies LLC</p>
+      <p>Built with Astro. Hosted on Cloudflare Pages.</p>
     </div>
   </div>
 </footer>
 
 <script>
-  // Smart navigation for footer quick links: if not on main page, convert anchor links to scroll parameter links
-  document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function () {
     const isMainPage = window.location.pathname === '/' || window.location.pathname === '/index.html';
-    
+
     if (!isMainPage) {
-      // Update footer quick links
       const footerLinks = document.querySelectorAll('footer a[href^="#"]');
-      footerLinks.forEach(link => {
+      footerLinks.forEach((link) => {
         const href = link.getAttribute('href');
         if (href && href !== '#') {
           link.setAttribute('href', `/?scroll=${href.substring(1)}`);
