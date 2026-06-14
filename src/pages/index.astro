@@ -420,8 +420,9 @@ const steps = [
       if (scrollTo) {
         const target = document.getElementById(scrollTo);
         if (target) {
+          const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
           setTimeout(() => {
-            target.scrollIntoView({ behavior: 'smooth' });
+            target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
             window.history.replaceState({}, document.title, window.location.pathname);
           }, 100);
         }
@@ -441,11 +442,14 @@ const steps = [
       const PAD = 16;
 
       function follow(e: MouseEvent) {
+        // Capture cursor position synchronously, then write to the DOM in rAF.
+        const cx = e.clientX;
+        const cy = e.clientY;
         cancelAnimationFrame(raf);
         raf = requestAnimationFrame(() => {
-          let x = e.clientX + 28;
-          let y = e.clientY - H / 2;
-          if (x + W + PAD > window.innerWidth) x = e.clientX - W - 28;
+          let x = cx + 28;
+          let y = cy - H / 2;
+          if (x + W + PAD > window.innerWidth) x = cx - W - 28;
           y = Math.max(PAD, Math.min(y, window.innerHeight - H - PAD));
           if (box) {
             box.style.left = x + 'px';

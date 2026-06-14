@@ -211,6 +211,19 @@ const websiteDemos = [
   <Footer />
 
   <script>
+    // Respect "Reduce Motion": stop the looping preview videos from
+    // autoplaying for motion-sensitive users (WCAG 2.3.3). The poster
+    // frame stays visible so the cards still show the work.
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.querySelectorAll('video').forEach((v) => {
+        const video = v as HTMLVideoElement;
+        video.autoplay = false;
+        video.loop = false;
+        video.removeAttribute('autoplay');
+        video.pause();
+      });
+    }
+
     // If an embedded site never fires load (some sites refuse to be framed),
     // don't leave the spinner running forever.
     setTimeout(() => {
