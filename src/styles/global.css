@@ -7,8 +7,11 @@
   --color-soft: #57534e;
   --color-faint: #7d786f;
   --color-line: #e6e2da;
-  --color-accent: #9a3412;
-  --color-accent-deep: #7a2a0f;
+  /* Accent: a confident trust-blue azure (bright, not navy). Tuned to
+     pass contrast for small text on the paper background and white text
+     on solid fills. */
+  --color-accent: #1a6ad9;
+  --color-accent-deep: #1456b8;
 
   --font-display: "Fraunces", "Iowan Old Style", Georgia, serif;
   --font-sans: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -42,7 +45,7 @@
   }
 
   ::selection {
-    background-color: #eaddca;
+    background-color: #cfe0fb;
   }
 
   :focus-visible {
