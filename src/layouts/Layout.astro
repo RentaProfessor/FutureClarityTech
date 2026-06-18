@@ -19,11 +19,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
-    <!-- Render the full desktop layout on phones, scaled down to fit the
-         screen (an exact replica, just smaller), rather than a separate
-         mobile layout. Omitting initial-scale lets the browser fit the
-         1024px design width to the device width. Pinch-zoom stays enabled. -->
-    <meta name="viewport" content="width=1024, viewport-fit=cover" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="format-detection" content="telephone=no" />
     <meta name="theme-color" content="#faf9f6" />
     <link rel="canonical" href={canonical} />
