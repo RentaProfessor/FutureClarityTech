@@ -1,0 +1,37 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+// Astro emits this to dist/404.html. Cloudflare Pages serves it with a real
+// HTTP 404 for any unmatched path. Without it, Pages falls back to index.html
+// with HTTP 200 — a soft 404, which search engines index as a duplicate of
+// the homepage.
+---
+
+<Layout
+  title="Page not found | FutureClarity Technologies"
+  description="That page doesn't exist. Head back to the homepage or take a look at recent work."
+>
+  <Header />
+
+  <main class="mx-auto flex min-h-[70vh] max-w-6xl flex-col justify-center px-6 py-28">
+    <p class="eyebrow mb-6">Error 404</p>
+
+    <h1 class="max-w-2xl text-[2.6rem] font-semibold leading-[1.06] tracking-tight sm:text-5xl">
+      That page doesn't exist.
+    </h1>
+
+    <p class="mt-6 max-w-xl text-lg text-ink/70">
+      The link may be out of date, or the address might have a typo in it.
+      Nothing is broken on our end.
+    </p>
+
+    <div class="mt-10 flex flex-wrap items-center gap-6">
+      <a href="/" class="btn">Back to homepage</a>
+      <a href="/portfolio" class="underline-offset-4 hover:underline">See recent work</a>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
