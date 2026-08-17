@@ -1,6 +1,13 @@
 # Redirects for Cloudflare Pages
-# Specific page redirects
-/portfolio    /portfolio/index.html   200
-
-# Fallback for any other routes - serve index.html for client-side routing
-/*    /index.html   200
+#
+# Intentionally empty. This is a multi-page STATIC Astro build, not a SPA.
+#
+# The previous "/*  /index.html  200" catch-all was a single-page-app rewrite:
+# it served the homepage with HTTP 200 for every path that did not match a
+# file, so nonexistent URLs never returned a 404. Search engines treat those
+# as soft 404s and index them. Astro already emits a real 404 page and
+# Cloudflare Pages serves static assets before consulting this file, so the
+# rule bought nothing and cost correct error handling.
+#
+# The "/portfolio  /portfolio/index.html  200" rule was also redundant —
+# Astro emits dist/portfolio/index.html and Pages serves it at /portfolio.

@@ -1,119 +1,57 @@
-# 🔄 Backup & Restore Guide - Mobile Optimization Update
+# Backup & Restore Guide
 
-## ✅ Successfully Pushed Changes to GitHub
+Historical record of the September 2025 mobile-optimization change, kept for the
+restore procedure. Run every command from the repository root.
 
-**Commit ID:** `32c6d69`  
-**Date:** September 29, 2025, 4:51 PM  
-**Branch:** `main`
+## Backups taken before that change
 
----
+- **Git branch:** `backup-before-mobile-optimization-20250929-165114` (local and remote)
+- **Local snapshot:** `backups/mobile-optimization-20250929-165128/`
 
-## 📦 Backup Information
+Note: `backups/` is no longer tracked by git. It is a local-only directory, ignored
+via `.gitignore`. Do not commit it — it duplicated the entire source tree on a public
+repository and carried its own stale copies of config files.
 
-### 1. **Git Branch Backup**
-- **Backup Branch:** `backup-before-mobile-optimization-20250929-165114`
-- **Location:** Both local and GitHub remote
-- **Contains:** Complete state before mobile optimization changes
+## How to restore
 
-### 2. **Local File Backup**
-- **Directory:** `backups/mobile-optimization-20250929-165128/`
-- **Contains:** Copy of all source files before changes
-- **Location:** Local project directory only
+### Option 1 — restore from the backup branch (recommended)
 
----
-
-## 🔙 How to Restore (If Needed)
-
-### Option 1: Restore from Git Branch (Recommended)
 ```bash
-# Navigate to project directory
-cd "/Users/brettchiate/Desktop/ROOT FILES/FUTURECLARITY TECHNOLOGIES LANDING"
-
-# Switch to backup branch
 git checkout backup-before-mobile-optimization-20250929-165114
-
-# Create a new branch from backup (optional)
 git checkout -b restore-from-backup
-
-# Or merge backup into main (if needed)
-git checkout main
-git merge backup-before-mobile-optimization-20250929-165114
 ```
 
-### Option 2: Restore from Local Backup
-```bash
-# Navigate to project directory
-cd "/Users/brettchiate/Desktop/ROOT FILES/FUTURECLARITY TECHNOLOGIES LANDING"
+Inspect the result, then merge into `main` through a normal pull request.
 
-# Copy backup files back to src/
+### Option 2 — restore from the local snapshot
+
+```bash
 cp -r backups/mobile-optimization-20250929-165128/* src/
-
-# Stage and commit the restoration
-git add .
-git commit -m "restore: Restore from local backup before mobile optimization"
+git add . && git commit -m "restore: revert to pre-mobile-optimization snapshot"
 ```
 
-### Option 3: Reset to Previous Commit
-```bash
-# Navigate to project directory
-cd "/Users/brettchiate/Desktop/ROOT FILES/FUTURECLARITY TECHNOLOGIES LANDING"
+### Option 3 — reset to an earlier commit
 
-# Find the commit before mobile optimization
+```bash
 git log --oneline
-
-# Reset to previous commit (replace COMMIT_ID with actual ID)
-git reset --hard 12f54ac
-
-# Force push to update remote (use with caution)
-git push origin main --force
+git checkout -b restore-from-<commit>  <commit>
 ```
 
----
+Prefer a new branch over `git reset --hard` on `main`. Force-pushing a rewritten
+`main` to a shared remote discards history that other clones and deploys may depend
+on, and it does not reliably remove anything from GitHub's servers — dangling commits
+stay reachable through the API. If you ever need to remove a *secret* from history,
+rotate the credential first; treat the history rewrite as cleanup, never as the fix.
 
-## 📋 Changes Made in This Update
+## What that change covered
 
-### Files Modified:
-- `src/components/Footer.astro`
-- `src/components/Header.astro`
-- `src/layouts/Layout.astro`
-- `src/pages/index.astro`
-- `src/pages/portfolio.astro`
-- `src/styles/global.css`
+Files: `src/components/Footer.astro`, `src/components/Header.astro`,
+`src/layouts/Layout.astro`, `src/pages/index.astro`, `src/pages/portfolio.astro`,
+`src/styles/global.css`
 
-### Key Improvements:
-- ✅ Mobile-first responsive design
-- ✅ Safari iOS compatibility (safe areas, input zoom prevention)
-- ✅ Chrome mobile optimizations
-- ✅ Touch-friendly interface elements
-- ✅ Performance optimizations
-- ✅ Cross-browser compatibility
-- ✅ Accessibility improvements
+Scope: mobile-first responsive layout, iOS Safari safe-area and input-zoom handling,
+touch target sizing, and accessibility passes.
 
 ---
 
-## 🚨 Emergency Restore Command
-
-If you need to quickly restore everything:
-
-```bash
-cd "/Users/brettchiate/Desktop/ROOT FILES/FUTURECLARITY TECHNOLOGIES LANDING"
-git checkout backup-before-mobile-optimization-20250929-165114
-git checkout -b emergency-restore
-git push origin emergency-restore
-```
-
----
-
-## 📞 Support
-
-If you encounter any issues with the mobile optimization or need to restore:
-
-1. **Check this guide first**
-2. **Use the backup branch:** `backup-before-mobile-optimization-20250929-165114`
-3. **Local backup location:** `backups/mobile-optimization-20250929-165128/`
-
----
-
-**Last Updated:** September 29, 2025  
-**Backup Created By:** Mobile Optimization Assistant  
-**Status:** ✅ Successfully pushed to GitHub with full backup safety measures
+**Last updated:** August 2026

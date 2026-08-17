@@ -16,6 +16,12 @@ pnpm-debug.log*
 # environment variables
 .env
 .env.production
+.env.local
+.env.*.local
+
+# local snapshots — keep these off the public repo. They duplicated the whole
+# tree (including a backup nested inside a backup) and shipped a stale .nvmrc.
+backups/
 
 # macOS-specific files
 .DS_Store
