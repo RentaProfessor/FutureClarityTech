@@ -1,23 +1,32 @@
-// Redirect the Cloudflare Pages preview hostname to the custom domain.
+// Force every request onto the custom domain.
 //
-// Cloudflare Pages serves this project on BOTH futureclaritytech.pages.dev and
+// Cloudflare Pages serves this project on *.pages.dev as well as
 // futureclaritytechnologies.com. Two hostnames serving identical content is a
-// duplicate, and Google picks one as canonical. The <link rel="canonical"> tag
-// (driven by `site` in astro.config.mjs) already tells it which to prefer; this
-// 301 makes it unambiguous and passes any accumulated ranking signal across.
+// duplicate, and Google picks one of them as canonical — it picked the
+// pages.dev copy, which is why brand searches surfaced that URL.
 //
-// Matched by exact hostname on purpose: deploy previews live at
-// <hash>.futureclaritytech.pages.dev and must keep working for QA, so a
-// .endsWith('.pages.dev') check would be wrong here.
+// A 301 (not a 404, and not blocking the host) is deliberate: Google has to be
+// able to FETCH the pages.dev URL and see the redirect in order to consolidate
+// the two and drop the old one. Disabling the pages.dev subdomain would break
+// that and strand the signal.
+//
+// This matches ANY *.pages.dev hostname, which includes branch aliases like
+// main.<project>.pages.dev and per-deployment preview URLs. That is intentional:
+// the requirement is that pages.dev never appears publicly. If you later want
+// deploy previews to stay browsable for QA, change the test to an exact match:
+//     if (url.hostname === 'futureclaritytech.pages.dev')
+// and previews will work again while the production alias still redirects.
 const CANONICAL_HOST = 'futureclaritytechnologies.com';
-const REDIRECT_FROM = new Set(['futureclaritytech.pages.dev']);
 
 export async function onRequest(context) {
   const url = new URL(context.request.url);
-  if (REDIRECT_FROM.has(url.hostname)) {
+
+  if (url.hostname.endsWith('.pages.dev')) {
     url.hostname = CANONICAL_HOST;
     url.protocol = 'https:';
+    // 301 = permanent. Google transfers ranking signals and drops the old URL.
     return Response.redirect(url.toString(), 301);
   }
+
   return context.next();
 }
