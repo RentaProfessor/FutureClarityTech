@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
+import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
@@ -10,6 +11,7 @@ export default defineConfig({
   // Google the pages.dev copy was canonical, which is why searches for the
   // company name surfaced *.pages.dev instead of this domain.
   site: 'https://futureclaritytechnologies.com',
+  integrations: [sitemap()],
   vite: {
     plugins: [tailwindcss()],
   },

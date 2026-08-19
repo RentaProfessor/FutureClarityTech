@@ -1,0 +1,9 @@
+# futureclaritytechnologies.com
+#
+# The canonical home of this site is https://futureclaritytechnologies.com.
+# Any *.pages.dev copy is a deploy artifact and 301-redirects here.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://futureclaritytechnologies.com/sitemap-index.xml
