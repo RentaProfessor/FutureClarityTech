@@ -6,23 +6,23 @@ import HeroIllustration from '../components/HeroIllustration.astro';
 import Cassette from '../components/Cassette.astro';
 import { SITE } from '../site';
 
-// Live starting prices, set to market rates for a small LA studio. Adjust
-// freely — the point of publishing a range is that buyers shortlist firms
-// they can price, and it filters out mismatched budgets.
+// Launch pricing: deliberately under market rate while the client roster
+// grows. The "launch" framing matters — it reads as a deal rather than a
+// cheap studio, and lets these rise later without redesigning the section.
 const tiers = [
   {
     name: 'Single-page site',
-    price: 'from $750',
+    price: 'from $450',
     body: 'One sharp page that gets your business found and contacted. Domain, hosting, and launch included.',
   },
   {
     name: 'Full website',
-    price: 'from $1,500',
+    price: 'from $950',
     body: 'Multi-page site with whatever your business runs on: online store, menu, booking, galleries.',
   },
   {
     name: 'iOS or web app',
-    price: 'scoped quote',
+    price: 'from $2,500',
     body: 'Design, development, and App Store release. We scope it together in the consultation, then fix the price.',
   },
 ];
@@ -343,8 +343,9 @@ const steps = [
           Straight answers on cost.
         </h2>
         <p class="mt-4 max-w-2xl text-soft">
-          Every project gets a fixed quote before we start, so there are no surprises. These
-          starting points cover most of what we build.
+          Every project gets a fixed quote before we start, so there are no surprises. These are
+          our launch rates while we grow our LA client roster — start a project now and you lock
+          them in.
         </p>
       </div>
 
