@@ -1,0 +1,15 @@
+{
+  "name": "outreach-sequencer",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test test/",
+    "deploy": "wrangler deploy",
+    "db:create": "wrangler d1 create outreach",
+    "db:migrate": "wrangler d1 execute outreach --remote --file=schema.sql",
+    "tail": "wrangler tail"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  }
+}
