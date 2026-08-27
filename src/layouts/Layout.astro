@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { SITE } from '../site';
 
 export interface Props {
   title: string;
@@ -8,10 +9,31 @@ export interface Props {
 
 const {
   title,
-  description = 'FutureClarity Technologies is a small studio. We design and build fast, reliable websites and apps for small businesses, and we prototype products of our own.',
+  description = 'FutureClarity Technologies is a small Los Angeles studio. We design and build fast, reliable websites and apps for small businesses, and we prototype products of our own.',
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
+
+// LocalBusiness structured data so search engines associate the studio with
+// its service area, contact details, and price range.
+const jsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: 'FutureClarity Technologies',
+  url: 'https://futureclaritytechnologies.com',
+  email: SITE.email,
+  telephone: SITE.phoneDisplay,
+  description:
+    'Small web studio in Los Angeles designing and building websites and apps for small businesses.',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Los Angeles',
+    addressRegion: 'CA',
+    addressCountry: 'US',
+  },
+  areaServed: ['Los Angeles, CA', 'United States'],
+  priceRange: '$$',
+});
 ---
 
 <!DOCTYPE html>
@@ -30,6 +52,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <script type="application/ld+json" set:html={jsonLd} />
 
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />

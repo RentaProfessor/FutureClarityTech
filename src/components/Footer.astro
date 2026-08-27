@@ -1,5 +1,6 @@
 ---
 // Site footer. Anchor links get the same /?scroll= rewrite as the header.
+import { SITE } from '../site';
 ---
 
 <footer class="overflow-hidden bg-ink text-paper">
@@ -36,6 +37,7 @@
         <ul class="mt-4 space-y-2 text-sm">
           <li><a href="/portfolio" class="text-stone-300 transition-colors hover:text-paper">Work</a></li>
           <li><a href="#services" class="text-stone-300 transition-colors hover:text-paper">Services</a></li>
+          <li><a href="#pricing" class="text-stone-300 transition-colors hover:text-paper">Pricing</a></li>
           <li><a href="#process" class="text-stone-300 transition-colors hover:text-paper">Process</a></li>
           <li><a href="#about" class="text-stone-300 transition-colors hover:text-paper">About</a></li>
           <li><a href="#contact" class="text-stone-300 transition-colors hover:text-paper">Contact</a></li>
@@ -46,13 +48,14 @@
         <p class="font-mono text-xs uppercase tracking-[0.18em] text-stone-400">Contact</p>
         <ul class="mt-4 space-y-2 text-sm text-stone-300">
           <li>
-            <a href="mailto:futureclaritytechnologies@gmail.com" class="break-all transition-colors hover:text-paper">
-              futureclaritytechnologies@gmail.com
+            <a href={`mailto:${SITE.email}`} class="break-all transition-colors hover:text-paper">
+              {SITE.email}
             </a>
           </li>
           <li>
-            <a href="tel:+18185850475" class="transition-colors hover:text-paper">+1 (818) 585-0475</a>
+            <a href={`tel:${SITE.phoneTel}`} class="transition-colors hover:text-paper">{SITE.phoneDisplay}</a>
           </li>
+          <li class="text-stone-400">{SITE.city}, CA</li>
         </ul>
       </div>
     </div>

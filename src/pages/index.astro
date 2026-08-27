@@ -4,6 +4,32 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import HeroIllustration from '../components/HeroIllustration.astro';
 import Cassette from '../components/Cassette.astro';
+import { SITE } from '../site';
+
+// EDIT ME: placeholder starting prices — set your real numbers before merging.
+// Publishing a starting range is deliberate: professional-services buyers
+// shortlist firms they can price, and it filters out mismatched budgets.
+const tiers = [
+  {
+    name: 'Single-page site',
+    price: 'from $750',
+    body: 'One sharp page that gets your business found and contacted. Domain, hosting, and launch included.',
+  },
+  {
+    name: 'Full website',
+    price: 'from $1,500',
+    body: 'Multi-page site with whatever your business runs on: online store, menu, booking, galleries.',
+  },
+  {
+    name: 'iOS or web app',
+    price: 'scoped quote',
+    body: 'Design, development, and App Store release. We scope it together in the consultation, then fix the price.',
+  },
+];
+
+// Real client quotes only — ask each past client for two sentences and add
+// them here. The section stays hidden while this array is empty.
+const testimonials: { quote: string; name: string; role: string }[] = [];
 
 const work = [
   {
@@ -81,9 +107,9 @@ const steps = [
           </span>
         </h1>
         <p class="mt-7 max-w-xl text-lg text-soft" data-reveal style="--reveal-delay: 0.12s">
-          FutureClarity is a small studio. We design and build websites and apps for small
-          businesses, and we prototype products of our own. Either way, you deal directly with
-          the people doing the work.
+          FutureClarity is a small Los Angeles studio. We design and build websites and apps
+          that bring small businesses customers, and we prototype products of our own. Either
+          way, you deal directly with the people doing the work.
         </p>
         <div class="mt-9 flex flex-wrap items-center gap-6" data-reveal style="--reveal-delay: 0.18s">
           <a href="#contact" class="btn">Start a project</a>
@@ -308,6 +334,64 @@ const steps = [
     </div>
   </section>
 
+  <!-- Pricing -->
+  <section id="pricing" class="scroll-mt-24 border-b border-line">
+    <div class="mx-auto max-w-6xl px-6 py-12 md:py-24">
+      <div data-reveal>
+        <p class="eyebrow">Pricing</p>
+        <h2 class="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
+          Straight answers on cost.
+        </h2>
+        <p class="mt-4 max-w-2xl text-soft">
+          Every project gets a fixed quote before we start, so there are no surprises. These
+          starting points cover most of what we build.
+        </p>
+      </div>
+
+      <div class="mt-10 grid gap-8 md:mt-12 md:grid-cols-3">
+        {
+          tiers.map((tier, i) => (
+            <div class="border border-line bg-card p-6 sm:p-7" data-reveal style={`--reveal-delay: ${i * 0.08}s`}>
+              <h3 class="text-xl font-medium">{tier.name}</h3>
+              <p class="mt-2 font-mono text-sm uppercase tracking-[0.15em] text-accent">{tier.price}</p>
+              <p class="mt-4 text-sm text-soft">{tier.body}</p>
+            </div>
+          ))
+        }
+      </div>
+
+      <p class="mt-8 max-w-2xl text-sm text-soft" data-reveal>
+        After launch, our care plan covers hosting, updates, and small changes for a flat
+        monthly fee. And if something would add cost without adding customers, we'll tell you
+        to skip it.
+      </p>
+    </div>
+  </section>
+
+  {
+    testimonials.length > 0 && (
+      <section id="testimonials" class="scroll-mt-24 border-b border-line">
+        <div class="mx-auto max-w-6xl px-6 py-12 md:py-24">
+          <div data-reveal>
+            <p class="eyebrow">Clients</p>
+            <h2 class="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">What clients say</h2>
+          </div>
+          <div class="mt-10 grid gap-8 md:grid-cols-2">
+            {testimonials.map((t) => (
+              <figure class="border border-line bg-card p-6 sm:p-7" data-reveal>
+                <blockquote class="text-soft">“{t.quote}”</blockquote>
+                <figcaption class="mt-4 text-sm font-medium">
+                  {t.name}
+                  <span class="block font-normal text-faint">{t.role}</span>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
   <!-- About -->
   <section id="about" class="scroll-mt-24 border-b border-line">
     <div class="mx-auto max-w-6xl px-6 py-12 md:py-24">
@@ -318,9 +402,10 @@ const steps = [
         </div>
         <div class="space-y-5 text-soft md:pt-12" data-reveal style="--reveal-delay: 0.08s">
           <p>
-            FutureClarity is a deliberately small studio. The person you talk to on the first call
-            is the person who designs and builds your project. No account managers, no hand-offs,
-            no ticket queue.
+            FutureClarity is a deliberately small studio based in Los Angeles, working with
+            small businesses everywhere. The person you talk to on the first call is the person
+            who designs and builds your project. No account managers, no hand-offs, no ticket
+            queue.
           </p>
           <p>
             We work mostly with small businesses: shops, restaurants, local services. At that size
@@ -348,22 +433,35 @@ const steps = [
           </h2>
           <p class="mt-4 text-soft">
             Email, call, or use the form. We read everything and usually reply within a business
-            day, with honest advice and a realistic quote.
+            day, with honest advice and a realistic quote. Based in Los Angeles, working with
+            small businesses everywhere.
           </p>
 
           <dl class="mt-10 space-y-6">
             <div>
               <dt class="font-mono text-xs uppercase tracking-[0.15em] text-faint">Email</dt>
               <dd class="mt-1">
-                <a href="mailto:futureclaritytechnologies@gmail.com" class="link break-all">
-                  futureclaritytechnologies@gmail.com
-                </a>
+                <a href={`mailto:${SITE.email}`} class="link break-all">{SITE.email}</a>
               </dd>
             </div>
             <div>
               <dt class="font-mono text-xs uppercase tracking-[0.15em] text-faint">Phone</dt>
-              <dd class="mt-1"><a href="tel:+18185850475" class="link">+1 (818) 585-0475</a></dd>
+              <dd class="mt-1">
+                <a href={`tel:${SITE.phoneTel}`} class="link">{SITE.phoneDisplay}</a>
+              </dd>
             </div>
+            {
+              SITE.calUrl && (
+                <div>
+                  <dt class="font-mono text-xs uppercase tracking-[0.15em] text-faint">Prefer to talk?</dt>
+                  <dd class="mt-2">
+                    <a href={SITE.calUrl} target="_blank" rel="noopener noreferrer" class="btn btn-sm">
+                      Book a free 15-minute call
+                    </a>
+                  </dd>
+                </div>
+              )
+            }
           </dl>
 
           <svg
@@ -386,6 +484,9 @@ const steps = [
           data-reveal
           style="--reveal-delay: 0.08s"
         >
+          <input type="hidden" name="_subject" value="New project inquiry — futureclaritytechnologies.com" />
+          <!-- Honeypot: hidden from people, filled by spam bots; Formspree drops those. -->
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
           <div>
             <label for="name" class="mb-1.5 block text-sm font-medium">Name</label>
             <input type="text" id="name" name="name" required class="field" placeholder="Your name" />
