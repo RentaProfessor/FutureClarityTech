@@ -166,10 +166,10 @@ body::after {
 
 .js [data-reveal] {
   opacity: 0;
-  transform: translateY(14px);
+  transform: translateY(52px) scale(0.985);
   transition:
-    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1s cubic-bezier(0.16, 1, 0.3, 1);
   transition-delay: var(--reveal-delay, 0s);
 }
 
@@ -178,11 +178,69 @@ body::after {
   transform: none;
 }
 
+/* Auto-stagger: children of a [data-reveal-group] cascade in as the
+   group scrolls into view, for a "flowing" sectional reveal. */
+.js [data-reveal-group] > [data-reveal]:nth-child(1) { --reveal-delay: 0s; }
+.js [data-reveal-group] > [data-reveal]:nth-child(2) { --reveal-delay: 0.08s; }
+.js [data-reveal-group] > [data-reveal]:nth-child(3) { --reveal-delay: 0.16s; }
+.js [data-reveal-group] > [data-reveal]:nth-child(4) { --reveal-delay: 0.24s; }
+.js [data-reveal-group] > [data-reveal]:nth-child(5) { --reveal-delay: 0.32s; }
+
+/* Scene divider: a hairline that draws left-to-right as the next scene
+   scrolls into view — the transition between section groups. */
+.js [data-draw] {
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--reveal-delay, 0s);
+}
+
+.js [data-draw].revealed {
+  transform: scaleX(1);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .js [data-reveal] {
     opacity: 1;
     transform: none;
     transition: none;
+  }
+
+  .js [data-draw] {
+    transform: none;
+    transition: none;
+  }
+}
+
+/* About illustration: gentle, ambient motion. */
+.about-illustration .lamp-bulb {
+  animation: lamp-pulse 4s ease-in-out infinite;
+}
+
+.about-illustration .lamp-glow {
+  animation: glow-pulse 4s ease-in-out infinite;
+}
+
+.about-illustration .about-steam {
+  animation: steam-drift 3.4s ease-in-out infinite;
+}
+
+@keyframes lamp-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+
+/* The light wash stays faint; only its strength breathes a little. */
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.09; }
+  50% { opacity: 0.05; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-illustration .lamp-bulb,
+  .about-illustration .lamp-glow,
+  .about-illustration .about-steam {
+    animation: none;
   }
 }
 

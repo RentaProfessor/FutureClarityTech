@@ -4,6 +4,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import HeroIllustration from '../components/HeroIllustration.astro';
 import Cassette from '../components/Cassette.astro';
+import AboutIllustration from '../components/AboutIllustration.astro';
 import { SITE } from '../site';
 
 // Launch pricing: deliberately under market rate while the client roster
@@ -82,9 +83,10 @@ const steps = [
 <Layout title="FutureClarity Technologies | Web development that just works.">
   <Header />
 
+  <!-- Scene 1: Hero + Recent work -->
   <!-- Hero -->
-  <section class="overflow-hidden border-b border-line">
-    <div class="mx-auto grid max-w-6xl items-center gap-12 px-6 pb-12 pt-28 md:pb-24 md:pt-44 lg:grid-cols-[1fr_1.15fr]">
+  <section class="overflow-hidden">
+    <div class="mx-auto grid max-w-6xl items-center gap-12 px-6 pb-4 pt-28 md:pb-8 md:pt-44 lg:grid-cols-[1fr_1.15fr]">
       <div>
         <p class="eyebrow mb-6" data-reveal>Websites, apps, and hardware</p>
         <h1
@@ -131,8 +133,8 @@ const steps = [
   </section>
 
   <!-- Recent work -->
-  <section class="border-b border-line">
-    <div class="mx-auto max-w-6xl px-6 py-12 md:py-20">
+  <section>
+    <div class="mx-auto max-w-6xl px-6 pb-16 pt-4 md:pb-28 md:pt-6">
       <div class="flex items-baseline justify-between" data-reveal>
         <p class="eyebrow">Recent work</p>
         <a href="/portfolio" class="link text-sm">All work</a>
@@ -169,9 +171,13 @@ const steps = [
   <!-- floating image that trails the cursor over the work list -->
   <div id="work-preview" aria-hidden="true"><img src="/work/white-squirrel.jpg" alt="" /></div>
 
+  <!-- scene transition -->
+  <div class="mx-auto max-w-6xl px-6"><div class="h-px bg-line" data-draw></div></div>
+
+  <!-- Scene 2: From the workshop + What we do -->
   <!-- LegacyTape -->
-  <section id="legacytape" class="scroll-mt-24 border-b border-line">
-    <div class="mx-auto grid max-w-6xl items-center gap-10 px-6 py-12 md:grid-cols-[0.9fr_1.1fr] md:gap-16 md:py-24">
+  <section id="legacytape" class="scroll-mt-24">
+    <div class="mx-auto grid max-w-6xl items-center gap-10 px-6 pb-8 pt-16 md:grid-cols-[0.9fr_1.1fr] md:gap-16 md:pb-10 md:pt-28">
       <div class="hidden w-full md:block" data-reveal style="--reveal-delay: 0.1s">
         <Cassette />
       </div>
@@ -202,8 +208,8 @@ const steps = [
   </section>
 
   <!-- Services -->
-  <section id="services" class="scroll-mt-24 border-b border-line">
-    <div class="mx-auto max-w-6xl px-6 py-12 md:py-24">
+  <section id="services" class="scroll-mt-24">
+    <div class="mx-auto max-w-6xl px-6 pb-16 pt-8 md:pb-28 md:pt-10">
       <div data-reveal>
         <p class="eyebrow">Services</p>
         <h2 class="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">What we do</h2>
@@ -288,9 +294,13 @@ const steps = [
     </div>
   </section>
 
+  <!-- scene transition -->
+  <div class="mx-auto max-w-6xl px-6"><div class="h-px bg-line" data-draw></div></div>
+
+  <!-- Scene 3: How a project runs -->
   <!-- Process -->
-  <section id="process" class="scroll-mt-24 border-b border-line">
-    <div class="mx-auto max-w-6xl px-6 py-12 md:py-24">
+  <section id="process" class="scroll-mt-24">
+    <div class="mx-auto max-w-6xl px-6 py-16 md:py-28">
       <div data-reveal>
         <p class="eyebrow">Process</p>
         <h2 class="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">How a project runs</h2>
@@ -334,9 +344,13 @@ const steps = [
     </div>
   </section>
 
+  <!-- scene transition -->
+  <div class="mx-auto max-w-6xl px-6"><div class="h-px bg-line" data-draw></div></div>
+
+  <!-- Scene 4: What it costs -->
   <!-- Pricing -->
-  <section id="pricing" class="scroll-mt-24 border-b border-line">
-    <div class="mx-auto max-w-6xl px-6 py-12 md:py-24">
+  <section id="pricing" class="scroll-mt-24">
+    <div class="mx-auto max-w-6xl px-6 py-16 md:py-28">
       <div data-reveal>
         <p class="eyebrow">Pricing</p>
         <h2 class="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
@@ -376,8 +390,8 @@ const steps = [
 
   {
     testimonials.length > 0 && (
-      <section id="testimonials" class="scroll-mt-24 border-b border-line">
-        <div class="mx-auto max-w-6xl px-6 py-12 md:py-24">
+      <section id="testimonials" class="scroll-mt-24">
+        <div class="mx-auto max-w-6xl px-6 pb-16 pt-4 md:pb-28 md:pt-6">
           <div data-reveal>
             <p class="eyebrow">Clients</p>
             <h2 class="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">What clients say</h2>
@@ -397,32 +411,40 @@ const steps = [
       </section>
     )
   }
+  <!-- scene transition -->
+  <div class="mx-auto max-w-6xl px-6"><div class="h-px bg-line" data-draw></div></div>
 
+  <!-- Scene 5: Small on purpose + Contact -->
   <!-- About -->
-  <section id="about" class="scroll-mt-24 border-b border-line">
-    <div class="mx-auto max-w-6xl px-6 py-12 md:py-24">
-      <div class="grid gap-10 md:grid-cols-2 md:gap-16">
-        <div data-reveal>
-          <p class="eyebrow">About</p>
-          <h2 class="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">Small on purpose.</h2>
+  <section id="about" class="scroll-mt-24">
+    <div class="mx-auto max-w-6xl px-6 pb-8 pt-16 md:pb-10 md:pt-28">
+      <div class="grid items-center gap-10 md:grid-cols-[1.05fr_0.95fr] md:gap-16">
+        <div>
+          <div data-reveal>
+            <p class="eyebrow">About</p>
+            <h2 class="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">Small on purpose.</h2>
+          </div>
+          <div class="mt-6 space-y-5 text-soft" data-reveal style="--reveal-delay: 0.08s">
+            <p>
+              FutureClarity is a deliberately small studio based in Los Angeles, working with small
+              businesses everywhere. The person you talk to on the first call
+              is the person who designs and builds your project. No account managers, no hand-offs,
+              no ticket queue.
+            </p>
+            <p>
+              We work mostly with small businesses: shops, restaurants, local services. At that size
+              a website has one job, bringing in customers, so we keep our builds simple, fast, and
+              easy for you to update. If something would add cost without adding customers, we'll
+              tell you to skip it.
+            </p>
+            <p>
+              Between client projects we build products of our own. LegacyTape, our recording
+              device for preserving family stories, is the current one.
+            </p>
+          </div>
         </div>
-        <div class="space-y-5 text-soft md:pt-12" data-reveal style="--reveal-delay: 0.08s">
-          <p>
-            FutureClarity is a deliberately small studio based in Los Angeles, working with
-            small businesses everywhere. The person you talk to on the first call is the person
-            who designs and builds your project. No account managers, no hand-offs, no ticket
-            queue.
-          </p>
-          <p>
-            We work mostly with small businesses: shops, restaurants, local services. At that size
-            a website has one job, bringing in customers, so we keep our builds simple, fast, and
-            easy for you to update. If something would add cost without adding customers, we'll
-            tell you to skip it.
-          </p>
-          <p>
-            Between client projects we build products of our own. LegacyTape, our recording
-            device for preserving family stories, is the current one.
-          </p>
+        <div class="hidden w-full md:block" data-reveal style="--reveal-delay: 0.12s">
+          <AboutIllustration />
         </div>
       </div>
     </div>
@@ -430,7 +452,7 @@ const steps = [
 
   <!-- Contact -->
   <section id="contact" class="scroll-mt-24">
-    <div class="mx-auto max-w-6xl px-6 py-12 md:py-24">
+    <div class="mx-auto max-w-6xl px-6 pb-16 pt-8 md:pb-28 md:pt-10">
       <div class="relative grid gap-12 md:grid-cols-[1fr_1.2fr] md:gap-16">
         <div data-reveal>
           <p class="eyebrow">Contact</p>
