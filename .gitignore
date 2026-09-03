@@ -28,3 +28,6 @@ backups/
 
 # jetbrains setting folder
 .idea/
+
+# local editor/session config
+.claude/
