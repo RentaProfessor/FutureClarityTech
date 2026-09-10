@@ -78,8 +78,14 @@ export function extractFromHtml(html) {
   }
 
   const ld = (html.match(/<script[^>]*type\s*=\s*["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi) || []).join(' ');
+  // schema.org LocalBusiness has dozens of subtypes, and a dentist marks
+  // up as "Dentist", not "LocalBusiness". Matching only the generic names
+  // reported "no structured data" for sites that had perfectly good
+  // markup -- a false accusation is the fastest way to lose a prospect on
+  // the first line, so this covers the subtypes SMBs actually use. Also
+  // handles "@type" given as an array.
   f.localBusinessSchema =
-    /"@type"\s*:\s*"[^"]*(LocalBusiness|Restaurant|Store|ProfessionalService|Organization)/i.test(ld);
+    /"@type"\s*:\s*(?:"[^"]*(?:LocalBusiness|Organization|Store|ProfessionalService|Restaurant|FoodEstablishment|CafeOrCoffeeShop|Cafe|BarOrPub|Brewery|Winery|Distillery|Bakery|FastFoodRestaurant|IceCreamShop|AutoRepair|AutoDealer|AutoBodyShop|AutoPartsStore|AutoWash|GasStation|MotorcycleRepair|Dentist|Physician|MedicalBusiness|MedicalClinic|VeterinaryCare|Optician|Pharmacy|HealthClub|HairSalon|BeautySalon|NailSalon|DaySpa|TattooParlor|HealthAndBeautyBusiness|Attorney|LegalService|AccountingService|InsuranceAgency|FinancialService|RealEstateAgent|HomeAndConstructionBusiness|Electrician|Plumber|HVACBusiness|Locksmith|RoofingContractor|GeneralContractor|HousePainter|MovingCompany|; ?CleaningService|DryCleaningOrLaundry|ChildCare|Preschool|School|EducationalOrganization|SportsActivityLocation|GymOrFitnessCenter|Florist|JewelryStore|ClothingStore|ShoeStore|BookStore|GroceryStore|SupermarketConvenienceStore|ConvenienceStore|HardwareStore|FurnitureStore|PetStore|LiquorStore|MobilePhoneStore|Hotel|Lodging|LodgingBusiness|BedAndBreakfast|TravelAgency|EntertainmentBusiness|MovieTheater|NightClub|EmploymentAgency|Notary|PhotographyBusiness|SelfStorage|ShoppingCenter|TouristAttraction)"|\[[^\]]*"[^"]*(?:LocalBusiness|Organization|Store|ProfessionalService|Restaurant|FoodEstablishment|CafeOrCoffeeShop|Cafe|BarOrPub|Brewery|Winery|Distillery|Bakery|FastFoodRestaurant|IceCreamShop|AutoRepair|AutoDealer|AutoBodyShop|AutoPartsStore|AutoWash|GasStation|MotorcycleRepair|Dentist|Physician|MedicalBusiness|MedicalClinic|VeterinaryCare|Optician|Pharmacy|HealthClub|HairSalon|BeautySalon|NailSalon|DaySpa|TattooParlor|HealthAndBeautyBusiness|Attorney|LegalService|AccountingService|InsuranceAgency|FinancialService|RealEstateAgent|HomeAndConstructionBusiness|Electrician|Plumber|HVACBusiness|Locksmith|RoofingContractor|GeneralContractor|HousePainter|MovingCompany|; ?CleaningService|DryCleaningOrLaundry|ChildCare|Preschool|School|EducationalOrganization|SportsActivityLocation|GymOrFitnessCenter|Florist|JewelryStore|ClothingStore|ShoeStore|BookStore|GroceryStore|SupermarketConvenienceStore|ConvenienceStore|HardwareStore|FurnitureStore|PetStore|LiquorStore|MobilePhoneStore|Hotel|Lodging|LodgingBusiness|BedAndBreakfast|TravelAgency|EntertainmentBusiness|MovieTheater|NightClub|EmploymentAgency|Notary|PhotographyBusiness|SelfStorage|ShoppingCenter|TouristAttraction)"[^\]]*\])/i.test(ld);
 
   return f;
 }

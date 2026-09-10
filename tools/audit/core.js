@@ -189,10 +189,14 @@ export function pickHeadline(failed, ttfbMs, f, common = {}, batchSize = 1) {
     'social-preview':
       'their link posts as a bare grey URL with no image when shared in a text or on Instagram',
     title: 'their page title is missing or truncated in Google results',
-    description:
-      f.metaDescription && f.metaDescription.length < 20
+    // Three distinct states, and conflating them produces a false claim: a
+    // description that is merely too long is not a missing one, and telling an
+    // owner they have none when they wrote one is an instant credibility loss.
+    description: !f.metaDescription
+      ? 'they have no search description, so Google is inventing the text under their link'
+      : f.metaDescription.length < 50
         ? `their search description is only ${f.metaDescription.length} characters, so Google is rewriting it`
-        : 'they have no search description, so Google is inventing the text under their link',
+        : `their search description runs ${f.metaDescription.length} characters, so Google cuts it off mid-sentence in results`,
     h1:
       f.h1Count > 1
         ? `their homepage has ${f.h1Count} competing main headings, so search engines cannot tell what the page is about`
