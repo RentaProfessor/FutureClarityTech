@@ -105,4 +105,59 @@ Good luck either way.
 — {{sender_name}}, FutureClarity Technologies`,
     },
   ],
+
+  // Local services: lawyers, car repair, salons, dentists, vets. Different
+  // buying logic from restaurants and shops. Nobody browses for a lawyer the
+  // way they browse for dinner -- they search once, with intent, usually on a
+  // phone, and call the first business that looks legitimate and is easy to
+  // reach. So the pitch is being findable and being callable, not menus or
+  // storefront browsing, and the CTA leans on the phone rather than the site.
+  service: [
+    {
+      waitDays: 0,
+      subject: 'found {{business}} on my phone',
+      body: `Hi {{first_name}},
+
+I was looking at how local businesses near USC show up on a phone, and {{observation}}
+
+I run FutureClarity, a small web studio in LA. For service businesses the whole game is someone searching once, deciding in about five seconds whether you look legitimate, and tapping to call. We build that, and we build a free working demo before anyone pays us anything: {{demo_url}}
+
+Worth a look?
+
+— {{sender_name}}, FutureClarity Technologies`,
+    },
+    {
+      waitDays: 3,
+      subject: 're: found {{business}} on my phone',
+      body: `Hi {{first_name}},
+
+One follow-up. People looking for what you do are usually ready to hire someone that same day, and {{observation}} Every one of those is a customer who called whoever came next.
+
+If I built a free working demo for {{business}}, would you spend five minutes looking at it?
+
+— {{sender_name}}`,
+    },
+    {
+      waitDays: 4,
+      subject: 'the demo for {{business}}',
+      body: `Hi {{first_name}},
+
+Rather than more email: {{demo_url}} is the sort of site we'd build you — loads fast, tap-to-call in the corner on every screen, and set up so Google shows your hours and address right in the search result.
+
+Fixed price agreed before we start, and you deal with the person building it. Interested?
+
+— {{sender_name}}`,
+    },
+    {
+      waitDays: 5,
+      subject: 'closing the loop',
+      body: `Hi {{first_name}},
+
+I'll leave it here — you've got a business to run. If {{business}} ever wants a site that actually brings in calls, the offer stands: free working demo first, fixed price, one person start to finish.
+
+Good luck either way.
+
+— {{sender_name}}, FutureClarity Technologies`,
+    },
+  ],
 };

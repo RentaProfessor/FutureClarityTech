@@ -153,7 +153,7 @@ if (!targets.length) {
 
 // Small concurrency: these are other people's servers, not a load test.
 const out = [];
-const CONCURRENCY = 4;
+const CONCURRENCY = 8;
 for (let i = 0; i < targets.length; i += CONCURRENCY) {
   out.push(...(await Promise.all(targets.slice(i, i + CONCURRENCY).map(auditUrl))));
 }
