@@ -33,7 +33,20 @@ export async function onRequest(context) {
     return context.next();
   }
 
-  if (url.hostname.endsWith('.pages.dev')) {
+  // `wrangler pages dev` serves on localhost; never redirect that away.
+  if (url.hostname === 'localhost' || url.hostname === '127.0.0.1') {
+    return context.next();
+  }
+
+  // www.<canonical> is folded in alongside *.pages.dev. It previously had no
+  // DNS record at all, so anyone who typed the www form got a DNS failure
+  // rather than the site; once www is a Pages custom domain it reaches this
+  // worker, and this 301 keeps it from becoming a duplicate of the apex in
+  // Google's index.
+  //
+  // Deliberately NOT widened to "any host that is not canonical" -- that also
+  // swallows per-deployment preview URLs and makes QA on a preview impossible.
+  if (url.hostname.endsWith('.pages.dev') || url.hostname === `www.${CANONICAL_HOST}`) {
     url.hostname = CANONICAL_HOST;
     url.protocol = 'https:';
     // 301 = permanent. Google transfers ranking signals and drops the old URL.

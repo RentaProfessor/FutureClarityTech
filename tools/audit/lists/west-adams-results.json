@@ -1,0 +1,1010 @@
+[
+  {
+    "input": "altaadams.com",
+    "url": "https://altaadams.com/",
+    "finalUrl": "https://www.altaadams.com/",
+    "reachable": true,
+    "status": 200,
+    "score": 58,
+    "serverResponseMs": 679,
+    "htmlBytes": 223272,
+    "generator": null,
+    "socialLinks": [
+      "Instagram"
+    ],
+    "failed": [
+      "phone",
+      "h1",
+      "localseo",
+      "social-preview",
+      "alt-text"
+    ],
+    "criticalFailures": [
+      "Tappable phone number",
+      "Local business listing data"
+    ],
+    "checks": [
+      {
+        "id": "https",
+        "label": "Secure (HTTPS)",
+        "pass": true,
+        "detail": "Served over HTTPS.",
+        "why": "Chrome shows a “Not secure” warning on HTTP sites. Customers read that as “this business isn't real.”",
+        "weight": "critical"
+      },
+      {
+        "id": "mobile",
+        "label": "Works on phones",
+        "pass": true,
+        "detail": "Has a mobile viewport tag.",
+        "why": "Most local searches happen on a phone. Without this the page loads desktop-width and everything is tiny.",
+        "weight": "critical"
+      },
+      {
+        "id": "speed",
+        "label": "Server response time",
+        "pass": true,
+        "detail": "0.7s to first response.",
+        "why": "Measured from a data centre, so a real phone on cell data is slower still. Past ~3s most visitors leave before seeing anything.",
+        "weight": "normal"
+      },
+      {
+        "id": "phone",
+        "label": "Tappable phone number",
+        "pass": false,
+        "detail": "No tap-to-call link anywhere on the page.",
+        "why": "A phone number that is plain text cannot be tapped. On mobile this is the single most common way a local business loses a ready-to-buy customer.",
+        "weight": "critical"
+      },
+      {
+        "id": "contact",
+        "label": "Way to get in touch",
+        "pass": true,
+        "detail": "Email link present.",
+        "why": "If there is no obvious way to make contact, interested visitors leave and go to a competitor.",
+        "weight": "critical"
+      },
+      {
+        "id": "title",
+        "label": "Page title",
+        "pass": true,
+        "detail": "“Alta Adams | Seasonal California Cuisine in Los Angeles” (55 characters)",
+        "why": "The title is the blue clickable line in Google results. Too short says nothing; past ~65 characters Google cuts it off.",
+        "weight": "normal"
+      },
+      {
+        "id": "description",
+        "label": "Search description",
+        "pass": true,
+        "detail": "143 characters.",
+        "why": "This is the grey summary under your link in search results. It is the pitch that decides whether anyone clicks.",
+        "weight": "normal"
+      },
+      {
+        "id": "h1",
+        "label": "One clear headline",
+        "pass": false,
+        "detail": "No H1 heading.",
+        "why": "Search engines use the H1 to understand what the page is about. Zero leaves it ambiguous; several compete with each other.",
+        "weight": "normal"
+      },
+      {
+        "id": "localseo",
+        "label": "Local business listing data",
+        "pass": false,
+        "detail": "No structured business data (name, address, hours) in the page code.",
+        "why": "This is the machine-readable block Google reads to show your hours, address and rating directly in search results. Without it you are a plain blue link next to competitors with a full listing.",
+        "weight": "critical"
+      },
+      {
+        "id": "social-preview",
+        "label": "Link previews",
+        "pass": false,
+        "detail": "No preview image or title set.",
+        "why": "Controls what appears when someone shares your link in a text message or on Instagram. Without it the link posts as a bare grey URL that nobody taps.",
+        "weight": "normal"
+      },
+      {
+        "id": "alt-text",
+        "label": "Image descriptions",
+        "pass": false,
+        "detail": "4 of 8 images have no description.",
+        "why": "Image descriptions are what screen readers announce, and they are also how Google Images finds your photos.",
+        "weight": "normal"
+      },
+      {
+        "id": "favicon",
+        "label": "Browser tab icon",
+        "pass": true,
+        "detail": "Favicon set.",
+        "why": "Small, but it is what your site looks like in a bookmark bar or a tab full of competitors.",
+        "weight": "normal"
+      }
+    ],
+    "headline": "there is no tap-to-call number anywhere on their site"
+  },
+  {
+    "input": "centopastabar.com",
+    "url": "https://centopastabar.com/",
+    "finalUrl": "https://www.cento.group/",
+    "reachable": true,
+    "status": 200,
+    "score": 58,
+    "serverResponseMs": 339,
+    "htmlBytes": 5823,
+    "generator": null,
+    "socialLinks": [
+      "Instagram"
+    ],
+    "failed": [
+      "phone",
+      "contact",
+      "h1",
+      "localseo",
+      "social-preview"
+    ],
+    "criticalFailures": [
+      "Tappable phone number",
+      "Way to get in touch",
+      "Local business listing data"
+    ],
+    "checks": [
+      {
+        "id": "https",
+        "label": "Secure (HTTPS)",
+        "pass": true,
+        "detail": "Served over HTTPS.",
+        "why": "Chrome shows a “Not secure” warning on HTTP sites. Customers read that as “this business isn't real.”",
+        "weight": "critical"
+      },
+      {
+        "id": "mobile",
+        "label": "Works on phones",
+        "pass": true,
+        "detail": "Has a mobile viewport tag.",
+        "why": "Most local searches happen on a phone. Without this the page loads desktop-width and everything is tiny.",
+        "weight": "critical"
+      },
+      {
+        "id": "speed",
+        "label": "Server response time",
+        "pass": true,
+        "detail": "0.3s to first response.",
+        "why": "Measured from a data centre, so a real phone on cell data is slower still. Past ~3s most visitors leave before seeing anything.",
+        "weight": "normal"
+      },
+      {
+        "id": "phone",
+        "label": "Tappable phone number",
+        "pass": false,
+        "detail": "No tap-to-call link anywhere on the page.",
+        "why": "A phone number that is plain text cannot be tapped. On mobile this is the single most common way a local business loses a ready-to-buy customer.",
+        "weight": "critical"
+      },
+      {
+        "id": "contact",
+        "label": "Way to get in touch",
+        "pass": false,
+        "detail": "No form, email link, or phone link found.",
+        "why": "If there is no obvious way to make contact, interested visitors leave and go to a competitor.",
+        "weight": "critical"
+      },
+      {
+        "id": "title",
+        "label": "Page title",
+        "pass": true,
+        "detail": "“Cento Group” (11 characters)",
+        "why": "The title is the blue clickable line in Google results. Too short says nothing; past ~65 characters Google cuts it off.",
+        "weight": "normal"
+      },
+      {
+        "id": "description",
+        "label": "Search description",
+        "pass": true,
+        "detail": "144 characters.",
+        "why": "This is the grey summary under your link in search results. It is the pitch that decides whether anyone clicks.",
+        "weight": "normal"
+      },
+      {
+        "id": "h1",
+        "label": "One clear headline",
+        "pass": false,
+        "detail": "No H1 heading.",
+        "why": "Search engines use the H1 to understand what the page is about. Zero leaves it ambiguous; several compete with each other.",
+        "weight": "normal"
+      },
+      {
+        "id": "localseo",
+        "label": "Local business listing data",
+        "pass": false,
+        "detail": "No structured business data (name, address, hours) in the page code.",
+        "why": "This is the machine-readable block Google reads to show your hours, address and rating directly in search results. Without it you are a plain blue link next to competitors with a full listing.",
+        "weight": "critical"
+      },
+      {
+        "id": "social-preview",
+        "label": "Link previews",
+        "pass": false,
+        "detail": "No preview image or title set.",
+        "why": "Controls what appears when someone shares your link in a text message or on Instagram. Without it the link posts as a bare grey URL that nobody taps.",
+        "weight": "normal"
+      },
+      {
+        "id": "alt-text",
+        "label": "Image descriptions",
+        "pass": true,
+        "detail": "No images on the page.",
+        "why": "Image descriptions are what screen readers announce, and they are also how Google Images finds your photos.",
+        "weight": "normal"
+      },
+      {
+        "id": "favicon",
+        "label": "Browser tab icon",
+        "pass": true,
+        "detail": "Favicon set.",
+        "why": "Small, but it is what your site looks like in a bookmark bar or a tab full of competitors.",
+        "weight": "normal"
+      }
+    ],
+    "headline": "there is no tap-to-call number anywhere on their site"
+  },
+  {
+    "input": "mizlala.com",
+    "url": "https://mizlala.com/",
+    "finalUrl": "https://mizlala.com/",
+    "reachable": true,
+    "status": 200,
+    "score": 67,
+    "serverResponseMs": 423,
+    "htmlBytes": 286773,
+    "generator": null,
+    "socialLinks": [
+      "Instagram"
+    ],
+    "failed": [
+      "phone",
+      "description",
+      "h1",
+      "localseo"
+    ],
+    "criticalFailures": [
+      "Tappable phone number",
+      "Local business listing data"
+    ],
+    "checks": [
+      {
+        "id": "https",
+        "label": "Secure (HTTPS)",
+        "pass": true,
+        "detail": "Served over HTTPS.",
+        "why": "Chrome shows a “Not secure” warning on HTTP sites. Customers read that as “this business isn't real.”",
+        "weight": "critical"
+      },
+      {
+        "id": "mobile",
+        "label": "Works on phones",
+        "pass": true,
+        "detail": "Has a mobile viewport tag.",
+        "why": "Most local searches happen on a phone. Without this the page loads desktop-width and everything is tiny.",
+        "weight": "critical"
+      },
+      {
+        "id": "speed",
+        "label": "Server response time",
+        "pass": true,
+        "detail": "0.4s to first response.",
+        "why": "Measured from a data centre, so a real phone on cell data is slower still. Past ~3s most visitors leave before seeing anything.",
+        "weight": "normal"
+      },
+      {
+        "id": "phone",
+        "label": "Tappable phone number",
+        "pass": false,
+        "detail": "No tap-to-call link anywhere on the page.",
+        "why": "A phone number that is plain text cannot be tapped. On mobile this is the single most common way a local business loses a ready-to-buy customer.",
+        "weight": "critical"
+      },
+      {
+        "id": "contact",
+        "label": "Way to get in touch",
+        "pass": true,
+        "detail": "1 form on the page.",
+        "why": "If there is no obvious way to make contact, interested visitors leave and go to a competitor.",
+        "weight": "critical"
+      },
+      {
+        "id": "title",
+        "label": "Page title",
+        "pass": true,
+        "detail": "“Mizlala Restaurant | Fresh &amp; Modern Mediterranean Grill” (59 characters)",
+        "why": "The title is the blue clickable line in Google results. Too short says nothing; past ~65 characters Google cuts it off.",
+        "weight": "normal"
+      },
+      {
+        "id": "description",
+        "label": "Search description",
+        "pass": false,
+        "detail": "163 characters.",
+        "why": "This is the grey summary under your link in search results. It is the pitch that decides whether anyone clicks.",
+        "weight": "normal"
+      },
+      {
+        "id": "h1",
+        "label": "One clear headline",
+        "pass": false,
+        "detail": "2 H1 headings.",
+        "why": "Search engines use the H1 to understand what the page is about. Zero leaves it ambiguous; several compete with each other.",
+        "weight": "normal"
+      },
+      {
+        "id": "localseo",
+        "label": "Local business listing data",
+        "pass": false,
+        "detail": "No structured business data (name, address, hours) in the page code.",
+        "why": "This is the machine-readable block Google reads to show your hours, address and rating directly in search results. Without it you are a plain blue link next to competitors with a full listing.",
+        "weight": "critical"
+      },
+      {
+        "id": "social-preview",
+        "label": "Link previews",
+        "pass": true,
+        "detail": "Preview title and image set.",
+        "why": "Controls what appears when someone shares your link in a text message or on Instagram. Without it the link posts as a bare grey URL that nobody taps.",
+        "weight": "normal"
+      },
+      {
+        "id": "alt-text",
+        "label": "Image descriptions",
+        "pass": true,
+        "detail": "1 of 31 images have no description.",
+        "why": "Image descriptions are what screen readers announce, and they are also how Google Images finds your photos.",
+        "weight": "normal"
+      },
+      {
+        "id": "favicon",
+        "label": "Browser tab icon",
+        "pass": true,
+        "detail": "Favicon set.",
+        "why": "Small, but it is what your site looks like in a bookmark bar or a tab full of competitors.",
+        "weight": "normal"
+      }
+    ],
+    "headline": "there is no tap-to-call number anywhere on their site"
+  },
+  {
+    "input": "farmhousekitchenthai.com",
+    "url": "https://farmhousekitchenthai.com/",
+    "finalUrl": "https://farmhousethai.com/",
+    "reachable": true,
+    "status": 403,
+    "headline": "their website returns an HTTP 403 error",
+    "error": "HTTP 403."
+  },
+  {
+    "input": "openfacefoodshop.com",
+    "url": "https://openfacefoodshop.com/",
+    "finalUrl": "https://openfacefoodshop.com/",
+    "reachable": true,
+    "status": 200,
+    "score": 92,
+    "serverResponseMs": 87,
+    "htmlBytes": 75676,
+    "generator": "Powered by Slider Revolution 5.4.5.2 - responsive, Mobile-Friendly Slider Plugin for WordPress with comfortable drag and drop interface.",
+    "socialLinks": [
+      "Facebook",
+      "Instagram"
+    ],
+    "failed": [
+      "h1"
+    ],
+    "criticalFailures": [],
+    "checks": [
+      {
+        "id": "https",
+        "label": "Secure (HTTPS)",
+        "pass": true,
+        "detail": "Served over HTTPS.",
+        "why": "Chrome shows a “Not secure” warning on HTTP sites. Customers read that as “this business isn't real.”",
+        "weight": "critical"
+      },
+      {
+        "id": "mobile",
+        "label": "Works on phones",
+        "pass": true,
+        "detail": "Has a mobile viewport tag.",
+        "why": "Most local searches happen on a phone. Without this the page loads desktop-width and everything is tiny.",
+        "weight": "critical"
+      },
+      {
+        "id": "speed",
+        "label": "Server response time",
+        "pass": true,
+        "detail": "0.1s to first response.",
+        "why": "Measured from a data centre, so a real phone on cell data is slower still. Past ~3s most visitors leave before seeing anything.",
+        "weight": "normal"
+      },
+      {
+        "id": "phone",
+        "label": "Tappable phone number",
+        "pass": true,
+        "detail": "2 tap-to-call links.",
+        "why": "A phone number that is plain text cannot be tapped. On mobile this is the single most common way a local business loses a ready-to-buy customer.",
+        "weight": "critical"
+      },
+      {
+        "id": "contact",
+        "label": "Way to get in touch",
+        "pass": true,
+        "detail": "Email link present.",
+        "why": "If there is no obvious way to make contact, interested visitors leave and go to a competitor.",
+        "weight": "critical"
+      },
+      {
+        "id": "title",
+        "label": "Page title",
+        "pass": true,
+        "detail": "“Open Face | Modern Danish Sandwhich Shop | Los Angeles” (54 characters)",
+        "why": "The title is the blue clickable line in Google results. Too short says nothing; past ~65 characters Google cuts it off.",
+        "weight": "normal"
+      },
+      {
+        "id": "description",
+        "label": "Search description",
+        "pass": true,
+        "detail": "128 characters.",
+        "why": "This is the grey summary under your link in search results. It is the pitch that decides whether anyone clicks.",
+        "weight": "normal"
+      },
+      {
+        "id": "h1",
+        "label": "One clear headline",
+        "pass": false,
+        "detail": "2 H1 headings.",
+        "why": "Search engines use the H1 to understand what the page is about. Zero leaves it ambiguous; several compete with each other.",
+        "weight": "normal"
+      },
+      {
+        "id": "localseo",
+        "label": "Local business listing data",
+        "pass": true,
+        "detail": "Structured business data found.",
+        "why": "This is the machine-readable block Google reads to show your hours, address and rating directly in search results. Without it you are a plain blue link next to competitors with a full listing.",
+        "weight": "critical"
+      },
+      {
+        "id": "social-preview",
+        "label": "Link previews",
+        "pass": true,
+        "detail": "Preview title and image set.",
+        "why": "Controls what appears when someone shares your link in a text message or on Instagram. Without it the link posts as a bare grey URL that nobody taps.",
+        "weight": "normal"
+      },
+      {
+        "id": "alt-text",
+        "label": "Image descriptions",
+        "pass": true,
+        "detail": "0 of 7 images have no description.",
+        "why": "Image descriptions are what screen readers announce, and they are also how Google Images finds your photos.",
+        "weight": "normal"
+      },
+      {
+        "id": "favicon",
+        "label": "Browser tab icon",
+        "pass": true,
+        "detail": "Favicon set.",
+        "why": "Small, but it is what your site looks like in a bookmark bar or a tab full of competitors.",
+        "weight": "normal"
+      }
+    ],
+    "headline": "their page has no single clear headline for search engines to read"
+  },
+  {
+    "input": "highlylikely.cafe",
+    "url": "https://highlylikely.cafe/",
+    "reachable": false,
+    "error": "Could not connect (fetch failed).",
+    "headline": "their website didn't load at all"
+  },
+  {
+    "input": "taquerialosanaya.com",
+    "url": "https://taquerialosanaya.com/",
+    "finalUrl": "https://taquerialosanaya.com/",
+    "reachable": true,
+    "status": 403,
+    "headline": "their website returns an HTTP 403 error",
+    "error": "HTTP 403."
+  },
+  {
+    "input": "vickysallday.com",
+    "url": "https://vickysallday.com/",
+    "finalUrl": "https://www.vickysallday.com/",
+    "reachable": true,
+    "status": 200,
+    "score": 67,
+    "serverResponseMs": 788,
+    "htmlBytes": 334060,
+    "generator": null,
+    "socialLinks": [
+      "Instagram"
+    ],
+    "failed": [
+      "phone",
+      "contact",
+      "description",
+      "h1"
+    ],
+    "criticalFailures": [
+      "Tappable phone number",
+      "Way to get in touch"
+    ],
+    "checks": [
+      {
+        "id": "https",
+        "label": "Secure (HTTPS)",
+        "pass": true,
+        "detail": "Served over HTTPS.",
+        "why": "Chrome shows a “Not secure” warning on HTTP sites. Customers read that as “this business isn't real.”",
+        "weight": "critical"
+      },
+      {
+        "id": "mobile",
+        "label": "Works on phones",
+        "pass": true,
+        "detail": "Has a mobile viewport tag.",
+        "why": "Most local searches happen on a phone. Without this the page loads desktop-width and everything is tiny.",
+        "weight": "critical"
+      },
+      {
+        "id": "speed",
+        "label": "Server response time",
+        "pass": true,
+        "detail": "0.8s to first response.",
+        "why": "Measured from a data centre, so a real phone on cell data is slower still. Past ~3s most visitors leave before seeing anything.",
+        "weight": "normal"
+      },
+      {
+        "id": "phone",
+        "label": "Tappable phone number",
+        "pass": false,
+        "detail": "No tap-to-call link anywhere on the page.",
+        "why": "A phone number that is plain text cannot be tapped. On mobile this is the single most common way a local business loses a ready-to-buy customer.",
+        "weight": "critical"
+      },
+      {
+        "id": "contact",
+        "label": "Way to get in touch",
+        "pass": false,
+        "detail": "No form, email link, or phone link found.",
+        "why": "If there is no obvious way to make contact, interested visitors leave and go to a competitor.",
+        "weight": "critical"
+      },
+      {
+        "id": "title",
+        "label": "Page title",
+        "pass": true,
+        "detail": "“Vicky&#39;s | Discover Flavorful Dining&mdash;Order Today” (57 characters)",
+        "why": "The title is the blue clickable line in Google results. Too short says nothing; past ~65 characters Google cuts it off.",
+        "weight": "normal"
+      },
+      {
+        "id": "description",
+        "label": "Search description",
+        "pass": false,
+        "detail": "5 characters.",
+        "why": "This is the grey summary under your link in search results. It is the pitch that decides whether anyone clicks.",
+        "weight": "normal"
+      },
+      {
+        "id": "h1",
+        "label": "One clear headline",
+        "pass": false,
+        "detail": "15 H1 headings.",
+        "why": "Search engines use the H1 to understand what the page is about. Zero leaves it ambiguous; several compete with each other.",
+        "weight": "normal"
+      },
+      {
+        "id": "localseo",
+        "label": "Local business listing data",
+        "pass": true,
+        "detail": "Structured business data found.",
+        "why": "This is the machine-readable block Google reads to show your hours, address and rating directly in search results. Without it you are a plain blue link next to competitors with a full listing.",
+        "weight": "critical"
+      },
+      {
+        "id": "social-preview",
+        "label": "Link previews",
+        "pass": true,
+        "detail": "Preview title and image set.",
+        "why": "Controls what appears when someone shares your link in a text message or on Instagram. Without it the link posts as a bare grey URL that nobody taps.",
+        "weight": "normal"
+      },
+      {
+        "id": "alt-text",
+        "label": "Image descriptions",
+        "pass": true,
+        "detail": "2 of 16 images have no description.",
+        "why": "Image descriptions are what screen readers announce, and they are also how Google Images finds your photos.",
+        "weight": "normal"
+      },
+      {
+        "id": "favicon",
+        "label": "Browser tab icon",
+        "pass": true,
+        "detail": "Favicon set.",
+        "why": "Small, but it is what your site looks like in a bookmark bar or a tab full of competitors.",
+        "weight": "normal"
+      }
+    ],
+    "headline": "there is no tap-to-call number anywhere on their site"
+  },
+  {
+    "input": "deliciouspizza.com",
+    "url": "https://deliciouspizza.com/",
+    "finalUrl": "https://deliciouspizza.com/",
+    "reachable": true,
+    "status": 200,
+    "score": 75,
+    "serverResponseMs": 319,
+    "htmlBytes": 346185,
+    "generator": "Divi v.4.27.8",
+    "socialLinks": [
+      "Instagram",
+      "Facebook"
+    ],
+    "failed": [
+      "description",
+      "h1",
+      "alt-text"
+    ],
+    "criticalFailures": [],
+    "checks": [
+      {
+        "id": "https",
+        "label": "Secure (HTTPS)",
+        "pass": true,
+        "detail": "Served over HTTPS.",
+        "why": "Chrome shows a “Not secure” warning on HTTP sites. Customers read that as “this business isn't real.”",
+        "weight": "critical"
+      },
+      {
+        "id": "mobile",
+        "label": "Works on phones",
+        "pass": true,
+        "detail": "Has a mobile viewport tag.",
+        "why": "Most local searches happen on a phone. Without this the page loads desktop-width and everything is tiny.",
+        "weight": "critical"
+      },
+      {
+        "id": "speed",
+        "label": "Server response time",
+        "pass": true,
+        "detail": "0.3s to first response.",
+        "why": "Measured from a data centre, so a real phone on cell data is slower still. Past ~3s most visitors leave before seeing anything.",
+        "weight": "normal"
+      },
+      {
+        "id": "phone",
+        "label": "Tappable phone number",
+        "pass": true,
+        "detail": "3 tap-to-call links.",
+        "why": "A phone number that is plain text cannot be tapped. On mobile this is the single most common way a local business loses a ready-to-buy customer.",
+        "weight": "critical"
+      },
+      {
+        "id": "contact",
+        "label": "Way to get in touch",
+        "pass": true,
+        "detail": "1 form on the page.",
+        "why": "If there is no obvious way to make contact, interested visitors leave and go to a competitor.",
+        "weight": "critical"
+      },
+      {
+        "id": "title",
+        "label": "Page title",
+        "pass": true,
+        "detail": "“Delicious Pizza - Delicious Pizza” (33 characters)",
+        "why": "The title is the blue clickable line in Google results. Too short says nothing; past ~65 characters Google cuts it off.",
+        "weight": "normal"
+      },
+      {
+        "id": "description",
+        "label": "Search description",
+        "pass": false,
+        "detail": "No meta description — Google will invent one from page text.",
+        "why": "This is the grey summary under your link in search results. It is the pitch that decides whether anyone clicks.",
+        "weight": "normal"
+      },
+      {
+        "id": "h1",
+        "label": "One clear headline",
+        "pass": false,
+        "detail": "No H1 heading.",
+        "why": "Search engines use the H1 to understand what the page is about. Zero leaves it ambiguous; several compete with each other.",
+        "weight": "normal"
+      },
+      {
+        "id": "localseo",
+        "label": "Local business listing data",
+        "pass": true,
+        "detail": "Structured business data found.",
+        "why": "This is the machine-readable block Google reads to show your hours, address and rating directly in search results. Without it you are a plain blue link next to competitors with a full listing.",
+        "weight": "critical"
+      },
+      {
+        "id": "social-preview",
+        "label": "Link previews",
+        "pass": true,
+        "detail": "Preview title and image set.",
+        "why": "Controls what appears when someone shares your link in a text message or on Instagram. Without it the link posts as a bare grey URL that nobody taps.",
+        "weight": "normal"
+      },
+      {
+        "id": "alt-text",
+        "label": "Image descriptions",
+        "pass": false,
+        "detail": "7 of 21 images have no description.",
+        "why": "Image descriptions are what screen readers announce, and they are also how Google Images finds your photos.",
+        "weight": "normal"
+      },
+      {
+        "id": "favicon",
+        "label": "Browser tab icon",
+        "pass": true,
+        "detail": "Favicon set.",
+        "why": "Small, but it is what your site looks like in a bookmark bar or a tab full of competitors.",
+        "weight": "normal"
+      }
+    ],
+    "headline": "they have no search description, so Google is inventing the text under their link"
+  },
+  {
+    "input": "maydanmarket.com",
+    "url": "https://maydanmarket.com/",
+    "finalUrl": "https://www.maydanmarket.com/",
+    "reachable": true,
+    "status": 200,
+    "score": 67,
+    "serverResponseMs": 431,
+    "htmlBytes": 1378396,
+    "generator": null,
+    "socialLinks": [
+      "Instagram"
+    ],
+    "failed": [
+      "phone",
+      "description",
+      "localseo",
+      "alt-text"
+    ],
+    "criticalFailures": [
+      "Tappable phone number",
+      "Local business listing data"
+    ],
+    "checks": [
+      {
+        "id": "https",
+        "label": "Secure (HTTPS)",
+        "pass": true,
+        "detail": "Served over HTTPS.",
+        "why": "Chrome shows a “Not secure” warning on HTTP sites. Customers read that as “this business isn't real.”",
+        "weight": "critical"
+      },
+      {
+        "id": "mobile",
+        "label": "Works on phones",
+        "pass": true,
+        "detail": "Has a mobile viewport tag.",
+        "why": "Most local searches happen on a phone. Without this the page loads desktop-width and everything is tiny.",
+        "weight": "critical"
+      },
+      {
+        "id": "speed",
+        "label": "Server response time",
+        "pass": true,
+        "detail": "0.4s to first response.",
+        "why": "Measured from a data centre, so a real phone on cell data is slower still. Past ~3s most visitors leave before seeing anything.",
+        "weight": "normal"
+      },
+      {
+        "id": "phone",
+        "label": "Tappable phone number",
+        "pass": false,
+        "detail": "No tap-to-call link anywhere on the page.",
+        "why": "A phone number that is plain text cannot be tapped. On mobile this is the single most common way a local business loses a ready-to-buy customer.",
+        "weight": "critical"
+      },
+      {
+        "id": "contact",
+        "label": "Way to get in touch",
+        "pass": true,
+        "detail": "Email link present.",
+        "why": "If there is no obvious way to make contact, interested visitors leave and go to a competitor.",
+        "weight": "critical"
+      },
+      {
+        "id": "title",
+        "label": "Page title",
+        "pass": true,
+        "detail": "“Maydan Market” (13 characters)",
+        "why": "The title is the blue clickable line in Google results. Too short says nothing; past ~65 characters Google cuts it off.",
+        "weight": "normal"
+      },
+      {
+        "id": "description",
+        "label": "Search description",
+        "pass": false,
+        "detail": "47 characters.",
+        "why": "This is the grey summary under your link in search results. It is the pitch that decides whether anyone clicks.",
+        "weight": "normal"
+      },
+      {
+        "id": "h1",
+        "label": "One clear headline",
+        "pass": true,
+        "detail": "1 H1 headings.",
+        "why": "Search engines use the H1 to understand what the page is about. Zero leaves it ambiguous; several compete with each other.",
+        "weight": "normal"
+      },
+      {
+        "id": "localseo",
+        "label": "Local business listing data",
+        "pass": false,
+        "detail": "No structured business data (name, address, hours) in the page code.",
+        "why": "This is the machine-readable block Google reads to show your hours, address and rating directly in search results. Without it you are a plain blue link next to competitors with a full listing.",
+        "weight": "critical"
+      },
+      {
+        "id": "social-preview",
+        "label": "Link previews",
+        "pass": true,
+        "detail": "Preview title and image set.",
+        "why": "Controls what appears when someone shares your link in a text message or on Instagram. Without it the link posts as a bare grey URL that nobody taps.",
+        "weight": "normal"
+      },
+      {
+        "id": "alt-text",
+        "label": "Image descriptions",
+        "pass": false,
+        "detail": "23 of 23 images have no description.",
+        "why": "Image descriptions are what screen readers announce, and they are also how Google Images finds your photos.",
+        "weight": "normal"
+      },
+      {
+        "id": "favicon",
+        "label": "Browser tab icon",
+        "pass": true,
+        "detail": "Favicon set.",
+        "why": "Small, but it is what your site looks like in a bookmark bar or a tab full of competitors.",
+        "weight": "normal"
+      }
+    ],
+    "headline": "there is no tap-to-call number anywhere on their site"
+  },
+  {
+    "input": "mianla.com",
+    "url": "https://mianla.com/",
+    "reachable": false,
+    "error": "Could not connect (fetch failed).",
+    "headline": "their website didn't load at all"
+  },
+  {
+    "input": "johnnyswestadams.com",
+    "url": "https://johnnyswestadams.com/",
+    "finalUrl": "https://www.johnnyswestadams.com/",
+    "reachable": true,
+    "status": 200,
+    "score": 83,
+    "serverResponseMs": 418,
+    "htmlBytes": 221699,
+    "generator": null,
+    "socialLinks": [
+      "Instagram"
+    ],
+    "failed": [
+      "phone",
+      "description"
+    ],
+    "criticalFailures": [
+      "Tappable phone number"
+    ],
+    "checks": [
+      {
+        "id": "https",
+        "label": "Secure (HTTPS)",
+        "pass": true,
+        "detail": "Served over HTTPS.",
+        "why": "Chrome shows a “Not secure” warning on HTTP sites. Customers read that as “this business isn't real.”",
+        "weight": "critical"
+      },
+      {
+        "id": "mobile",
+        "label": "Works on phones",
+        "pass": true,
+        "detail": "Has a mobile viewport tag.",
+        "why": "Most local searches happen on a phone. Without this the page loads desktop-width and everything is tiny.",
+        "weight": "critical"
+      },
+      {
+        "id": "speed",
+        "label": "Server response time",
+        "pass": true,
+        "detail": "0.4s to first response.",
+        "why": "Measured from a data centre, so a real phone on cell data is slower still. Past ~3s most visitors leave before seeing anything.",
+        "weight": "normal"
+      },
+      {
+        "id": "phone",
+        "label": "Tappable phone number",
+        "pass": false,
+        "detail": "No tap-to-call link anywhere on the page.",
+        "why": "A phone number that is plain text cannot be tapped. On mobile this is the single most common way a local business loses a ready-to-buy customer.",
+        "weight": "critical"
+      },
+      {
+        "id": "contact",
+        "label": "Way to get in touch",
+        "pass": true,
+        "detail": "1 form on the page.",
+        "why": "If there is no obvious way to make contact, interested visitors leave and go to a competitor.",
+        "weight": "critical"
+      },
+      {
+        "id": "title",
+        "label": "Page title",
+        "pass": true,
+        "detail": "“Johnny&#39;s Pastrami West Adams” (32 characters)",
+        "why": "The title is the blue clickable line in Google results. Too short says nothing; past ~65 characters Google cuts it off.",
+        "weight": "normal"
+      },
+      {
+        "id": "description",
+        "label": "Search description",
+        "pass": false,
+        "detail": "6 characters.",
+        "why": "This is the grey summary under your link in search results. It is the pitch that decides whether anyone clicks.",
+        "weight": "normal"
+      },
+      {
+        "id": "h1",
+        "label": "One clear headline",
+        "pass": true,
+        "detail": "1 H1 headings.",
+        "why": "Search engines use the H1 to understand what the page is about. Zero leaves it ambiguous; several compete with each other.",
+        "weight": "normal"
+      },
+      {
+        "id": "localseo",
+        "label": "Local business listing data",
+        "pass": true,
+        "detail": "Structured business data found.",
+        "why": "This is the machine-readable block Google reads to show your hours, address and rating directly in search results. Without it you are a plain blue link next to competitors with a full listing.",
+        "weight": "critical"
+      },
+      {
+        "id": "social-preview",
+        "label": "Link previews",
+        "pass": true,
+        "detail": "Preview title and image set.",
+        "why": "Controls what appears when someone shares your link in a text message or on Instagram. Without it the link posts as a bare grey URL that nobody taps.",
+        "weight": "normal"
+      },
+      {
+        "id": "alt-text",
+        "label": "Image descriptions",
+        "pass": true,
+        "detail": "1 of 19 images have no description.",
+        "why": "Image descriptions are what screen readers announce, and they are also how Google Images finds your photos.",
+        "weight": "normal"
+      },
+      {
+        "id": "favicon",
+        "label": "Browser tab icon",
+        "pass": true,
+        "detail": "Favicon set.",
+        "why": "Small, but it is what your site looks like in a bookmark bar or a tab full of competitors.",
+        "weight": "normal"
+      }
+    ],
+    "headline": "there is no tap-to-call number anywhere on their site"
+  }
+]

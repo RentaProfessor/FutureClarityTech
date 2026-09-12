@@ -1,0 +1,35 @@
+name = "outreach-sequencer"
+main = "src/index.js"
+compatibility_date = "2026-08-01"
+
+# Every 30 minutes; the engine itself enforces the weekday send window and
+# caps, so off-window ticks only sync replies.
+[triggers]
+crons = ["*/30 * * * *"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "outreach"
+# Fill in after `npx wrangler d1 create outreach`:
+database_id = "REPLACE_WITH_D1_DATABASE_ID"
+
+[vars]
+# Your first name, exactly as emails should be signed.
+SENDER_FIRST_NAME = "REPLACE_WITH_YOUR_FIRST_NAME"
+FROM_NAME = "REPLACE_WITH_YOUR_FIRST_NAME at FutureClarity"
+# The outreach-domain inbox this Worker sends as (NOT the main domain).
+FROM_EMAIL = "ben@REPLACE_WITH_OUTREACH_DOMAIN"
+# CAN-SPAM requires a real postal address on every commercial email.
+# A USPS PO Box or a registered-agent address works if you don't want
+# to publish a home address.
+POSTAL_ADDRESS = "REPLACE_WITH_REAL_POSTAL_ADDRESS, Los Angeles, CA"
+# Caps. Keep SEND_CAP_PER_DAY at 10 for the first 3-4 weeks (warm-up),
+# then raise gradually. Never exceed ~50/day from one inbox.
+SEND_CAP_PER_DAY = "30"
+SEND_CAP_PER_TICK = "5"
+# Send window in UTC hours: 15-19 UTC = 8am-noon Pacific (PDT), weekdays only.
+SEND_WINDOW_UTC_START = "15"
+SEND_WINDOW_UTC_END = "19"
+
+# Secrets — set with `npx wrangler secret put <NAME>`:
+#   GMAIL_CLIENT_ID, GMAIL_CLIENT_SECRET, GMAIL_REFRESH_TOKEN, API_TOKEN
