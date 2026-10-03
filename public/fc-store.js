@@ -3,8 +3,6 @@
 (function () {
   var cfg = window.FC_CONFIG || {};
   var live = !!(cfg.supabaseUrl && cfg.supabaseKey);
-  // Served from this site (public/vendor/) so the CSP never has to trust a third-party script host.
-  var SB_JS = '/vendor/supabase-js-2.117.2/supabase.js';
   var MAP = { createdAt: 'created_at', updatedAt: 'updated_at', emailedDate: 'emailed_date', auditDate: 'audit_date', buildTime: 'build_time', hoursSaved: 'hours_saved', estShown: 'est_shown' };
   var BACK = {}; Object.keys(MAP).forEach(function (k) { BACK[MAP[k]] = k; });
 
@@ -74,47 +72,60 @@
   };
 
   // ------------------------------------------------------------------ live mode (Supabase)
-  var sbPromise = null;
-  function sb() {
-    if (!sbPromise) sbPromise = new Promise(function (res, rej) {
-      var s = document.createElement('script'); s.src = SB_JS;
-      s.onload = function () { res(window.supabase.createClient(cfg.supabaseUrl, cfg.supabaseKey)); };
-      s.onerror = function () { rej(new Error('Could not load the database library.')); };
-      document.head.appendChild(s);
-    });
-    return sbPromise;
+  // The dashboard opens with a code, checked by the database (see supabase/dashboard_code.sql).
+  // The public key alone can only add a request; reading or editing needs the code.
+  var BASE = (cfg.supabaseUrl || '').replace(/\/$/, '');
+  var HEADERS = { apikey: cfg.supabaseKey, Authorization: 'Bearer ' + cfg.supabaseKey, 'Content-Type': 'application/json' };
+  var CKEY = 'fc-dashboard-code';
+  function getCode() { try { return localStorage.getItem(CKEY); } catch (e) { return mem[CKEY] || null; } }
+  function setCode(c) { mem[CKEY] = c; try { localStorage.setItem(CKEY, c); } catch (e) {} }
+  function clearCode() { delete mem[CKEY]; try { localStorage.removeItem(CKEY); } catch (e) {} }
+  function rpc(fn, args) {
+    return fetch(BASE + '/rest/v1/rpc/' + fn, { method: 'POST', headers: HEADERS, body: JSON.stringify(args) })
+      .then(function (r) {
+        if (!r.ok) { var e = new Error('Request failed (' + r.status + ')'); e.status = r.status; throw e; }
+        return r.text().then(function (t) { return t ? JSON.parse(t) : null; });
+      });
   }
-  function ok(res) { if (res.error) throw res.error; return res.data; }
+  var codeWatchers = [];
+  function tellAuth(who) { codeWatchers.forEach(function (cb) { cb(who); }); }
+  var TEAM = 'Team';
   var liveStore = {
     // Plain request with the public key: visitors can only add a row, never read one back.
     submit: function (req) {
-      return fetch(cfg.supabaseUrl.replace(/\/$/, '') + '/rest/v1/requests', {
+      return fetch(BASE + '/rest/v1/requests', {
         method: 'POST',
         headers: { apikey: cfg.supabaseKey, Authorization: 'Bearer ' + cfg.supabaseKey, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
         body: JSON.stringify(toDb(customerFields(req)))
       }).then(function (r) { if (!r.ok) throw new Error('Request failed (' + r.status + ')'); });
     },
     onAuth: function (cb) {
-      sb().then(function (c) {
-        c.auth.getSession().then(function (r) { cb(r.data && r.data.session ? r.data.session.user.email : null); });
-        c.auth.onAuthStateChange(function (_e, session) { cb(session ? session.user.email : null); });
-      }).catch(function () { cb(null); });
+      codeWatchers.push(cb);
+      var c = getCode(); if (!c) { cb(null); return; }
+      rpc('dashboard_check', { code: c }).then(function (ok) { if (!ok) clearCode(); cb(ok ? TEAM : null); }, function () { cb(null); });
     },
-    signIn: function (email) {
-      return sb().then(function (c) { return c.auth.signInWithOtp({ email: email, options: { shouldCreateUser: false, emailRedirectTo: location.origin + location.pathname } }); }).then(ok);
+    // "Sign in" = check the code; on success it is remembered on this device.
+    signIn: function (code) {
+      return rpc('dashboard_check', { code: code }).then(function (ok) {
+        if (!ok) throw new Error('wrong code');
+        setCode(code); tellAuth(TEAM); return {};
+      });
     },
-    signOut: function () { return sb().then(function (c) { return c.auth.signOut(); }); },
+    signOut: function () { clearCode(); tellAuth(null); return Promise.resolve(); },
     watch: function (cb, onErr) {
-      sb().then(function (c) {
-        function load() { c.from('requests').select('*').order('created_at', { ascending: false }).then(function (r) { if (r.error) { if (onErr) onErr(r.error); return; } cb(r.data.map(fromDb)); }); }
-        load();
-        c.channel('requests-feed').on('postgres_changes', { event: '*', schema: 'public', table: 'requests' }, load).subscribe();
-        setInterval(load, 60000); // safety net if the live feed drops
-      }).catch(function (e) { if (onErr) onErr(e); });
+      function load() {
+        var c = getCode(); if (!c) return;
+        rpc('dashboard_rows', { code: c }).then(function (rows) { cb((rows || []).map(fromDb)); }, function (e) {
+          if (e.status === 401 || e.status === 403) { clearCode(); tellAuth(null); return; } // code was changed
+          if (onErr) onErr(e);
+        });
+      }
+      load();
+      setInterval(load, 10000); // new requests show up within 10 seconds
     },
-    add: function (row) { return sb().then(function (c) { return c.from('requests').insert(toDb(row)).select().single(); }).then(ok).then(fromDb); },
-    update: function (id, patch) { return sb().then(function (c) { return c.from('requests').update(toDb(patch)).eq('id', id); }).then(ok); },
-    remove: function (id) { return sb().then(function (c) { return c.from('requests').delete().eq('id', id); }).then(ok); }
+    add: function (row) { return rpc('dashboard_add', { code: getCode(), new_row: toDb(row) }).then(fromDb); },
+    update: function (id, patch) { return rpc('dashboard_update', { code: getCode(), row_id: id, patch: toDb(patch) }); },
+    remove: function (id) { return rpc('dashboard_delete', { code: getCode(), row_id: id }); }
   };
 
   window.FCStore = live ? liveStore : demo;

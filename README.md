@@ -59,12 +59,18 @@ These are load-bearing. Read the comments before changing any of them.
    inserts one row into Supabase `requests` through `public/fc-store.js`. If
    the insert fails, the page offers email / text / copy buttons instead.
 3. **`/dashboard/`** (`public/dashboard/index.html`): the team's Client
-   Pipeline. Sign in with an emailed link; new requests appear live.
+   Pipeline. Opens with the **dashboard code**; new requests show up within
+   10 seconds.
 
-Typing **the dashboard phrase** as the whole message on the homepage form
-opens `/dashboard/` instead of booking (capitals and spaces ignored). Only its
-SHA-256 is in the page; see `DASHBOARD_PHRASE_SHA256` in `index.astro`. It is a
-shortcut, not access control: the dashboard still needs a team sign-in.
+**Dashboard code.** Typing the code as the whole message on the homepage form
+(one word, capitals ignored) opens `/dashboard/`; it can also be typed on the
+dashboard itself. The code is checked by Supabase, not the browser: neither the
+code nor a hash of it is in the site or this repo. The device remembers it until
+"Sign out". Set or change it in Supabase > SQL Editor:
+
+```sql
+insert into public.dashboard_settings (id, code_hash) values (1, extensions.crypt(lower('YOURCODE'), extensions.gen_salt('bf'))) on conflict (id) do update set code_hash = excluded.code_hash;
+```
 
 Note: someone who fills in step 1 but leaves before tapping Send on step 2 is
 not recorded anywhere.
@@ -76,21 +82,20 @@ Project `bzudkcybqhmqrybskwfn`. URL and publishable key are in
 security). If both are ever emptied, the pages fall back to demo mode, where
 requests stay in the visitor's own browser.
 
-- **Schema:** run `supabase/schema.sql` in Supabase > SQL Editor. It creates
-  `requests` and `team_members` and adds `requests` to realtime. Safe to
-  re-run. First team member: beng@futureclaritytechnologies.com. To add one:
+- **Schema:** run `supabase/schema.sql`, then `supabase/dashboard_code.sql`, in
+  Supabase > SQL Editor. Both are safe to re-run. `schema.sql` creates
+  `requests` and `team_members` and adds `requests` to realtime. First team member: beng@futureclaritytechnologies.com. To add one:
   `insert into public.team_members (email) values (lower('their@email.com')) on conflict do nothing;`
   and invite them under Authentication > Users.
-- **Who can do what:** the website (anon) may only INSERT, and only the
-  customer columns; it can never read a row back. Signed-in users see and edit
-  requests only if their email is in `team_members`.
-- **Auth settings** (Supabase dashboard): sign-ups off; Site URL
-  `https://futureclaritytechnologies.com`; Redirect URL
-  `https://futureclaritytechnologies.com/dashboard/`.
-- **Library:** supabase-js is self-hosted at
-  `public/vendor/supabase-js-2.117.2/` (2.117.2 is the first line that
-  recognizes `sb_publishable_` keys), so the CSP's `script-src` trusts no
-  third-party host. `connect-src` allows only this project (`https` + `wss`).
+- **Who can do what:** the public key may only INSERT a request, and only the
+  customer columns; it can never read a row back. Reading, editing, adding and
+  deleting go through `dashboard_*` functions that require the code; a wrong
+  code waits 1 second before failing, to slow guessing. (The email sign-in and
+  `team_members` setup from `schema.sql` is still in the database but unused by
+  the site for now; restoring it means bringing back supabase-js and the email
+  login from git history.)
+- **CSP:** `connect-src` allows only this Supabase project, over https. No
+  third-party scripts.
 
 `/plan` and `/dashboard/` are sent with `X-Robots-Tag: noindex` from
 `public/_headers`, and as static files in `public/` they are not in the

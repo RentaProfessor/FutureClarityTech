@@ -149,9 +149,9 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
   <form class="box" id="loginForm" novalidate>
     <div class="k">FutureClarity team</div>
     <h1>Client Pipeline</h1>
-    <p>Sign in with your work email. We'll email you a one-time sign-in link, so there's no password to remember.</p>
-    <label class="f">Work email<input id="l-email" type="email" autocomplete="email" placeholder="you@futureclaritytechnologies.com"></label>
-    <button class="btn primary" id="l-send" type="submit">Email me a sign-in link</button>
+    <p>Enter the dashboard code. This device will remember it until you sign out.</p>
+    <label class="f">Dashboard code<input id="l-email" type="password" autocomplete="current-password" placeholder="Dashboard code"></label>
+    <button class="btn primary" id="l-send" type="submit">Open dashboard</button>
     <p class="msg" id="l-msg" role="alert" hidden></p>
   </form>
   <div class="box" id="sentView" hidden>
@@ -554,13 +554,13 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
   $('loginForm').addEventListener('submit', e => {
     e.preventDefault();
     const email = $('l-email').value.trim(), msg = $('l-msg'), btn = $('l-send');
-    if (!/^\S+@\S+\.\S+$/.test(email)) { msg.textContent = 'Enter your work email.'; msg.hidden = false; return; }
-    msg.hidden = true; btn.disabled = true; btn.textContent = 'Sending…';
+    if (!email) { msg.textContent = 'Enter the dashboard code.'; msg.hidden = false; return; }
+    msg.hidden = true; btn.disabled = true; btn.textContent = 'Checking…';
     store.signIn(email).then(res => {
-      pendingEmail = email; $('sentTo').textContent = email; $('demoOpen').hidden = !(res && res.demo);
-      $('loginForm').hidden = true; $('sentView').hidden = false;
-    }).catch(() => { msg.textContent = 'That email is not on the team list, or the link could not be sent. Check it and try again.'; msg.hidden = false; })
-      .then(() => { btn.disabled = false; btn.textContent = 'Email me a sign-in link'; });
+      if (res && res.demo) store.demoConfirm('Demo');
+      $('l-email').value = '';
+    }).catch(() => { msg.textContent = "That code didn't work. Check it and try again."; msg.hidden = false; })
+      .then(() => { btn.disabled = false; btn.textContent = 'Open dashboard'; });
   });
   $('demoOpen').addEventListener('click', () => store.demoConfirm(pendingEmail));
   $('sentBack').addEventListener('click', () => { $('sentView').hidden = true; $('loginForm').hidden = false; $('l-email').focus(); });
