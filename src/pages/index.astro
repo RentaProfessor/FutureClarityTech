@@ -359,7 +359,7 @@ const FORMSPREE_ENDPOINT = 'https://formspree.io/f/movkledr';
         <!-- A real POST target, so the form still works if the script below
              fails to load. The script upgrades it to a fetch and keeps the
              visitor on the page. -->
-        <form id="lead" class="glass" action={FORMSPREE_ENDPOINT} method="POST">
+        <form id="lead" class="glass" action={FORMSPREE_ENDPOINT} method="POST" novalidate>
           <div class="two">
             <input
               id="f-name"
@@ -533,6 +533,22 @@ const FORMSPREE_ENDPOINT = 'https://formspree.io/f/movkledr';
 
   const form = document.getElementById('lead') as HTMLFormElement | null;
 
+  // Team shortcut: typing the dashboard phrase into the message box and
+  // submitting opens /dashboard/ instead of sending a lead. Only the SHA-256
+  // of the phrase is in the page, so it cannot be read from the source.
+  // This is a shortcut, not the lock: /dashboard/ still requires a team sign-in.
+  // To change it (type it lowercase, single spaces):
+  //   printf '%s' 'your new phrase' | sha256sum
+  const DASHBOARD_PHRASE_SHA256 = '70fa926125c40651cd095ca1a5f78ae6e1b78af96eb739df3a353606f1baefd3';
+
+  async function isDashboardPhrase(text: string) {
+    const norm = text.trim().toLowerCase().replace(/\s+/g, ' ');
+    if (!norm || !window.crypto?.subtle) return false;
+    const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(norm));
+    const hex = Array.from(new Uint8Array(digest), (b) => b.toString(16).padStart(2, '0')).join('');
+    return hex === DASHBOARD_PHRASE_SHA256;
+  }
+
   if (form) {
     const val = (id: string) => (document.getElementById(id) as HTMLInputElement).value.trim();
 
@@ -562,6 +578,11 @@ const FORMSPREE_ENDPOINT = 'https://formspree.io/f/movkledr';
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
+
+      if (await isDashboardPhrase(val('f-msg'))) {
+        window.location.href = '/dashboard/';
+        return;
+      }
 
       const required = ['f-name', 'f-business', 'f-contact'];
       const missing = required.filter((id) => {
