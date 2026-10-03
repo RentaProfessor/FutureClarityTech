@@ -4,7 +4,7 @@
   var cfg = window.FC_CONFIG || {};
   var live = !!(cfg.supabaseUrl && cfg.supabaseKey);
   // Served from this site (public/vendor/) so the CSP never has to trust a third-party script host.
-  var SB_JS = '/vendor/supabase-js-2.45.4/supabase.js';
+  var SB_JS = '/vendor/supabase-js-2.117.2/supabase.js';
   var MAP = { createdAt: 'created_at', updatedAt: 'updated_at', emailedDate: 'emailed_date', auditDate: 'audit_date', buildTime: 'build_time', hoursSaved: 'hours_saved', estShown: 'est_shown' };
   var BACK = {}; Object.keys(MAP).forEach(function (k) { BACK[MAP[k]] = k; });
 

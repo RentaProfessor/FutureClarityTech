@@ -71,16 +71,15 @@ saved in the visitor's own browser only, and `plan.html` still shows "Request
 sent". Step 1 has already reached Formspree, so no lead is lost, but the picks
 do not reach anyone until the backend is connected.
 
-To connect it:
+Connected to Supabase project `bzudkcybqhmqrybskwfn` (publishable key in
+`public/fc-config.js`, which is public by design). How it is wired:
 
 - Run `supabase/schema.sql` in Supabase > SQL Editor. It adds
-  beng@futureclaritytechnologies.com as the first team member. It creates `requests` and `team_members`, the row level security
-  described below, and adds `requests` to realtime. Safe to re-run.
-
-- Fill in `public/fc-config.js`. Never put the `service_role` key there.
-- In `public/_headers`, add to the CSP: `https://cdn.jsdelivr.net` to
-  `script-src` (the dashboard loads the Supabase library from there), and
-  `https://<project>.supabase.co wss://<project>.supabase.co` to `connect-src`.
+  beng@futureclaritytechnologies.com as the first team member.
+- The Supabase library is self-hosted at `public/vendor/supabase-js-2.117.2/`
+  (2.117.2 is the first line that recognizes `sb_publishable_` keys), so the
+  CSP's `script-src` trusts no third-party host. `connect-src` allows only this
+  project, over `https` and `wss`.
 - Row level security on `requests`: the `anon` role may **INSERT only**, and
   only the customer columns (name, business, contact, website, app, needs,
   scope, est_shown). Team members (`team_members`) may select/update/delete.
