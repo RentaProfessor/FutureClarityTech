@@ -1,93 +1,31 @@
 ---
-// Fixed site header. Anchor links are rewritten to /?scroll= links on
-// pages other than the homepage (see script below).
+import LogoMark from './LogoMark.astro';
+
+interface Props {
+  // On the homepage the nav scrolls to in-page sections. Anywhere else (the
+  // 404 page) the same links have to navigate home first, so they are
+  // prefixed with "/" and the browser handles the jump natively.
+  home?: boolean;
+}
+
+const { home = true } = Astro.props;
+const base = home ? '' : '/';
+
+const links = [
+  { href: `${base}#how`, label: 'How it works' },
+  { href: `${base}#custom`, label: 'Custom' },
+  { href: `${base}#web`, label: 'Websites & apps' },
+  { href: `${base}#pricing`, label: 'Pricing' },
+  { href: `${base}#process`, label: 'Process' },
+];
 ---
 
-<header class="fixed inset-x-0 top-0 z-50 border-b border-line bg-paper/95 backdrop-blur-sm safe-area-top">
-  <nav class="mx-auto grid h-16 max-w-6xl grid-cols-[1fr_auto_1fr] items-center px-6">
-    <!-- Logo, left -->
-    <a href="/" class="col-start-1 justify-self-start font-display text-xl font-semibold tracking-tight text-ink">
-      FutureClarity<span class="text-accent">.</span>
-    </a>
-
-    <!-- Nav links, centered -->
-    <div class="col-start-2 hidden items-center gap-7 justify-self-center md:flex">
-      <a href="/portfolio" class="nav-link">Work</a>
-      <a href="#services" class="nav-link">Services</a>
-      <a href="#about" class="nav-link">About</a>
-      <a href="#contact" class="nav-link">Contact</a>
-    </div>
-
-    <!-- CTA + mobile button, right -->
-    <div class="col-start-3 flex items-center justify-self-end">
-      <a href="#contact" class="btn btn-sm hidden md:inline-flex">Start a project</a>
-      <button
-        id="mobile-menu-button"
-        class="-mr-2 flex h-11 w-11 items-center justify-center text-ink md:hidden"
-        aria-label="Toggle menu"
-      >
-        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-      </button>
-    </div>
-  </nav>
-
-  <!-- Mobile navigation -->
-  <div id="mobile-menu" class="hidden border-t border-line bg-paper md:hidden">
-    <div class="divide-y divide-line px-6">
-      <a href="/portfolio" class="block py-3.5 font-medium text-ink">Work</a>
-      <a href="#services" class="block py-3.5 font-medium text-ink">Services</a>
-      <a href="#about" class="block py-3.5 font-medium text-ink">About</a>
-      <a href="#contact" class="block py-3.5 font-medium text-ink">Contact</a>
-    </div>
+<header>
+  <div class="wrap">
+    <LogoMark href={home ? '#top' : '/'} />
+    <nav>
+      {links.map((link) => <a href={link.href}>{link.label}</a>)}
+    </nav>
+    <a class="btn btn-primary" href={`${base}#contact`}>Free audit</a>
   </div>
 </header>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const mobileMenuButton = document.getElementById('mobile-menu-button');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const mobileMenuLinks = mobileMenu?.querySelectorAll('a');
-
-    // On pages other than the homepage, anchor links need to navigate home first
-    const isMainPage = window.location.pathname === '/' || window.location.pathname === '/index.html';
-
-    if (!isMainPage) {
-      const anchorLinks = document.querySelectorAll('header a[href^="#"]');
-      anchorLinks.forEach((link) => {
-        const href = link.getAttribute('href');
-        if (href && href !== '#') {
-          link.setAttribute('href', `/?scroll=${href.substring(1)}`);
-        }
-      });
-    }
-
-    if (mobileMenuButton && mobileMenu) {
-      const setIcon = (open: boolean) => {
-        const svg = mobileMenuButton.querySelector('svg path');
-        svg?.setAttribute('d', open ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16M4 18h16');
-      };
-
-      mobileMenuButton.addEventListener('click', function () {
-        mobileMenu.classList.toggle('hidden');
-        setIcon(!mobileMenu.classList.contains('hidden'));
-      });
-
-      mobileMenuLinks?.forEach((link) => {
-        link.addEventListener('click', function () {
-          mobileMenu.classList.add('hidden');
-          setIcon(false);
-        });
-      });
-
-      document.addEventListener('click', function (event) {
-        const target = event.target as Node;
-        if (!mobileMenuButton.contains(target) && !mobileMenu.contains(target)) {
-          mobileMenu.classList.add('hidden');
-          setIcon(false);
-        }
-      });
-    }
-  });
-</script>

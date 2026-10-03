@@ -1,0 +1,12 @@
+---
+interface Props {
+  href?: string;
+}
+
+const { href = '#top' } = Astro.props;
+---
+
+<a href={href} class="logo" aria-label="FutureClarity Technologies, home">
+  <svg viewBox="190 50 220 180" aria-hidden="true"><use href="#lensBeam" /></svg>
+  <span class="wm">FUTURE <span>CLARITY</span></span>
+</a>

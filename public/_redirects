@@ -1,13 +1,13 @@
 # Redirects for Cloudflare Pages
 #
-# Intentionally empty. This is a multi-page STATIC Astro build, not a SPA.
-#
-# The previous "/*  /index.html  200" catch-all was a single-page-app rewrite:
-# it served the homepage with HTTP 200 for every path that did not match a
-# file, so nonexistent URLs never returned a 404. Search engines treat those
-# as soft 404s and index them. Astro already emits a real 404 page and
-# Cloudflare Pages serves static assets before consulting this file, so the
-# rule bought nothing and cost correct error handling.
-#
-# The "/portfolio  /portfolio/index.html  200" rule was also redundant —
-# Astro emits dist/portfolio/index.html and Pages serves it at /portfolio.
+# This is a multi-page STATIC Astro build, not a SPA. Do not add a
+# "/*  /index.html  200" catch-all: that served the homepage with HTTP 200 for
+# every unmatched path, so nonexistent URLs never returned a 404. Search
+# engines treat those as soft 404s and index them. Astro emits a real 404 page
+# and Pages serves static assets before consulting this file.
+
+# /portfolio was retired when the site moved to the single-page dashboards and
+# automations layout. It was an indexed URL, so it redirects rather than 404s:
+# a 301 passes its ranking signals to the homepage and keeps old links working.
+/portfolio  /  301
+/portfolio/*  /  301
