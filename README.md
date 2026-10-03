@@ -73,6 +73,10 @@ do not reach anyone until the backend is connected.
 
 To connect it:
 
+- Run `supabase/schema.sql` in Supabase > SQL Editor (edit the two team emails at the
+  bottom first). It creates `requests` and `team_members`, the row level security
+  described below, and adds `requests` to realtime. Safe to re-run.
+
 - Fill in `public/fc-config.js`. Never put the `service_role` key there.
 - In `public/_headers`, add to the CSP: `https://cdn.jsdelivr.net` to
   `script-src` (the dashboard loads the Supabase library from there), and
