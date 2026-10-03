@@ -1,81 +1,16 @@
 ---
-// Site footer. Anchor links get the same /?scroll= rewrite as the header.
+import LogoMark from './LogoMark.astro';
+
+interface Props {
+  home?: boolean;
+}
+
+const { home = true } = Astro.props;
 ---
 
-<footer class="overflow-hidden bg-ink text-paper">
-  <div class="mx-auto max-w-6xl px-6 pb-14 pt-12">
-    <p
-      aria-hidden="true"
-      class="select-none whitespace-nowrap font-display font-semibold leading-none tracking-tight text-[#2c2723]"
-      style="font-size: clamp(3.5rem, 12.5vw, 10.5rem);"
-    >
-      FutureClarity
-    </p>
-
-    <div class="mt-14 grid gap-10 md:grid-cols-[2fr_1fr_1fr]">
-      <div>
-        <p class="font-display text-xl font-semibold tracking-tight">FutureClarity</p>
-        <p class="mt-3 max-w-sm text-sm text-stone-400">
-          A small studio. We design and build fast, reliable websites and apps for small
-          businesses, and we prototype products of our own.
-        </p>
-        <p class="mt-4 text-sm">
-          <a
-            href="https://mylegacytape.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-stone-300 underline decoration-1 underline-offset-4 transition-colors hover:text-paper"
-          >
-            LegacyTape, our current product ↗
-          </a>
-        </p>
-      </div>
-
-      <div>
-        <p class="font-mono text-xs uppercase tracking-[0.18em] text-stone-400">Pages</p>
-        <ul class="mt-4 space-y-2 text-sm">
-          <li><a href="/portfolio" class="text-stone-300 transition-colors hover:text-paper">Work</a></li>
-          <li><a href="#services" class="text-stone-300 transition-colors hover:text-paper">Services</a></li>
-          <li><a href="#process" class="text-stone-300 transition-colors hover:text-paper">Process</a></li>
-          <li><a href="#about" class="text-stone-300 transition-colors hover:text-paper">About</a></li>
-          <li><a href="#contact" class="text-stone-300 transition-colors hover:text-paper">Contact</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <p class="font-mono text-xs uppercase tracking-[0.18em] text-stone-400">Contact</p>
-        <ul class="mt-4 space-y-2 text-sm text-stone-300">
-          <li>
-            <a href="mailto:futureclaritytechnologies@gmail.com" class="break-all transition-colors hover:text-paper">
-              futureclaritytechnologies@gmail.com
-            </a>
-          </li>
-          <li>
-            <a href="tel:+18185850475" class="transition-colors hover:text-paper">+1 (818) 585-0475</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="mt-12 flex flex-col gap-2 border-t border-white/10 pt-6 text-xs text-stone-400 sm:flex-row sm:items-center sm:justify-between">
-      <p>&copy; {new Date().getFullYear()} FutureClarity Technologies LLC</p>
-      <p>Built with Astro. Hosted on Cloudflare Pages.</p>
-    </div>
+<footer>
+  <div class="wrap">
+    <LogoMark href={home ? '#top' : '/'} />
+    <span>Custom dashboards, workflows, websites &amp; app cleanup</span>
   </div>
 </footer>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const isMainPage = window.location.pathname === '/' || window.location.pathname === '/index.html';
-
-    if (!isMainPage) {
-      const footerLinks = document.querySelectorAll('footer a[href^="#"]');
-      footerLinks.forEach((link) => {
-        const href = link.getAttribute('href');
-        if (href && href !== '#') {
-          link.setAttribute('href', `/?scroll=${href.substring(1)}`);
-        }
-      });
-    }
-  });
-</script>

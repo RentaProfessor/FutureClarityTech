@@ -5,7 +5,16 @@
   Strict-Transport-Security: max-age=31536000
   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
   Cross-Origin-Opener-Policy: same-origin
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; form-action https://formspree.io; frame-src https://mylegacytape.com https://www.thewhitesquirrelllc.com https://demo-grill.pages.dev https://clothlandingdemo.pages.dev; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://formspree.io; form-action https://formspree.io; frame-src 'none'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests
+
+# connect-src note: the lead form submits with fetch(), which is governed by
+# connect-src — not form-action. When the form moves to Supabase, add that
+# project's host here or the browser will block the request with no visible
+# error:
+#   connect-src 'self' https://formspree.io https://<project-ref>.supabase.co
+#
+# frame-src is 'none' since the portfolio page and its demo iframes were
+# retired. Restore an explicit allowlist if embeds come back — never '*'.
 
 # Content-hashed build assets never change at a given URL — cache hard.
 /_astro/*
@@ -25,10 +34,9 @@
   Cache-Control: public, max-age=86400, must-revalidate
 
 # HTML pages must always revalidate so a new deploy shows immediately and the
-# browser never serves a stale page (incl. the clean-URL routes).
+# browser never serves a stale page. Extensionless clean URLs do not match
+# /*.html, so any new route needs its own rule here.
 /
-  Cache-Control: public, max-age=0, must-revalidate
-/portfolio
   Cache-Control: public, max-age=0, must-revalidate
 /*.html
   Cache-Control: public, max-age=0, must-revalidate

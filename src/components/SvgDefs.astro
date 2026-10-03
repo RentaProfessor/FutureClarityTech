@@ -1,0 +1,31 @@
+---
+// Gradients and the glow filter used by the logo mark and the hero lens.
+// Rendered once per page from Layout.astro, because <use href="#lensBeam">
+// and url(#lensFill) only resolve within the same document.
+---
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="lensFill" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#07082a" />
+      <stop offset=".6" stop-color="#3a3fc4" />
+      <stop offset="1" stop-color="#d8d3fb" />
+    </linearGradient>
+    <linearGradient id="beamFill" gradientUnits="userSpaceOnUse" x1="200" y1="175" x2="400" y2="105">
+      <stop offset="0" stop-color="#181c6b" stop-opacity="0" />
+      <stop offset=".5" stop-color="#d8d3fb" />
+      <stop offset="1" stop-color="#181c6b" stop-opacity="0" />
+    </linearGradient>
+    <filter id="lensGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="5" result="b" />
+      <feMerge>
+        <feMergeNode in="b" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <g id="lensBeam">
+      <path d="M300,58 Q352,140 300,222 Q248,140 300,58 Z" fill="url(#lensFill)" filter="url(#lensGlow)" />
+      <line x1="195" y1="178" x2="405" y2="102" stroke="url(#beamFill)" stroke-width="3" filter="url(#lensGlow)" />
+    </g>
+  </defs>
+</svg>
