@@ -5,13 +5,12 @@
   Strict-Transport-Security: max-age=31536000
   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
   Cross-Origin-Opener-Policy: same-origin
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://formspree.io https://bzudkcybqhmqrybskwfn.supabase.co wss://bzudkcybqhmqrybskwfn.supabase.co; form-action https://formspree.io; frame-src 'none'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://bzudkcybqhmqrybskwfn.supabase.co wss://bzudkcybqhmqrybskwfn.supabase.co; form-action 'self'; frame-src 'none'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests
 
-# connect-src: the homepage form submits to Formspree with fetch(), and
-# /plan.html + /dashboard/ talk to the Supabase project (https for data,
-# wss for the dashboard's live updates). fetch() is governed by connect-src,
-# not form-action. The Supabase library itself is served from /vendor/, so
-# script-src does not need any third-party host.
+# connect-src: /plan.html and /dashboard/ talk to the Supabase project only
+# (https for data, wss for the dashboard's live updates). The Supabase library
+# is served from /vendor/, so script-src needs no third-party host. No form
+# posts anywhere off-site, so form-action is 'self'.
 #
 # frame-src is 'none' since the portfolio page and its demo iframes were
 # retired. Restore an explicit allowlist if embeds come back — never '*'.
