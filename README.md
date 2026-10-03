@@ -56,6 +56,10 @@ The contact form posts to Formspree (`formspree.io/f/movkledr`). It is a real
 `<form action method="POST">`, so it still works with JavaScript disabled; the
 script upgrades it to a `fetch()` and keeps the visitor on the page.
 
+After a successful submit the form shows a "Continue to step 2" button linking to
+`plan.html`. That page is not built yet, so the link 404s until it is. The link
+is `rel="nofollow"` so crawlers do not follow it into the 404.
+
 To move it to Supabase, set these at build time:
 
 ```sh
