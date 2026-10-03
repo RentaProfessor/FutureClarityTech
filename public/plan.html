@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Build Your Plan · FutureClarity</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Step 2 of the free-audit booking: same visual system as the landing page, one column, picks first, send last. */
+:root{
+  --bg:#04050A; --ink:#EEF0FA; --muted:#8E95AB; --dim:#7D84A0; --line:rgba(124,131,240,.16); --line-strong:rgba(124,131,240,.42);
+  --accent:#7C83F0; --deep:#3A3FC4; --lav:#D8D3FB; --glass:rgba(255,255,255,.025); --good:#5FD3A4; --bad:#FF9C8F;
+  --display:"Montserrat","Avenir Next","Helvetica Neue",Arial,sans-serif; --sans:"Inter",system-ui,-apple-system,sans-serif; --mono:"JetBrains Mono",ui-monospace,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+html{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background-image:linear-gradient(rgba(124,131,240,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(124,131,240,.05) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(ellipse at 50% 0%,#000 0%,transparent 70%);-webkit-mask-image:radial-gradient(ellipse at 50% 0%,#000 0%,transparent 70%)}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.wrap{max-width:720px;margin:0 auto;padding:0 24px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(4,5,10,.8);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;max-width:1080px}
+.logo{display:flex;align-items:center;gap:10px}
+.logo svg{width:20px;height:28px;overflow:visible}
+.logo .wm{font-family:var(--display);font-weight:300;font-size:14px;letter-spacing:.26em;white-space:nowrap}
+.logo .wm span{color:var(--accent)}
+.back{font-size:14px;color:var(--muted);display:inline-flex;align-items:center;min-height:40px}
+.back:hover{color:var(--ink)}
+main{padding:28px 0 64px}
+.bsteps{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:22px}
+.bsteps li{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--dim);padding:8px 10px;border-radius:10px;border:1px solid var(--line);min-width:0}
+.bsteps li b{flex:0 0 22px;height:22px;border-radius:50%;display:grid;place-items:center;font:600 12px var(--mono);border:1px solid var(--line-strong);color:var(--muted)}
+.bsteps li.on{color:var(--ink);border-color:var(--accent);background:rgba(58,63,196,.18)}
+.bsteps li.on b{background:var(--deep);border-color:var(--deep);color:#fff}
+.bsteps li.done b{color:var(--good);border-color:var(--good)}
+.label{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
+h1{font-family:var(--display);font-weight:300;font-size:clamp(30px,6vw,42px);line-height:1.12;margin:8px 0 8px;text-wrap:balance}
+h1 .grad{background:linear-gradient(90deg,var(--accent),var(--lav));-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:var(--muted);font-size:16px;margin-bottom:22px}
+.card{background:var(--glass);border:1px solid var(--line);border-radius:18px;padding:20px;display:grid;gap:10px;margin-bottom:14px;min-width:0}
+.card h2{font-family:var(--display);font-weight:400;font-size:19px}
+.card h2 small{font-family:var(--sans);font-size:13px;color:var(--muted);font-weight:400;margin-left:6px}
+.sq{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-top:6px}
+.sq span{letter-spacing:.04em;text-transform:none}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips button{font:500 14px var(--sans);color:var(--muted);background:rgba(0,0,0,.3);border:1px solid var(--line);border-radius:999px;padding:9px 14px;min-height:42px;cursor:pointer;text-align:left}
+.chips button:hover{border-color:var(--accent);color:var(--ink)}
+.chips button.on{background:rgba(58,63,196,.3);border-color:var(--accent);color:var(--ink)}
+.chips button.on::before{content:"\2713  ";color:var(--good)}
+.chips button small{display:block;font-size:12px;color:var(--dim);font-weight:400}
+.chips button.on small{color:var(--muted)}
+.est{border:1px solid var(--line-strong);border-radius:14px;padding:14px 16px;background:rgba(58,63,196,.12)}
+.est b{font-family:var(--display);font-weight:300;font-size:26px;display:block;color:var(--ink)}
+.est span{font-size:13px;color:var(--muted)}
+.details{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.details .full{grid-column:1/-1}
+input,textarea{font:inherit;font-size:15px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:rgba(0,0,0,.35);color:var(--ink);width:100%;min-width:0}
+input::placeholder,textarea::placeholder{color:var(--dim)}
+input:focus,textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(124,131,240,.18)}
+input[aria-invalid="true"]{border-color:var(--bad)}
+.summary{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;font-size:14.5px;color:var(--muted)}
+.summary b{color:var(--ink);font-weight:500}
+.link{background:none;border:0;color:var(--accent);font:500 14px var(--sans);cursor:pointer;min-height:40px;padding:0 4px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 22px;border-radius:999px;font-weight:500;font-size:15px;border:1px solid var(--line-strong);background:transparent;color:var(--ink);cursor:pointer;font-family:var(--sans);min-height:48px;transition:border-color .2s,box-shadow .2s,background .2s}
+.btn:hover{border-color:var(--accent);box-shadow:0 0 24px rgba(124,131,240,.25)}
+.btn-primary{background:var(--deep);border-color:var(--deep);color:#fff;box-shadow:0 0 30px rgba(58,63,196,.35)}
+.btn-primary:hover{background:#474ddb}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.actions .btn{flex:1 1 200px}
+.err{color:var(--bad);font-size:14px}
+.recap{display:grid;gap:6px;font-size:15px;color:var(--muted)}
+.recap div{display:grid;grid-template-columns:120px minmax(0,1fr);gap:10px;padding:8px 0;border-top:1px solid var(--line)}
+.recap div:first-child{border-top:0}
+.recap dt{color:var(--dim);font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;padding-top:3px}
+.recap dd{color:var(--ink);overflow-wrap:anywhere}
+.sendrow{display:flex;flex-wrap:wrap;gap:8px}
+.sendrow .btn{flex:1 1 150px}
+.note{font-size:13.5px;color:var(--muted)}
+.sel{color:var(--lav);user-select:all}
+@media (max-width:640px){
+  .wrap{padding:0 16px}
+  main{padding-top:18px}
+  .bsteps li{font-size:0;justify-content:center;padding:8px}
+  .bsteps li b{font-size:12px}
+  .bsteps li.on{font-size:12.5px}
+  .card{padding:16px}
+  .details{grid-template-columns:minmax(0,1fr)}
+  .recap div{grid-template-columns:minmax(0,1fr);gap:2px}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <a href="/" class="logo" aria-label="FutureClarity Technologies, home" data-back>
+      <svg viewBox="190 50 220 180" aria-hidden="true">
+        <defs>
+          <linearGradient id="lf" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#07082a"/><stop offset=".6" stop-color="#3a3fc4"/><stop offset="1" stop-color="#d8d3fb"/></linearGradient>
+          <linearGradient id="bf" gradientUnits="userSpaceOnUse" x1="200" y1="175" x2="400" y2="105"><stop offset="0" stop-color="#181c6b" stop-opacity="0"/><stop offset=".5" stop-color="#d8d3fb"/><stop offset="1" stop-color="#181c6b" stop-opacity="0"/></linearGradient>
+        </defs>
+        <path d="M300,58 Q352,140 300,222 Q248,140 300,58 Z" fill="url(#lf)"/>
+        <line x1="195" y1="178" x2="405" y2="102" stroke="url(#bf)" stroke-width="3"/>
+      </svg>
+      <span class="wm">FUTURE <span>CLARITY</span></span>
+    </a>
+    <a href="/" class="back" data-back>‹ Back to site</a>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <ol class="bsteps" aria-label="Booking steps">
+      <li class="done"><b>✓</b>Your details</li>
+      <li class="on" id="st2"><b>2</b>Your plan</li>
+      <li id="st3"><b>3</b>Send</li>
+    </ol>
+
+    <section id="planView">
+      <div class="label">Free audit · step 2</div>
+      <h1 id="hello">What would you like <span class="grad">us to build?</span></h1>
+      <p class="sub">Tap anything that fits. It helps us prep your audit, and you'll see a typical price range as you go. Not sure? Skip ahead.</p>
+
+      <div class="card" id="whoCard">
+        <div class="summary" id="whoSummary"></div>
+        <div class="details" id="whoFields" hidden>
+          <input id="p-name" placeholder="Your name" autocomplete="name" aria-label="Your name">
+          <input id="p-business" placeholder="Business name" autocomplete="organization" aria-label="Business name">
+          <input id="p-contact" class="full" placeholder="Email or phone" autocomplete="email" aria-label="Email or phone">
+          <input id="p-site" placeholder="Website (optional)" autocomplete="url" aria-label="Website, optional">
+          <input id="p-app" placeholder="App name (optional)" aria-label="App name, optional">
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Automations for your dashboard <small id="wfCount">pick up to 5</small></h2>
+        <div class="chips" id="wfChips">
+          <button type="button" data-wf="Online booking + reminders">Online booking + reminders<small>Book any time, fewer no-shows</small></button>
+          <button type="button" data-wf="Missed-call text-back">Missed-call text-back<small>Every missed caller gets a text</small></button>
+          <button type="button" data-wf="Review requests">Review requests<small>More reviews, automatically</small></button>
+          <button type="button" data-wf="Rebooking nudges">Rebooking nudges<small>"Time to come back?" texts</small></button>
+          <button type="button" data-wf="Invoices & payment reminders">Invoices &amp; payment reminders<small>Get paid without chasing</small></button>
+          <button type="button" data-wf="Data entry / records">Data entry / records<small>No more typing it twice</small></button>
+          <button type="button" data-wf="Estimates & quotes">Estimates &amp; quotes<small>Fast, consistent replies</small></button>
+          <button type="button" data-wf="Custom workflow">Something else<small>Tell us below</small></button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Website</h2>
+        <div class="chips" id="siteChips">
+          <button type="button" data-site="" class="on">No website work</button>
+          <button type="button" data-site="landing">Landing page<small>One page: hours, prices, booking</small></button>
+          <button type="button" data-site="small">Small website<small>Up to 5 pages, new or a revamp</small></button>
+          <button type="button" data-site="monthly">Website, pay monthly<small>$0 down, hosting included</small></button>
+        </div>
+        <div class="sq">Also</div>
+        <div class="chips" id="extraChips">
+          <button type="button" data-x="app">Clean up my app<small>Fix, speed up, connect it</small></button>
+          <button type="button" data-x="care">Monthly care<small>Optional: we keep it running</small></button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Anything else we should know? <small>optional</small></h2>
+        <textarea id="p-msg" rows="3" placeholder="The task you wish ran itself, busy times, tools you already use…" aria-label="Anything else we should know, optional"></textarea>
+      </div>
+
+      <div class="est" id="estimate" aria-live="polite"><span>Pick anything above to see a typical range.</span></div>
+      <p class="err" id="err" role="alert" hidden>Add your name, business name and an email or phone so we can reach you.</p>
+      <div class="actions">
+        <button type="button" class="btn" id="skipBtn">Not sure yet, skip</button>
+        <button type="button" class="btn btn-primary" id="reviewBtn">Review &amp; send</button>
+      </div>
+    </section>
+
+    <section id="sendView" hidden>
+      <div class="label">Free audit · step 3</div>
+      <h1>Last step: <span class="grad">send it to us.</span></h1>
+      <p class="sub">One tap sends everything below straight to our team. We reply within one business day to set up your free audit.</p>
+      <div class="card"><dl class="recap" id="recap"></dl></div>
+      <div class="sendrow"><button class="btn btn-primary" id="sendBtn" type="button">Send my request</button></div>
+      <div id="fallback" hidden>
+        <p class="err" role="alert" style="margin:14px 0 10px">That didn't go through. Try again, or send it to us yourself:</p>
+        <div class="sendrow">
+          <a class="btn" id="sendEmail" href="mailto:beng@futureclaritytechnologies.com">Email it</a>
+          <a class="btn" id="sendText" href="sms:+18189397964">Text it</a>
+          <button class="btn" id="copyReq" type="button">Copy request</button>
+        </div>
+        <p class="note" style="margin-top:12px">Or reach us at <span class="sel">beng@futureclaritytechnologies.com</span> or <span class="sel">(818) 939-7964</span>.</p>
+      </div>
+      <div class="actions"><button type="button" class="btn" id="editBtn">‹ Change my picks</button></div>
+    </section>
+
+    <section id="doneView" hidden>
+      <div class="label">Free audit · all set</div>
+      <h1 id="doneTitle">Request sent. <span class="grad">We've got it.</span></h1>
+      <p class="sub">It's with our team now. We'll reply within one business day to set up your free audit. Nothing else to do.</p>
+      <div class="card"><dl class="recap" id="doneRecap"></dl></div>
+      <p class="note">Need us sooner? <span class="sel">(818) 939-7964</span> · <span class="sel">beng@futureclaritytechnologies.com</span></p>
+      <div class="actions"><a class="btn" href="/">‹ Back to the site</a></div>
+    </section>
+  </div>
+</main>
+
+<script src="/fc-config.js"></script>
+<script src="/fc-store.js"></script>
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  // same ranges as the pricing section and the Client Pipeline
+  var DASH = { 1: [400, 800], 2: [700, 1300], 3: [1000, 1800], 4: [1400, 2400], 5: [1800, 3000] }, CARE = { 1: 49, 2: 79, 3: 99, 4: 139, 5: 179 };
+  var SITE = { landing: [300, 600, 'Landing page'], small: [600, 1200, 'Small website'], monthly: [0, 0, 'Website, pay monthly'] };
+  var st = { wf: [], site: '', app: false, care: false };
+  function money(n) { return '$' + n.toLocaleString('en-US'); }
+
+  // details from step 1 (the landing page form)
+  var req = null;
+  try { req = JSON.parse(sessionStorage.getItem('fc-audit-request') || 'null'); } catch (x) {}
+  if (!req) { try { req = JSON.parse(localStorage.getItem('fc-audit-request') || 'null'); } catch (x) {} }
+  req = req || {};
+  var fields = { name: 'p-name', business: 'p-business', contact: 'p-contact', website: 'p-site', app: 'p-app' };
+  Object.keys(fields).forEach(function (k) { $(fields[k]).value = req[k] || ''; });
+  $('p-msg').value = req.msg || '';
+  if (req.app) st.app = true;
+  function showWho() {
+    var have = req.name && req.business && req.contact;
+    if (!have) { $('whoFields').hidden = false; $('whoSummary').hidden = true; return; }
+    var s = $('whoSummary'); s.textContent = '';
+    var t = document.createElement('span'); var b = document.createElement('b'); b.textContent = req.business; t.appendChild(b);
+    t.appendChild(document.createTextNode(' · ' + req.name + ' · ' + req.contact)); s.appendChild(t);
+    var e = document.createElement('button'); e.type = 'button'; e.className = 'link'; e.textContent = 'Edit'; e.onclick = function () { $('whoFields').hidden = false; s.hidden = true; $('p-name').focus(); }; s.appendChild(e);
+  }
+  if (req.name) { var h = $('hello'); h.textContent = 'Thanks, ' + req.name.split(' ')[0] + '. What would you like '; var g = document.createElement('span'); g.className = 'grad'; g.textContent = 'us to build?'; h.appendChild(g); }
+  showWho();
+
+  function calc() {
+    var lo = 0, hi = 0, mo = 0, n = st.wf.length;
+    if (n) { lo += DASH[n][0]; hi += DASH[n][1]; if (st.care) mo += CARE[n]; }
+    if (st.site) { lo += SITE[st.site][0]; hi += SITE[st.site][1]; if (st.site === 'monthly') mo += 59; }
+    if (st.app) { lo += 1500; hi += 4000; }
+    return { lo: lo, hi: hi, mo: mo };
+  }
+  function estText() { var c = calc(); if (!c.hi && !c.mo) return ''; return (c.hi ? money(c.lo) + '–' + money(c.hi) + ' setup' : '$0 down') + (c.mo ? ' + about $' + c.mo + '/mo' : ''); }
+  function render() {
+    document.querySelectorAll('#wfChips button').forEach(function (b) { var on = st.wf.indexOf(b.dataset.wf) > -1; b.classList.toggle('on', on); b.setAttribute('aria-pressed', on); });
+    document.querySelectorAll('#siteChips button').forEach(function (b) { var on = b.dataset.site === st.site; b.classList.toggle('on', on); b.setAttribute('aria-pressed', on); });
+    document.querySelectorAll('#extraChips button').forEach(function (b) { var on = !!st[b.dataset.x]; b.classList.toggle('on', on); b.setAttribute('aria-pressed', on); });
+    $('wfCount').textContent = st.wf.length ? st.wf.length + ' of 5 picked' : 'pick up to 5';
+    var t = estText(), el = $('estimate'); el.textContent = '';
+    if (!t) { var s0 = document.createElement('span'); s0.textContent = 'Pick anything above to see a typical range.'; el.appendChild(s0); return; }
+    var b = document.createElement('b'); b.textContent = t; el.appendChild(b);
+    var s = document.createElement('span'); s.textContent = (st.care && !st.wf.length ? 'Monthly care starts once you pick an automation. ' : '') + 'Typical range. Monthly care is optional, and your fixed quote comes after the free audit (it may be lower or higher).'; el.appendChild(s);
+    $('reviewBtn').textContent = 'Review & send';
+  }
+  $('wfChips').addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (!b) return; var i = st.wf.indexOf(b.dataset.wf);
+    if (i > -1) st.wf.splice(i, 1); else if (st.wf.length < 5) st.wf.push(b.dataset.wf); else { $('wfCount').textContent = 'up to 5 per package'; return; }
+    render();
+  });
+  $('siteChips').addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; st.site = b.dataset.site; render(); });
+  $('extraChips').addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return; st[b.dataset.x] = !st[b.dataset.x]; render(); });
+
+  function readWho() { Object.keys(fields).forEach(function (k) { req[k] = $(fields[k]).value.trim(); }); req.msg = $('p-msg').value.trim(); }
+  function toTop() { window.scrollTo({ top: 0, behavior: 'auto' }); }
+  function goSend() {
+    readWho();
+    var missing = ['p-name', 'p-business', 'p-contact'].filter(function (id) { var el = $(id); var empty = !el.value.trim(); el.setAttribute('aria-invalid', empty ? 'true' : 'false'); return empty; });
+    if (missing.length) { $('whoFields').hidden = false; $('whoSummary').hidden = true; $('err').hidden = false; $(missing[0]).focus(); return; }
+    $('err').hidden = true;
+    var careOn = st.care && st.wf.length > 0, est = estText();
+    var body = 'Name: ' + req.name + '\nBusiness: ' + req.business + '\nEmail or phone: ' + req.contact +
+      '\nWebsite: ' + (req.website || 'none') + '\nApp: ' + (req.app || 'none') +
+      '\nWorkflows: ' + (st.wf.length ? st.wf.join('; ') : 'none') + '\nWebsite work: ' + (st.site ? SITE[st.site][2] : 'None') +
+      '\nApp cleanup: ' + (st.app ? 'Yes' : 'No') + '\nMonthly care: ' + (careOn ? 'Yes' : 'No') + (est ? '\nEstimate shown: ' + est : '') +
+      '\nWhat they need: ' + (req.msg || '');
+    var subject = 'Free audit request: ' + req.business;
+    $('sendEmail').href = 'mailto:beng@futureclaritytechnologies.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    $('sendText').href = 'sms:+18189397964?&body=' + encodeURIComponent(subject + '\n' + body);
+    var picks = st.wf.slice(); if (st.site) picks.push(SITE[st.site][2]); if (st.app) picks.push('App cleanup' + (req.app ? ' (' + req.app + ')' : '')); if (careOn) picks.push('Monthly care');
+    var rc = $('recap'); rc.textContent = '';
+    [['Business', req.business], ['Contact', req.name + ' · ' + req.contact], ['Website', req.website || 'None'], ['You picked', picks.length ? picks.join(', ') : 'Not sure yet, we will help you decide'], ['Typical range', est || 'We will quote after the audit'], ['Notes', req.msg || '—']].forEach(function (row) {
+      var d = document.createElement('div'), dt = document.createElement('dt'), dd = document.createElement('dd'); dt.textContent = row[0]; dd.textContent = row[1]; d.appendChild(dt); d.appendChild(dd); rc.appendChild(d);
+    });
+    var cb = $('copyReq'); cb.textContent = 'Copy request';
+    cb.onclick = function () { try { navigator.clipboard.writeText(subject + '\n' + body).then(function () { cb.textContent = 'Copied'; }, function () { cb.textContent = 'Copy not allowed here'; }); } catch (x) { cb.textContent = 'Copy not allowed here'; } };
+    try { sessionStorage.setItem('fc-audit-request', JSON.stringify(req)); } catch (x) {}
+    payload = { name: req.name, business: req.business, contact: req.contact, website: req.website || '', app: req.app || '', needs: req.msg || '', scope: { wf: st.wf.slice(), site: st.site, app: st.app, care: careOn }, estShown: est };
+    $('fallback').hidden = true; $('sendBtn').disabled = false; $('sendBtn').textContent = 'Send my request';
+    $('planView').hidden = true; $('sendView').hidden = false;
+    $('st2').className = 'done'; $('st2').querySelector('b').textContent = '✓'; $('st3').className = 'on';
+    toTop();
+  }
+  // Send: the request goes straight into the team dashboard. Email/text only show up if that fails.
+  var payload = null, sending = false;
+  $('sendBtn').addEventListener('click', function () {
+    if (sending || !payload) return;
+    var btn = $('sendBtn'); sending = true; btn.disabled = true; btn.textContent = 'Sending…';
+    window.FCStore.submit(payload).then(function () {
+      sending = false;
+      try { sessionStorage.removeItem('fc-audit-request'); localStorage.removeItem('fc-audit-request'); } catch (x) {}
+      $('doneRecap').innerHTML = $('recap').innerHTML;
+      $('sendView').hidden = true; $('doneView').hidden = false;
+      $('st3').className = 'done'; $('st3').querySelector('b').textContent = '✓';
+      toTop();
+    }, function () {
+      sending = false; btn.disabled = false; btn.textContent = 'Try again';
+      $('fallback').hidden = false;
+    });
+  });
+  $('reviewBtn').addEventListener('click', goSend);
+  $('skipBtn').addEventListener('click', function () { st = { wf: [], site: '', app: false, care: false }; render(); goSend(); });
+  $('editBtn').addEventListener('click', function () { $('sendView').hidden = true; $('planView').hidden = false; $('st2').className = 'on'; $('st2').querySelector('b').textContent = '2'; $('st3').className = ''; toTop(); });
+  document.querySelectorAll('[data-back]').forEach(function (a) { a.addEventListener('click', function (e) { if (window.history.length > 1) { e.preventDefault(); window.history.back(); } }); });
+  render();
+})();
+</script>
+</body>
+</html>

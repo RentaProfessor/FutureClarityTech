@@ -3,18 +3,9 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
-// Lead delivery. Formspree is the endpoint the previous site used and is kept
-// as the live destination so no enquiry is lost during the redesign. When the
-// Supabase env vars below are set at build time the form posts there instead,
-// and Formspree stays as the fallback if that request fails.
-//
-// Before switching Supabase on, two things have to be true:
-//   1. The leads table has row level security with an INSERT-only policy for
-//      the anon role. The anon key ships in the page, so without that policy
-//      anyone can read every lead back out.
-//   2. public/_headers has the Supabase host in connect-src, or the browser
-//      blocks the request under the existing Content-Security-Policy.
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/movkledr';
+// Booking a free audit: this form (step 1) hands the visitor's details to
+// /plan.html (step 2), which sends the full request to Supabase via
+// public/fc-store.js. It lands on the team dashboard at /dashboard/.
 ---
 
 <Layout title="FutureClarity Technologies">
@@ -355,10 +346,7 @@ const FORMSPREE_ENDPOINT = 'https://formspree.io/f/movkledr';
           30 minutes at your business. No obligation. Next, you'll pick what you'd like built so we
           can prep before we meet.
         </p>
-        <!-- A real POST target, so the form still works if the script below
-             fails to load. The script upgrades it to a fetch and keeps the
-             visitor on the page. -->
-        <form id="lead" class="glass" action={FORMSPREE_ENDPOINT} method="POST">
+        <form id="lead" class="glass" novalidate>
           <div class="two">
             <input
               id="f-name"
@@ -408,9 +396,7 @@ const FORMSPREE_ENDPOINT = 'https://formspree.io/f/movkledr';
           </div>
           <div id="thanks" role="status">
             <p>Got it. Next, pick what you'd like us to build.</p>
-            <!-- Step 2 (plan.html) is not built yet, so this link 404s for now.
-                 rel=nofollow keeps crawlers from following it into that 404. -->
-            <a class="btn btn-primary" id="toPlan" href="plan.html" rel="nofollow">Continue to step 2</a>
+            <a class="btn btn-primary" id="toPlan" href="/plan.html">Continue to step 2</a>
           </div>
         </form>
         <div class="direct">
@@ -525,44 +511,37 @@ const FORMSPREE_ENDPOINT = 'https://formspree.io/f/movkledr';
   });
 
   // ---- lead form ----------------------------------------------------------
-  // Supabase is used when both vars are present at build time; Formspree is
-  // the fallback, and a native form POST is the last resort so a lead is
-  // never silently dropped. See the note at the top of this page.
-  const SUPABASE_URL = import.meta.env.PUBLIC_SUPABASE_URL;
-  const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
-  const SUPABASE_TABLE = import.meta.env.PUBLIC_SUPABASE_LEADS_TABLE || 'leads';
+  // Step 1 of booking. Nothing is sent from here: the details are handed to
+  // /plan.html, which sends the whole request to Supabase on its Send button.
 
   const form = document.getElementById('lead') as HTMLFormElement | null;
+
+  // Team shortcut: typing the dashboard phrase into the message box and
+  // submitting opens /dashboard/ instead of sending a lead. Only the SHA-256
+  // of the phrase is in the page, so it cannot be read from the source.
+  // This is a shortcut, not the lock: /dashboard/ still requires a team sign-in.
+  // Capitals and spaces are ignored. To change it (type it lowercase, no spaces):
+  //   printf '%s' 'your new phrase' | sha256sum
+  const DASHBOARD_PHRASE_SHA256 = '9826ccfe35c833d112e7c1316c26bf509048227c159967f72b3719d29c27f56f';
+
+  async function isDashboardPhrase(text: string) {
+    const norm = text.toLowerCase().replace(/\s+/g, '');
+    if (!norm || !window.crypto?.subtle) return false;
+    const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(norm));
+    const hex = Array.from(new Uint8Array(digest), (b) => b.toString(16).padStart(2, '0')).join('');
+    return hex === DASHBOARD_PHRASE_SHA256;
+  }
 
   if (form) {
     const val = (id: string) => (document.getElementById(id) as HTMLInputElement).value.trim();
 
-    async function toSupabase(payload: Record<string, string>) {
-      if (!SUPABASE_URL || !SUPABASE_ANON_KEY) return false;
-      const res = await fetch(`${SUPABASE_URL}/rest/v1/${SUPABASE_TABLE}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          apikey: SUPABASE_ANON_KEY,
-          Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
-          Prefer: 'return=minimal',
-        },
-        body: JSON.stringify(payload),
-      });
-      return res.ok;
-    }
-
-    async function toFormspree(payload: Record<string, string>) {
-      const res = await fetch(form!.action, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify(payload),
-      });
-      return res.ok;
-    }
-
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
+
+      if (await isDashboardPhrase(val('f-msg'))) {
+        window.location.href = '/dashboard/';
+        return;
+      }
 
       const required = ['f-name', 'f-business', 'f-contact'];
       const missing = required.filter((id) => {
@@ -592,19 +571,14 @@ const FORMSPREE_ENDPOINT = 'https://formspree.io/f/movkledr';
         msg: val('f-msg'),
       };
 
-      const button = form.querySelector('button[type="submit"]') as HTMLButtonElement;
-      button.disabled = true;
-
-      try {
-        const sent = (await toSupabase(payload)) || (await toFormspree(payload));
-        if (!sent) throw new Error('submission rejected');
-        form.querySelectorAll('input, textarea').forEach((f) => ((f as HTMLInputElement).value = ''));
-        thanks.style.display = 'block';
-        button.disabled = false;
-      } catch {
-        // Fall back to a plain browser POST rather than losing the enquiry.
-        form.submit();
-      }
+      // Hand the details to step 2, which greets them by name and pre-fills
+      // the form. Both storages: sessionStorage can be unavailable in some
+      // private-browsing modes.
+      const handoff = JSON.stringify(payload);
+      try { sessionStorage.setItem('fc-audit-request', handoff); } catch {}
+      try { localStorage.setItem('fc-audit-request', handoff); } catch {}
+      thanks.style.display = 'block';
+      window.location.href = '/plan.html';
     });
   }
 </script>
