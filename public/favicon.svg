@@ -1,4 +1,1 @@
-<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-  <rect width="32" height="32" rx="6" fill="#1c1917"/>
-  <text x="16" y="23" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="18" font-weight="600" fill="#faf9f6">FC</text>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#05070b"/><path d="M32 8 Q46 32 32 56 Q18 32 32 8Z" fill="#7c83f0"/><line x1="8" y1="42" x2="56" y2="22" stroke="#d8d3fb" stroke-width="3"/></svg>

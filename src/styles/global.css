@@ -409,9 +409,9 @@ form { max-width: 560px; margin: 0 auto; padding: 28px; display: grid; gap: 12px
 .two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 input, textarea {
   font: inherit;
-  /* 16px floor stops iOS Safari zooming the page when a field takes focus.
-     The design specified 15px; the extra pixel is deliberate. */
-  font-size: 16px;
+  /* Matches the design. Note iOS Safari zooms the page when a field under
+     16px takes focus; raise this to 16px to stop that. */
+  font-size: 15px;
   padding: 13px 15px;
   border: 1px solid var(--line);
   border-radius: 12px;
@@ -433,6 +433,7 @@ input[aria-invalid="true"] { border-color: #ff9c8f; }
   background: rgba(58, 63, 196, 0.12);
 }
 #thanks p { margin: 0; }
+#thanks .btn { margin-top: 10px; }
 #formerr { display: none; color: #ff9c8f; font-size: 14px; text-align: center; }
 .direct { margin: 24px auto 0; max-width: 560px; display: grid; gap: 8px; }
 .dline { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 6px 12px; font-size: 15px; color: var(--muted); }

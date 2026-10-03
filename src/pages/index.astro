@@ -17,7 +17,7 @@ import Footer from '../components/Footer.astro';
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/movkledr';
 ---
 
-<Layout title="FutureClarity Technologies | Dashboards & automations for local businesses">
+<Layout title="FutureClarity Technologies">
   <Header />
 
   <main id="top">
@@ -352,8 +352,8 @@ const FORMSPREE_ENDPOINT = 'https://formspree.io/f/movkledr';
         <div class="label c">Get started</div>
         <h2>Book your free audit.</h2>
         <p class="sub">
-          30 minutes at your business. No obligation. Tell us what you would like built so we can
-          prep before we meet.
+          30 minutes at your business. No obligation. Next, you'll pick what you'd like built so we
+          can prep before we meet.
         </p>
         <!-- A real POST target, so the form still works if the script below
              fails to load. The script upgrades it to a fetch and keeps the
@@ -407,7 +407,10 @@ const FORMSPREE_ENDPOINT = 'https://formspree.io/f/movkledr';
             Add your name, business name and an email or phone so we can reach you.
           </div>
           <div id="thanks" role="status">
-            <p>Got it — thanks. We'll be in touch shortly to set up your free audit.</p>
+            <p>Got it. Next, pick what you'd like us to build.</p>
+            <!-- Step 2 (plan.html) is not built yet, so this link 404s for now.
+                 rel=nofollow keeps crawlers from following it into that 404. -->
+            <a class="btn btn-primary" id="toPlan" href="plan.html" rel="nofollow">Continue to step 2</a>
           </div>
         </form>
         <div class="direct">
