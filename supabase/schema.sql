@@ -130,11 +130,10 @@ end $$;
 
 -- ---------------------------------------------------------------- your team
 
--- Replace with the real sign-in emails (lowercase). Each person must ALSO be
--- invited under Authentication > Users, because new sign-ups are turned off.
+-- Who can sign in to the dashboard. Each person must ALSO be invited under
+-- Authentication > Users, because new sign-ups are turned off.
+-- To add someone later, run:
+--   insert into public.team_members (email) values (lower('their@email.com')) on conflict do nothing;
 insert into public.team_members (email)
-select lower(btrim(e)) from (values
-  ('change-me-1@futureclaritytechnologies.com'),
-  ('change-me-2@futureclaritytechnologies.com')
-) as v(e)
+values ('beng@futureclaritytechnologies.com')
 on conflict (email) do nothing;
