@@ -50,30 +50,46 @@ These are load-bearing. Read the comments before changing any of them.
   phone and email byte-identical to the Google Business Profile listing. Add a
   postal address and `areaServed` and it can become a `LocalBusiness`.
 
-## Lead form
+## Lead form and audit booking
 
-The contact form posts to Formspree (`formspree.io/f/movkledr`). It is a real
-`<form action method="POST">`, so it still works with JavaScript disabled; the
-script upgrades it to a `fetch()` and keeps the visitor on the page.
+Booking a free audit is three steps:
 
-After a successful submit the form shows a "Continue to step 2" button linking to
-`plan.html`. That page is not built yet, so the link 404s until it is. The link
-is `rel="nofollow"` so crawlers do not follow it into the 404.
+1. **Homepage form** (`src/pages/index.astro`). Posts to Formspree
+   (`formspree.io/f/movkledr`) first, so the lead always reaches us, then
+   hands the details to step 2 and redirects there. It is a real
+   `<form action method="POST">`, so it still works with JavaScript off.
+2. **`/plan.html`** (`public/plan.html`). The visitor picks automations, website
+   and app work, and sees a typical price range.
+3. **Send.** `plan.html` submits through `public/fc-store.js` into the team
+   dashboard at **`/dashboard/`** (`public/dashboard/index.html`).
 
-To move it to Supabase, set these at build time:
+### Demo mode until the backend is connected
 
-```sh
-PUBLIC_SUPABASE_URL=https://<project-ref>.supabase.co
-PUBLIC_SUPABASE_ANON_KEY=<anon key>
-PUBLIC_SUPABASE_LEADS_TABLE=leads   # optional, defaults to "leads"
-```
+`public/fc-config.js` holds the Supabase URL and anon key. While both are
+empty, `plan.html` and `/dashboard/` run in **demo mode**: step-2 picks are
+saved in the visitor's own browser only, and `plan.html` still shows "Request
+sent". Step 1 has already reached Formspree, so no lead is lost, but the picks
+do not reach anyone until the backend is connected.
 
-When both of the first two are present the form posts to Supabase and falls
-back to Formspree if that request fails. Before switching it on:
+To connect it:
 
-1. Give the leads table row level security with an **INSERT-only** policy for
-   the `anon` role. The anon key ships in the page, so without that policy
-   anyone can read every lead back out.
-2. Add the Supabase host to `connect-src` in `public/_headers`, or the browser
-   blocks the request with no visible error.
-3. Add some spam protection. A public insert endpoint will be found by bots.
+- Fill in `public/fc-config.js`. Never put the `service_role` key there.
+- In `public/_headers`, add to the CSP: `https://cdn.jsdelivr.net` to
+  `script-src` (the dashboard loads the Supabase library from there), and
+  `https://<project>.supabase.co wss://<project>.supabase.co` to `connect-src`.
+- Row level security on `requests`: the `anon` role may **INSERT only**, and
+  only the customer columns (name, business, contact, website, app, needs,
+  scope, est_shown). Team members (`team_members`) may select/update/delete.
+  Anyone can call the insert endpoint directly, not just through the page.
+- Make `id` a `uuid` or integer column, and cap `scope.wf` at 5 entries. The
+  dashboard's request screen breaks on more than 5.
+- Supabase Auth: Site URL `https://futureclaritytechnologies.com`, add
+  `https://futureclaritytechnologies.com/dashboard/` to Redirect URLs, and
+  turn off "Allow new users to sign up".
+
+`/plan` and `/dashboard/` are sent with `X-Robots-Tag: noindex` from
+`public/_headers`, so they stay out of search results. They are static files in
+`public/`, so they are not in the sitemap either.
+
+The `PUBLIC_SUPABASE_*` env-var path in `index.astro` predates `fc-store.js`
+and is not needed for the setup above; leave those vars unset.

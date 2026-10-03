@@ -3,8 +3,9 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
-// Lead delivery. Formspree is the endpoint the previous site used and is kept
-// as the live destination so no enquiry is lost during the redesign. When the
+// Lead delivery. Step 1 (this form) always reaches Formspree before the
+// visitor moves on to step 2 (/plan.html), so a lead is never lost even while
+// the step-2 data layer (public/fc-config.js) is unconfigured and in demo mode. When the
 // Supabase env vars below are set at build time the form posts there instead,
 // and Formspree stays as the fallback if that request fails.
 //
@@ -408,9 +409,7 @@ const FORMSPREE_ENDPOINT = 'https://formspree.io/f/movkledr';
           </div>
           <div id="thanks" role="status">
             <p>Got it. Next, pick what you'd like us to build.</p>
-            <!-- Step 2 (plan.html) is not built yet, so this link 404s for now.
-                 rel=nofollow keeps crawlers from following it into that 404. -->
-            <a class="btn btn-primary" id="toPlan" href="plan.html" rel="nofollow">Continue to step 2</a>
+            <a class="btn btn-primary" id="toPlan" href="/plan.html">Continue to step 2</a>
           </div>
         </form>
         <div class="direct">
@@ -598,9 +597,15 @@ const FORMSPREE_ENDPOINT = 'https://formspree.io/f/movkledr';
       try {
         const sent = (await toSupabase(payload)) || (await toFormspree(payload));
         if (!sent) throw new Error('submission rejected');
-        form.querySelectorAll('input, textarea').forEach((f) => ((f as HTMLInputElement).value = ''));
         thanks.style.display = 'block';
         button.disabled = false;
+        // Step 1 has already reached us above. Hand the details to step 2
+        // (/plan.html), which greets them by name and pre-fills the form.
+        // Both storages: sessionStorage can be unavailable in some private modes.
+        const handoff = JSON.stringify(payload);
+        try { sessionStorage.setItem('fc-audit-request', handoff); } catch {}
+        try { localStorage.setItem('fc-audit-request', handoff); } catch {}
+        window.location.href = '/plan.html';
       } catch {
         // Fall back to a plain browser POST rather than losing the enquiry.
         form.submit();

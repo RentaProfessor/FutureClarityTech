@@ -1,0 +1,575 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Client Pipeline · FutureClarity</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a status board of audit requests; each request opens a two-tab screen (follow-up + scope builder | generated audit & proposal). */
+:root {
+  --bg: #f3f4f8; --surface: #ffffff; --sunk: #eceef4; --line: #d6d9e4;
+  --fg: #151a2e; --muted: #5d6479; --accent: #3a3fc4; --accent-ink: #ffffff; --accent-soft: #e4e5fb;
+  --bad: #b3261e; --bad-soft: #fbe3e0; --warn: #8a5a00; --warn-soft: #fdf0d2; --ok: #1d6b3a; --ok-soft: #dcf1e3; --scrim: rgba(15, 18, 32, .45);
+  --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --body: "Public Sans", -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0f1220; --surface: #171b2c; --sunk: #1f2438; --line: #2d3350;
+  --fg: #e9ebf5; --muted: #9aa1ba; --accent: #8f94ff; --accent-ink: #10132a; --accent-soft: #262b55;
+  --bad: #ff8a7d; --bad-soft: #3a1f22; --warn: #f0c264; --warn-soft: #352c17; --ok: #7fd6a0; --ok-soft: #16301f; --scrim: rgba(0, 0, 0, .6); color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0f1220; --surface: #171b2c; --sunk: #1f2438; --line: #2d3350;
+  --fg: #e9ebf5; --muted: #9aa1ba; --accent: #8f94ff; --accent-ink: #10132a; --accent-soft: #262b55;
+  --bad: #ff8a7d; --bad-soft: #3a1f22; --warn: #f0c264; --warn-soft: #352c17; --ok: #7fd6a0; --ok-soft: #16301f; --scrim: rgba(0, 0, 0, .6); color-scheme: dark; }
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font: 15px/1.45 var(--body); margin: 0; }
+.wrap { max-width: 1180px; margin: 0 auto; padding: 22px 16px 48px; }
+h1, h2, h3 { font-family: var(--display); margin: 0; text-wrap: balance; }
+button, input, select, textarea { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.muted { color: var(--muted); }
+header.top { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 10px; }
+header.top h1 { font-size: 28px; font-weight: 800; letter-spacing: -.01em; }
+header.top p { margin: 3px 0 0; font-size: 13.5px; color: var(--muted); }
+.save { font-size: 12.5px; color: var(--muted); min-height: 18px; }
+.save.err { color: var(--bad); }
+.btn { background: var(--surface); border: 1px solid var(--line); border-radius: 9px; padding: 9px 14px; font-size: 14px; font-weight: 600; cursor: pointer; min-height: 40px; }
+.btn:hover { border-color: var(--accent); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.btn:disabled { opacity: .5; cursor: not-allowed; }
+
+/* board */
+.board { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin: 20px 0 22px; }
+@media (max-width: 860px) { .board { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .board { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.w { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px; text-align: left; cursor: pointer; display: grid; gap: 2px; min-width: 0; }
+.w:hover, .w.on { border-color: var(--accent); }
+.w.on { box-shadow: inset 0 0 0 1px var(--accent); }
+.w .lab { font-size: 11.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.w b { font-family: var(--display); font-size: 34px; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.w .sub { font-size: 12.5px; color: var(--muted); }
+.w.new b { color: var(--warn); }
+.w.won b { color: var(--ok); }
+
+.sect-h { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+.sect-h h2 { font-size: 20px; font-weight: 700; }
+.reqs { display: grid; gap: 8px; }
+.req { display: grid; grid-template-columns: 6px minmax(0, 1fr) auto; gap: 0 14px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; cursor: pointer; text-align: left; padding: 0; }
+.req:hover { border-color: var(--accent); }
+.req .stripe { background: var(--line); }
+.req[data-s="New"] .stripe { background: var(--warn); }
+.req[data-s="Won"] .stripe { background: var(--ok); }
+.req[data-s="Lost"] .stripe { background: var(--bad); }
+.req[data-s="Quoted"] .stripe, .req[data-s="Audit booked"] .stripe, .req[data-s="Contacted"] .stripe { background: var(--accent); }
+.req .body { padding: 12px 0; min-width: 0; }
+.req .name { font-weight: 700; font-size: 16px; }
+.req .meta { font-size: 13px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.req .side { padding: 12px 14px 12px 0; display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+.chip { display: inline-block; font-size: 11.5px; font-weight: 600; padding: 2px 9px; border-radius: 999px; background: var(--sunk); color: var(--muted); white-space: nowrap; }
+.chip.New { background: var(--warn-soft); color: var(--warn); }
+.chip.Won, .chip.good { background: var(--ok-soft); color: var(--ok); }
+.chip.Lost, .chip.bad { background: var(--bad-soft); color: var(--bad); }
+.chip.Contacted, .chip.Audit.booked, .chip.Quoted { background: var(--accent-soft); color: var(--accent); }
+.empty { background: var(--surface); border: 1px dashed var(--line); border-radius: 12px; padding: 26px 20px; text-align: center; color: var(--muted); }
+.empty h3 { color: var(--fg); font-size: 17px; margin-bottom: 6px; }
+.howto { margin-top: 26px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; font-size: 13.5px; color: var(--muted); }
+.howto b { color: var(--fg); }
+.howto ol { margin: 6px 0 0; padding-left: 20px; }
+
+/* overlays */
+.scrim { position: fixed; inset: 0; background: var(--scrim); z-index: 20; }
+.panel { position: fixed; z-index: 21; background: var(--bg); border-radius: 16px; display: flex; flex-direction: column; overflow: hidden;
+  top: calc(env(safe-area-inset-top, 0px) + 16px); bottom: calc(env(safe-area-inset-bottom, 0px) + 16px); left: 16px; right: 16px; max-width: 980px; margin: 0 auto; }
+.panel.small { max-width: 640px; }
+@media (max-width: 600px) { .panel { left: 0; right: 0; bottom: 0; top: calc(env(safe-area-inset-top, 0px) + 10px); border-radius: 16px 16px 0 0; } }
+.ph { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; justify-content: space-between; padding: 14px 16px; background: var(--surface); border-bottom: 1px solid var(--line); }
+.ph h2 { font-size: 20px; font-weight: 700; }
+.tabs { display: flex; gap: 4px; padding: 8px 16px 0; background: var(--surface); border-bottom: 1px solid var(--line); }
+.tabs button { border: 0; background: none; padding: 9px 12px; font-weight: 600; font-size: 14px; color: var(--muted); border-bottom: 2px solid transparent; cursor: pointer; }
+.tabs button.on { color: var(--fg); border-bottom-color: var(--accent); }
+.pbody { flex: 1; overflow: auto; }
+.pad { padding: 16px; display: grid; gap: 16px; }
+.grid2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+@media (max-width: 760px) { .grid2 { grid-template-columns: minmax(0, 1fr); } }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px; display: grid; gap: 10px; align-content: start; min-width: 0; }
+.card h3 { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); font-weight: 700; font-family: var(--body); }
+label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: var(--muted); }
+.f input, .f select, .f textarea, .paste { background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 9px 10px; font-size: 14.5px; font-weight: 400; color: var(--fg); width: 100%; min-width: 0; }
+.f textarea, .paste { min-height: 84px; resize: vertical; line-height: 1.4; }
+.row2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.seg { display: flex; flex-wrap: wrap; gap: 6px; }
+.seg button { border: 1px solid var(--line); background: var(--bg); border-radius: 999px; padding: 7px 13px; font-size: 13.5px; font-weight: 600; cursor: pointer; min-height: 36px; }
+.seg button.on { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.seg button.on.lost { background: var(--bad); border-color: var(--bad); color: var(--surface); }
+.seg button.on.won { background: var(--ok); border-color: var(--ok); color: var(--surface); }
+.contact { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-family: var(--mono); font-size: 14px; }
+.contact span { user-select: all; overflow-wrap: anywhere; }
+.opt { display: grid; grid-template-columns: 22px minmax(0, 1fr) auto; gap: 10px; align-items: start; padding: 9px 0; border-top: 1px solid var(--line); cursor: pointer; }
+.opt:first-of-type { border-top: 0; }
+.opt input { width: 18px; height: 18px; margin: 2px 0 0; }
+.opt b { font-size: 14.5px; }
+.opt small { display: block; color: var(--muted); font-size: 12.5px; }
+.opt .p { font-family: var(--mono); font-size: 13px; color: var(--muted); white-space: nowrap; }
+.wfs { display: flex; flex-wrap: wrap; gap: 6px; }
+.wfs button { border: 1px solid var(--line); background: var(--bg); border-radius: 999px; padding: 6px 12px; font-size: 13px; cursor: pointer; min-height: 34px; }
+.wfs button.on { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); font-weight: 600; }
+.totals { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+@media (max-width: 520px) { .totals { grid-template-columns: minmax(0, 1fr); } }
+.tot { background: var(--sunk); border-radius: 10px; padding: 10px 12px; }
+.tot b { display: block; font-family: var(--display); font-size: 20px; font-variant-numeric: tabular-nums; }
+.tot span { font-size: 12px; color: var(--muted); }
+.hint { font-size: 12.5px; color: var(--muted); }
+.navbar { display: flex; gap: 8px; justify-content: space-between; flex-wrap: wrap; padding: 12px 16px; background: var(--surface); border-top: 1px solid var(--line); }
+.paperwrap { padding: 16px; overflow-x: auto; }
+.paper { background: #ffffff; color: #14213d; border-radius: 10px; border: 1px solid #d9dce5; padding: 26px 28px; max-width: 860px; margin: 0 auto; }
+@media (max-width: 600px) { .paper { padding: 18px 16px; } .row2 { grid-template-columns: minmax(0, 1fr); } }
+.confirmdel { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; font-size: 13px; }
+[hidden] { display: none !important; }
+.demo-banner { background: var(--warn-soft); color: var(--warn); font-size: 13px; font-weight: 600; text-align: center; padding: 8px 16px; }
+.login { min-height: 100vh; display: grid; place-items: center; padding: 24px 16px; }
+.login .box { width: 100%; max-width: 420px; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 26px 24px; display: grid; gap: 14px; }
+.login h1 { font-size: 26px; font-weight: 800; }
+.login p { margin: 0; color: var(--muted); font-size: 14.5px; }
+.login .k { font-size: 11.5px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+.login .btn { width: 100%; min-height: 46px; }
+.login .msg { font-size: 13.5px; color: var(--bad); }
+.whoami { font-size: 12.5px; color: var(--muted); overflow-wrap: anywhere; }
+</style>
+</head>
+<body>
+<div class="demo-banner" id="demoBanner" hidden>Demo mode: not connected to the database yet. Requests are saved in this browser only.</div>
+
+<div class="login" id="loginView" hidden>
+  <form class="box" id="loginForm" novalidate>
+    <div class="k">FutureClarity team</div>
+    <h1>Client Pipeline</h1>
+    <p>Sign in with your work email. We'll email you a one-time sign-in link, so there's no password to remember.</p>
+    <label class="f">Work email<input id="l-email" type="email" autocomplete="email" placeholder="you@futureclaritytechnologies.com"></label>
+    <button class="btn primary" id="l-send" type="submit">Email me a sign-in link</button>
+    <p class="msg" id="l-msg" role="alert" hidden></p>
+  </form>
+  <div class="box" id="sentView" hidden>
+    <div class="k">Check your email</div>
+    <h1>Link sent</h1>
+    <p>We sent a sign-in link to <b id="sentTo"></b>. Open it on this device and you're in.</p>
+    <button class="btn primary" id="demoOpen" type="button" hidden>Open the sign-in link (demo)</button>
+    <button class="btn" id="sentBack" type="button">Use a different email</button>
+  </div>
+</div>
+
+
+<div class="wrap" id="app" hidden>
+  <header class="top">
+    <div>
+      <h1>Client Pipeline</h1>
+      <p>FutureClarity audit requests · they arrive here straight from the website</p>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+      <span class="save" id="save" aria-live="polite"></span>
+      <span class="whoami" id="who"></span>
+      <button class="btn" id="signOut">Sign out</button>
+      <button class="btn primary" id="addBtn">+ Add request</button>
+    </div>
+  </header>
+
+  <section class="board" id="board" aria-label="Request status"></section>
+
+  <section>
+    <div class="sect-h"><h2 id="listTitle">All requests</h2><span class="muted" id="listSub" style="font-size:13px"></span></div>
+    <div class="reqs" id="reqs"></div>
+  </section>
+
+  <div class="howto">
+    <b>How requests get here.</b> When a customer taps <b>Send my request</b> on the website, it shows up in this list on its own, marked New.
+    <ol>
+      <li>Open it. Their details and picks are already filled in, and the audit &amp; proposal is already built.</li>
+      <li>Fill in follow-up, scope, time and pricing as you go. Everything saves by itself.</li>
+      <li>For a request that came by phone, text or walk-in, click <b>+ Add request</b>.</li>
+    </ol>
+  </div>
+</div>
+
+<div id="reqLayer" hidden>
+  <div class="scrim" data-close="req"></div>
+  <div class="panel" role="dialog" aria-modal="true" aria-labelledby="reqTitle">
+    <div class="ph"><div><h2 id="reqTitle"></h2><div class="muted" id="reqSub" style="font-size:13px"></div></div><button class="btn" data-close="req">Done</button></div>
+    <div class="tabs" role="tablist"><button data-tab="work" class="on" role="tab">Follow-up &amp; scope</button><button data-tab="audit" role="tab">Audit &amp; proposal</button></div>
+    <div class="pbody" id="reqBody"></div>
+  </div>
+</div>
+
+<div id="addLayer" hidden>
+  <div class="scrim" data-close="add"></div>
+  <div class="panel small" role="dialog" aria-modal="true" aria-labelledby="addTitle">
+    <div class="ph"><h2 id="addTitle">Add a request</h2><button class="btn" data-close="add">Cancel</button></div>
+    <div class="pbody"><div class="pad">
+      <label class="f">Paste an email or text (optional)
+        <textarea class="paste" id="a-paste" placeholder="If they emailed or texted you, paste it here and the fields fill in. Otherwise just type below."></textarea></label>
+      <div class="row2">
+        <label class="f">Name<input id="a-name" autocomplete="off"></label>
+        <label class="f">Business<input id="a-business" autocomplete="off"></label>
+      </div>
+      <label class="f">Email or phone<input id="a-contact" autocomplete="off"></label>
+      <div class="row2">
+        <label class="f">Website (optional)<input id="a-website" autocomplete="off"></label>
+        <label class="f">App name (optional)<input id="a-app" autocomplete="off"></label>
+      </div>
+      <div class="row2">
+        <label class="f">Type of business<input id="a-btype" placeholder="Barbershop, auto repair…" autocomplete="off"></label>
+        <label class="f">Came in from<select id="a-source"><option>Phone / text</option><option>Website form</option><option>Email</option><option>Walk-in</option><option>Referral</option><option>Cold call</option></select></label>
+      </div>
+      <label class="f">What they need<textarea id="a-needs" placeholder="In their words"></textarea></label>
+      <p class="hint" id="a-scope" hidden style="background:var(--accent-soft);color:var(--accent);padding:8px 10px;border-radius:8px;font-weight:600"></p>
+      <p class="hint" id="a-err" role="alert" hidden>Add at least a business name and a way to reach them.</p>
+    </div></div>
+    <div class="navbar"><span></span><button class="btn primary" id="a-save">Save request</button></div>
+  </div>
+</div>
+
+<script src="/fc-config.js"></script>
+<script src="/fc-store.js"></script>
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const iso = d => d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  const today = () => iso(new Date());
+  const nice = s => s ? new Date(s.length > 10 ? s : s + 'T12:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : '';
+  const money = n => '$' + Math.round(n).toLocaleString('en-US');
+
+  // ---------- pricing & time model (same ranges as the website) ----------
+  const DASH = { 1: [400, 800], 2: [700, 1300], 3: [1000, 1800], 4: [1400, 2400], 5: [1800, 3000] };
+  const CARE = { 1: 49, 2: 79, 3: 99, 4: 139, 5: 179 };
+  const SITE = { landing: [300, 600, 'Landing page', 'One page: hours, prices, booking, map', [3, 5]], small: [600, 1200, 'Small website', 'Up to 5 pages', [7, 10]] };
+  const SITE_MONTHLY = 59;
+  const APP = [1500, 4000];
+  const WORKFLOWS = [
+    ['Online booking + reminders', 3], ['Missed-call text-back', 2], ['Review requests', 1], ['Rebooking nudges', 1],
+    ['Invoices & payment reminders', 3], ['Data entry / records', 3], ['Estimates & quotes', 2], ['Custom workflow', 2],
+  ];
+  const STATUSES = ['New', 'Contacted', 'Audit booked', 'Quoted', 'Won', 'Lost'];
+
+  function calc(r) {
+    const sc = r.scope || {}; const items = []; let lo = 0, hi = 0, dLo = 0, dHi = 0, monthly = 0;
+    const wf = (sc.wf || []).slice(0, 5); const n = wf.length;
+    if (n) { const [a, b] = DASH[n]; items.push([`Your dashboard + ${n} workflow${n > 1 ? 's' : ''}`, wf.join(', '), a, b]); lo += a; hi += b; dLo += 3 + 2 * n; dHi += 5 + 3 * n; if (sc.care) monthly += CARE[n]; }
+    if (sc.site === 'landing' || sc.site === 'small') { const s = SITE[sc.site]; items.push([s[2], s[3] + (r.website ? ` (rebuild of ${r.website})` : ''), s[0], s[1]]); lo += s[0]; hi += s[1]; dLo += s[4][0]; dHi += s[4][1]; }
+    if (sc.site === 'monthly') { items.push(['Website, pay monthly', '$0 down, hosting and edits included', 0, 0]); monthly += SITE_MONTHLY; dLo += 5; dHi += 10; }
+    if (sc.app) { items.push(['App cleanup' + (r.app ? `: ${r.app}` : ''), 'Fix broken screens and flows, speed it up, connect it to the dashboard', APP[0], APP[1]]); lo += APP[0]; hi += APP[1]; dLo += 10; dHi += 20; }
+    const saved = wf.reduce((t, w) => t + ((WORKFLOWS.find(x => x[0] === w) || [0, 2])[1]), 0);
+    return { items, lo, hi, dLo, dHi, monthly, savedSuggest: saved, n };
+  }
+
+  const store = window.FCStore; let db = null, reqs = [], loaded = false, filter = '', openId = null, tab = 'work';
+  const pending = new Map(), local = new Map(), timers = new Map();
+
+  function setSave(t, err) { const el = $('save'); el.textContent = t; el.classList.toggle('err', !!err); }
+  function editing() { const a = document.activeElement; return a && /TEXTAREA|INPUT|SELECT/.test(a.tagName) && a.closest('#reqLayer'); }
+
+  function write(id, patch) {
+    if (!db) return;
+    local.set(id, { ...(local.get(id) || {}), ...patch });
+    const r = reqs.find(x => x.id === id); if (r) Object.assign(r, patch);
+    setSave('Saving…');
+    const prev = pending.get(id) || Promise.resolve();
+    const next = prev.then(() => store.update(id, patch))
+      .then(() => { if (pending.get(id) === next) { pending.delete(id); local.delete(id); setSave('All changes saved'); } })
+      .catch(() => { pending.delete(id); setSave('Could not save. Check your connection and try again.', true); });
+    pending.set(id, next);
+    renderBoard(); renderList();
+  }
+  function writeSoon(id, patch, key) { clearTimeout(timers.get(key)); setSave('Typing…'); timers.set(key, setTimeout(() => { timers.delete(key); write(id, patch()); }, 700)); }
+
+  // ---------- board + list ----------
+  const W = [
+    ['', 'All requests', r => true],
+    ['New', 'New', r => (r.status || 'New') === 'New'],
+    ['reply', 'Need a reply', r => r.emailed !== 'Yes' && !['Won', 'Lost'].includes(r.status)],
+    ['Quoted', 'Quoted', r => r.status === 'Quoted'],
+    ['Won', 'Won', r => r.status === 'Won'],
+  ];
+  function renderBoard() {
+    $('board').innerHTML = W.map(([k, lab, fn]) => {
+      const c = reqs.filter(fn).length;
+      const sub = k === 'Won' ? (() => { const v = reqs.filter(fn).reduce((t, r) => t + (parseFloat(String(r.quote || '').replace(/[^\d.]/g, '')) || 0), 0); return v ? money(v) + ' quoted' : 'Closed deals'; })() : k === 'reply' ? 'Not emailed back yet' : k === 'Quoted' ? 'Waiting on a yes' : k === 'New' ? 'Just came in' : 'Every request';
+      return `<button class="w ${k === 'New' ? 'new' : k === 'Won' ? 'won' : ''}${filter === k && k ? ' on' : ''}" data-w="${k}"><span class="lab">${lab}</span><b>${loaded ? c : '–'}</b><span class="sub">${sub}</span></button>`;
+    }).join('');
+  }
+  function renderList() {
+    const w = W.find(x => x[0] === filter) || W[0];
+    const rows = reqs.filter(w[2]).sort((a, b) => (b.createdAt || '').localeCompare(a.createdAt || ''));
+    $('listTitle').textContent = w[0] ? w[1] : 'All requests';
+    $('listSub').textContent = loaded ? rows.length + ' request' + (rows.length === 1 ? '' : 's') + ' · newest first' : '';
+    if (!loaded) { $('reqs').innerHTML = '<div class="empty"><h3>Loading requests…</h3></div>'; return; }
+    
+    if (!rows.length) { $('reqs').innerHTML = filter ? '<div class="empty"><h3>Nothing here right now</h3>Pick "All requests" to see everything.</div>' : '<div class="empty"><h3>No requests yet</h3>When someone books a free audit on the website, their request appears here on its own, with the audit &amp; proposal already built.</div>'; return; }
+    $('reqs').innerHTML = rows.map(r => {
+      const c = calc(r), st = r.status || 'New';
+      const what = c.items.length ? c.items.map(i => i[0]).join(' · ') : (r.needs || 'No scope yet');
+      return `<button class="req" data-open="${esc(r.id)}" data-s="${esc(st)}"><span class="stripe"></span>
+        <span class="body"><span class="name">${esc(r.business || r.name || 'Unnamed')}</span>
+          <span class="meta" style="display:block">${esc(r.name || '')}${r.btype ? ' · ' + esc(r.btype) : ''} · ${esc(r.contact || '')}</span>
+          <span class="meta" style="display:block">${esc(what)}</span></span>
+        <span class="side"><span class="chip ${esc(st)}">${esc(st)}</span>${r.emailed === 'Yes' ? `<span class="chip good">Replied ${esc(nice(r.emailedDate))}</span>` : '<span class="chip New">Needs reply</span>'}
+          <span class="muted" style="font-size:12px">${c.items.length ? (r.quote ? esc(r.quote) : money(c.lo) + '–' + money(c.hi)) : ''} ${r.createdAt ? '· ' + esc(nice(r.createdAt)) : ''}</span></span></button>`;
+    }).join('');
+  }
+
+  // ---------- request screen ----------
+  function openReq(id) { openId = id; tab = 'work'; $('reqLayer').hidden = false; document.body.style.overflow = 'hidden'; renderReq(); $('reqBody').scrollTop = 0; }
+  function closeReq() { flushAll(); $('reqLayer').hidden = true; openId = null; document.body.style.overflow = ''; renderList(); }
+  function flushAll() { for (const [k, t] of timers) { clearTimeout(t); timers.delete(k); } document.querySelectorAll('#reqBody [data-k]').forEach(el => { if (el.dataset.dirty) { delete el.dataset.dirty; write(openId, { [el.dataset.k]: el.value }); } }); }
+
+  function renderReq() {
+    const r = reqs.find(x => x.id === openId); if (!r) return;
+    $('reqTitle').textContent = r.business || r.name || 'Request';
+    $('reqSub').textContent = [r.name, r.btype, r.source, r.createdAt ? 'received ' + nice(r.createdAt) : ''].filter(Boolean).join(' · ');
+    document.querySelectorAll('.tabs button').forEach(b => b.classList.toggle('on', b.dataset.tab === tab));
+    if (tab === 'audit') { $('reqBody').innerHTML = `<div class="pad" style="padding-bottom:0"><div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><button class="btn primary" data-print>Print / save proposal</button><span class="hint">Opens the print window. Pick your printer, or choose Save as PDF.</span></div></div><div class="paperwrap"><div class="paper">${proposalBody(r)}</div></div>`; return; }
+    const c = calc(r), sc = r.scope || {}, wf = sc.wf || [];
+    const seg = (k, opts, cls = {}) => `<div class="seg">${opts.map(o => `<button data-set="${k}" data-v="${esc(o)}" class="${r[k] === o ? 'on ' : ''}${cls[o] || ''}">${esc(o)}</button>`).join('')}</div>`;
+    $('reqBody').innerHTML = `<div class="pad">
+      <div class="grid2">
+        <div class="card"><h3>Who &amp; what they asked for</h3>
+          <div class="contact"><span>${esc(r.contact || 'No contact given')}</span>${r.contact ? '<button class="btn" data-copy="contact" style="min-height:34px;padding:5px 12px">Copy</button>' : ''}</div>
+          <div class="row2"><label class="f">Name<input data-k="name" value="${esc(r.name || '')}"></label><label class="f">Business<input data-k="business" value="${esc(r.business || '')}"></label></div>
+          <div class="row2"><label class="f">Email or phone<input data-k="contact" value="${esc(r.contact || '')}"></label><label class="f">Type of business<input data-k="btype" value="${esc(r.btype || '')}"></label></div>
+          <div class="row2"><label class="f">Website<input data-k="website" value="${esc(r.website || '')}"></label><label class="f">App name<input data-k="app" value="${esc(r.app || '')}"></label></div>
+          <label class="f">What they need<textarea data-k="needs">${esc(r.needs || '')}</textarea></label>
+        </div>
+        <div class="card"><h3>Follow-up</h3>
+          <label class="f">Status${seg('status', STATUSES, { Won: 'won', Lost: 'lost' })}</label>
+          <label class="f">Emailed them back?${seg('emailed', ['Yes', 'No'])}</label>
+          <div class="row2"><label class="f">Date emailed<input type="date" data-k="emailedDate" value="${esc(r.emailedDate || '')}"></label><label class="f">Audit / walkthrough date<input type="date" data-k="auditDate" value="${esc(r.auditDate || '')}"></label></div>
+          <label class="f">Notes<textarea data-k="notes" placeholder="What they said, best time to reach them, decision maker…">${esc(r.notes || '')}</textarea></label>
+        </div>
+      </div>
+      <div class="card"><h3>What they want: build the scope</h3>
+        <div><b style="font-size:14px">Dashboard + workflows</b> <span class="hint">· pick up to 5 · ${wf.length ? `${wf.length} selected, ${money(DASH[wf.length][0])}–${money(DASH[wf.length][1])}` : 'none selected'}</span></div>
+        <div class="wfs">${WORKFLOWS.map(([w]) => `<button data-wf="${esc(w)}" class="${wf.includes(w) ? 'on' : ''}">${esc(w)}</button>`).join('')}</div>
+        <div>
+          <label class="opt"><input type="radio" name="site" data-site="" ${!sc.site ? 'checked' : ''}><span><b>No website work</b></span><span></span></label>
+          <label class="opt"><input type="radio" name="site" data-site="landing" ${sc.site === 'landing' ? 'checked' : ''}><span><b>Landing page</b><small>One page: hours, prices, booking, map</small></span><span class="p">$300–$600</span></label>
+          <label class="opt"><input type="radio" name="site" data-site="small" ${sc.site === 'small' ? 'checked' : ''}><span><b>Small website</b><small>Up to 5 pages, new or a revamp</small></span><span class="p">$600–$1,200</span></label>
+          <label class="opt"><input type="radio" name="site" data-site="monthly" ${sc.site === 'monthly' ? 'checked' : ''}><span><b>Website, pay monthly</b><small>$0 down, hosting and edits included</small></span><span class="p">~$59/mo</span></label>
+          <label class="opt"><input type="checkbox" data-app ${sc.app ? 'checked' : ''}><span><b>App cleanup</b><small>${r.app ? esc(r.app) + ': ' : ''}fix, speed up, connect to the dashboard</small></span><span class="p">$1,500–$4,000</span></label>
+          <label class="opt"><input type="checkbox" data-care ${sc.care ? 'checked' : ''} ${wf.length ? '' : 'disabled'}><span><b>Optional monthly care</b><small>Texting and software costs, monitoring, fixes${wf.length ? '' : ' (pick workflows first)'}</small></span><span class="p">${wf.length ? '~$' + CARE[wf.length] + '/mo' : ''}</span></label>
+        </div>
+      </div>
+      <div class="card"><h3>Time &amp; pricing</h3>
+        <div class="totals">
+          <div class="tot"><b>${c.items.length ? money(c.lo) + '–' + money(c.hi) : '—'}</b><span>Setup range from the scope</span></div>
+          <div class="tot"><b>${c.items.length ? c.dLo + '–' + c.dHi + ' days' : '—'}</b><span>Suggested build time</span></div>
+          <div class="tot"><b>${c.monthly ? '$' + c.monthly + '/mo' : '—'}</b><span>Monthly (optional)</span></div>
+        </div>
+        <div class="row2">
+          <label class="f">Your quote for them<input data-k="quote" placeholder="${c.items.length ? 'e.g. ' + money(Math.round((c.lo + c.hi) / 2 / 50) * 50) : 'e.g. $1,200'}" value="${esc(r.quote || '')}"></label>
+          <label class="f">How long the build will take<input data-k="buildTime" placeholder="${c.items.length ? c.dLo + '–' + c.dHi + ' days' : 'e.g. 2 weeks'}" value="${esc(r.buildTime || '')}"></label>
+        </div>
+        <div class="row2">
+          <label class="f">Hours their automations save per week<input data-k="hoursSaved" inputmode="decimal" placeholder="${c.savedSuggest ? 'about ' + c.savedSuggest : 'e.g. 5'}" value="${esc(r.hoursSaved || '')}"></label>
+          <label class="f">Online listing check (filled by Claude)<textarea data-k="findings" placeholder="One finding per line, e.g. Apple Maps listing is unclaimed">${esc(r.findings || '')}</textarea></label>
+        </div>
+        <p class="hint">Everything here flows into the Audit &amp; proposal tab automatically.</p>
+      </div>
+      <div class="confirmdel" id="delbox"><button class="btn" data-del>Delete request</button></div>
+    </div>`;
+  }
+
+  // ---------- audit & proposal ----------
+  function auditCSS() { return `
+    .au{color:#14213d;font:14px/1.5 "Public Sans",-apple-system,Arial,sans-serif}
+    .au h1,.au h2,.au h3{font-family:"Archivo","Helvetica Neue",Arial,sans-serif;margin:0;color:#14213d}
+    .au .k{letter-spacing:.3em;text-transform:uppercase;font-size:11px;font-weight:700;color:#3a3fc4}
+    .au .cover h1{font-size:30px;margin:6px 0 4px}.au .cover p{color:#5b6275;margin:0}
+    .au .facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px 24px;border-top:3px solid #14213d;margin-top:16px;padding-top:12px}
+    .au .facts b{display:block;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:#5b6275}
+    .au .facts div{overflow-wrap:anywhere}
+    .au .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin-top:16px}
+    .au .tiles div{background:#f4f5fa;border-radius:8px;padding:10px 12px}.au .tiles strong{display:block;font-family:"Archivo",Arial,sans-serif;font-size:21px}.au .tiles span{font-size:12px;color:#5b6275}
+    .au section{margin-top:24px}.au h2{font-size:20px;margin:3px 0 6px}.au .lead{color:#5b6275;margin:0 0 10px}
+    .au blockquote{margin:6px 0 0;padding:10px 14px;border-left:4px solid #3a3fc4;background:#f4f5fa;border-radius:0 8px 8px 0;font-style:italic}
+    .au .item{border:1px solid #d9dce5;border-left:4px solid #d49b00;border-radius:6px;padding:8px 12px;margin:7px 0}.au .item.good{border-left-color:#1d6b3a}
+    .au table{width:100%;border-collapse:collapse;margin:8px 0;font-size:13px}
+    .au th{text-align:left;background:#14213d;color:#fff;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;padding:6px 8px}.au td{border-bottom:1px solid #d9dce5;padding:7px 8px;vertical-align:top;overflow-wrap:anywhere}
+    .au td.p{white-space:nowrap;font-weight:700}
+    .au .step{display:grid;grid-template-columns:30px 1fr;gap:10px;margin:9px 0}.au .step .n{width:26px;height:26px;border-radius:6px;background:#3a3fc4;color:#fff;font-weight:700;text-align:center;line-height:26px}
+    .au .step p{margin:2px 0 0}.au .note{background:#f4f5fa;border-radius:6px;padding:9px 12px;font-size:13px;margin-top:10px}
+    .au .foot{margin-top:24px;border-top:1px solid #d9dce5;padding-top:8px;font-size:11.5px;color:#5b6275}`; }
+  function proposalBody(r) {
+    const c = calc(r); const biz = r.business || r.name || 'Your business';
+    const findings = String(r.findings || '').split('\n').map(s => s.replace(/^[•\-\s]+/, '').trim()).filter(Boolean);
+    const quick = [];
+    if (!r.website) quick.push('No website was given. Customers who search for you may only find directory and map listings.');
+    if (r.app) quick.push(`You mentioned an app (${r.app}). We will review how it works today as part of the audit.`);
+    const hrs = parseFloat(r.hoursSaved) || c.savedSuggest;
+    const descr = {
+      'Online booking + reminders': 'Customers book online any time; confirmation and day-before reminder texts cut no-shows.',
+      'Missed-call text-back': 'Every missed caller gets a text with your booking link within seconds.',
+      'Review requests': 'A thank-you text with your review link after each visit.',
+      'Rebooking nudges': 'A friendly "time to come back?" text a few weeks after each visit.',
+      'Invoices & payment reminders': 'Invoices go out on their own, with polite reminders until they are paid.',
+      'Data entry / records': 'Customer and job records update themselves instead of being typed in twice.',
+      'Estimates & quotes': 'Quote requests come in with the details you need and get a fast, consistent reply.',
+      'Custom workflow': 'A workflow built around the specific task you asked us to take off your plate.',
+    };
+    const wf = (r.scope && r.scope.wf) || [];
+    return `<div class="au">
+      <div class="cover"><div class="k">Audit &amp; Proposal</div><h1>${esc(biz)}</h1>
+        <p>What you asked for, what we found, and exactly what we would build for ${esc(biz)}.</p>
+        <div class="facts"><div><b>Prepared for</b>${esc(r.name || '—')}</div><div><b>Contact</b>${esc(r.contact || '—')}</div><div><b>Website</b>${esc(r.website || 'None given')}</div><div><b>App</b>${esc(r.app || 'None given')}</div></div>
+        <div class="tiles">
+          <div><strong>${c.items.length ? (r.quote ? esc(r.quote) : money(c.lo) + '–' + money(c.hi)) : 'TBD'}</strong><span>${r.quote ? 'your quote' : 'typical setup range'}</span></div>
+          <div><strong>${esc(r.buildTime || (c.items.length ? c.dLo + '–' + c.dHi + ' days' : 'TBD'))}</strong><span>to build</span></div>
+          <div><strong>${hrs ? '~' + hrs + ' hrs/week' : 'TBD'}</strong><span>time saved</span></div>
+          <div><strong>${c.monthly ? '$' + c.monthly + '/mo' : 'None'}</strong><span>optional monthly</span></div>
+        </div></div>
+      <section><div class="k">Section 1</div><h2>What you asked for</h2>${r.needs ? `<blockquote>${esc(r.needs)}</blockquote>` : '<p class="lead">We will go over your goals together at the free audit.</p>'}</section>
+      <section><div class="k">Section 2</div><h2>What we found</h2>
+        ${findings.length ? findings.map(f => `<div class="item">${esc(f)}</div>`).join('') : `<p class="lead">Before our walkthrough we check your Google, Apple Maps and Yelp listings and your website for wrong hours, old phone numbers and missing information.</p>${quick.map(q => `<div class="item">${esc(q)}</div>`).join('')}`}</section>
+      <section><div class="k">Section 3</div><h2>What we would build</h2>
+        ${c.items.length ? '' : '<p class="lead">We will recommend a setup after the free audit.</p>'}
+        ${wf.length ? `<div class="step"><div class="n">1</div><div><b>Your dashboard</b><p>One screen built for ${esc(biz)}: what is happening today and what your automations did for you.</p></div></div>` + wf.map((w, i) => `<div class="step"><div class="n">${i + 2}</div><div><b>${esc(w)}</b><p>${esc(descr[w] || '')}</p></div></div>`).join('') : ''}
+        ${c.items.filter(i => !/^Your dashboard/.test(i[0])).map((i, k) => `<div class="step"><div class="n">${wf.length + k + (wf.length ? 2 : 1)}</div><div><b>${esc(i[0])}</b><p>${esc(i[1])}</p></div></div>`).join('')}</section>
+      <section><div class="k">Section 4</div><h2>Timeline and time saved</h2>
+        <table><tr><th>What</th><th>Estimate</th></tr>
+          <tr><td>Build time, from go-ahead to live</td><td class="p">${esc(r.buildTime || (c.items.length ? c.dLo + '–' + c.dHi + ' business days' : 'Set after the audit'))}</td></tr>
+          <tr><td>Time your automations save you</td><td class="p">${hrs ? 'about ' + hrs + ' hours a week (~' + Math.round(hrs * 4.3) + ' a month)' : 'Set after the audit'}</td></tr></table></section>
+      <section><div class="k">Section 5</div><h2>Investment</h2>
+        ${c.items.length ? `<table><tr><th>Item</th><th>Typical range</th></tr>${c.items.map(i => `<tr><td><b>${esc(i[0])}</b><br><span style="color:#5b6275">${esc(i[1])}</span></td><td class="p">${i[2] ? money(i[2]) + '–' + money(i[3]) : '$0 down'}</td></tr>`).join('')}
+          <tr><td><b>Setup total</b></td><td class="p">${r.quote ? esc(r.quote) + ' (your quote)' : money(c.lo) + '–' + money(c.hi)}</td></tr>
+          ${c.monthly ? `<tr><td><b>Monthly (optional)</b><br><span style="color:#5b6275">Care, texting and software costs${(r.scope || {}).site === 'monthly' ? ', website hosting and edits' : ''}</span></td><td class="p">$${c.monthly}/mo</td></tr>` : ''}</table>` : '<p class="lead">Pricing follows the free audit.</p>'}
+        <div class="note">Every business is different, so final pricing can come in lower or higher than these ranges. You get a fixed quote before any work starts, care is optional, and we show you a working demo before you pay anything.</div></section>
+      <section><div class="k">Next step</div><h2>Your free audit</h2><p class="lead">${r.auditDate ? 'We are scheduled for ' + esc(nice(r.auditDate)) + '. ' : ''}We come to your business, see how your day runs, and confirm the plan and the fixed quote.</p></section>
+      <div class="foot">FutureClarity Technologies · (818) 939-7964 · beng@futureclaritytechnologies.com · Prepared ${esc(nice(today()))}</div></div>`;
+  }
+  // Print: load the proposal into a hidden frame; it opens the print window by itself once loaded.
+  function printDoc(html) {
+    const old = $('printFrame'); if (old) old.remove();
+    const f = document.createElement('iframe'); f.id = 'printFrame'; f.setAttribute('aria-hidden', 'true');
+    f.style.cssText = 'position:fixed;right:0;bottom:0;width:0;height:0;border:0';
+    f.srcdoc = html; document.body.appendChild(f);
+  }
+  function proposalDoc(r) {
+    return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(r.business || 'Proposal')} · Audit & Proposal</title>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Public+Sans:wght@400;600;700&display=swap">
+      <style>body{margin:0;background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}main{max-width:820px;margin:0 auto;padding:36px 28px}@page{size:Letter;margin:.5in}.bar{position:sticky;top:0;display:flex;gap:12px;align-items:center;justify-content:space-between;background:#14213d;color:#fff;padding:10px 16px;font:600 14px Arial,sans-serif}.bar button{background:#fff;color:#14213d;border:0;border-radius:6px;padding:8px 16px;font:700 14px Arial,sans-serif;cursor:pointer}@media print{.bar{display:none}main{padding:0;max-width:none}.au section,.au table,.au .step,.au .item{break-inside:avoid}}${auditCSS()}</style></head>
+      <body><div class="bar"><span>Print-ready proposal · ${esc(r.business || '')}</span><button onclick="print()">Print</button></div><main>${proposalBody(r)}</main><script>window.addEventListener('load',function(){setTimeout(function(){window.print()},500)})<\/script></body></html>`;
+  }
+  const st = document.createElement('style'); st.textContent = auditCSS(); document.head.appendChild(st);
+
+  // ---------- add request ----------
+  function parsePaste(t) {
+    const out = {}; const map = [['name', /^(your\s+)?name$/i], ['business', /^business(\s+name)?$/i], ['contact', /^(email\s*(or|\/)\s*phone|contact|phone|email)$/i], ['website', /^website$/i], ['app', /^app(\s+name)?$/i], ['wfline', /^workflows?$/i], ['siteline', /^website\s+work$/i], ['appline', /^app\s+cleanup$/i], ['careline', /^monthly\s+care$/i], ['estline', /^estimate(\s+shown)?$/i], ['needs', /^(what\s+(they|i|we)\s+need|needs|message|what eats up your week\??)$/i]];
+    let last = null;
+    t.split(/\r?\n/).forEach(line => {
+      const m = line.match(/^\s*([A-Za-z \/?]+?)\s*:\s*(.*)$/);
+      const k = m && map.find(([, re]) => re.test(m[1].trim()));
+      if (k) { last = k[0]; out[last] = m[2].trim(); }
+      else if (last === 'needs' && line.trim()) out.needs += (out.needs ? '\n' : '') + line.trim();
+    });
+    if (out.website && /^(none|n\/a|-)$/i.test(out.website)) out.website = '';
+    if (out.app && /^(none|n\/a|-)$/i.test(out.app)) out.app = '';
+    if (out.wfline !== undefined || out.siteline !== undefined || out.appline !== undefined || out.careline !== undefined) {
+      const wf = String(out.wfline || '').split(/[;,]/).map(x => x.trim()).map(x => (WORKFLOWS.find(w => w[0].toLowerCase() === x.toLowerCase()) || [])[0]).filter(Boolean).slice(0, 5);
+      const sl = String(out.siteline || '').toLowerCase();
+      out.scope = { wf, site: /landing/.test(sl) ? 'landing' : /small/.test(sl) ? 'small' : /monthly/.test(sl) ? 'monthly' : '', app: /^y/i.test(out.appline || ''), care: /^y/i.test(out.careline || '') && wf.length > 0 };
+    }
+    return out;
+  }
+  const A = ['name', 'business', 'contact', 'website', 'app', 'btype', 'needs'];
+  let addScope = null, addEst = '';
+  function openAdd() { addScope = null; addEst = ''; $('a-scope').hidden = true; A.forEach(k => $('a-' + k).value = ''); $('a-paste').value = ''; $('a-source').value = 'Website form'; $('a-err').hidden = true; $('addLayer').hidden = false; document.body.style.overflow = 'hidden'; setTimeout(() => $('a-paste').focus(), 30); }
+  function closeAdd() { $('addLayer').hidden = true; if ($('reqLayer').hidden) document.body.style.overflow = ''; }
+  $('a-paste').addEventListener('input', e => {
+    const p = parsePaste(e.target.value); A.forEach(k => { if (p[k] && $('a-' + k)) $('a-' + k).value = p[k]; });
+    addScope = p.scope || null; addEst = p.estline || '';
+    const box = $('a-scope');
+    if (addScope) { const parts = [...addScope.wf]; if (addScope.site) parts.push({ landing: 'Landing page', small: 'Small website', monthly: 'Website, pay monthly' }[addScope.site]); if (addScope.app) parts.push('App cleanup'); if (addScope.care) parts.push('Monthly care');
+      box.textContent = 'They picked: ' + (parts.length ? parts.join(', ') : 'nothing yet (not sure)') + (addEst ? ' · they saw ' + addEst : ''); box.hidden = false; } else box.hidden = true;
+  });
+  $('a-save').addEventListener('click', async () => {
+    const d = Object.fromEntries(A.map(k => [k, $('a-' + k).value.trim()]));
+    if (!(d.business || d.name) || !d.contact) { $('a-err').hidden = false; return; }
+    if (!db) { setSave('Sign in to save requests.', true); return; }
+    const btn = $('a-save'); btn.disabled = true; setSave('Saving…');
+    try {
+      const row = await store.add({ ...d, source: $('a-source').value, status: 'New', emailed: 'No', scope: addScope || { wf: [], site: '', app: !!d.app, care: false }, ...(addEst ? { estShown: addEst } : {}) });
+      if (!reqs.find(x => x.id === row.id)) reqs.unshift(row);
+      setSave('Request saved'); closeAdd(); renderBoard(); openReq(row.id);
+    } catch (e) { setSave('Could not save. Try again.', true); }
+    btn.disabled = false;
+  });
+
+  // ---------- events ----------
+  $('addBtn').addEventListener('click', openAdd);
+  $('board').addEventListener('click', e => { const b = e.target.closest('[data-w]'); if (!b) return; filter = filter === b.dataset.w ? '' : b.dataset.w; renderBoard(); renderList(); });
+  $('reqs').addEventListener('click', e => { const b = e.target.closest('[data-open]'); if (b) openReq(b.dataset.open); });
+  document.addEventListener('click', e => { const c = e.target.closest('[data-close]'); if (!c) return; if (c.dataset.close === 'req') closeReq(); else closeAdd(); });
+  document.addEventListener('keydown', e => { if (e.key !== 'Escape') return; if (!$('addLayer').hidden) closeAdd(); else if (!$('reqLayer').hidden) closeReq(); });
+  document.querySelector('.tabs').addEventListener('click', e => { const b = e.target.closest('[data-tab]'); if (!b) return; flushAll(); tab = b.dataset.tab; renderReq(); $('reqBody').scrollTop = 0; });
+  $('reqBody').addEventListener('click', e => {
+    const r = reqs.find(x => x.id === openId); if (!r) return;
+    const s = e.target.closest('[data-set]');
+    if (s) { const k = s.dataset.set, v = r[k] === s.dataset.v ? '' : s.dataset.v; const patch = { [k]: v }; if (k === 'emailed' && v === 'Yes' && !r.emailedDate) patch.emailedDate = today(); if (k === 'emailed' && v === 'Yes' && (r.status || 'New') === 'New') patch.status = 'Contacted'; write(openId, patch); renderReq(); return; }
+    const w = e.target.closest('[data-wf]');
+    if (w) { const sc = { ...(r.scope || {}) }; let wf = [...(sc.wf || [])]; const name = w.dataset.wf; if (wf.includes(name)) wf = wf.filter(x => x !== name); else { if (wf.length >= 5) { setSave('Up to 5 workflows per package.', true); return; } wf.push(name); } sc.wf = wf; if (!wf.length) sc.care = false; write(openId, { scope: sc }); renderReq(); return; }
+    if (e.target.closest('[data-copy]')) { navigator.clipboard.writeText(r.contact || '').then(() => setSave('Copied'), () => setSave('Select the contact above to copy it.')); return; }
+    if (e.target.closest('[data-print]')) { flushAll(); printDoc(proposalDoc(r)); return; }
+    if (e.target.closest('[data-del]')) { $('delbox').innerHTML = '<span>Delete this request for good?</span><button class="btn" data-delno>Keep it</button><button class="btn" data-delyes style="border-color:var(--bad);color:var(--bad)">Delete</button>'; return; }
+    if (e.target.closest('[data-delno]')) { renderReq(); return; }
+    if (e.target.closest('[data-delyes]')) { const id = openId; closeReq(); store.remove(id).then(() => setSave('Request deleted')).catch(() => setSave('Could not delete. Try again.', true)); return; }
+  });
+  $('reqBody').addEventListener('change', e => {
+    const r = reqs.find(x => x.id === openId); if (!r) return; const el = e.target;
+    if (el.dataset.site !== undefined) { write(openId, { scope: { ...(r.scope || {}), site: el.dataset.site } }); renderReq(); return; }
+    if (el.hasAttribute('data-app')) { write(openId, { scope: { ...(r.scope || {}), app: el.checked } }); renderReq(); return; }
+    if (el.hasAttribute('data-care')) { write(openId, { scope: { ...(r.scope || {}), care: el.checked } }); renderReq(); return; }
+    if (el.type === 'date' && el.dataset.k) { write(openId, { [el.dataset.k]: el.value, ...(el.dataset.k === 'emailedDate' && el.value ? { emailed: 'Yes' } : {}) }); return; }
+  });
+  $('reqBody').addEventListener('input', e => { const el = e.target; const k = el.dataset.k; if (!k || el.type === 'date') return; el.dataset.dirty = '1'; const id = openId; writeSoon(id, () => { delete el.dataset.dirty; return { [k]: el.value }; }, id + k); });
+  $('reqBody').addEventListener('focusout', e => { const el = e.target; const k = el.dataset.k; if (!k || el.type === 'date' || !el.dataset.dirty) return; clearTimeout(timers.get(openId + k)); timers.delete(openId + k); delete el.dataset.dirty; write(openId, { [k]: el.value }); });
+
+  // ---------- sign-in ----------
+  let watching = false, pendingEmail = '';
+  function showApp(email) {
+    $('loginView').hidden = true; $('app').hidden = false; $('who').textContent = email; db = store;
+    if (watching) return; watching = true;
+    store.watch(rows => {
+      reqs = rows.map(r => ({ ...r, ...(local.get(r.id) || {}) })); loaded = true;
+      renderBoard(); renderList();
+      if (openId && !editing()) { if (!reqs.find(r => r.id === openId)) closeReq(); else renderReq(); }
+    }, () => setSave('Lost connection. Reload the page.', true));
+  }
+  function showLogin() {
+    if (!$('reqLayer').hidden) closeReq(); closeAdd();
+    db = null; $('app').hidden = true; $('loginView').hidden = false; $('loginForm').hidden = false; $('sentView').hidden = true;
+  }
+  $('loginForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const email = $('l-email').value.trim(), msg = $('l-msg'), btn = $('l-send');
+    if (!/^\S+@\S+\.\S+$/.test(email)) { msg.textContent = 'Enter your work email.'; msg.hidden = false; return; }
+    msg.hidden = true; btn.disabled = true; btn.textContent = 'Sending…';
+    store.signIn(email).then(res => {
+      pendingEmail = email; $('sentTo').textContent = email; $('demoOpen').hidden = !(res && res.demo);
+      $('loginForm').hidden = true; $('sentView').hidden = false;
+    }).catch(() => { msg.textContent = 'That email is not on the team list, or the link could not be sent. Check it and try again.'; msg.hidden = false; })
+      .then(() => { btn.disabled = false; btn.textContent = 'Email me a sign-in link'; });
+  });
+  $('demoOpen').addEventListener('click', () => store.demoConfirm(pendingEmail));
+  $('sentBack').addEventListener('click', () => { $('sentView').hidden = true; $('loginForm').hidden = false; $('l-email').focus(); });
+  $('signOut').addEventListener('click', () => store.signOut());
+
+  $('demoBanner').hidden = store.live;
+  renderBoard(); renderList();
+  store.onAuth(email => { if (email) showApp(email); else showLogin(); });
+})();
+</script>
+</body>
+</html>

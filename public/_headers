@@ -40,3 +40,24 @@
   Cache-Control: public, max-age=0, must-revalidate
 /*.html
   Cache-Control: public, max-age=0, must-revalidate
+
+# Step 2 of the audit booking and the team dashboard are app pages, not
+# content: keep them out of search results. noindex (not a robots.txt
+# Disallow) so crawlers can still fetch them and see the instruction.
+# Cloudflare Pages serves /plan.html at /plan, so both paths are listed.
+/plan
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: public, max-age=0, must-revalidate
+/plan.html
+  X-Robots-Tag: noindex, nofollow
+/dashboard
+  X-Robots-Tag: noindex, nofollow
+/dashboard/*
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: public, max-age=0, must-revalidate
+
+# Site settings and the data layer must never be served stale after an edit.
+/fc-config.js
+  Cache-Control: public, max-age=0, must-revalidate
+/fc-store.js
+  Cache-Control: public, max-age=0, must-revalidate
