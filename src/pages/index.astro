@@ -537,12 +537,12 @@ const FORMSPREE_ENDPOINT = 'https://formspree.io/f/movkledr';
   // submitting opens /dashboard/ instead of sending a lead. Only the SHA-256
   // of the phrase is in the page, so it cannot be read from the source.
   // This is a shortcut, not the lock: /dashboard/ still requires a team sign-in.
-  // To change it (type it lowercase, single spaces):
+  // Capitals and spaces are ignored. To change it (type it lowercase, no spaces):
   //   printf '%s' 'your new phrase' | sha256sum
-  const DASHBOARD_PHRASE_SHA256 = '70fa926125c40651cd095ca1a5f78ae6e1b78af96eb739df3a353606f1baefd3';
+  const DASHBOARD_PHRASE_SHA256 = '9826ccfe35c833d112e7c1316c26bf509048227c159967f72b3719d29c27f56f';
 
   async function isDashboardPhrase(text: string) {
-    const norm = text.trim().toLowerCase().replace(/\s+/g, ' ');
+    const norm = text.toLowerCase().replace(/\s+/g, '');
     if (!norm || !window.crypto?.subtle) return false;
     const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(norm));
     const hex = Array.from(new Uint8Array(digest), (b) => b.toString(16).padStart(2, '0')).join('');
