@@ -423,6 +423,8 @@ import Footer from '../components/Footer.astro';
   </div>
 </Layout>
 
+<script is:inline src="/fc-config.js"></script>
+
 <script>
   // ---- in-page navigation -------------------------------------------------
   const header = document.querySelector('header')!;
@@ -516,20 +518,30 @@ import Footer from '../components/Footer.astro';
 
   const form = document.getElementById('lead') as HTMLFormElement | null;
 
-  // Team shortcut: typing the dashboard phrase into the message box and
-  // submitting opens /dashboard/ instead of sending a lead. Only the SHA-256
-  // of the phrase is in the page, so it cannot be read from the source.
-  // This is a shortcut, not the lock: /dashboard/ still requires a team sign-in.
-  // Capitals and spaces are ignored. To change it (type it lowercase, no spaces):
-  //   printf '%s' 'your new phrase' | sha256sum
-  const DASHBOARD_PHRASE_SHA256 = '9826ccfe35c833d112e7c1316c26bf509048227c159967f72b3719d29c27f56f';
+  // Team shortcut: typing the dashboard code as the whole message opens
+  // /dashboard/ instead of booking. The code is checked by the database
+  // (supabase/dashboard_code.sql); neither the code nor a hash of it is in
+  // this page. Only a short single-word message is checked, so real
+  // enquiries never reach the database from here.
+  const CODE_KEY = 'fc-dashboard-code';
 
-  async function isDashboardPhrase(text: string) {
-    const norm = text.toLowerCase().replace(/\s+/g, '');
-    if (!norm || !window.crypto?.subtle) return false;
-    const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(norm));
-    const hex = Array.from(new Uint8Array(digest), (b) => b.toString(16).padStart(2, '0')).join('');
-    return hex === DASHBOARD_PHRASE_SHA256;
+  async function tryDashboardCode(text: string) {
+    const t = text.trim();
+    if (t.length < 6 || t.length > 64 || /\s/.test(t)) return false;
+    const cfg = (window as any).FC_CONFIG;
+    if (!cfg?.supabaseUrl || !cfg?.supabaseKey) return false;
+    try {
+      const res = await fetch(cfg.supabaseUrl.replace(/\/$/, '') + '/rest/v1/rpc/dashboard_check', {
+        method: 'POST',
+        headers: { apikey: cfg.supabaseKey, Authorization: `Bearer ${cfg.supabaseKey}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ code: t }),
+      });
+      if (!res.ok || (await res.json()) !== true) return false;
+      try { localStorage.setItem(CODE_KEY, t); } catch {}
+      return true;
+    } catch {
+      return false;
+    }
   }
 
   if (form) {
@@ -538,7 +550,7 @@ import Footer from '../components/Footer.astro';
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      if (await isDashboardPhrase(val('f-msg'))) {
+      if (await tryDashboardCode(val('f-msg'))) {
         window.location.href = '/dashboard/';
         return;
       }
