@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Lead Finder</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="/css/app.css">
+<script type="module" src="/js/app/main.js"></script>
+</head>
+<body>
+<div class="demo-banner" id="demoBanner" hidden>Demo: fictional businesses, canned website checks, and a call list kept in this browser. <a href="/">About this demo</a></div>
+
+<div class="login" id="loginView" hidden>
+  <form class="box" id="loginForm" novalidate>
+    <div class="k">Team</div>
+    <h1>Lead Finder</h1>
+    <p>Enter the dashboard code. This device will remember it until you sign out.</p>
+    <label class="f">Dashboard code<input id="l-code" type="password" autocomplete="current-password" placeholder="Dashboard code"></label>
+    <button class="btn primary" id="l-send" type="submit">Open</button>
+    <p class="msg" id="l-msg" role="alert" hidden></p>
+  </form>
+</div>
+
+<div class="wrap" id="app" hidden>
+  <header class="top">
+    <div>
+      <h1>Lead Finder</h1>
+      <p>Local businesses whose websites are broken, parked or out of date, scored and ready to call</p>
+    </div>
+    <div class="hbtns">
+      <span class="save" id="save" aria-live="polite"></span>
+      <button class="btn" id="addBtn" type="button">+ Add a business</button>
+      <button class="btn" id="meBtn" type="button">Your details</button>
+      <button class="btn" id="signOut" type="button">Sign out</button>
+    </div>
+  </header>
+
+  <nav class="views" aria-label="Views">
+    <button type="button" data-view="find" class="on" aria-pressed="true">Find businesses</button>
+    <button type="button" data-view="list" aria-pressed="false">Call list <span class="n" id="listCount">0</span></button>
+  </nav>
+
+  <!-- FIND -->
+  <section id="findView">
+    <form class="card" id="searchForm" novalidate>
+      <div class="step">1 · What kind of business</div>
+      <div class="vchips" id="vchips"></div>
+      <div class="vwhy" id="vwhy" hidden></div>
+      <input class="in" id="customQ" placeholder="What kind of business? e.g. HVAC, florist, nail salon" autocomplete="off" aria-label="What kind of business" hidden>
+      <div class="step">2 · Where</div>
+      <div class="searchrow">
+        <input class="in" id="area" list="areaList" placeholder="Neighborhood, city or ZIP, e.g. Van Nuys" autocomplete="off" aria-label="Neighborhood, city or ZIP">
+        <datalist id="areaList"></datalist>
+        <button class="btn primary" id="go" type="submit">Find businesses</button>
+      </div>
+      <div class="areas" id="areas"></div>
+      <div class="radius" id="radius" role="group" aria-label="How far to look"></div>
+    </form>
+
+    <div id="findNotice"></div>
+
+    <div id="resultsWrap" hidden>
+      <div class="rbar">
+        <div><h2 id="rTitle"></h2><div class="muted sub" id="rSub"></div></div>
+        <div class="toggles">
+          <label><input type="checkbox" id="hideSkip" checked> Hide chains &amp; poor fits</label>
+          <label><input type="checkbox" id="hideListed"> Hide ones already on my list</label>
+          <button class="btn sm" id="saveHot" type="button">Save all hot leads</button>
+        </div>
+      </div>
+      <div class="list" id="results"></div>
+      <div class="more"><button class="btn" id="more" type="button" hidden></button></div>
+      <p class="hint attrib" id="attrib">Business listings: <a href="https://docs.overturemaps.org/attribution/" target="_blank" rel="noopener noreferrer">Overture Maps Foundation</a>, under <a href="https://cdla.dev/permissive-2-0/" target="_blank" rel="noopener noreferrer">CDLA-Permissive-2.0</a>, with data from Meta, Microsoft, Foursquare and others. Missing a business? Add it with <b>+ Add a business</b>.</p>
+    </div>
+  </section>
+
+  <!-- CALL LIST -->
+  <section id="listView" hidden>
+    <div id="listNotice"></div>
+    <div class="board" id="board" aria-label="Call list status"></div>
+    <div class="ltools">
+      <input class="in" id="lsearch" type="search" placeholder="Search your list" aria-label="Search your list">
+      <span class="hbtns"><button class="btn sm" id="auditsBtn" type="button" title="One PDF with an audit for each business shown below, to print for a day of visits">Download audits (PDF)</button><button class="btn sm" id="csv" type="button">Download CSV</button></span>
+    </div>
+    <div class="list" id="plist"></div>
+  </section>
+</div>
+
+<!-- one business -->
+<div id="pLayer" hidden>
+  <div class="scrim" data-close="p"></div>
+  <div class="panel" role="dialog" aria-modal="true" aria-labelledby="pTitle">
+    <div class="ph"><div><h2 id="pTitle"></h2><div class="muted sub" id="pSub"></div></div><button class="btn" type="button" data-close="p">Done</button></div>
+    <div class="pbody" id="pBody"></div>
+    <div class="navbar" id="pNav"></div>
+  </div>
+</div>
+
+<!-- your details -->
+<div id="meLayer" hidden>
+  <div class="scrim" data-close="me"></div>
+  <div class="panel small" role="dialog" aria-modal="true" aria-labelledby="meTitle">
+    <div class="ph"><h2 id="meTitle">Your details</h2><button class="btn" type="button" data-close="me">Done</button></div>
+    <div class="pbody"><div class="pad">
+      <p class="hint">Printed as the sign-off at the end of each audit. Saved on this device only.</p>
+      <label class="f">Your name<input id="me-name" autocomplete="name"></label>
+      <label class="f">Sign-off, one line each<textarea id="me-sign" rows="4"></textarea></label>
+    </div></div>
+  </div>
+</div>
+
+<!-- add a business by hand -->
+<div id="addLayer" hidden>
+  <div class="scrim" data-close="add"></div>
+  <div class="panel small" role="dialog" aria-modal="true" aria-labelledby="addTitle">
+    <div class="ph"><h2 id="addTitle">Add a business</h2><button class="btn" type="button" data-close="add">Cancel</button></div>
+    <div class="pbody"><div class="pad">
+      <p class="hint">For businesses you find on Google Maps, drive past, or hear about. It goes on your call list and gets the same website check and audit.</p>
+      <label class="f">Business name<input id="n-name" autocomplete="off"></label>
+      <div class="row2"><label class="f">Kind of business<select id="n-v"></select></label><label class="f">Phone<input id="n-phone" inputmode="tel" autocomplete="off"></label></div>
+      <label class="f">Website (optional)<input id="n-web" inputmode="url" autocomplete="off" placeholder="Leave empty if they don't have one"></label>
+      <label class="f">Address (optional)<input id="n-addr" autocomplete="off"></label>
+      <div class="row2"><label class="f">Google rating (optional)<input id="n-rating" inputmode="decimal" placeholder="4.5" autocomplete="off"></label><label class="f">Google reviews (optional)<input id="n-reviews" inputmode="numeric" placeholder="120" autocomplete="off"></label></div>
+      <p class="hint bad" id="n-err" role="alert" hidden>Add at least the business name.</p>
+    </div></div>
+    <div class="navbar"><span></span><button class="btn primary" id="n-save" type="button">Save to call list</button></div>
+  </div>
+</div>
+</body>
+</html>

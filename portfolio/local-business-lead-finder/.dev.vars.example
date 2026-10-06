@@ -1,0 +1,9 @@
+# The website checker's settings for `npx wrangler pages dev dist` (copy to .dev.vars, which git
+# ignores). In production, set the same variables in the Cloudflare Pages project instead.
+
+# Your Supabase project, and its publishable key (never the secret / service_role key).
+SUPABASE_URL=https://your-project-ref.supabase.co
+SUPABASE_KEY=your-publishable-key
+
+# Optional: the User-Agent the checker sends. Say who you are and how to reach you.
+CHECK_USER_AGENT=Mozilla/5.0 (compatible; YourAgencyLeadCheck/1.0; +https://your-site.example)

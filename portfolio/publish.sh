@@ -6,7 +6,7 @@
 #   gh auth login                 # log in as your PERSONAL account first
 #   ./publish.sh --dry-run        # show what would happen
 #   ./publish.sh                  # publish everything
-#   ./publish.sh poker-room       # publish one project
+#   ./publish.sh webrtc-poker     # publish one project
 #
 # It never deletes or overwrites anything: a repository that already exists is skipped.
 set -euo pipefail
@@ -24,11 +24,11 @@ done
 
 # folder (= repository name) | description | topics | homepage
 PROJECTS=(
-  "redline-motor-club|Shopify store for a concept streetwear brand: SKU standard, tag-driven collections, and a catalog audit tool|shopify,ecommerce,merchandising,graphql,python|https://eepcnb-0u.myshopify.com"
-  "lead-finder|Finds local businesses whose websites are dead, parked or broken: Cloudflare Pages Functions, Postgres, a dependency-free PDF writer|cloudflare-pages,supabase,postgresql,javascript,pdf|"
+  "redline-shopify-store|Shopify store for a concept streetwear brand: SKU standard, tag-driven collections, and a catalog audit tool|shopify,ecommerce,merchandising,graphql,python|https://eepcnb-0u.myshopify.com"
+  "local-business-lead-finder|Finds local businesses whose websites are dead, parked or broken: Cloudflare Pages Functions, Postgres, a dependency-free PDF writer|cloudflare-pages,supabase,postgresql,javascript,pdf|"
   "legacy-tape-firmware|ESP32-S3 firmware for a cassette-style story recorder: LVGL touch UI, BLE Wi-Fi provisioning, chunked HTTPS audio upload|esp32,freertos,lvgl,embedded,arduino|"
   "plantwatch|Soil-moisture monitoring and forecast-aware watering advice from Ecowitt sensors: Supabase edge functions, a PWA and a SwiftUI app|supabase,deno,iot,swiftui,pwa|"
-  "poker-room|Peer-to-peer Texas Hold'em in the browser over WebRTC, with a tested host-authoritative game engine|typescript,webrtc,peerjs,vite,vitest|"
+  "webrtc-poker|Peer-to-peer Texas Hold'em in the browser over WebRTC, with a tested host-authoritative game engine|typescript,webrtc,peerjs,vite,vitest|"
   "assigndash|Turns course syllabi into an assignment dashboard using OpenAI structured outputs: Express and Supabase|nodejs,express,openai,supabase,javascript|"
 )
 

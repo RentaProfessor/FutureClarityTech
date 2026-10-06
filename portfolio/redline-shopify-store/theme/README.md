@@ -24,7 +24,7 @@ These files go on top of a stock Horizon 4.1.4 theme. With the
 ```sh
 git clone https://github.com/Shopify/horizon.git && cd horizon
 git checkout f63ddf8                       # "Horizon v4.1.4"
-cp -r ../redline-motor-club/theme/{config,sections,templates} .
+cp -r ../redline-shopify-store/theme/{config,sections,templates} .
 shopify theme push --unpublished --store your-store.myshopify.com
 ```
 

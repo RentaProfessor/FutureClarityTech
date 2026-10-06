@@ -1,0 +1,34 @@
+# Cloudflare Pages response headers. scripts/dev-server.mjs applies this same file locally, so a
+# Content-Security-Policy problem shows up in `npm run dev` and in the end-to-end test, not in production.
+#
+# The CSP allows no inline script or style at all: every script is an ES module from this site and
+# every style is a stylesheet. connect-src is this site only; `npm run build` adds the Supabase
+# project when SUPABASE_URL is set (scripts/build.mjs). Fonts come from Google Fonts.
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Strict-Transport-Security: max-age=31536000
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+  Cross-Origin-Opener-Policy: same-origin
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; form-action 'self'; frame-src 'none'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests
+
+# Nothing here is content-hashed, so everything revalidates: a deploy shows up on the next load,
+# and an unchanged file costs a 304.
+/
+  Cache-Control: public, max-age=0, must-revalidate
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+/js/*
+  Cache-Control: public, max-age=0, must-revalidate
+/css/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+# The app and its data are tools, not content: keep them out of search results. noindex (not a
+# robots.txt Disallow) so crawlers can still fetch them and see the instruction.
+/app/*
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: public, max-age=0, must-revalidate
+/data/*
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: public, max-age=0, must-revalidate

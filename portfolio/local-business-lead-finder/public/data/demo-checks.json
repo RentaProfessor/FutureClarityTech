@@ -1,0 +1,3799 @@
+{
+ "http://www.copperlineautocare.test/": {
+  "url": "http://www.copperlineautocare.test/",
+  "kind": "site",
+  "finalUrl": "http://www.copperlineautocare.test/",
+  "https": false,
+  "ms": 886,
+  "bytes": 1877,
+  "title": "Home",
+  "mobile": false,
+  "tel": false,
+  "bookingWords": false,
+  "tools": [],
+  "builder": "",
+  "year": 2016,
+  "thin": false,
+  "emails": [],
+  "seo": {
+   "desc": 0,
+   "noindex": false,
+   "schema": false,
+   "og": false,
+   "h1": true
+  },
+  "extras": {},
+  "phones": [],
+  "imgs": 8,
+  "noAlt": 6,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": true
+  },
+  "full": true
+ },
+ "https://www.ridgewaymotorworks.test": {
+  "url": "https://www.ridgewaymotorworks.test",
+  "kind": "parked",
+  "by": "Afternic",
+  "sale": true,
+  "finalUrl": "https://www.afternic.com/forsale/ridgewaymotorworks.test?traffic_id=daslnc&traffic_type=TDFS",
+  "domain": {
+   "name": "ridgewaymotorworks.test",
+   "registered": true,
+   "created": "2025-11-02",
+   "expires": "2026-11-02",
+   "lapsed": false,
+   "ending": false,
+   "registrar": "GoDaddy.com, LLC",
+   "parkedBy": ""
+  }
+ },
+ "https://www.bluebirdgarage.test": {
+  "url": "https://www.bluebirdgarage.test",
+  "kind": "expired",
+  "error": "it could not be reached",
+  "domain": {
+   "name": "bluebirdgarage.test",
+   "registered": true,
+   "created": "2012-07-14",
+   "expires": "2026-07-14",
+   "lapsed": true,
+   "ending": true,
+   "registrar": "Namecheap, Inc.",
+   "parkedBy": ""
+  }
+ },
+ "https://ironleafautomotive.test/": {
+  "url": "https://ironleafautomotive.test/",
+  "kind": "site",
+  "finalUrl": "https://ironleafautomotive.test/",
+  "https": true,
+  "ms": 610,
+  "bytes": 2788,
+  "title": "Ironleaf Automotive | Auto repair in Van Nuys",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": true,
+  "tools": [
+   {
+    "name": "Tekmetric",
+    "suite": true
+   }
+  ],
+  "builder": "WordPress",
+  "year": 2026,
+  "thin": false,
+  "emails": [],
+  "seo": {
+   "desc": 147,
+   "noindex": false,
+   "schema": true,
+   "og": true,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "8185550103"
+  ],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": true
+  },
+  "full": true
+ },
+ "http://www.northgatebrakeandtire.test/": {
+  "url": "http://www.northgatebrakeandtire.test/",
+  "kind": "site",
+  "finalUrl": "https://www.northgatebrakeandtire.test/",
+  "https": true,
+  "ms": 1136,
+  "bytes": 2527,
+  "title": "Home",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": false,
+  "tools": [],
+  "builder": "Wix",
+  "year": 2025,
+  "thin": false,
+  "emails": [
+   "info@northgatebrakeandtire.test"
+  ],
+  "seo": {
+   "desc": 34,
+   "noindex": true,
+   "schema": false,
+   "og": true,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "8185550104"
+  ],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": true
+  },
+  "full": true
+ },
+ "https://larkspurtransmission.test/": {
+  "url": "https://larkspurtransmission.test/",
+  "kind": "parked",
+  "finalUrl": "https://larkspurtransmission.test/",
+  "https": true,
+  "ms": 370,
+  "bytes": 225,
+  "title": "larkspurtransmission.test",
+  "by": "GoDaddy",
+  "sale": false,
+  "domain": {
+   "name": "larkspurtransmission.test",
+   "registered": true,
+   "created": "2015-04-12",
+   "expires": "2027-01-19",
+   "lapsed": false,
+   "ending": false,
+   "registrar": "GoDaddy.com, LLC",
+   "parkedBy": ""
+  }
+ },
+ "https://junipersmogandrepair.test/": {
+  "url": "https://junipersmogandrepair.test/",
+  "kind": "site",
+  "finalUrl": "https://junipersmogandrepair.test/",
+  "https": true,
+  "ms": 542,
+  "bytes": 2174,
+  "title": "Juniper Smog & Repair",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": false,
+  "tools": [],
+  "builder": "WordPress",
+  "year": 2022,
+  "thin": false,
+  "emails": [],
+  "seo": {
+   "desc": 0,
+   "noindex": false,
+   "schema": false,
+   "og": false,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "8185550106"
+  ],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": false,
+   "phone": true
+  },
+  "full": true
+ },
+ "http://www.redcanyonautoservice.test/": {
+  "url": "http://www.redcanyonautoservice.test/",
+  "kind": "placeholder",
+  "finalUrl": "http://www.redcanyonautoservice.test/",
+  "https": false,
+  "ms": 229,
+  "bytes": 159,
+  "title": "Coming Soon",
+  "reason": "coming soon",
+  "domain": {
+   "name": "redcanyonautoservice.test",
+   "registered": true,
+   "created": "2015-04-12",
+   "expires": "2027-04-12",
+   "lapsed": false,
+   "ending": false,
+   "registrar": "Squarespace Domains II LLC",
+   "parkedBy": ""
+  }
+ },
+ "http://www.silverfernautoelectric.test/": {
+  "url": "http://www.silverfernautoelectric.test/",
+  "kind": "site",
+  "finalUrl": "https://www.silverfernautoelectric.test/",
+  "https": true,
+  "ms": 1066,
+  "bytes": 2886,
+  "title": "Silver Fern Auto Electric | Auto repair in Sherman Oaks",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": true,
+  "tools": [],
+  "builder": "WordPress",
+  "year": 2026,
+  "thin": false,
+  "emails": [
+   "office@silverfernautoelectric.test"
+  ],
+  "seo": {
+   "desc": 157,
+   "noindex": false,
+   "schema": true,
+   "og": true,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "7475550190"
+  ],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": false
+  },
+  "full": true
+ },
+ "https://granitepeakauto.test/": {
+  "url": "https://granitepeakauto.test/",
+  "kind": "profile",
+  "profile": "Facebook page"
+ },
+ "https://oakhollowgarage.test/": {
+  "url": "https://oakhollowgarage.test/",
+  "kind": "site",
+  "finalUrl": "https://oakhollowgarage.test/",
+  "https": true,
+  "ms": 576,
+  "bytes": 4091,
+  "title": "Hartwell & Pine | Estate Planning Attorneys",
+  "mobile": true,
+  "tel": false,
+  "bookingWords": true,
+  "tools": [],
+  "builder": "",
+  "year": 2026,
+  "thin": false,
+  "emails": [],
+  "seo": {
+   "desc": 85,
+   "noindex": false,
+   "schema": false,
+   "og": false,
+   "h1": true
+  },
+  "extras": {},
+  "phones": [],
+  "imgs": 0,
+  "noAlt": 0,
+  "onPage": {
+   "name": false,
+   "area": false,
+   "phone": false
+  },
+  "notMine": true,
+  "full": true
+ },
+ "http://westbrookcarclinic.test": {
+  "url": "http://westbrookcarclinic.test",
+  "kind": "site",
+  "finalUrl": "https://westbrookcarclinic.test/",
+  "https": true,
+  "ms": 6593,
+  "bytes": 2734,
+  "title": "Westbrook Car Clinic | Auto repair in Van Nuys",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": true,
+  "tools": [],
+  "builder": "Squarespace",
+  "year": 2026,
+  "thin": false,
+  "emails": [],
+  "seo": {
+   "desc": 148,
+   "noindex": false,
+   "schema": true,
+   "og": true,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "8185550111"
+  ],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": true
+  },
+  "full": true
+ },
+ "https://harborlightautorepair.test/": {
+  "url": "https://harborlightautorepair.test/",
+  "kind": "unregistered",
+  "error": "it could not be reached",
+  "domain": {
+   "name": "harborlightautorepair.test",
+   "registered": false
+  }
+ },
+ "http://cobaltenginerepair.test": {
+  "url": "http://cobaltenginerepair.test",
+  "kind": "site",
+  "finalUrl": "https://cobaltenginerepair.test/",
+  "https": true,
+  "ms": 1221,
+  "bytes": 2730,
+  "title": "Cobalt Engine Repair | Auto repair in Sherman Oaks",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": true,
+  "tools": [],
+  "builder": "WordPress",
+  "year": 2026,
+  "thin": false,
+  "emails": [],
+  "seo": {
+   "desc": 152,
+   "noindex": false,
+   "schema": true,
+   "og": true,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "8185550113"
+  ],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": true
+  },
+  "full": true
+ },
+ "http://www.fireflymufflerandexhaust.test/": {
+  "url": "http://www.fireflymufflerandexhaust.test/",
+  "kind": "placeholder",
+  "finalUrl": "http://www.fireflymufflerandexhaust.test/",
+  "https": false,
+  "ms": 875,
+  "bytes": 222,
+  "title": "Welcome to nginx!",
+  "reason": "default page",
+  "domain": {
+   "name": "fireflymufflerandexhaust.test",
+   "registered": true,
+   "created": "2015-04-12",
+   "expires": "2027-04-12",
+   "lapsed": false,
+   "ending": false,
+   "registrar": "Namecheap, Inc.",
+   "parkedBy": ""
+  }
+ },
+ "https://www.lanternstreetgarage.test": {
+  "url": "https://www.lanternstreetgarage.test",
+  "kind": "site",
+  "finalUrl": "https://lanternstreetgarage-demo.wixsite.com/home",
+  "https": true,
+  "ms": 1282,
+  "bytes": 2718,
+  "title": "Lantern Street Garage | Auto repair in Lake Balboa",
+  "mobile": true,
+  "tel": false,
+  "bookingWords": true,
+  "tools": [],
+  "builder": "Wix",
+  "year": 2026,
+  "thin": false,
+  "emails": [],
+  "seo": {
+   "desc": 140,
+   "noindex": false,
+   "schema": true,
+   "og": true,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": null
+  },
+  "full": true,
+  "freeHost": "Wix",
+  "movedTo": "lanternstreetgarage-demo.wixsite.com"
+ },
+ "http://bellwetherautocare.test": {
+  "url": "http://bellwetherautocare.test",
+  "kind": "down",
+  "status": 500,
+  "error": "the page answers with error 500",
+  "domain": {
+   "name": "bellwetherautocare.test",
+   "registered": true,
+   "created": "2015-04-12",
+   "expires": "2027-04-12",
+   "lapsed": false,
+   "ending": false,
+   "registrar": "GoDaddy.com, LLC",
+   "parkedBy": ""
+  }
+ },
+ "https://www.kestreltireandwheel.test": {
+  "url": "https://www.kestreltireandwheel.test",
+  "kind": "blocked",
+  "status": 403,
+  "domain": {
+   "name": "kestreltireandwheel.test",
+   "registered": true,
+   "created": "2015-04-12",
+   "expires": "2027-04-12",
+   "lapsed": false,
+   "ending": false,
+   "registrar": "GoDaddy.com, LLC",
+   "parkedBy": ""
+  }
+ },
+ "https://tamarackautoservice.test/": {
+  "url": "https://tamarackautoservice.test/",
+  "kind": "site",
+  "finalUrl": "https://tamarackautoservice.test/",
+  "https": true,
+  "ms": 774,
+  "bytes": 2803,
+  "title": "Tamarack Auto Service | Auto repair in Van Nuys",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": true,
+  "tools": [],
+  "builder": "Squarespace",
+  "year": 2026,
+  "thin": false,
+  "emails": [],
+  "seo": {
+   "desc": 149,
+   "noindex": false,
+   "schema": false,
+   "og": true,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "8185550117"
+  ],
+  "imgs": 10,
+  "noAlt": 7,
+  "noZoom": true,
+  "filler": true,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": true
+  },
+  "full": true
+ },
+ "https://sagebrushsmogcheck.test/": {
+  "url": "https://sagebrushsmogcheck.test/",
+  "kind": "site",
+  "finalUrl": "https://sagebrushsmogcheck.test/",
+  "https": true,
+  "ms": 204,
+  "bytes": 252,
+  "title": "Sagebrush Smog Check",
+  "mobile": true,
+  "tel": false,
+  "bookingWords": false,
+  "tools": [],
+  "builder": "",
+  "year": null,
+  "thin": true,
+  "emails": [],
+  "seo": {
+   "desc": 0,
+   "noindex": false,
+   "schema": false,
+   "og": false,
+   "h1": true
+  },
+  "extras": {},
+  "phones": [],
+  "imgs": 0,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": false,
+   "phone": true
+  },
+  "full": true
+ },
+ "http://www.amberlineautomotive.test/": {
+  "url": "http://www.amberlineautomotive.test/",
+  "kind": "placeholder",
+  "finalUrl": "http://www.amberlineautomotive.test/",
+  "https": false,
+  "ms": 317,
+  "bytes": 225,
+  "title": "Account Suspended",
+  "reason": "suspended",
+  "domain": {
+   "name": "amberlineautomotive.test",
+   "registered": true,
+   "created": "2015-04-12",
+   "expires": "2027-04-12",
+   "lapsed": false,
+   "ending": false,
+   "registrar": "Tucows Domains Inc.",
+   "parkedBy": ""
+  }
+ },
+ "http://www.foxglovebrakecenter.test/": {
+  "url": "http://www.foxglovebrakecenter.test/",
+  "kind": "placeholder",
+  "reason": "host home",
+  "by": "Squarespace",
+  "finalUrl": "https://www.squarespace.com/",
+  "domain": {
+   "name": "foxglovebrakecenter.test",
+   "registered": true,
+   "created": "2015-04-12",
+   "expires": "2027-04-12",
+   "lapsed": false,
+   "ending": false,
+   "registrar": "Squarespace Domains II LLC",
+   "parkedBy": ""
+  }
+ },
+ "http://www.quarryroadgarage.test/": {
+  "url": "http://www.quarryroadgarage.test/",
+  "kind": "down",
+  "error": "it redirects in a loop"
+ },
+ "https://www.saltgrassautorepair.test": {
+  "url": "https://www.saltgrassautorepair.test",
+  "kind": "parked",
+  "error": "it could not be reached",
+  "by": "ParkingCrew",
+  "sale": false,
+  "domain": {
+   "name": "saltgrassautorepair.test",
+   "registered": true,
+   "created": "2015-04-12",
+   "expires": "2027-04-12",
+   "lapsed": false,
+   "ending": false,
+   "registrar": "Dynadot Inc",
+   "parkedBy": "ParkingCrew"
+  }
+ },
+ "https://riverbendtransmission.test/": {
+  "url": "https://riverbendtransmission.test/",
+  "kind": "down",
+  "error": "it did not load within 7 seconds",
+  "domain": {
+   "name": "riverbendtransmission.test",
+   "registered": true,
+   "created": "2015-04-12",
+   "expires": "2027-04-12",
+   "lapsed": false,
+   "ending": false,
+   "registrar": "GoDaddy.com, LLC",
+   "parkedBy": ""
+  }
+ },
+ "http://thistleautoworks.test": {
+  "url": "http://thistleautoworks.test",
+  "kind": "expired",
+  "error": "it could not be reached",
+  "domain": {
+   "name": "thistleautoworks.test",
+   "registered": true,
+   "created": "2019-08-30",
+   "expires": "2026-08-30",
+   "lapsed": true,
+   "ending": false,
+   "registrar": "GoDaddy.com, LLC",
+   "parkedBy": ""
+  }
+ },
+ "https://www.wildrosemotorrepair.test": {
+  "url": "https://www.wildrosemotorrepair.test",
+  "kind": "parked",
+  "finalUrl": "https://www.wildrosemotorrepair.test/",
+  "https": true,
+  "ms": 288,
+  "bytes": 280,
+  "title": "wildrosemotorrepair.test is for sale",
+  "by": "Sedo",
+  "sale": true,
+  "domain": {
+   "name": "wildrosemotorrepair.test",
+   "registered": true,
+   "created": "2015-04-12",
+   "expires": "2027-04-12",
+   "lapsed": false,
+   "ending": false,
+   "registrar": "Sedo GmbH",
+   "parkedBy": "Sedo"
+  }
+ },
+ "https://marigoldoilandlube.test/": {
+  "url": "https://marigoldoilandlube.test/",
+  "kind": "site",
+  "finalUrl": "https://marigoldoilandlube.test/",
+  "https": true,
+  "ms": 581,
+  "bytes": 2802,
+  "title": "Marigold Oil & Lube | Auto repair in North Hollywood",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": true,
+  "tools": [],
+  "builder": "Squarespace",
+  "year": 2026,
+  "thin": false,
+  "emails": [],
+  "seo": {
+   "desc": 154,
+   "noindex": false,
+   "schema": true,
+   "og": true,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "8185550126"
+  ],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": true
+  },
+  "full": true
+ },
+ "http://lubedepotexpress14.test": {
+  "url": "http://lubedepotexpress14.test",
+  "kind": "site",
+  "finalUrl": "https://lubedepotexpress14.test/",
+  "https": true,
+  "ms": 805,
+  "bytes": 2722,
+  "title": "Lube Depot Express #14 | Auto repair in Van Nuys",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": true,
+  "tools": [],
+  "builder": "WordPress",
+  "year": 2026,
+  "thin": false,
+  "emails": [],
+  "seo": {
+   "desc": 150,
+   "noindex": false,
+   "schema": true,
+   "og": true,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "8185550127"
+  ],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": true
+  },
+  "full": true
+ },
+ "https://www.hollowellautorepair.test": {
+  "url": "https://www.hollowellautorepair.test",
+  "kind": "site",
+  "finalUrl": "https://www.hollowellauto.test/",
+  "https": true,
+  "ms": 1295,
+  "bytes": 2711,
+  "title": "Hollowell Auto Repair | Auto repair in Encino",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": true,
+  "tools": [],
+  "builder": "WordPress",
+  "year": 2026,
+  "thin": false,
+  "emails": [],
+  "seo": {
+   "desc": 147,
+   "noindex": false,
+   "schema": true,
+   "og": true,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "8185550128"
+  ],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": true
+  },
+  "full": true,
+  "movedTo": "hollowellauto.test"
+ },
+ "https://www.brightwaterautoclinic.test": {
+  "url": "https://www.brightwaterautoclinic.test",
+  "kind": "site",
+  "finalUrl": "https://www.brightwaterautoclinic.test/",
+  "https": true,
+  "ms": 422,
+  "bytes": 2803,
+  "title": "Brightwater Auto Clinic | Auto repair in Valley Village",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": true,
+  "tools": [],
+  "builder": "Squarespace",
+  "year": 2026,
+  "thin": false,
+  "emails": [],
+  "seo": {
+   "desc": 157,
+   "noindex": false,
+   "schema": true,
+   "og": true,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "8185550130"
+  ],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": true
+  },
+  "full": true
+ },
+ "http://corvidmotorworks.test": {
+  "url": "http://corvidmotorworks.test",
+  "kind": "site",
+  "finalUrl": "http://corvidmotorworks.test/",
+  "https": false,
+  "ms": 820,
+  "bytes": 1949,
+  "title": "Home",
+  "mobile": false,
+  "tel": false,
+  "bookingWords": false,
+  "tools": [],
+  "builder": "",
+  "year": 2016,
+  "thin": false,
+  "emails": [
+   "hello@corvidmotorworks.test"
+  ],
+  "seo": {
+   "desc": 0,
+   "noindex": false,
+   "schema": false,
+   "og": false,
+   "h1": true
+  },
+  "extras": {},
+  "phones": [],
+  "imgs": 8,
+  "noAlt": 6,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": true
+  },
+  "full": true
+ },
+ "https://www.halberdtruckandauto.test": {
+  "url": "https://www.halberdtruckandauto.test",
+  "kind": "site",
+  "finalUrl": "https://www.halberdtruckandauto.test/",
+  "https": true,
+  "ms": 757,
+  "bytes": 2265,
+  "title": "Halberd Truck & Auto",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": false,
+  "tools": [],
+  "builder": "WordPress",
+  "year": 2022,
+  "thin": false,
+  "emails": [
+   "office@halberdtruckandauto.test"
+  ],
+  "seo": {
+   "desc": 0,
+   "noindex": false,
+   "schema": false,
+   "og": false,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "8185550132"
+  ],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": false,
+   "phone": true
+  },
+  "full": true
+ },
+ "https://wagtailgroomingco.test/": {
+  "url": "https://wagtailgroomingco.test/",
+  "kind": "site",
+  "finalUrl": "https://wagtailgroomingco.test/",
+  "https": true,
+  "ms": 432,
+  "bytes": 2873,
+  "title": "Wagtail Grooming Co. | Dog grooming in Van Nuys",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": true,
+  "tools": [
+   {
+    "name": "MoeGo",
+    "suite": true
+   }
+  ],
+  "builder": "WordPress",
+  "year": 2026,
+  "thin": false,
+  "emails": [
+   "office@wagtailgroomingco.test"
+  ],
+  "seo": {
+   "desc": 133,
+   "noindex": false,
+   "schema": true,
+   "og": true,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "8185550133"
+  ],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": true
+  },
+  "full": true
+ },
+ "https://blueheronpetspa.test/": {
+  "url": "https://blueheronpetspa.test/",
+  "kind": "placeholder",
+  "finalUrl": "https://blueheronpetspa.test/",
+  "https": true,
+  "ms": 684,
+  "bytes": 159,
+  "title": "Coming Soon",
+  "reason": "coming soon",
+  "domain": {
+   "name": "blueheronpetspa.test",
+   "registered": true,
+   "created": "2015-04-12",
+   "expires": "2027-04-12",
+   "lapsed": false,
+   "ending": false,
+   "registrar": "Squarespace Domains II LLC",
+   "parkedBy": ""
+  }
+ },
+ "https://www.saffronpawgrooming.test": {
+  "url": "https://www.saffronpawgrooming.test",
+  "kind": "site",
+  "finalUrl": "https://www.saffronpawgrooming.test/",
+  "https": true,
+  "ms": 298,
+  "bytes": 2367,
+  "title": "Home",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": false,
+  "tools": [],
+  "builder": "Wix",
+  "year": 2025,
+  "thin": false,
+  "emails": [],
+  "seo": {
+   "desc": 32,
+   "noindex": true,
+   "schema": false,
+   "og": true,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "8185550135"
+  ],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": true
+  },
+  "full": true
+ },
+ "http://www.muddymuttwash.test/": {
+  "url": "http://www.muddymuttwash.test/",
+  "kind": "profile",
+  "profile": "Facebook page"
+ },
+ "http://corgicornergrooming.test": {
+  "url": "http://corgicornergrooming.test",
+  "kind": "site",
+  "finalUrl": "http://corgicornergrooming.test/",
+  "https": false,
+  "ms": 382,
+  "bytes": 1858,
+  "title": "Home",
+  "mobile": false,
+  "tel": false,
+  "bookingWords": false,
+  "tools": [],
+  "builder": "",
+  "year": 2016,
+  "thin": false,
+  "emails": [],
+  "seo": {
+   "desc": 0,
+   "noindex": false,
+   "schema": false,
+   "og": false,
+   "h1": true
+  },
+  "extras": {},
+  "phones": [],
+  "imgs": 8,
+  "noAlt": 6,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": true
+  },
+  "full": true
+ },
+ "https://whiskerlanepetsalon.test/": {
+  "url": "https://whiskerlanepetsalon.test/",
+  "kind": "parked",
+  "by": "Afternic",
+  "sale": true,
+  "finalUrl": "https://www.afternic.com/forsale/whiskerlanepetsalon.test?traffic_id=daslnc&traffic_type=TDFS",
+  "domain": {
+   "name": "whiskerlanepetsalon.test",
+   "registered": true,
+   "created": "2025-11-02",
+   "expires": "2026-11-02",
+   "lapsed": false,
+   "ending": false,
+   "registrar": "GoDaddy.com, LLC",
+   "parkedBy": ""
+  }
+ },
+ "https://www.pineconepetgrooming.test": {
+  "url": "https://www.pineconepetgrooming.test",
+  "kind": "site",
+  "finalUrl": "https://www.pineconepetgrooming.test/",
+  "https": true,
+  "ms": 784,
+  "bytes": 2217,
+  "title": "Pine Cone Pet Grooming",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": false,
+  "tools": [],
+  "builder": "WordPress",
+  "year": 2022,
+  "thin": false,
+  "emails": [
+   "info@pineconepetgrooming.test"
+  ],
+  "seo": {
+   "desc": 0,
+   "noindex": false,
+   "schema": false,
+   "og": false,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "8185550139"
+  ],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": false,
+   "phone": true
+  },
+  "full": true
+ },
+ "https://www.velveteargrooming.test": {
+  "url": "https://www.velveteargrooming.test",
+  "kind": "site",
+  "finalUrl": "https://www.velveteargrooming.test/",
+  "https": true,
+  "ms": 211,
+  "bytes": 2815,
+  "title": "Velvet Ear Grooming | Dog grooming in Valley Village",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": true,
+  "tools": [],
+  "builder": "Squarespace",
+  "year": 2026,
+  "thin": false,
+  "emails": [
+   "office@velveteargrooming.test"
+  ],
+  "seo": {
+   "desc": 138,
+   "noindex": false,
+   "schema": true,
+   "og": true,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "8185550141"
+  ],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": true
+  },
+  "full": true
+ },
+ "http://www.mirrorlinedetailing.test/": {
+  "url": "http://www.mirrorlinedetailing.test/",
+  "kind": "site",
+  "finalUrl": "http://www.mirrorlinedetailing.test/",
+  "https": false,
+  "ms": 600,
+  "bytes": 1981,
+  "title": "Home",
+  "mobile": false,
+  "tel": false,
+  "bookingWords": false,
+  "tools": [],
+  "builder": "",
+  "year": 2016,
+  "thin": false,
+  "emails": [
+   "contact@mirrorlinedetailing.test"
+  ],
+  "seo": {
+   "desc": 0,
+   "noindex": false,
+   "schema": false,
+   "og": false,
+   "h1": true
+  },
+  "extras": {},
+  "phones": [],
+  "imgs": 8,
+  "noAlt": 6,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": true
+  },
+  "full": true
+ },
+ "https://www.glassbeamwindowtint.test": {
+  "url": "https://www.glassbeamwindowtint.test",
+  "kind": "site",
+  "finalUrl": "https://www.glassbeamwindowtint.test/",
+  "https": true,
+  "ms": 813,
+  "bytes": 2799,
+  "title": "Glassbeam Window Tint | Auto detailing in Van Nuys",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": true,
+  "tools": [
+   {
+    "name": "Urable",
+    "suite": true
+   }
+  ],
+  "builder": "WordPress",
+  "year": 2026,
+  "thin": false,
+  "emails": [],
+  "seo": {
+   "desc": 147,
+   "noindex": false,
+   "schema": true,
+   "og": true,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "8185550143"
+  ],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": true
+  },
+  "full": true
+ },
+ "http://obsidianautospa.test": {
+  "url": "http://obsidianautospa.test",
+  "kind": "expired",
+  "error": "it could not be reached",
+  "domain": {
+   "name": "obsidianautospa.test",
+   "registered": true,
+   "created": "2012-07-14",
+   "expires": "2026-07-14",
+   "lapsed": true,
+   "ending": true,
+   "registrar": "Namecheap, Inc.",
+   "parkedBy": ""
+  }
+ },
+ "https://www.clearcoatcollective.test": {
+  "url": "https://www.clearcoatcollective.test",
+  "kind": "site",
+  "finalUrl": "https://clearcoatcollective-demo.wixsite.com/home",
+  "https": true,
+  "ms": 1189,
+  "bytes": 2808,
+  "title": "Clearcoat Collective | Auto detailing in Sherman Oaks",
+  "mobile": true,
+  "tel": false,
+  "bookingWords": true,
+  "tools": [],
+  "builder": "Wix",
+  "year": 2026,
+  "thin": false,
+  "emails": [
+   "contact@clearcoatcollective.test"
+  ],
+  "seo": {
+   "desc": 138,
+   "noindex": false,
+   "schema": true,
+   "og": true,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": null
+  },
+  "full": true,
+  "freeHost": "Wix",
+  "movedTo": "clearcoatcollective-demo.wixsite.com"
+ },
+ "http://www.polishedpinedetailing.test/": {
+  "url": "http://www.polishedpinedetailing.test/",
+  "kind": "site",
+  "finalUrl": "https://www.polishedpinedetailing.test/",
+  "https": true,
+  "ms": 1309,
+  "bytes": 2775,
+  "title": "Polished Pine Detailing | Auto detailing in North Hollywood",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": true,
+  "tools": [],
+  "builder": "WordPress",
+  "year": 2026,
+  "thin": false,
+  "emails": [],
+  "seo": {
+   "desc": 156,
+   "noindex": false,
+   "schema": true,
+   "og": true,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "7475550148"
+  ],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": false
+  },
+  "full": true
+ },
+ "https://sunstopwindowtinting.test/": {
+  "url": "https://sunstopwindowtinting.test/",
+  "kind": "parked",
+  "finalUrl": "https://sunstopwindowtinting.test/",
+  "https": true,
+  "ms": 257,
+  "bytes": 225,
+  "title": "sunstopwindowtinting.test",
+  "by": "GoDaddy",
+  "sale": false,
+  "domain": {
+   "name": "sunstopwindowtinting.test",
+   "registered": true,
+   "created": "2015-04-12",
+   "expires": "2027-01-19",
+   "lapsed": false,
+   "ending": false,
+   "registrar": "GoDaddy.com, LLC",
+   "parkedBy": ""
+  }
+ },
+ "https://lusterlabdetailing.test/": {
+  "url": "https://lusterlabdetailing.test/",
+  "kind": "site",
+  "finalUrl": "https://lusterlabdetailing.test/",
+  "https": true,
+  "ms": 803,
+  "bytes": 2469,
+  "title": "Home",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": false,
+  "tools": [],
+  "builder": "Wix",
+  "year": 2025,
+  "thin": false,
+  "emails": [
+   "hello@lusterlabdetailing.test"
+  ],
+  "seo": {
+   "desc": 32,
+   "noindex": true,
+   "schema": false,
+   "og": true,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "8185550148"
+  ],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": true
+  },
+  "full": true
+ },
+ "http://gleamhauscarcare.test": {
+  "url": "http://gleamhauscarcare.test",
+  "kind": "site",
+  "finalUrl": "https://gleamhauscarcare.test/",
+  "https": true,
+  "ms": 542,
+  "bytes": 2673,
+  "title": "Gleamhaus Car Care | Auto detailing in Encino",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": true,
+  "tools": [],
+  "builder": "WordPress",
+  "year": 2026,
+  "thin": false,
+  "emails": [],
+  "seo": {
+   "desc": 142,
+   "noindex": false,
+   "schema": true,
+   "og": true,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "8185550149"
+  ],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": true
+  },
+  "full": true
+ },
+ "https://ceramiccoastdetail.test/": {
+  "url": "https://ceramiccoastdetail.test/",
+  "kind": "site",
+  "finalUrl": "https://ceramiccoastdetail.test/",
+  "https": true,
+  "ms": 6400,
+  "bytes": 2748,
+  "title": "Ceramic Coast Detail | Auto detailing in Studio City",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": true,
+  "tools": [],
+  "builder": "Squarespace",
+  "year": 2026,
+  "thin": false,
+  "emails": [],
+  "seo": {
+   "desc": 149,
+   "noindex": false,
+   "schema": true,
+   "og": true,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "8185550150"
+  ],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": true
+  },
+  "full": true
+ },
+ "https://www.halohandwash.test": {
+  "url": "https://www.halohandwash.test",
+  "kind": "down",
+  "status": 500,
+  "error": "the page answers with error 500",
+  "domain": {
+   "name": "halohandwash.test",
+   "registered": true,
+   "created": "2015-04-12",
+   "expires": "2027-04-12",
+   "lapsed": false,
+   "ending": false,
+   "registrar": "GoDaddy.com, LLC",
+   "parkedBy": ""
+  }
+ },
+ "https://graphitewraps.test/": {
+  "url": "https://graphitewraps.test/",
+  "kind": "site",
+  "finalUrl": "https://graphitewraps.test/",
+  "https": true,
+  "ms": 614,
+  "bytes": 2166,
+  "title": "Graphite Wraps",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": false,
+  "tools": [],
+  "builder": "WordPress",
+  "year": 2022,
+  "thin": false,
+  "emails": [
+   "info@graphitewraps.test"
+  ],
+  "seo": {
+   "desc": 0,
+   "noindex": false,
+   "schema": false,
+   "og": false,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "8185550152"
+  ],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": false,
+   "phone": true
+  },
+  "full": true
+ },
+ "http://www.straightlinecollision.test/": {
+  "url": "http://www.straightlinecollision.test/",
+  "kind": "site",
+  "finalUrl": "http://www.straightlinecollision.test/",
+  "https": false,
+  "ms": 356,
+  "bytes": 2011,
+  "title": "Home",
+  "mobile": false,
+  "tel": false,
+  "bookingWords": false,
+  "tools": [],
+  "builder": "",
+  "year": 2016,
+  "thin": false,
+  "emails": [
+   "hello@straightlinecollision.test"
+  ],
+  "seo": {
+   "desc": 0,
+   "noindex": false,
+   "schema": false,
+   "og": false,
+   "h1": true
+  },
+  "extras": {},
+  "phones": [],
+  "imgs": 8,
+  "noAlt": 6,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": true
+  },
+  "full": true
+ },
+ "https://www.panelcraftcollision.test": {
+  "url": "https://www.panelcraftcollision.test",
+  "kind": "site",
+  "finalUrl": "https://www.panelcraftcollision.test/",
+  "https": true,
+  "ms": 614,
+  "bytes": 2859,
+  "title": "Panelcraft Collision | Collision repair in Lake Balboa",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": true,
+  "tools": [
+   {
+    "name": "Shopmonkey",
+    "suite": true
+   }
+  ],
+  "builder": "WordPress",
+  "year": 2026,
+  "thin": false,
+  "emails": [],
+  "seo": {
+   "desc": 161,
+   "noindex": false,
+   "schema": true,
+   "og": true,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "8185550154"
+  ],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": true
+  },
+  "full": true
+ },
+ "https://bayleafautobody.test/": {
+  "url": "https://bayleafautobody.test/",
+  "kind": "unregistered",
+  "error": "it could not be reached",
+  "domain": {
+   "name": "bayleafautobody.test",
+   "registered": false
+  }
+ },
+ "http://sablepaintandbody.test": {
+  "url": "http://sablepaintandbody.test",
+  "kind": "site",
+  "finalUrl": "https://sablepaintandbody.test/",
+  "https": true,
+  "ms": 715,
+  "bytes": 2272,
+  "title": "Sable Paint & Body",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": false,
+  "tools": [],
+  "builder": "WordPress",
+  "year": 2022,
+  "thin": false,
+  "emails": [
+   "contact@sablepaintandbody.test"
+  ],
+  "seo": {
+   "desc": 0,
+   "noindex": false,
+   "schema": false,
+   "og": false,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "8185550156"
+  ],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": false,
+   "phone": true
+  },
+  "full": true
+ },
+ "https://www.corbelcollisioncenter.test": {
+  "url": "https://www.corbelcollisioncenter.test",
+  "kind": "placeholder",
+  "reason": "host home",
+  "by": "Squarespace",
+  "finalUrl": "https://www.squarespace.com/",
+  "domain": {
+   "name": "corbelcollisioncenter.test",
+   "registered": true,
+   "created": "2015-04-12",
+   "expires": "2027-04-12",
+   "lapsed": false,
+   "ending": false,
+   "registrar": "Squarespace Domains II LLC",
+   "parkedBy": ""
+  }
+ },
+ "http://www.arrowwoodautobody.test/": {
+  "url": "http://www.arrowwoodautobody.test/",
+  "kind": "site",
+  "finalUrl": "https://www.arrowwoodautobody.test/",
+  "https": true,
+  "ms": 650,
+  "bytes": 2868,
+  "title": "Arrowwood Auto Body | Collision repair in North Hollywood",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": true,
+  "tools": [],
+  "builder": "WordPress",
+  "year": 2026,
+  "thin": false,
+  "emails": [
+   "office@arrowwoodautobody.test"
+  ],
+  "seo": {
+   "desc": 164,
+   "noindex": false,
+   "schema": true,
+   "og": true,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "8185550158"
+  ],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": true
+  },
+  "full": true
+ },
+ "http://northlightbodyandframe.test": {
+  "url": "http://northlightbodyandframe.test",
+  "kind": "blocked",
+  "status": 403,
+  "domain": {
+   "name": "northlightbodyandframe.test",
+   "registered": true,
+   "created": "2015-04-12",
+   "expires": "2027-04-12",
+   "lapsed": false,
+   "ending": false,
+   "registrar": "GoDaddy.com, LLC",
+   "parkedBy": ""
+  }
+ },
+ "https://hollowbrookcollision.test/": {
+  "url": "https://hollowbrookcollision.test/",
+  "kind": "site",
+  "finalUrl": "https://hollowbrookcollision.test/",
+  "https": true,
+  "ms": 273,
+  "bytes": 2843,
+  "title": "Hollowbrook Collision | Collision repair in Encino",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": true,
+  "tools": [],
+  "builder": "Squarespace",
+  "year": 2026,
+  "thin": false,
+  "emails": [],
+  "seo": {
+   "desc": 157,
+   "noindex": false,
+   "schema": false,
+   "og": true,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "8185550160"
+  ],
+  "imgs": 10,
+  "noAlt": 7,
+  "noZoom": true,
+  "filler": true,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": true
+  },
+  "full": true
+ },
+ "https://www.steadyhandbodyworks.test": {
+  "url": "https://www.steadyhandbodyworks.test",
+  "kind": "parked",
+  "finalUrl": "https://www.steadyhandbodyworks.test/",
+  "https": true,
+  "ms": 627,
+  "bytes": 280,
+  "title": "steadyhandbodyworks.test is for sale",
+  "by": "Sedo",
+  "sale": true,
+  "domain": {
+   "name": "steadyhandbodyworks.test",
+   "registered": true,
+   "created": "2015-04-12",
+   "expires": "2027-04-12",
+   "lapsed": false,
+   "ending": false,
+   "registrar": "Sedo GmbH",
+   "parkedBy": "Sedo"
+  }
+ },
+ "https://www.ironcranemartialarts.test": {
+  "url": "https://www.ironcranemartialarts.test",
+  "kind": "site",
+  "finalUrl": "https://www.ironcranemartialarts.test/",
+  "https": true,
+  "ms": 520,
+  "bytes": 2880,
+  "title": "Iron Crane Martial Arts | Martial arts classes in Van Nuys",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": true,
+  "tools": [
+   {
+    "name": "Zen Planner",
+    "suite": true
+   }
+  ],
+  "builder": "WordPress",
+  "year": 2026,
+  "thin": false,
+  "emails": [],
+  "seo": {
+   "desc": 149,
+   "noindex": false,
+   "schema": true,
+   "og": true,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "8185550162"
+  ],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": true
+  },
+  "full": true
+ },
+ "http://willowdragonkungfu.test": {
+  "url": "http://willowdragonkungfu.test",
+  "kind": "site",
+  "finalUrl": "http://willowdragonkungfu.test/",
+  "https": false,
+  "ms": 566,
+  "bytes": 1891,
+  "title": "Home",
+  "mobile": false,
+  "tel": false,
+  "bookingWords": false,
+  "tools": [],
+  "builder": "",
+  "year": 2016,
+  "thin": false,
+  "emails": [],
+  "seo": {
+   "desc": 0,
+   "noindex": false,
+   "schema": false,
+   "og": false,
+   "h1": true
+  },
+  "extras": {},
+  "phones": [],
+  "imgs": 8,
+  "noAlt": 6,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": true
+  },
+  "full": true
+ },
+ "https://summitridgejiujitsu.test/": {
+  "url": "https://summitridgejiujitsu.test/",
+  "kind": "site",
+  "finalUrl": "https://summitridgejiujitsu.test/",
+  "https": true,
+  "ms": 530,
+  "bytes": 2398,
+  "title": "Home",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": false,
+  "tools": [],
+  "builder": "Wix",
+  "year": 2025,
+  "thin": false,
+  "emails": [],
+  "seo": {
+   "desc": 34,
+   "noindex": true,
+   "schema": false,
+   "og": true,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "8185550164"
+  ],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": true
+  },
+  "full": true
+ },
+ "https://tidewaterboxingclub.test/": {
+  "url": "https://tidewaterboxingclub.test/",
+  "kind": "site",
+  "finalUrl": "https://tidewaterboxingclub.test/",
+  "https": true,
+  "ms": 773,
+  "bytes": 2778,
+  "title": "Tidewater Boxing Club | Martial arts classes in North Hollywood",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": true,
+  "tools": [],
+  "builder": "WordPress",
+  "year": 2026,
+  "thin": false,
+  "emails": [],
+  "seo": {
+   "desc": 154,
+   "noindex": false,
+   "schema": true,
+   "og": true,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "8185550165"
+  ],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": true
+  },
+  "full": true
+ },
+ "http://blackpinetaekwondo.test": {
+  "url": "http://blackpinetaekwondo.test",
+  "kind": "placeholder",
+  "finalUrl": "http://blackpinetaekwondo.test/",
+  "https": false,
+  "ms": 455,
+  "bytes": 159,
+  "title": "Coming Soon",
+  "reason": "coming soon",
+  "domain": {
+   "name": "blackpinetaekwondo.test",
+   "registered": true,
+   "created": "2015-04-12",
+   "expires": "2027-04-12",
+   "lapsed": false,
+   "ending": false,
+   "registrar": "Squarespace Domains II LLC",
+   "parkedBy": ""
+  }
+ },
+ "https://www.kestrelmuaythai.test": {
+  "url": "https://www.kestrelmuaythai.test",
+  "kind": "site",
+  "finalUrl": "https://www.kestrelmuaythai.test/",
+  "https": true,
+  "ms": 857,
+  "bytes": 2115,
+  "title": "Kestrel Muay Thai",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": false,
+  "tools": [],
+  "builder": "WordPress",
+  "year": 2022,
+  "thin": false,
+  "emails": [],
+  "seo": {
+   "desc": 0,
+   "noindex": false,
+   "schema": false,
+   "og": false,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "8185550167"
+  ],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": false,
+   "phone": true
+  },
+  "full": true
+ },
+ "http://www.granitefistboxing.test/": {
+  "url": "http://www.granitefistboxing.test/",
+  "kind": "expired",
+  "error": "it could not be reached",
+  "domain": {
+   "name": "granitefistboxing.test",
+   "registered": true,
+   "created": "2019-08-30",
+   "expires": "2026-08-30",
+   "lapsed": true,
+   "ending": false,
+   "registrar": "GoDaddy.com, LLC",
+   "parkedBy": ""
+  }
+ },
+ "http://blueorchidaikido.test": {
+  "url": "http://blueorchidaikido.test",
+  "kind": "profile",
+  "profile": "Facebook page"
+ },
+ "https://northwindmma.test/": {
+  "url": "https://northwindmma.test/",
+  "kind": "site",
+  "finalUrl": "https://northwindmma.test/",
+  "https": true,
+  "ms": 6400,
+  "bytes": 2756,
+  "title": "Northwind MMA | Martial arts classes in Encino",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": true,
+  "tools": [],
+  "builder": "Squarespace",
+  "year": 2026,
+  "thin": false,
+  "emails": [
+   "hello@northwindmma.test"
+  ],
+  "seo": {
+   "desc": 137,
+   "noindex": false,
+   "schema": true,
+   "og": true,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "8185550170"
+  ],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": true
+  },
+  "full": true
+ },
+ "http://cypresskickboxing.test": {
+  "url": "http://cypresskickboxing.test",
+  "kind": "site",
+  "finalUrl": "https://cypresskickboxing.test/",
+  "https": true,
+  "ms": 1370,
+  "bytes": 2799,
+  "title": "Cypress Kickboxing | Martial arts classes in Van Nuys",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": true,
+  "tools": [],
+  "builder": "WordPress",
+  "year": 2026,
+  "thin": false,
+  "emails": [
+   "info@cypresskickboxing.test"
+  ],
+  "seo": {
+   "desc": 144,
+   "noindex": false,
+   "schema": true,
+   "og": true,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "7475550121"
+  ],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": false
+  },
+  "full": true
+ },
+ "http://www.stonewalljudoclub.test/": {
+  "url": "http://www.stonewalljudoclub.test/",
+  "kind": "parked",
+  "error": "it could not be reached",
+  "by": "ParkingCrew",
+  "sale": false,
+  "domain": {
+   "name": "stonewalljudoclub.test",
+   "registered": true,
+   "created": "2015-04-12",
+   "expires": "2027-04-12",
+   "lapsed": false,
+   "ending": false,
+   "registrar": "Dynadot Inc",
+   "parkedBy": "ParkingCrew"
+  }
+ },
+ "https://www.nightjartattoo.test": {
+  "url": "https://www.nightjartattoo.test",
+  "kind": "profile",
+  "profile": "Instagram profile"
+ },
+ "https://copperneedletattoo.test/": {
+  "url": "https://copperneedletattoo.test/",
+  "kind": "site",
+  "finalUrl": "https://copperneedletattoo.test/",
+  "https": true,
+  "ms": 261,
+  "bytes": 2693,
+  "title": "Copper Needle Tattoo | Custom tattoos in Van Nuys",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": true,
+  "tools": [],
+  "builder": "Squarespace",
+  "year": 2026,
+  "thin": false,
+  "emails": [],
+  "seo": {
+   "desc": 132,
+   "noindex": false,
+   "schema": true,
+   "og": true,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "8185550174"
+  ],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": true
+  },
+  "full": true
+ },
+ "http://www.saintsparrowtattoo.test/": {
+  "url": "http://www.saintsparrowtattoo.test/",
+  "kind": "site",
+  "finalUrl": "http://www.saintsparrowtattoo.test/",
+  "https": false,
+  "ms": 180,
+  "bytes": 1828,
+  "title": "Home",
+  "mobile": false,
+  "tel": false,
+  "bookingWords": false,
+  "tools": [],
+  "builder": "",
+  "year": 2016,
+  "thin": false,
+  "emails": [],
+  "seo": {
+   "desc": 0,
+   "noindex": false,
+   "schema": false,
+   "og": false,
+   "h1": true
+  },
+  "extras": {},
+  "phones": [],
+  "imgs": 8,
+  "noAlt": 6,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": null
+  },
+  "full": true
+ },
+ "http://thornfieldtattoostudio.test": {
+  "url": "http://thornfieldtattoostudio.test",
+  "kind": "site",
+  "finalUrl": "https://thornfieldtattoostudio.test/",
+  "https": true,
+  "ms": 1049,
+  "bytes": 2377,
+  "title": "Home",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": false,
+  "tools": [],
+  "builder": "Wix",
+  "year": 2025,
+  "thin": false,
+  "emails": [],
+  "seo": {
+   "desc": 36,
+   "noindex": true,
+   "schema": false,
+   "og": true,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "8185550176"
+  ],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": true
+  },
+  "full": true
+ },
+ "http://wolfandwillowtattoo.test": {
+  "url": "http://wolfandwillowtattoo.test",
+  "kind": "parked",
+  "by": "Afternic",
+  "sale": true,
+  "finalUrl": "https://www.afternic.com/forsale/wolfandwillowtattoo.test?traffic_id=daslnc&traffic_type=TDFS",
+  "domain": {
+   "name": "wolfandwillowtattoo.test",
+   "registered": true,
+   "created": "2025-11-02",
+   "expires": "2026-11-02",
+   "lapsed": false,
+   "ending": false,
+   "registrar": "GoDaddy.com, LLC",
+   "parkedBy": ""
+  }
+ },
+ "http://papercranetattoo.test": {
+  "url": "http://papercranetattoo.test",
+  "kind": "site",
+  "finalUrl": "https://papercranetattoo.test/",
+  "https": true,
+  "ms": 1030,
+  "bytes": 2172,
+  "title": "Paper Crane Tattoo",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": false,
+  "tools": [],
+  "builder": "WordPress",
+  "year": 2022,
+  "thin": false,
+  "emails": [
+   "office@papercranetattoo.test"
+  ],
+  "seo": {
+   "desc": 0,
+   "noindex": false,
+   "schema": false,
+   "og": false,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "8185550178"
+  ],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": false,
+   "phone": true
+  },
+  "full": true
+ },
+ "http://www.emberandashtattoo.test/": {
+  "url": "http://www.emberandashtattoo.test/",
+  "kind": "placeholder",
+  "finalUrl": "http://www.emberandashtattoo.test/",
+  "https": false,
+  "ms": 285,
+  "bytes": 222,
+  "title": "Welcome to nginx!",
+  "reason": "default page",
+  "domain": {
+   "name": "emberandashtattoo.test",
+   "registered": true,
+   "created": "2015-04-12",
+   "expires": "2027-04-12",
+   "lapsed": false,
+   "ending": false,
+   "registrar": "Namecheap, Inc.",
+   "parkedBy": ""
+  }
+ },
+ "http://www.sharplinebarberco.test/": {
+  "url": "http://www.sharplinebarberco.test/",
+  "kind": "profile",
+  "profile": "Booksy profile"
+ },
+ "https://www.bluejaybarbershop.test": {
+  "url": "https://www.bluejaybarbershop.test",
+  "kind": "site",
+  "finalUrl": "https://www.bluejaybarbershop.test/",
+  "https": true,
+  "ms": 262,
+  "bytes": 2706,
+  "title": "Bluejay Barbershop | Haircuts in Van Nuys",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": true,
+  "tools": [
+   {
+    "name": "Booksy",
+    "suite": true
+   }
+  ],
+  "builder": "WordPress",
+  "year": 2026,
+  "thin": false,
+  "emails": [],
+  "seo": {
+   "desc": 121,
+   "noindex": false,
+   "schema": true,
+   "og": true,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "8185550181"
+  ],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": true
+  },
+  "full": true
+ },
+ "http://thegentrychair.test": {
+  "url": "http://thegentrychair.test",
+  "kind": "site",
+  "finalUrl": "http://thegentrychair.test/",
+  "https": false,
+  "ms": 789,
+  "bytes": 1825,
+  "title": "Home",
+  "mobile": false,
+  "tel": false,
+  "bookingWords": false,
+  "tools": [],
+  "builder": "",
+  "year": 2016,
+  "thin": false,
+  "emails": [],
+  "seo": {
+   "desc": 0,
+   "noindex": false,
+   "schema": false,
+   "og": false,
+   "h1": true
+  },
+  "extras": {},
+  "phones": [],
+  "imgs": 8,
+  "noAlt": 6,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": true
+  },
+  "full": true
+ },
+ "https://www.hazelwoodhairstudio.test": {
+  "url": "https://www.hazelwoodhairstudio.test",
+  "kind": "site",
+  "finalUrl": "https://www.hazelwoodhairstudio.test/",
+  "https": true,
+  "ms": 325,
+  "bytes": 2355,
+  "title": "Home",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": false,
+  "tools": [],
+  "builder": "Wix",
+  "year": 2025,
+  "thin": false,
+  "emails": [],
+  "seo": {
+   "desc": 33,
+   "noindex": true,
+   "schema": false,
+   "og": true,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "8185550184"
+  ],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": true
+  },
+  "full": true
+ },
+ "https://velvetrosesalon.test/": {
+  "url": "https://velvetrosesalon.test/",
+  "kind": "site",
+  "finalUrl": "https://velvetrosesalon.test/",
+  "https": true,
+  "ms": 635,
+  "bytes": 2620,
+  "title": "Velvet Rose Salon | Haircuts in Sherman Oaks",
+  "mobile": true,
+  "tel": false,
+  "bookingWords": true,
+  "tools": [
+   {
+    "name": "Booksy",
+    "suite": true
+   }
+  ],
+  "builder": "WordPress",
+  "year": 2026,
+  "thin": false,
+  "emails": [],
+  "seo": {
+   "desc": 112,
+   "noindex": false,
+   "schema": true,
+   "og": true,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": null
+  },
+  "full": true
+ },
+ "http://saltandsagehair.test": {
+  "url": "http://saltandsagehair.test",
+  "kind": "site",
+  "finalUrl": "https://saltandsagehair.test/",
+  "https": true,
+  "ms": 935,
+  "bytes": 2090,
+  "title": "Salt & Sage Hair",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": false,
+  "tools": [],
+  "builder": "WordPress",
+  "year": 2022,
+  "thin": false,
+  "emails": [],
+  "seo": {
+   "desc": 0,
+   "noindex": false,
+   "schema": false,
+   "og": false,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "8185550185"
+  ],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": false,
+   "phone": true
+  },
+  "full": true
+ },
+ "https://www.lumenhairstudio.test": {
+  "url": "https://www.lumenhairstudio.test",
+  "kind": "placeholder",
+  "finalUrl": "https://www.lumenhairstudio.test/",
+  "https": true,
+  "ms": 502,
+  "bytes": 159,
+  "title": "Coming Soon",
+  "reason": "coming soon",
+  "domain": {
+   "name": "lumenhairstudio.test",
+   "registered": true,
+   "created": "2015-04-12",
+   "expires": "2027-04-12",
+   "lapsed": false,
+   "ending": false,
+   "registrar": "Squarespace Domains II LLC",
+   "parkedBy": ""
+  }
+ },
+ "http://juniperhairbar.test": {
+  "url": "http://juniperhairbar.test",
+  "kind": "site",
+  "finalUrl": "https://juniperhairbar.test/",
+  "https": true,
+  "ms": 734,
+  "bytes": 2615,
+  "title": "Juniper Hair Bar | Haircuts in Valley Village",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": true,
+  "tools": [],
+  "builder": "WordPress",
+  "year": 2026,
+  "thin": false,
+  "emails": [],
+  "seo": {
+   "desc": 125,
+   "noindex": false,
+   "schema": true,
+   "og": true,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "8185550187"
+  ],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": true
+  },
+  "full": true
+ },
+ "https://www.marlowecuts.test": {
+  "url": "https://www.marlowecuts.test",
+  "kind": "profile",
+  "profile": "Facebook page"
+ },
+ "http://www.fablehairco.test/": {
+  "url": "http://www.fablehairco.test/",
+  "kind": "expired",
+  "error": "it could not be reached",
+  "domain": {
+   "name": "fablehairco.test",
+   "registered": true,
+   "created": "2012-07-14",
+   "expires": "2026-07-14",
+   "lapsed": true,
+   "ending": true,
+   "registrar": "Namecheap, Inc.",
+   "parkedBy": ""
+  }
+ },
+ "http://petalandpinesalon.test": {
+  "url": "http://petalandpinesalon.test",
+  "kind": "site",
+  "finalUrl": "https://petalandpinesalon.test/",
+  "https": true,
+  "ms": 597,
+  "bytes": 2682,
+  "title": "Petal & Pine Salon | Haircuts in North Hollywood",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": true,
+  "tools": [],
+  "builder": "WordPress",
+  "year": 2026,
+  "thin": false,
+  "emails": [],
+  "seo": {
+   "desc": 128,
+   "noindex": false,
+   "schema": true,
+   "og": true,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "7475550100"
+  ],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": false
+  },
+  "full": true
+ },
+ "http://northsidefades.test": {
+  "url": "http://northsidefades.test",
+  "kind": "profile",
+  "profile": "Booksy profile"
+ },
+ "https://www.kindredbarberco.test": {
+  "url": "https://www.kindredbarberco.test",
+  "kind": "site",
+  "finalUrl": "https://www.kindredbarberco.test/",
+  "https": true,
+  "ms": 6400,
+  "bytes": 2637,
+  "title": "Kindred Barber Co. | Haircuts in Van Nuys",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": true,
+  "tools": [],
+  "builder": "Squarespace",
+  "year": 2026,
+  "thin": false,
+  "emails": [],
+  "seo": {
+   "desc": 121,
+   "noindex": false,
+   "schema": true,
+   "og": true,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "8185550193"
+  ],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": true
+  },
+  "full": true
+ },
+ "http://www.silvershearssalon.test/": {
+  "url": "http://www.silvershearssalon.test/",
+  "kind": "site",
+  "finalUrl": "http://www.silvershearssalon.test/",
+  "https": false,
+  "ms": 622,
+  "bytes": 1842,
+  "title": "Home",
+  "mobile": false,
+  "tel": false,
+  "bookingWords": false,
+  "tools": [],
+  "builder": "",
+  "year": 2016,
+  "thin": false,
+  "emails": [],
+  "seo": {
+   "desc": 0,
+   "noindex": false,
+   "schema": false,
+   "og": false,
+   "h1": true
+  },
+  "extras": {},
+  "phones": [],
+  "imgs": 8,
+  "noAlt": 6,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": true
+  },
+  "full": true
+ },
+ "http://www.goldenhourhair.test/": {
+  "url": "http://www.goldenhourhair.test/",
+  "kind": "site",
+  "finalUrl": "https://goldenhourhair-demo.wixsite.com/home",
+  "https": true,
+  "ms": 1309,
+  "bytes": 2692,
+  "title": "Golden Hour Hair | Haircuts in Valley Village",
+  "mobile": true,
+  "tel": false,
+  "bookingWords": true,
+  "tools": [],
+  "builder": "Wix",
+  "year": 2026,
+  "thin": false,
+  "emails": [
+   "info@goldenhourhair.test"
+  ],
+  "seo": {
+   "desc": 113,
+   "noindex": false,
+   "schema": true,
+   "og": true,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": null
+  },
+  "full": true,
+  "freeHost": "Wix",
+  "movedTo": "goldenhourhair-demo.wixsite.com"
+ },
+ "https://www.crownandcomb.test": {
+  "url": "https://www.crownandcomb.test",
+  "kind": "site",
+  "finalUrl": "https://www.crownandcomb.test/",
+  "https": true,
+  "ms": 255,
+  "bytes": 2713,
+  "title": "Crown & Comb | Haircuts in North Hollywood",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": true,
+  "tools": [
+   {
+    "name": "Booksy",
+    "suite": true
+   }
+  ],
+  "builder": "WordPress",
+  "year": 2026,
+  "thin": false,
+  "emails": [],
+  "seo": {
+   "desc": 122,
+   "noindex": false,
+   "schema": true,
+   "og": true,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "8185550195"
+  ],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": true
+  },
+  "full": true
+ },
+ "http://willowbrooksalon.test": {
+  "url": "http://willowbrooksalon.test",
+  "kind": "parked",
+  "finalUrl": "http://willowbrooksalon.test/",
+  "https": false,
+  "ms": 407,
+  "bytes": 221,
+  "title": "willowbrooksalon.test",
+  "by": "GoDaddy",
+  "sale": false,
+  "domain": {
+   "name": "willowbrooksalon.test",
+   "registered": true,
+   "created": "2015-04-12",
+   "expires": "2027-01-19",
+   "lapsed": false,
+   "ending": false,
+   "registrar": "GoDaddy.com, LLC",
+   "parkedBy": ""
+  }
+ },
+ "https://www.modernmane.test": {
+  "url": "https://www.modernmane.test",
+  "kind": "site",
+  "finalUrl": "https://www.modernmane.test/",
+  "https": true,
+  "ms": 273,
+  "bytes": 234,
+  "title": "Modern Mane",
+  "mobile": true,
+  "tel": false,
+  "bookingWords": false,
+  "tools": [],
+  "builder": "",
+  "year": null,
+  "thin": true,
+  "emails": [],
+  "seo": {
+   "desc": 0,
+   "noindex": false,
+   "schema": false,
+   "og": false,
+   "h1": true
+  },
+  "extras": {},
+  "phones": [],
+  "imgs": 0,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": false,
+   "phone": true
+  },
+  "full": true
+ },
+ "http://sableandsteelbarbers.test": {
+  "url": "http://sableandsteelbarbers.test",
+  "kind": "down",
+  "status": 500,
+  "error": "the page answers with error 500",
+  "domain": {
+   "name": "sableandsteelbarbers.test",
+   "registered": true,
+   "created": "2015-04-12",
+   "expires": "2027-04-12",
+   "lapsed": false,
+   "ending": false,
+   "registrar": "GoDaddy.com, LLC",
+   "parkedBy": ""
+  }
+ },
+ "https://bramblehairstudio.test/": {
+  "url": "https://bramblehairstudio.test/",
+  "kind": "site",
+  "finalUrl": "https://bramblehairstudio.test/",
+  "https": true,
+  "ms": 526,
+  "bytes": 2173,
+  "title": "Bramble Hair Studio",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": false,
+  "tools": [],
+  "builder": "WordPress",
+  "year": 2022,
+  "thin": false,
+  "emails": [
+   "hello@bramblehairstudio.test"
+  ],
+  "seo": {
+   "desc": 0,
+   "noindex": false,
+   "schema": false,
+   "og": false,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "7475550100"
+  ],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": false,
+   "phone": true
+  },
+  "full": true
+ },
+ "http://cedarchairbarbershop.test": {
+  "url": "http://cedarchairbarbershop.test",
+  "kind": "unregistered",
+  "error": "it could not be reached",
+  "domain": {
+   "name": "cedarchairbarbershop.test",
+   "registered": false
+  }
+ },
+ "https://lotuspondnails.test/": {
+  "url": "https://lotuspondnails.test/",
+  "kind": "site",
+  "finalUrl": "https://lotuspondnails.test/",
+  "https": true,
+  "ms": 289,
+  "bytes": 2877,
+  "title": "Lotus Pond Nails | Local service in Van Nuys",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": true,
+  "tools": [
+   {
+    "name": "Vagaro",
+    "suite": true
+   }
+  ],
+  "builder": "WordPress",
+  "year": 2026,
+  "thin": false,
+  "emails": [
+   "contact@lotuspondnails.test"
+  ],
+  "seo": {
+   "desc": 151,
+   "noindex": false,
+   "schema": true,
+   "og": true,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "7475550102"
+  ],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": true
+  },
+  "full": true
+ },
+ "https://quietharbormassage.test/": {
+  "url": "https://quietharbormassage.test/",
+  "kind": "site",
+  "finalUrl": "https://quietharbormassage.test/",
+  "https": true,
+  "ms": 183,
+  "bytes": 2405,
+  "title": "Home",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": false,
+  "tools": [],
+  "builder": "Wix",
+  "year": 2025,
+  "thin": false,
+  "emails": [],
+  "seo": {
+   "desc": 32,
+   "noindex": true,
+   "schema": false,
+   "og": true,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "7475550103"
+  ],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": true
+  },
+  "full": true
+ },
+ "https://fernwooddayspa.test/": {
+  "url": "https://fernwooddayspa.test/",
+  "kind": "site",
+  "finalUrl": "https://fernwooddayspa.test/",
+  "https": true,
+  "ms": 633,
+  "bytes": 2687,
+  "title": "Fernwood Day Spa | Local service in Encino",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": true,
+  "tools": [],
+  "builder": "WordPress",
+  "year": 2026,
+  "thin": false,
+  "emails": [],
+  "seo": {
+   "desc": 149,
+   "noindex": false,
+   "schema": true,
+   "og": true,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "7475550104"
+  ],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": true
+  },
+  "full": true
+ },
+ "http://www.coolbreezehvac.test/": {
+  "url": "http://www.coolbreezehvac.test/",
+  "kind": "site",
+  "finalUrl": "http://www.coolbreezehvac.test/",
+  "https": false,
+  "ms": 616,
+  "bytes": 1933,
+  "title": "Home",
+  "mobile": false,
+  "tel": false,
+  "bookingWords": false,
+  "tools": [],
+  "builder": "",
+  "year": 2016,
+  "thin": false,
+  "emails": [
+   "office@coolbreezehvac.test"
+  ],
+  "seo": {
+   "desc": 0,
+   "noindex": false,
+   "schema": false,
+   "og": false,
+   "h1": true
+  },
+  "extras": {},
+  "phones": [],
+  "imgs": 8,
+  "noAlt": 6,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": null
+  },
+  "full": true
+ },
+ "http://steadyflowplumbing.test": {
+  "url": "http://steadyflowplumbing.test",
+  "kind": "site",
+  "finalUrl": "https://steadyflowplumbing.test/",
+  "https": true,
+  "ms": 1360,
+  "bytes": 2869,
+  "title": "Steady Flow Plumbing | Local service in North Hollywood",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": true,
+  "tools": [
+   {
+    "name": "Vagaro",
+    "suite": true
+   }
+  ],
+  "builder": "WordPress",
+  "year": 2026,
+  "thin": false,
+  "emails": [],
+  "seo": {
+   "desc": 162,
+   "noindex": false,
+   "schema": true,
+   "og": true,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "7475550105"
+  ],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": true
+  },
+  "full": true
+ },
+ "http://brightwireelectric.test": {
+  "url": "http://brightwireelectric.test",
+  "kind": "site",
+  "finalUrl": "https://brightwireelectric.test/",
+  "https": true,
+  "ms": 1372,
+  "bytes": 2149,
+  "title": "Brightwire Electric",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": false,
+  "tools": [],
+  "builder": "WordPress",
+  "year": 2022,
+  "thin": false,
+  "emails": [],
+  "seo": {
+   "desc": 0,
+   "noindex": false,
+   "schema": false,
+   "og": false,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "7475550106"
+  ],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": false,
+   "phone": true
+  },
+  "full": true
+ },
+ "https://turnkeylocksmiths.test/": {
+  "url": "https://turnkeylocksmiths.test/",
+  "kind": "parked",
+  "by": "Afternic",
+  "sale": true,
+  "finalUrl": "https://www.afternic.com/forsale/turnkeylocksmiths.test?traffic_id=daslnc&traffic_type=TDFS",
+  "domain": {
+   "name": "turnkeylocksmiths.test",
+   "registered": true,
+   "created": "2025-11-02",
+   "expires": "2026-11-02",
+   "lapsed": false,
+   "ending": false,
+   "registrar": "GoDaddy.com, LLC",
+   "parkedBy": ""
+  }
+ },
+ "https://www.petalpressflorist.test": {
+  "url": "https://www.petalpressflorist.test",
+  "kind": "site",
+  "finalUrl": "https://www.petalpressflorist.test/",
+  "https": true,
+  "ms": 652,
+  "bytes": 2745,
+  "title": "Petal Press Florist | Local service in Studio City",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": true,
+  "tools": [],
+  "builder": "WordPress",
+  "year": 2026,
+  "thin": false,
+  "emails": [],
+  "seo": {
+   "desc": 157,
+   "noindex": false,
+   "schema": true,
+   "og": true,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "7475550109"
+  ],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": true
+  },
+  "full": true
+ },
+ "https://goodboydogtraining.test/": {
+  "url": "https://goodboydogtraining.test/",
+  "kind": "profile",
+  "profile": "Facebook page"
+ },
+ "https://www.trebleclefmusicschool.test": {
+  "url": "https://www.trebleclefmusicschool.test",
+  "kind": "site",
+  "finalUrl": "https://www.trebleclefmusicschool.test/",
+  "https": true,
+  "ms": 6400,
+  "bytes": 2829,
+  "title": "Treble Clef Music School | Local service in Sherman Oaks",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": true,
+  "tools": [],
+  "builder": "Squarespace",
+  "year": 2026,
+  "thin": false,
+  "emails": [],
+  "seo": {
+   "desc": 163,
+   "noindex": false,
+   "schema": true,
+   "og": true,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "7475550112"
+  ],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": true
+  },
+  "full": true
+ },
+ "http://spinstepdancestudio.test": {
+  "url": "http://spinstepdancestudio.test",
+  "kind": "placeholder",
+  "finalUrl": "http://spinstepdancestudio.test/",
+  "https": false,
+  "ms": 245,
+  "bytes": 159,
+  "title": "Coming Soon",
+  "reason": "coming soon",
+  "domain": {
+   "name": "spinstepdancestudio.test",
+   "registered": true,
+   "created": "2015-04-12",
+   "expires": "2027-04-12",
+   "lapsed": false,
+   "ending": false,
+   "registrar": "Squarespace Domains II LLC",
+   "parkedBy": ""
+  }
+ },
+ "https://stillwateryoga.test/": {
+  "url": "https://stillwateryoga.test/",
+  "kind": "site",
+  "finalUrl": "https://stillwateryoga.test/",
+  "https": true,
+  "ms": 719,
+  "bytes": 2883,
+  "title": "Stillwater Yoga | Local service in Studio City",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": true,
+  "tools": [
+   {
+    "name": "Vagaro",
+    "suite": true
+   }
+  ],
+  "builder": "WordPress",
+  "year": 2026,
+  "thin": false,
+  "emails": [
+   "contact@stillwateryoga.test"
+  ],
+  "seo": {
+   "desc": 153,
+   "noindex": false,
+   "schema": true,
+   "og": true,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "7475550114"
+  ],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": true
+  },
+  "full": true
+ },
+ "https://corelanternpilates.test/": {
+  "url": "https://corelanternpilates.test/",
+  "kind": "expired",
+  "error": "it could not be reached",
+  "domain": {
+   "name": "corelanternpilates.test",
+   "registered": true,
+   "created": "2012-07-14",
+   "expires": "2026-07-14",
+   "lapsed": true,
+   "ending": true,
+   "registrar": "Namecheap, Inc.",
+   "parkedBy": ""
+  }
+ },
+ "http://www.silverframephotography.test/": {
+  "url": "http://www.silverframephotography.test/",
+  "kind": "site",
+  "finalUrl": "https://www.silverframephotography.test/",
+  "https": true,
+  "ms": 1604,
+  "bytes": 2285,
+  "title": "Silverframe Photography",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": false,
+  "tools": [],
+  "builder": "WordPress",
+  "year": 2022,
+  "thin": false,
+  "emails": [
+   "office@silverframephotography.test"
+  ],
+  "seo": {
+   "desc": 0,
+   "noindex": false,
+   "schema": false,
+   "og": false,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "7475550115"
+  ],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": false,
+   "phone": true
+  },
+  "full": true
+ },
+ "http://www.bytefixcomputerrepair.test/": {
+  "url": "http://www.bytefixcomputerrepair.test/",
+  "kind": "site",
+  "finalUrl": "http://www.bytefixcomputerrepair.test/",
+  "https": false,
+  "ms": 243,
+  "bytes": 1928,
+  "title": "Home",
+  "mobile": false,
+  "tel": false,
+  "bookingWords": false,
+  "tools": [],
+  "builder": "",
+  "year": 2016,
+  "thin": false,
+  "emails": [],
+  "seo": {
+   "desc": 0,
+   "noindex": false,
+   "schema": false,
+   "og": false,
+   "h1": true
+  },
+  "extras": {},
+  "phones": [],
+  "imgs": 8,
+  "noAlt": 6,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": true
+  },
+  "full": true
+ },
+ "https://crackedscreenphonerepair.test/": {
+  "url": "https://crackedscreenphonerepair.test/",
+  "kind": "site",
+  "finalUrl": "https://crackedscreenphonerepair.test/",
+  "https": true,
+  "ms": 231,
+  "bytes": 2929,
+  "title": "Cracked Screen Phone Repair | Local service in Van Nuys",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": true,
+  "tools": [],
+  "builder": "WordPress",
+  "year": 2026,
+  "thin": false,
+  "emails": [
+   "hello@crackedscreenphonerepair.test"
+  ],
+  "seo": {
+   "desc": 162,
+   "noindex": false,
+   "schema": true,
+   "og": true,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "8185550170"
+  ],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": false
+  },
+  "full": true
+ },
+ "https://riseandcrumbbakery.test/": {
+  "url": "https://riseandcrumbbakery.test/",
+  "kind": "site",
+  "finalUrl": "https://riseandcrumbbakery.test/",
+  "https": true,
+  "ms": 655,
+  "bytes": 2838,
+  "title": "Rise & Crumb Bakery | Local service in Valley Village",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": true,
+  "tools": [],
+  "builder": "Squarespace",
+  "year": 2026,
+  "thin": false,
+  "emails": [],
+  "seo": {
+   "desc": 160,
+   "noindex": false,
+   "schema": true,
+   "og": true,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "7475550119"
+  ],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": true
+  },
+  "full": true
+ },
+ "http://inklineprintshop.test": {
+  "url": "http://inklineprintshop.test",
+  "kind": "down",
+  "status": 500,
+  "error": "the page answers with error 500",
+  "domain": {
+   "name": "inklineprintshop.test",
+   "registered": true,
+   "created": "2015-04-12",
+   "expires": "2027-04-12",
+   "lapsed": false,
+   "ending": false,
+   "registrar": "GoDaddy.com, LLC",
+   "parkedBy": ""
+  }
+ },
+ "http://www.spokeandchainbikerepair.test/": {
+  "url": "http://www.spokeandchainbikerepair.test/",
+  "kind": "site",
+  "finalUrl": "https://www.spokeandchainbikerepair.test/",
+  "https": true,
+  "ms": 698,
+  "bytes": 2593,
+  "title": "Home",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": false,
+  "tools": [],
+  "builder": "Wix",
+  "year": 2025,
+  "thin": false,
+  "emails": [
+   "hello@spokeandchainbikerepair.test"
+  ],
+  "seo": {
+   "desc": 37,
+   "noindex": true,
+   "schema": false,
+   "og": true,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "7475550121"
+  ],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": true
+  },
+  "full": true
+ },
+ "https://www.steadylanedrivingschool.test": {
+  "url": "https://www.steadylanedrivingschool.test",
+  "kind": "parked",
+  "finalUrl": "https://www.steadylanedrivingschool.test/",
+  "https": true,
+  "ms": 799,
+  "bytes": 228,
+  "title": "steadylanedrivingschool.test",
+  "by": "GoDaddy",
+  "sale": false,
+  "domain": {
+   "name": "steadylanedrivingschool.test",
+   "registered": true,
+   "created": "2015-04-12",
+   "expires": "2027-01-19",
+   "lapsed": false,
+   "ending": false,
+   "registrar": "GoDaddy.com, LLC",
+   "parkedBy": ""
+  }
+ },
+ "https://bugoffpestcontrol.test/": {
+  "url": "https://bugoffpestcontrol.test/",
+  "kind": "site",
+  "finalUrl": "https://bugoffpestcontrol.test/",
+  "https": true,
+  "ms": 323,
+  "bytes": 2840,
+  "title": "Bug Off Pest Control | Local service in Van Nuys",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": true,
+  "tools": [],
+  "builder": "Squarespace",
+  "year": 2026,
+  "thin": false,
+  "emails": [],
+  "seo": {
+   "desc": 155,
+   "noindex": false,
+   "schema": false,
+   "og": true,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "7475550123"
+  ],
+  "imgs": 10,
+  "noAlt": 7,
+  "noZoom": true,
+  "filler": true,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": true
+  },
+  "full": true
+ },
+ "https://www.handyhalsrepairs.test": {
+  "url": "https://www.handyhalsrepairs.test",
+  "kind": "site",
+  "finalUrl": "https://www.handyhalsrepairs.test/",
+  "https": true,
+  "ms": 862,
+  "bytes": 250,
+  "title": "Handy Hal's Repairs",
+  "mobile": true,
+  "tel": false,
+  "bookingWords": false,
+  "tools": [],
+  "builder": "",
+  "year": null,
+  "thin": true,
+  "emails": [],
+  "seo": {
+   "desc": 0,
+   "noindex": false,
+   "schema": false,
+   "og": false,
+   "h1": true
+  },
+  "extras": {},
+  "phones": [],
+  "imgs": 0,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": false,
+   "phone": null
+  },
+  "full": true
+ },
+ "http://www.coldspotappliancerepair.test/": {
+  "url": "http://www.coldspotappliancerepair.test/",
+  "kind": "unregistered",
+  "error": "it could not be reached",
+  "domain": {
+   "name": "coldspotappliancerepair.test",
+   "registered": false
+  }
+ },
+ "http://bluelagoonpoolservice.test": {
+  "url": "http://bluelagoonpoolservice.test",
+  "kind": "site",
+  "finalUrl": "https://bluelagoonpoolservice.test/",
+  "https": true,
+  "ms": 918,
+  "bytes": 2908,
+  "title": "Blue Lagoon Pool Service | Local service in Encino",
+  "mobile": true,
+  "tel": true,
+  "bookingWords": true,
+  "tools": [],
+  "builder": "Squarespace",
+  "year": 2026,
+  "thin": false,
+  "emails": [
+   "hello@bluelagoonpoolservice.test"
+  ],
+  "seo": {
+   "desc": 157,
+   "noindex": false,
+   "schema": true,
+   "og": true,
+   "h1": true
+  },
+  "extras": {
+   "analytics": [
+    "Google Analytics"
+   ]
+  },
+  "phones": [
+   "7475550126"
+  ],
+  "imgs": 4,
+  "noAlt": 0,
+  "onPage": {
+   "name": true,
+   "area": true,
+   "phone": true
+  },
+  "full": true
+ },
+ "https://freshpilecarpetcleaning.test/": {
+  "url": "https://freshpilecarpetcleaning.test/",
+  "kind": "blocked",
+  "status": 403,
+  "domain": {
+   "name": "freshpilecarpetcleaning.test",
+   "registered": true,
+   "created": "2015-04-12",
+   "expires": "2027-04-12",
+   "lapsed": false,
+   "ending": false,
+   "registrar": "GoDaddy.com, LLC",
+   "parkedBy": ""
+  }
+ },
+ "https://tuftedupholstery.test/": {
+  "url": "https://tuftedupholstery.test/",
+  "kind": "placeholder",
+  "reason": "host home",
+  "by": "Squarespace",
+  "finalUrl": "https://www.squarespace.com/",
+  "domain": {
+   "name": "tuftedupholstery.test",
+   "registered": true,
+   "created": "2015-04-12",
+   "expires": "2027-04-12",
+   "lapsed": false,
+   "ending": false,
+   "registrar": "Squarespace Domains II LLC",
+   "parkedBy": ""
+  }
+ }
+}

@@ -1,0 +1,4 @@
+# scripts/build-places.py
+pyarrow>=15
+fsspec>=2024.2
+aiohttp>=3.9

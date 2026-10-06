@@ -1,0 +1,14 @@
+:root { --bg: #f3f4f8; --surface: #ffffff; --fg: #151a2e; --muted: #5d6479; --accent: #3a3fc4; --accent-ink: #ffffff; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #0f1220; --surface: #171b2c; --fg: #e9ebf5; --muted: #9aa1ba; --accent: #8f94ff; --accent-ink: #10132a; color-scheme: dark; }
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font: 16px/1.55 "Public Sans", -apple-system, "Segoe UI", sans-serif; margin: 0; }
+.wrap { max-width: 720px; margin: 0 auto; padding: 56px 20px 64px; }
+h1 { font: 800 44px/1.1 "Archivo", "Helvetica Neue", Arial, sans-serif; margin: 0 0 14px; letter-spacing: -.01em; }
+.k { font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin: 0 0 8px; }
+.lede { font-size: 19px; margin: 0 0 18px; }
+ul { padding-left: 20px; margin: 0 0 26px; display: grid; gap: 8px; }
+a { color: var(--accent); }
+.btn { display: inline-block; background: var(--accent); color: var(--accent-ink); text-decoration: none; font-weight: 600; padding: 12px 20px; border-radius: 10px; }
+.note { font-size: 14px; color: var(--muted); margin-top: 26px; }

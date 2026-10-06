@@ -1,0 +1,27 @@
+{
+  "name": "lead-finder",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Find local businesses near a point, check their websites for dead, parked, for-sale, slow or broken sites, score them as leads, and make a two-page PDF audit for each.",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "node scripts/dev-server.mjs",
+    "build": "node scripts/build.mjs",
+    "build:demo": "node scripts/build-demo-data.mjs",
+    "lint": "eslint .",
+    "test": "node --test \"tests/unit/*.test.js\"",
+    "test:e2e": "node --test \"tests/e2e/*.test.js\"",
+    "screenshots": "node scripts/screenshots.mjs"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.5.8",
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.12.0",
+    "globals": "^17.13.0",
+    "pdfjs-dist": "^6.4.299",
+    "playwright": "1.56.1"
+  }
+}
