@@ -5,13 +5,13 @@
   Strict-Transport-Security: max-age=31536000
   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
   Cross-Origin-Opener-Policy: same-origin
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://bzudkcybqhmqrybskwfn.supabase.co https://overpass-api.de https://overpass.kumi.systems https://nominatim.openstreetmap.org; form-action 'self'; frame-src 'none'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://bzudkcybqhmqrybskwfn.supabase.co https://overpass.private.coffee https://overpass-api.de https://nominatim.openstreetmap.org; form-action 'self'; frame-src 'none'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests
 
 # connect-src: the homepage (dashboard-code check), /plan.html and /dashboard/
 # talk to the Supabase project, over https. The Lead Finder
 # (/dashboard/leads.html) also searches OpenStreetMap: two Overpass servers
-# (the second is the fallback when the first is busy) and Nominatim, which turns
-# a typed place name into map coordinates. No form posts anywhere off-site, so
+# (Private.coffee first, the main overpass-api.de as the backup when it is slow)
+# and Nominatim, which turns a typed place name into map coordinates. No form posts anywhere off-site, so
 # form-action is 'self'.
 #
 # frame-src is 'none' since the portfolio page and its demo iframes were
