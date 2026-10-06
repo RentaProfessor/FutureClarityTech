@@ -1,0 +1,178 @@
+handle,title,product_type,status,tags,variant,sku,price,compare_at_price,inventory
+classic-mesh-trucker,Classic Mesh Trucker,Hats,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:mesh-twill",Black,RMC-HAT-MSH-BLK-OS,58.00,,24
+classic-mesh-trucker,Classic Mesh Trucker,Hats,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:mesh-twill",White,RMC-HAT-MSH-WHT-OS,58.00,,18
+classic-mesh-trucker,Classic Mesh Trucker,Hats,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:mesh-twill",Cherry Red,RMC-HAT-MSH-CHY-OS,58.00,,1
+classic-mesh-trucker,Classic Mesh Trucker,Hats,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:mesh-twill",Hot Pink,RMC-HAT-MSH-HPK-OS,58.00,,18
+classic-mesh-trucker,Classic Mesh Trucker,Hats,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:mesh-twill",Sky Blue,RMC-HAT-MSH-SKY-OS,58.00,,28
+classic-mesh-trucker,Classic Mesh Trucker,Hats,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:mesh-twill",Desert Camo,RMC-HAT-MSH-CAM-OS,58.00,,4
+foam-front-trucker,Foam Front Trucker,Hats,ACTIVE,"dept:unisex, drop:00, fit:regular, mat:foam-mesh, pgm:sale-2026-12-31",Black,RMC-HAT-FOM-BLK-OS,48.00,58.00,30
+foam-front-trucker,Foam Front Trucker,Hats,ACTIVE,"dept:unisex, drop:00, fit:regular, mat:foam-mesh, pgm:sale-2026-12-31",Bone,RMC-HAT-FOM-BON-OS,48.00,58.00,11
+foam-front-trucker,Foam Front Trucker,Hats,ACTIVE,"dept:unisex, drop:00, fit:regular, mat:foam-mesh, pgm:sale-2026-12-31",Moss Green,RMC-HAT-FOM-MOS-OS,48.00,58.00,1
+foam-front-trucker,Foam Front Trucker,Hats,ACTIVE,"dept:unisex, drop:00, fit:regular, mat:foam-mesh, pgm:sale-2026-12-31",Sunburst Yellow,RMC-HAT-FOM-SUN-OS,48.00,58.00,0
+suede-panel-trucker,Suede Panel Trucker,Hats,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:suede",Bone,RMC-HAT-SUE-BON-OS,62.00,,55
+suede-panel-trucker,Suede Panel Trucker,Hats,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:suede",Black,RMC-HAT-SUE-BLK-OS,62.00,,18
+suede-panel-trucker,Suede Panel Trucker,Hats,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:suede",Cherry Red,RMC-HAT-SUE-CHY-OS,62.00,,40
+velour-trucker,Velour Trucker,Hats,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:velour",Hot Pink,RMC-HAT-VEL-HPK-OS,58.00,,2
+velour-trucker,Velour Trucker,Hats,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:velour",Navy,RMC-HAT-VEL-NVY-OS,58.00,,2
+velour-trucker,Velour Trucker,Hats,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:velour",Chrome Silver,RMC-HAT-VEL-CHR-OS,58.00,,24
+rhinestone-halo-trucker,Rhinestone Halo Trucker,Hats,ACTIVE,"dept:womens, drop:01, fit:regular, mat:twill-rhinestone",Black,RMC-HAT-RHN-BLK-OS,68.00,,51
+rhinestone-halo-trucker,Rhinestone Halo Trucker,Hats,ACTIVE,"dept:womens, drop:01, fit:regular, mat:twill-rhinestone",Baby Pink,RMC-HAT-RHN-BPK-OS,68.00,,67
+rhinestone-halo-trucker,Rhinestone Halo Trucker,Hats,ACTIVE,"dept:womens, drop:01, fit:regular, mat:twill-rhinestone",Cheetah,RMC-HAT-RHN-CHT-OS,68.00,,21
+ribbed-cuff-beanie,Ribbed Cuff Beanie,Beanies,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:acrylic-knit",Black,RMC-BEA-RIB-BLK-OS,35.00,,55
+ribbed-cuff-beanie,Ribbed Cuff Beanie,Beanies,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:acrylic-knit",Bone,RMC-BEA-RIB-BON-OS,35.00,,6
+ribbed-cuff-beanie,Ribbed Cuff Beanie,Beanies,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:acrylic-knit",Cherry Red,RMC-BEA-RIB-CHY-OS,35.00,,19
+ribbed-cuff-beanie,Ribbed Cuff Beanie,Beanies,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:acrylic-knit",Moss Green,RMC-BEA-RIB-MOS-OS,35.00,,54
+ribbed-cuff-beanie,Ribbed Cuff Beanie,Beanies,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:acrylic-knit",Hot Pink,RMC-BEA-RIB-HPK-OS,35.00,,58
+kids-mesh-trucker,Kids Mesh Trucker,Hats,ACTIVE,"dept:kids, drop:01, fit:regular, mat:mesh-twill",Black,RMC-KID-MSH-BLK-OS,40.00,,64
+kids-mesh-trucker,Kids Mesh Trucker,Hats,ACTIVE,"dept:kids, drop:01, fit:regular, mat:mesh-twill",Sky Blue,RMC-KID-MSH-SKY-OS,40.00,,52
+kids-mesh-trucker,Kids Mesh Trucker,Hats,ACTIVE,"dept:kids, drop:01, fit:regular, mat:mesh-twill",Baby Pink,RMC-KID-MSH-BPK-OS,40.00,,38
+kids-mesh-trucker,Kids Mesh Trucker,Hats,ACTIVE,"dept:kids, drop:01, fit:regular, mat:mesh-twill",Sunburst Yellow,RMC-KID-MSH-SUN-OS,40.00,,65
+bowling-bag,Bowling Bag,Bags,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:patent-pu",Black,RMC-BAG-BWL-BLK-OS,99.00,,8
+bowling-bag,Bowling Bag,Bags,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:patent-pu",White,RMC-BAG-BWL-WHT-OS,99.00,,9
+bowling-bag,Bowling Bag,Bags,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:patent-pu",Cherry Red,RMC-BAG-BWL-CHY-OS,99.00,,36
+bowling-bag,Bowling Bag,Bags,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:patent-pu",Hot Pink,RMC-BAG-BWL-HPK-OS,99.00,,33
+bowling-bag,Bowling Bag,Bags,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:patent-pu",Cheetah,RMC-BAG-BWL-CHT-OS,99.00,,19
+bowling-bag,Bowling Bag,Bags,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:patent-pu",Desert Camo,RMC-BAG-BWL-CAM-OS,99.00,,11
+mini-bowling-bag,Mini Bowling Bag,Bags,ACTIVE,"dept:womens, drop:01, fit:regular, mat:patent-pu",Black,RMC-BAG-MBW-BLK-OS,69.00,,10
+mini-bowling-bag,Mini Bowling Bag,Bags,ACTIVE,"dept:womens, drop:01, fit:regular, mat:patent-pu",Baby Pink,RMC-BAG-MBW-BPK-OS,69.00,,12
+mini-bowling-bag,Mini Bowling Bag,Bags,ACTIVE,"dept:womens, drop:01, fit:regular, mat:patent-pu",Cheetah,RMC-BAG-MBW-CHT-OS,69.00,,57
+mini-bowling-bag,Mini Bowling Bag,Bags,ACTIVE,"dept:womens, drop:01, fit:regular, mat:patent-pu",Chrome Silver,RMC-BAG-MBW-CHR-OS,69.00,,3
+shoulder-bag,Shoulder Bag,Bags,ACTIVE,"dept:womens, drop:01, fit:regular, mat:pebbled-pu",Black,RMC-BAG-SHD-BLK-OS,79.00,,37
+shoulder-bag,Shoulder Bag,Bags,ACTIVE,"dept:womens, drop:01, fit:regular, mat:pebbled-pu",Bone,RMC-BAG-SHD-BON-OS,79.00,,52
+shoulder-bag,Shoulder Bag,Bags,ACTIVE,"dept:womens, drop:01, fit:regular, mat:pebbled-pu",Indigo Wash,RMC-BAG-SHD-IND-OS,79.00,,19
+shoulder-bag,Shoulder Bag,Bags,ACTIVE,"dept:womens, drop:01, fit:regular, mat:pebbled-pu",Cherry Red,RMC-BAG-SHD-CHY-OS,79.00,,32
+crossbody-sling,Crossbody Sling,Bags,ACTIVE,"dept:unisex, drop:00, fit:regular, mat:ripstop, pgm:sale-2026-12-31",Black,RMC-BAG-SLG-BLK-OS,52.00,65.00,57
+crossbody-sling,Crossbody Sling,Bags,ACTIVE,"dept:unisex, drop:00, fit:regular, mat:ripstop, pgm:sale-2026-12-31",Desert Camo,RMC-BAG-SLG-CAM-OS,52.00,65.00,3
+crossbody-sling,Crossbody Sling,Bags,ACTIVE,"dept:unisex, drop:00, fit:regular, mat:ripstop, pgm:sale-2026-12-31",Chrome Silver,RMC-BAG-SLG-CHR-OS,52.00,65.00,0
+weekender-duffle,Weekender Duffle,Bags,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:canvas-pu",Black,RMC-BAG-DUF-BLK-OS,149.00,,58
+weekender-duffle,Weekender Duffle,Bags,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:canvas-pu",Bone,RMC-BAG-DUF-BON-OS,149.00,,33
+weekender-duffle,Weekender Duffle,Bags,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:canvas-pu",Desert Camo,RMC-BAG-DUF-CAM-OS,149.00,,57
+heavyweight-graphic-tee,Heavyweight Graphic Tee,T-Shirts,ACTIVE,"dept:unisex, drop:01, fit:oversized, mat:cotton-240gsm",Black / S,RMC-TEE-GRP-BLK-SM,48.00,,44
+heavyweight-graphic-tee,Heavyweight Graphic Tee,T-Shirts,ACTIVE,"dept:unisex, drop:01, fit:oversized, mat:cotton-240gsm",Black / M,RMC-TEE-GRP-BLK-MD,48.00,,54
+heavyweight-graphic-tee,Heavyweight Graphic Tee,T-Shirts,ACTIVE,"dept:unisex, drop:01, fit:oversized, mat:cotton-240gsm",Black / L,RMC-TEE-GRP-BLK-LG,48.00,,5
+heavyweight-graphic-tee,Heavyweight Graphic Tee,T-Shirts,ACTIVE,"dept:unisex, drop:01, fit:oversized, mat:cotton-240gsm",Black / XL,RMC-TEE-GRP-BLK-XL,48.00,,33
+heavyweight-graphic-tee,Heavyweight Graphic Tee,T-Shirts,ACTIVE,"dept:unisex, drop:01, fit:oversized, mat:cotton-240gsm",Black / 2XL,RMC-TEE-GRP-BLK-2XL,48.00,,8
+heavyweight-graphic-tee,Heavyweight Graphic Tee,T-Shirts,ACTIVE,"dept:unisex, drop:01, fit:oversized, mat:cotton-240gsm",Bone / S,RMC-TEE-GRP-BON-SM,48.00,,70
+heavyweight-graphic-tee,Heavyweight Graphic Tee,T-Shirts,ACTIVE,"dept:unisex, drop:01, fit:oversized, mat:cotton-240gsm",Bone / M,RMC-TEE-GRP-BON-MD,48.00,,25
+heavyweight-graphic-tee,Heavyweight Graphic Tee,T-Shirts,ACTIVE,"dept:unisex, drop:01, fit:oversized, mat:cotton-240gsm",Bone / L,RMC-TEE-GRP-BON-LG,48.00,,50
+heavyweight-graphic-tee,Heavyweight Graphic Tee,T-Shirts,ACTIVE,"dept:unisex, drop:01, fit:oversized, mat:cotton-240gsm",Bone / XL,RMC-TEE-GRP-BON-XL,48.00,,23
+heavyweight-graphic-tee,Heavyweight Graphic Tee,T-Shirts,ACTIVE,"dept:unisex, drop:01, fit:oversized, mat:cotton-240gsm",Bone / 2XL,RMC-TEE-GRP-BON-2XL,48.00,,70
+heavyweight-graphic-tee,Heavyweight Graphic Tee,T-Shirts,ACTIVE,"dept:unisex, drop:01, fit:oversized, mat:cotton-240gsm",Cherry Red / S,RMC-TEE-GRP-CHY-SM,48.00,,60
+heavyweight-graphic-tee,Heavyweight Graphic Tee,T-Shirts,ACTIVE,"dept:unisex, drop:01, fit:oversized, mat:cotton-240gsm",Cherry Red / M,RMC-TEE-GRP-CHY-MD,48.00,,37
+heavyweight-graphic-tee,Heavyweight Graphic Tee,T-Shirts,ACTIVE,"dept:unisex, drop:01, fit:oversized, mat:cotton-240gsm",Cherry Red / L,RMC-TEE-GRP-CHY-LG,48.00,,39
+heavyweight-graphic-tee,Heavyweight Graphic Tee,T-Shirts,ACTIVE,"dept:unisex, drop:01, fit:oversized, mat:cotton-240gsm",Cherry Red / XL,RMC-TEE-GRP-CHY-XL,48.00,,24
+heavyweight-graphic-tee,Heavyweight Graphic Tee,T-Shirts,ACTIVE,"dept:unisex, drop:01, fit:oversized, mat:cotton-240gsm",Cherry Red / 2XL,RMC-TEE-GRP-CHY-2XL,48.00,,7
+heavyweight-graphic-tee,Heavyweight Graphic Tee,T-Shirts,ACTIVE,"dept:unisex, drop:01, fit:oversized, mat:cotton-240gsm",Moss Green / S,RMC-TEE-GRP-MOS-SM,48.00,,29
+heavyweight-graphic-tee,Heavyweight Graphic Tee,T-Shirts,ACTIVE,"dept:unisex, drop:01, fit:oversized, mat:cotton-240gsm",Moss Green / M,RMC-TEE-GRP-MOS-MD,48.00,,2
+heavyweight-graphic-tee,Heavyweight Graphic Tee,T-Shirts,ACTIVE,"dept:unisex, drop:01, fit:oversized, mat:cotton-240gsm",Moss Green / L,RMC-TEE-GRP-MOS-LG,48.00,,15
+heavyweight-graphic-tee,Heavyweight Graphic Tee,T-Shirts,ACTIVE,"dept:unisex, drop:01, fit:oversized, mat:cotton-240gsm",Moss Green / XL,RMC-TEE-GRP-MOS-XL,48.00,,10
+heavyweight-graphic-tee,Heavyweight Graphic Tee,T-Shirts,ACTIVE,"dept:unisex, drop:01, fit:oversized, mat:cotton-240gsm",Moss Green / 2XL,RMC-TEE-GRP-MOS-2XL,48.00,,35
+baby-tee,Baby Tee,T-Shirts,ACTIVE,"dept:womens, drop:00, fit:cropped, mat:cotton-spandex, pgm:sale-2026-12-31",White / XS,RMC-TEE-BBY-WHT-XS,32.00,42.00,59
+baby-tee,Baby Tee,T-Shirts,ACTIVE,"dept:womens, drop:00, fit:cropped, mat:cotton-spandex, pgm:sale-2026-12-31",White / S,RMC-TEE-BBY-WHT-SM,32.00,42.00,54
+baby-tee,Baby Tee,T-Shirts,ACTIVE,"dept:womens, drop:00, fit:cropped, mat:cotton-spandex, pgm:sale-2026-12-31",White / M,RMC-TEE-BBY-WHT-MD,32.00,42.00,62
+baby-tee,Baby Tee,T-Shirts,ACTIVE,"dept:womens, drop:00, fit:cropped, mat:cotton-spandex, pgm:sale-2026-12-31",White / L,RMC-TEE-BBY-WHT-LG,32.00,42.00,4
+baby-tee,Baby Tee,T-Shirts,ACTIVE,"dept:womens, drop:00, fit:cropped, mat:cotton-spandex, pgm:sale-2026-12-31",White / XL,RMC-TEE-BBY-WHT-XL,32.00,42.00,40
+baby-tee,Baby Tee,T-Shirts,ACTIVE,"dept:womens, drop:00, fit:cropped, mat:cotton-spandex, pgm:sale-2026-12-31",Baby Pink / XS,RMC-TEE-BBY-BPK-XS,32.00,42.00,0
+baby-tee,Baby Tee,T-Shirts,ACTIVE,"dept:womens, drop:00, fit:cropped, mat:cotton-spandex, pgm:sale-2026-12-31",Baby Pink / S,RMC-TEE-BBY-BPK-SM,32.00,42.00,11
+baby-tee,Baby Tee,T-Shirts,ACTIVE,"dept:womens, drop:00, fit:cropped, mat:cotton-spandex, pgm:sale-2026-12-31",Baby Pink / M,RMC-TEE-BBY-BPK-MD,32.00,42.00,1
+baby-tee,Baby Tee,T-Shirts,ACTIVE,"dept:womens, drop:00, fit:cropped, mat:cotton-spandex, pgm:sale-2026-12-31",Baby Pink / L,RMC-TEE-BBY-BPK-LG,32.00,42.00,43
+baby-tee,Baby Tee,T-Shirts,ACTIVE,"dept:womens, drop:00, fit:cropped, mat:cotton-spandex, pgm:sale-2026-12-31",Baby Pink / XL,RMC-TEE-BBY-BPK-XL,32.00,42.00,10
+baby-tee,Baby Tee,T-Shirts,ACTIVE,"dept:womens, drop:00, fit:cropped, mat:cotton-spandex, pgm:sale-2026-12-31",Black / XS,RMC-TEE-BBY-BLK-XS,32.00,42.00,21
+baby-tee,Baby Tee,T-Shirts,ACTIVE,"dept:womens, drop:00, fit:cropped, mat:cotton-spandex, pgm:sale-2026-12-31",Black / S,RMC-TEE-BBY-BLK-SM,32.00,42.00,2
+baby-tee,Baby Tee,T-Shirts,ACTIVE,"dept:womens, drop:00, fit:cropped, mat:cotton-spandex, pgm:sale-2026-12-31",Black / M,RMC-TEE-BBY-BLK-MD,32.00,42.00,38
+baby-tee,Baby Tee,T-Shirts,ACTIVE,"dept:womens, drop:00, fit:cropped, mat:cotton-spandex, pgm:sale-2026-12-31",Black / L,RMC-TEE-BBY-BLK-LG,32.00,42.00,19
+baby-tee,Baby Tee,T-Shirts,ACTIVE,"dept:womens, drop:00, fit:cropped, mat:cotton-spandex, pgm:sale-2026-12-31",Black / XL,RMC-TEE-BBY-BLK-XL,32.00,42.00,54
+ribbed-tank,Ribbed Tank,T-Shirts,ACTIVE,"dept:womens, drop:00, fit:regular, mat:cotton-rib, pgm:sale-2026-12-31",Black / XS,RMC-TNK-RIB-BLK-XS,28.00,34.00,55
+ribbed-tank,Ribbed Tank,T-Shirts,ACTIVE,"dept:womens, drop:00, fit:regular, mat:cotton-rib, pgm:sale-2026-12-31",Black / S,RMC-TNK-RIB-BLK-SM,28.00,34.00,37
+ribbed-tank,Ribbed Tank,T-Shirts,ACTIVE,"dept:womens, drop:00, fit:regular, mat:cotton-rib, pgm:sale-2026-12-31",Black / M,RMC-TNK-RIB-BLK-MD,28.00,34.00,45
+ribbed-tank,Ribbed Tank,T-Shirts,ACTIVE,"dept:womens, drop:00, fit:regular, mat:cotton-rib, pgm:sale-2026-12-31",Black / L,RMC-TNK-RIB-BLK-LG,28.00,34.00,12
+ribbed-tank,Ribbed Tank,T-Shirts,ACTIVE,"dept:womens, drop:00, fit:regular, mat:cotton-rib, pgm:sale-2026-12-31",Black / XL,RMC-TNK-RIB-BLK-XL,28.00,34.00,44
+ribbed-tank,Ribbed Tank,T-Shirts,ACTIVE,"dept:womens, drop:00, fit:regular, mat:cotton-rib, pgm:sale-2026-12-31",White / XS,RMC-TNK-RIB-WHT-XS,28.00,34.00,34
+ribbed-tank,Ribbed Tank,T-Shirts,ACTIVE,"dept:womens, drop:00, fit:regular, mat:cotton-rib, pgm:sale-2026-12-31",White / S,RMC-TNK-RIB-WHT-SM,28.00,34.00,6
+ribbed-tank,Ribbed Tank,T-Shirts,ACTIVE,"dept:womens, drop:00, fit:regular, mat:cotton-rib, pgm:sale-2026-12-31",White / M,RMC-TNK-RIB-WHT-MD,28.00,34.00,62
+ribbed-tank,Ribbed Tank,T-Shirts,ACTIVE,"dept:womens, drop:00, fit:regular, mat:cotton-rib, pgm:sale-2026-12-31",White / L,RMC-TNK-RIB-WHT-LG,28.00,34.00,68
+ribbed-tank,Ribbed Tank,T-Shirts,ACTIVE,"dept:womens, drop:00, fit:regular, mat:cotton-rib, pgm:sale-2026-12-31",White / XL,RMC-TNK-RIB-WHT-XL,28.00,34.00,48
+ribbed-tank,Ribbed Tank,T-Shirts,ACTIVE,"dept:womens, drop:00, fit:regular, mat:cotton-rib, pgm:sale-2026-12-31",Hot Pink / XS,RMC-TNK-RIB-HPK-XS,28.00,34.00,0
+ribbed-tank,Ribbed Tank,T-Shirts,ACTIVE,"dept:womens, drop:00, fit:regular, mat:cotton-rib, pgm:sale-2026-12-31",Hot Pink / S,RMC-TNK-RIB-HPK-SM,28.00,34.00,3
+ribbed-tank,Ribbed Tank,T-Shirts,ACTIVE,"dept:womens, drop:00, fit:regular, mat:cotton-rib, pgm:sale-2026-12-31",Hot Pink / M,RMC-TNK-RIB-HPK-MD,28.00,34.00,5
+ribbed-tank,Ribbed Tank,T-Shirts,ACTIVE,"dept:womens, drop:00, fit:regular, mat:cotton-rib, pgm:sale-2026-12-31",Hot Pink / L,RMC-TNK-RIB-HPK-LG,28.00,34.00,34
+ribbed-tank,Ribbed Tank,T-Shirts,ACTIVE,"dept:womens, drop:00, fit:regular, mat:cotton-rib, pgm:sale-2026-12-31",Hot Pink / XL,RMC-TNK-RIB-HPK-XL,28.00,34.00,70
+heavyweight-hoodie,Heavyweight Hoodie,Sweatshirts,ACTIVE,"dept:unisex, drop:01, fit:oversized, mat:fleece-400gsm",Black / S,RMC-HOD-HVY-BLK-SM,128.00,,9
+heavyweight-hoodie,Heavyweight Hoodie,Sweatshirts,ACTIVE,"dept:unisex, drop:01, fit:oversized, mat:fleece-400gsm",Black / M,RMC-HOD-HVY-BLK-MD,128.00,,25
+heavyweight-hoodie,Heavyweight Hoodie,Sweatshirts,ACTIVE,"dept:unisex, drop:01, fit:oversized, mat:fleece-400gsm",Black / L,RMC-HOD-HVY-BLK-LG,128.00,,29
+heavyweight-hoodie,Heavyweight Hoodie,Sweatshirts,ACTIVE,"dept:unisex, drop:01, fit:oversized, mat:fleece-400gsm",Black / XL,RMC-HOD-HVY-BLK-XL,128.00,,64
+heavyweight-hoodie,Heavyweight Hoodie,Sweatshirts,ACTIVE,"dept:unisex, drop:01, fit:oversized, mat:fleece-400gsm",Black / 2XL,RMC-HOD-HVY-BLK-2XL,128.00,,55
+heavyweight-hoodie,Heavyweight Hoodie,Sweatshirts,ACTIVE,"dept:unisex, drop:01, fit:oversized, mat:fleece-400gsm",Bone / S,RMC-HOD-HVY-BON-SM,128.00,,66
+heavyweight-hoodie,Heavyweight Hoodie,Sweatshirts,ACTIVE,"dept:unisex, drop:01, fit:oversized, mat:fleece-400gsm",Bone / M,RMC-HOD-HVY-BON-MD,128.00,,63
+heavyweight-hoodie,Heavyweight Hoodie,Sweatshirts,ACTIVE,"dept:unisex, drop:01, fit:oversized, mat:fleece-400gsm",Bone / L,RMC-HOD-HVY-BON-LG,128.00,,66
+heavyweight-hoodie,Heavyweight Hoodie,Sweatshirts,ACTIVE,"dept:unisex, drop:01, fit:oversized, mat:fleece-400gsm",Bone / XL,RMC-HOD-HVY-BON-XL,128.00,,40
+heavyweight-hoodie,Heavyweight Hoodie,Sweatshirts,ACTIVE,"dept:unisex, drop:01, fit:oversized, mat:fleece-400gsm",Bone / 2XL,RMC-HOD-HVY-BON-2XL,128.00,,29
+heavyweight-hoodie,Heavyweight Hoodie,Sweatshirts,ACTIVE,"dept:unisex, drop:01, fit:oversized, mat:fleece-400gsm",Moss Green / S,RMC-HOD-HVY-MOS-SM,128.00,,0
+heavyweight-hoodie,Heavyweight Hoodie,Sweatshirts,ACTIVE,"dept:unisex, drop:01, fit:oversized, mat:fleece-400gsm",Moss Green / M,RMC-HOD-HVY-MOS-MD,128.00,,12
+heavyweight-hoodie,Heavyweight Hoodie,Sweatshirts,ACTIVE,"dept:unisex, drop:01, fit:oversized, mat:fleece-400gsm",Moss Green / L,RMC-HOD-HVY-MOS-LG,128.00,,16
+heavyweight-hoodie,Heavyweight Hoodie,Sweatshirts,ACTIVE,"dept:unisex, drop:01, fit:oversized, mat:fleece-400gsm",Moss Green / XL,RMC-HOD-HVY-MOS-XL,128.00,,65
+heavyweight-hoodie,Heavyweight Hoodie,Sweatshirts,ACTIVE,"dept:unisex, drop:01, fit:oversized, mat:fleece-400gsm",Moss Green / 2XL,RMC-HOD-HVY-MOS-2XL,128.00,,31
+zip-track-jacket,Zip Track Jacket,Outerwear,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:poly-tricot",Navy / XS,RMC-JKT-TRK-NVY-XS,115.00,,10
+zip-track-jacket,Zip Track Jacket,Outerwear,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:poly-tricot",Navy / S,RMC-JKT-TRK-NVY-SM,115.00,,61
+zip-track-jacket,Zip Track Jacket,Outerwear,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:poly-tricot",Navy / M,RMC-JKT-TRK-NVY-MD,115.00,,38
+zip-track-jacket,Zip Track Jacket,Outerwear,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:poly-tricot",Navy / L,RMC-JKT-TRK-NVY-LG,115.00,,6
+zip-track-jacket,Zip Track Jacket,Outerwear,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:poly-tricot",Navy / XL,RMC-JKT-TRK-NVY-XL,115.00,,27
+zip-track-jacket,Zip Track Jacket,Outerwear,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:poly-tricot",Chrome Silver / XS,RMC-JKT-TRK-CHR-XS,115.00,,45
+zip-track-jacket,Zip Track Jacket,Outerwear,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:poly-tricot",Chrome Silver / S,RMC-JKT-TRK-CHR-SM,115.00,,54
+zip-track-jacket,Zip Track Jacket,Outerwear,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:poly-tricot",Chrome Silver / M,RMC-JKT-TRK-CHR-MD,115.00,,45
+zip-track-jacket,Zip Track Jacket,Outerwear,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:poly-tricot",Chrome Silver / L,RMC-JKT-TRK-CHR-LG,115.00,,37
+zip-track-jacket,Zip Track Jacket,Outerwear,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:poly-tricot",Chrome Silver / XL,RMC-JKT-TRK-CHR-XL,115.00,,20
+mechanic-shirt,Mechanic Shirt,Outerwear,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:cotton-twill",Bone / S,RMC-SHT-MEC-BON-SM,79.00,,22
+mechanic-shirt,Mechanic Shirt,Outerwear,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:cotton-twill",Bone / M,RMC-SHT-MEC-BON-MD,79.00,,65
+mechanic-shirt,Mechanic Shirt,Outerwear,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:cotton-twill",Bone / L,RMC-SHT-MEC-BON-LG,79.00,,27
+mechanic-shirt,Mechanic Shirt,Outerwear,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:cotton-twill",Bone / XL,RMC-SHT-MEC-BON-XL,79.00,,26
+mechanic-shirt,Mechanic Shirt,Outerwear,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:cotton-twill",Bone / 2XL,RMC-SHT-MEC-BON-2XL,79.00,,55
+mechanic-shirt,Mechanic Shirt,Outerwear,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:cotton-twill",Bone / 3XL,RMC-SHT-MEC-BON-3XL,79.00,,66
+mechanic-shirt,Mechanic Shirt,Outerwear,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:cotton-twill",Navy / S,RMC-SHT-MEC-NVY-SM,79.00,,61
+mechanic-shirt,Mechanic Shirt,Outerwear,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:cotton-twill",Navy / M,RMC-SHT-MEC-NVY-MD,79.00,,40
+mechanic-shirt,Mechanic Shirt,Outerwear,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:cotton-twill",Navy / L,RMC-SHT-MEC-NVY-LG,79.00,,20
+mechanic-shirt,Mechanic Shirt,Outerwear,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:cotton-twill",Navy / XL,RMC-SHT-MEC-NVY-XL,79.00,,25
+mechanic-shirt,Mechanic Shirt,Outerwear,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:cotton-twill",Navy / 2XL,RMC-SHT-MEC-NVY-2XL,79.00,,16
+mechanic-shirt,Mechanic Shirt,Outerwear,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:cotton-twill",Navy / 3XL,RMC-SHT-MEC-NVY-3XL,79.00,,12
+straight-leg-jean,Straight-Leg Jean,Bottoms,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:denim-13oz",Indigo Wash / 28,RMC-JEA-STR-IND-28,99.00,,24
+straight-leg-jean,Straight-Leg Jean,Bottoms,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:denim-13oz",Indigo Wash / 30,RMC-JEA-STR-IND-30,99.00,,53
+straight-leg-jean,Straight-Leg Jean,Bottoms,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:denim-13oz",Indigo Wash / 32,RMC-JEA-STR-IND-32,99.00,,57
+straight-leg-jean,Straight-Leg Jean,Bottoms,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:denim-13oz",Indigo Wash / 34,RMC-JEA-STR-IND-34,99.00,,24
+straight-leg-jean,Straight-Leg Jean,Bottoms,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:denim-13oz",Indigo Wash / 36,RMC-JEA-STR-IND-36,99.00,,23
+straight-leg-jean,Straight-Leg Jean,Bottoms,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:denim-13oz",Indigo Wash / 38,RMC-JEA-STR-IND-38,99.00,,1
+straight-leg-jean,Straight-Leg Jean,Bottoms,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:denim-13oz",Bone / 28,RMC-JEA-STR-BON-28,99.00,,23
+straight-leg-jean,Straight-Leg Jean,Bottoms,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:denim-13oz",Bone / 30,RMC-JEA-STR-BON-30,99.00,,70
+straight-leg-jean,Straight-Leg Jean,Bottoms,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:denim-13oz",Bone / 32,RMC-JEA-STR-BON-32,99.00,,8
+straight-leg-jean,Straight-Leg Jean,Bottoms,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:denim-13oz",Bone / 34,RMC-JEA-STR-BON-34,99.00,,2
+straight-leg-jean,Straight-Leg Jean,Bottoms,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:denim-13oz",Bone / 36,RMC-JEA-STR-BON-36,99.00,,30
+straight-leg-jean,Straight-Leg Jean,Bottoms,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:denim-13oz",Bone / 38,RMC-JEA-STR-BON-38,99.00,,35
+board-swim-short,Board Swim Short,Swimwear,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:recycled-poly",Black / XS,RMC-SWM-BRD-BLK-XS,52.00,,41
+board-swim-short,Board Swim Short,Swimwear,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:recycled-poly",Black / S,RMC-SWM-BRD-BLK-SM,52.00,,18
+board-swim-short,Board Swim Short,Swimwear,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:recycled-poly",Black / M,RMC-SWM-BRD-BLK-MD,52.00,,37
+board-swim-short,Board Swim Short,Swimwear,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:recycled-poly",Black / L,RMC-SWM-BRD-BLK-LG,52.00,,57
+board-swim-short,Board Swim Short,Swimwear,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:recycled-poly",Black / XL,RMC-SWM-BRD-BLK-XL,52.00,,48
+board-swim-short,Board Swim Short,Swimwear,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:recycled-poly",Black / 1X,RMC-SWM-BRD-BLK-1X,52.00,,47
+board-swim-short,Board Swim Short,Swimwear,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:recycled-poly",Black / 2X,RMC-SWM-BRD-BLK-2X,52.00,,7
+board-swim-short,Board Swim Short,Swimwear,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:recycled-poly",Black / 3X,RMC-SWM-BRD-BLK-3X,52.00,,16
+board-swim-short,Board Swim Short,Swimwear,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:recycled-poly",Sunburst Yellow / XS,RMC-SWM-BRD-SUN-XS,52.00,,64
+board-swim-short,Board Swim Short,Swimwear,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:recycled-poly",Sunburst Yellow / S,RMC-SWM-BRD-SUN-SM,52.00,,5
+board-swim-short,Board Swim Short,Swimwear,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:recycled-poly",Sunburst Yellow / M,RMC-SWM-BRD-SUN-MD,52.00,,24
+board-swim-short,Board Swim Short,Swimwear,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:recycled-poly",Sunburst Yellow / L,RMC-SWM-BRD-SUN-LG,52.00,,12
+board-swim-short,Board Swim Short,Swimwear,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:recycled-poly",Sunburst Yellow / XL,RMC-SWM-BRD-SUN-XL,52.00,,22
+board-swim-short,Board Swim Short,Swimwear,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:recycled-poly",Sunburst Yellow / 1X,RMC-SWM-BRD-SUN-1X,52.00,,35
+board-swim-short,Board Swim Short,Swimwear,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:recycled-poly",Sunburst Yellow / 2X,RMC-SWM-BRD-SUN-2X,52.00,,48
+board-swim-short,Board Swim Short,Swimwear,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:recycled-poly",Sunburst Yellow / 3X,RMC-SWM-BRD-SUN-3X,52.00,,0
+zip-around-wallet,Zip-Around Wallet,Accessories,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:pebbled-pu",Black,RMC-WAL-ZIP-BLK-OS,29.00,,65
+zip-around-wallet,Zip-Around Wallet,Accessories,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:pebbled-pu",Cherry Red,RMC-WAL-ZIP-CHY-OS,29.00,,50
+zip-around-wallet,Zip-Around Wallet,Accessories,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:pebbled-pu",Cheetah,RMC-WAL-ZIP-CHT-OS,29.00,,2
+zip-around-wallet,Zip-Around Wallet,Accessories,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:pebbled-pu",Baby Pink,RMC-WAL-ZIP-BPK-OS,29.00,,64
+halo-keychain,Halo Keychain,Accessories,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:zinc-alloy",Chrome Silver,RMC-KEY-HAL-CHR-OS,20.00,,12
+halo-keychain,Halo Keychain,Accessories,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:zinc-alloy",Black,RMC-KEY-HAL-BLK-OS,20.00,,63
+halo-keychain,Halo Keychain,Accessories,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:zinc-alloy",Hot Pink,RMC-KEY-HAL-HPK-OS,20.00,,19
+halo-keychain,Halo Keychain,Accessories,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:zinc-alloy",Sunburst Yellow,RMC-KEY-HAL-SUN-OS,20.00,,54
+rectangle-sunglasses,Rectangle Sunglasses,Accessories,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:acetate",Black,RMC-SUN-REC-BLK-OS,69.00,,53
+rectangle-sunglasses,Rectangle Sunglasses,Accessories,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:acetate",Chrome Silver,RMC-SUN-REC-CHR-OS,69.00,,59
+rectangle-sunglasses,Rectangle Sunglasses,Accessories,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:acetate",Cherry Red,RMC-SUN-REC-CHY-OS,69.00,,47
+crew-socks-2-pack,Crew Socks 2-Pack,Accessories,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:cotton-blend",Black,RMC-SOK-CRW-BLK-OS,14.00,,45
+crew-socks-2-pack,Crew Socks 2-Pack,Accessories,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:cotton-blend",Bone,RMC-SOK-CRW-BON-OS,14.00,,30
+crew-socks-2-pack,Crew Socks 2-Pack,Accessories,ACTIVE,"dept:unisex, drop:01, fit:regular, mat:cotton-blend",Cherry Red,RMC-SOK-CRW-CHY-OS,14.00,,31

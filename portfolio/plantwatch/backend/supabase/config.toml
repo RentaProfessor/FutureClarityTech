@@ -1,0 +1,13 @@
+project_id = "plantwatch"
+
+[db]
+major_version = 15
+
+# Both functions authenticate the caller themselves (GoTrue /auth/v1/user) and
+# forward the caller's JWT to PostgREST so row-level security applies. The
+# gateway check below rejects requests without a valid JWT before they run.
+[functions.report-v2]
+verify_jwt = true
+
+[functions.ecowitt-devices]
+verify_jwt = true

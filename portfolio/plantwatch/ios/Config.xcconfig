@@ -1,0 +1,18 @@
+// Build settings shared by the Debug and Release configurations.
+//
+// Supabase connection values are read from Secrets.xcconfig, which is
+// gitignored. To configure a build:
+//
+//   cp ios/Secrets.example.xcconfig ios/Secrets.xcconfig
+//
+// and fill in your project's URL and anon key. The placeholders below keep the
+// project buildable without it; the app then shows sign-in errors until it is
+// pointed at a real project.
+//
+// "//" starts a comment in .xcconfig files, so URLs are written with an empty
+// variable between the slashes: https:/$()/your-project-ref.supabase.co
+
+SUPABASE_URL = https:/$()/your-project-ref.supabase.co
+SUPABASE_ANON_KEY = your-anon-key
+
+#include? "Secrets.xcconfig"

@@ -1,0 +1,4242 @@
+{
+  "data": {
+    "products": {
+      "nodes": [
+        {
+          "title": "Classic Mesh Trucker",
+          "handle": "classic-mesh-trucker",
+          "productType": "Hats",
+          "vendor": "Redline Motor Club",
+          "tags": [
+            "dept:unisex",
+            "drop:01",
+            "fit:regular",
+            "mat:mesh-twill"
+          ],
+          "status": "ACTIVE",
+          "options": [
+            {
+              "name": "Color",
+              "values": [
+                "Black",
+                "White",
+                "Cherry Red",
+                "Hot Pink",
+                "Sky Blue",
+                "Desert Camo"
+              ]
+            }
+          ],
+          "seo": {
+            "title": "Classic Mesh Trucker | Redline Motor Club",
+            "description": "Five-panel trucker with a structured foam front, breathable mesh back, and a seven-row snapback. Pre-curved bill with contrast under-brim."
+          },
+          "media": {
+            "nodes": [
+              {
+                "alt": "Classic Mesh Trucker in Cherry Red worn at golden hour",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Classic Mesh Trucker in Black",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Classic Mesh Trucker in White",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Classic Mesh Trucker in Cherry Red",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Classic Mesh Trucker in Hot Pink",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Classic Mesh Trucker in Sky Blue",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Classic Mesh Trucker in Desert Camo",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Classic Mesh Trucker colorway grid",
+                "mediaContentType": "IMAGE"
+              }
+            ]
+          },
+          "variants": {
+            "nodes": [
+              {
+                "title": "Black",
+                "sku": "RMC-HAT-MSH-BLK-OS",
+                "price": "58.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 24,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Black"
+                  }
+                ]
+              },
+              {
+                "title": "White",
+                "sku": "RMC-HAT-MSH-WHT-OS",
+                "price": "58.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 18,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "White"
+                  }
+                ]
+              },
+              {
+                "title": "Cherry Red",
+                "sku": "RMC-HAT-MSH-CHY-OS",
+                "price": "58.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 1,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Cherry Red"
+                  }
+                ]
+              },
+              {
+                "title": "Hot Pink",
+                "sku": "RMC-HAT-MSH-HPK-OS",
+                "price": "58.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 18,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Hot Pink"
+                  }
+                ]
+              },
+              {
+                "title": "Sky Blue",
+                "sku": "RMC-HAT-MSH-SKY-OS",
+                "price": "58.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 28,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Sky Blue"
+                  }
+                ]
+              },
+              {
+                "title": "Desert Camo",
+                "sku": "RMC-HAT-MSH-CAM-OS",
+                "price": "58.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 4,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Desert Camo"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "title": "Foam Front Trucker",
+          "handle": "foam-front-trucker",
+          "productType": "Hats",
+          "vendor": "Redline Motor Club",
+          "tags": [
+            "dept:unisex",
+            "drop:00",
+            "fit:regular",
+            "mat:foam-mesh",
+            "pgm:sale-2026-12-31"
+          ],
+          "status": "ACTIVE",
+          "options": [
+            {
+              "name": "Color",
+              "values": [
+                "Black",
+                "Bone",
+                "Moss Green",
+                "Sunburst Yellow"
+              ]
+            }
+          ],
+          "seo": {
+            "title": "Foam Front Trucker | Redline Motor Club",
+            "description": "Classic foam-front trucker with a tall crown and breathable mesh back. Drop 00 carryover colorways at a carryover price."
+          },
+          "media": {
+            "nodes": [
+              {
+                "alt": "Foam Front Trucker in Bone",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Foam Front Trucker in Black",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Foam Front Trucker in Moss Green",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Foam Front Trucker in Sunburst Yellow",
+                "mediaContentType": "IMAGE"
+              }
+            ]
+          },
+          "variants": {
+            "nodes": [
+              {
+                "title": "Black",
+                "sku": "RMC-HAT-FOM-BLK-OS",
+                "price": "48.00",
+                "compareAtPrice": "58.00",
+                "inventoryQuantity": 30,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Black"
+                  }
+                ]
+              },
+              {
+                "title": "Bone",
+                "sku": "RMC-HAT-FOM-BON-OS",
+                "price": "48.00",
+                "compareAtPrice": "58.00",
+                "inventoryQuantity": 11,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Bone"
+                  }
+                ]
+              },
+              {
+                "title": "Moss Green",
+                "sku": "RMC-HAT-FOM-MOS-OS",
+                "price": "48.00",
+                "compareAtPrice": "58.00",
+                "inventoryQuantity": 1,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Moss Green"
+                  }
+                ]
+              },
+              {
+                "title": "Sunburst Yellow",
+                "sku": "RMC-HAT-FOM-SUN-OS",
+                "price": "48.00",
+                "compareAtPrice": "58.00",
+                "inventoryQuantity": 0,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Sunburst Yellow"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "title": "Suede Panel Trucker",
+          "handle": "suede-panel-trucker",
+          "productType": "Hats",
+          "vendor": "Redline Motor Club",
+          "tags": [
+            "dept:unisex",
+            "drop:01",
+            "fit:regular",
+            "mat:suede"
+          ],
+          "status": "ACTIVE",
+          "options": [
+            {
+              "name": "Color",
+              "values": [
+                "Bone",
+                "Black",
+                "Cherry Red"
+              ]
+            }
+          ],
+          "seo": {
+            "title": "Suede Panel Trucker | Redline Motor Club",
+            "description": "Brushed faux-suede front panels on a structured five-panel crown, tonal mesh back, chrome-finish snap closure."
+          },
+          "media": {
+            "nodes": [
+              {
+                "alt": "Suede Panel Trucker in Cherry Red",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Suede Panel Trucker in Bone",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Suede Panel Trucker in Black",
+                "mediaContentType": "IMAGE"
+              }
+            ]
+          },
+          "variants": {
+            "nodes": [
+              {
+                "title": "Bone",
+                "sku": "RMC-HAT-SUE-BON-OS",
+                "price": "62.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 55,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Bone"
+                  }
+                ]
+              },
+              {
+                "title": "Black",
+                "sku": "RMC-HAT-SUE-BLK-OS",
+                "price": "62.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 18,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Black"
+                  }
+                ]
+              },
+              {
+                "title": "Cherry Red",
+                "sku": "RMC-HAT-SUE-CHY-OS",
+                "price": "62.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 40,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Cherry Red"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "title": "Velour Trucker",
+          "handle": "velour-trucker",
+          "productType": "Hats",
+          "vendor": "Redline Motor Club",
+          "tags": [
+            "dept:unisex",
+            "drop:01",
+            "fit:regular",
+            "mat:velour"
+          ],
+          "status": "ACTIVE",
+          "options": [
+            {
+              "name": "Color",
+              "values": [
+                "Hot Pink",
+                "Navy",
+                "Chrome Silver"
+              ]
+            }
+          ],
+          "seo": {
+            "title": "Velour Trucker | Redline Motor Club",
+            "description": "Plush velour front with a matching brim wrap and breathable mesh back. Soft hand, structured shape."
+          },
+          "media": {
+            "nodes": [
+              {
+                "alt": "Velour Trucker in Hot Pink",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Velour Trucker in Navy",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Velour Trucker in Chrome Silver",
+                "mediaContentType": "IMAGE"
+              }
+            ]
+          },
+          "variants": {
+            "nodes": [
+              {
+                "title": "Hot Pink",
+                "sku": "RMC-HAT-VEL-HPK-OS",
+                "price": "58.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 2,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Hot Pink"
+                  }
+                ]
+              },
+              {
+                "title": "Navy",
+                "sku": "RMC-HAT-VEL-NVY-OS",
+                "price": "58.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 2,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Navy"
+                  }
+                ]
+              },
+              {
+                "title": "Chrome Silver",
+                "sku": "RMC-HAT-VEL-CHR-OS",
+                "price": "58.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 24,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Chrome Silver"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "title": "Rhinestone Halo Trucker",
+          "handle": "rhinestone-halo-trucker",
+          "productType": "Hats",
+          "vendor": "Redline Motor Club",
+          "tags": [
+            "dept:womens",
+            "drop:01",
+            "fit:regular",
+            "mat:twill-rhinestone"
+          ],
+          "status": "ACTIVE",
+          "options": [
+            {
+              "name": "Color",
+              "values": [
+                "Black",
+                "Baby Pink",
+                "Cheetah"
+              ]
+            }
+          ],
+          "seo": {
+            "title": "Rhinestone Halo Trucker | Redline Motor Club",
+            "description": "Hand-set rhinestone halo motif across a structured twill front. Mesh back, adjustable snap."
+          },
+          "media": {
+            "nodes": [
+              {
+                "alt": "Rhinestone Halo Trucker in Black",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Rhinestone Halo Trucker in Baby Pink",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Rhinestone Halo Trucker in Cheetah",
+                "mediaContentType": "IMAGE"
+              }
+            ]
+          },
+          "variants": {
+            "nodes": [
+              {
+                "title": "Black",
+                "sku": "RMC-HAT-RHN-BLK-OS",
+                "price": "68.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 51,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Black"
+                  }
+                ]
+              },
+              {
+                "title": "Baby Pink",
+                "sku": "RMC-HAT-RHN-BPK-OS",
+                "price": "68.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 67,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Baby Pink"
+                  }
+                ]
+              },
+              {
+                "title": "Cheetah",
+                "sku": "RMC-HAT-RHN-CHT-OS",
+                "price": "68.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 21,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Cheetah"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "title": "Ribbed Cuff Beanie",
+          "handle": "ribbed-cuff-beanie",
+          "productType": "Beanies",
+          "vendor": "Redline Motor Club",
+          "tags": [
+            "dept:unisex",
+            "drop:01",
+            "fit:regular",
+            "mat:acrylic-knit"
+          ],
+          "status": "ACTIVE",
+          "options": [
+            {
+              "name": "Color",
+              "values": [
+                "Black",
+                "Bone",
+                "Cherry Red",
+                "Moss Green",
+                "Hot Pink"
+              ]
+            }
+          ],
+          "seo": {
+            "title": "Ribbed Cuff Beanie | Redline Motor Club",
+            "description": "Double-layer ribbed acrylic knit with a deep fold-over cuff. One size."
+          },
+          "media": {
+            "nodes": [
+              {
+                "alt": "Ribbed Cuff Beanie in Cherry Red",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Ribbed Cuff Beanie in Black",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Ribbed Cuff Beanie in Bone",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Ribbed Cuff Beanie in Moss Green",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Ribbed Cuff Beanie in Hot Pink",
+                "mediaContentType": "IMAGE"
+              }
+            ]
+          },
+          "variants": {
+            "nodes": [
+              {
+                "title": "Black",
+                "sku": "RMC-BEA-RIB-BLK-OS",
+                "price": "35.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 55,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Black"
+                  }
+                ]
+              },
+              {
+                "title": "Bone",
+                "sku": "RMC-BEA-RIB-BON-OS",
+                "price": "35.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 6,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Bone"
+                  }
+                ]
+              },
+              {
+                "title": "Cherry Red",
+                "sku": "RMC-BEA-RIB-CHY-OS",
+                "price": "35.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 19,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Cherry Red"
+                  }
+                ]
+              },
+              {
+                "title": "Moss Green",
+                "sku": "RMC-BEA-RIB-MOS-OS",
+                "price": "35.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 54,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Moss Green"
+                  }
+                ]
+              },
+              {
+                "title": "Hot Pink",
+                "sku": "RMC-BEA-RIB-HPK-OS",
+                "price": "35.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 58,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Hot Pink"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "title": "Kids Mesh Trucker",
+          "handle": "kids-mesh-trucker",
+          "productType": "Hats",
+          "vendor": "Redline Motor Club",
+          "tags": [
+            "dept:kids",
+            "drop:01",
+            "fit:regular",
+            "mat:mesh-twill"
+          ],
+          "status": "ACTIVE",
+          "options": [
+            {
+              "name": "Color",
+              "values": [
+                "Black",
+                "Sky Blue",
+                "Baby Pink",
+                "Sunburst Yellow"
+              ]
+            }
+          ],
+          "seo": {
+            "title": "Kids Mesh Trucker | Redline Motor Club",
+            "description": "The Classic Mesh Trucker scaled for kids, with a shorter crown and youth snapback range."
+          },
+          "media": {
+            "nodes": [
+              {
+                "alt": "Kids Mesh Trucker in Sky Blue",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Kids Mesh Trucker in Black",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Kids Mesh Trucker in Baby Pink",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Kids Mesh Trucker in Sunburst Yellow",
+                "mediaContentType": "IMAGE"
+              }
+            ]
+          },
+          "variants": {
+            "nodes": [
+              {
+                "title": "Black",
+                "sku": "RMC-KID-MSH-BLK-OS",
+                "price": "40.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 64,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Black"
+                  }
+                ]
+              },
+              {
+                "title": "Sky Blue",
+                "sku": "RMC-KID-MSH-SKY-OS",
+                "price": "40.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 52,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Sky Blue"
+                  }
+                ]
+              },
+              {
+                "title": "Baby Pink",
+                "sku": "RMC-KID-MSH-BPK-OS",
+                "price": "40.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 38,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Baby Pink"
+                  }
+                ]
+              },
+              {
+                "title": "Sunburst Yellow",
+                "sku": "RMC-KID-MSH-SUN-OS",
+                "price": "40.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 65,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Sunburst Yellow"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "title": "Bowling Bag",
+          "handle": "bowling-bag",
+          "productType": "Bags",
+          "vendor": "Redline Motor Club",
+          "tags": [
+            "dept:unisex",
+            "drop:01",
+            "fit:regular",
+            "mat:patent-pu"
+          ],
+          "status": "ACTIVE",
+          "options": [
+            {
+              "name": "Color",
+              "values": [
+                "Black",
+                "White",
+                "Cherry Red",
+                "Hot Pink",
+                "Cheetah",
+                "Desert Camo"
+              ]
+            }
+          ],
+          "seo": {
+            "title": "Bowling Bag | Redline Motor Club",
+            "description": "Structured Y2K bowling silhouette in glossy patent PU with chrome hardware, curved top zip, twin rolled handles, and protective chrome feet."
+          },
+          "media": {
+            "nodes": [
+              {
+                "alt": "Bowling Bag in Cherry Red carried on a Los Angeles sidewalk",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Bowling Bag in Cherry Red",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Bowling Bag in Black",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Bowling Bag in White",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Bowling Bag in Hot Pink",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Bowling Bag in Cheetah",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Bowling Bag in Desert Camo",
+                "mediaContentType": "IMAGE"
+              }
+            ]
+          },
+          "variants": {
+            "nodes": [
+              {
+                "title": "Black",
+                "sku": "RMC-BAG-BWL-BLK-OS",
+                "price": "99.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 8,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Black"
+                  }
+                ]
+              },
+              {
+                "title": "White",
+                "sku": "RMC-BAG-BWL-WHT-OS",
+                "price": "99.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 9,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "White"
+                  }
+                ]
+              },
+              {
+                "title": "Cherry Red",
+                "sku": "RMC-BAG-BWL-CHY-OS",
+                "price": "99.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 36,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Cherry Red"
+                  }
+                ]
+              },
+              {
+                "title": "Hot Pink",
+                "sku": "RMC-BAG-BWL-HPK-OS",
+                "price": "99.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 33,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Hot Pink"
+                  }
+                ]
+              },
+              {
+                "title": "Cheetah",
+                "sku": "RMC-BAG-BWL-CHT-OS",
+                "price": "99.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 19,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Cheetah"
+                  }
+                ]
+              },
+              {
+                "title": "Desert Camo",
+                "sku": "RMC-BAG-BWL-CAM-OS",
+                "price": "99.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 11,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Desert Camo"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "title": "Mini Bowling Bag",
+          "handle": "mini-bowling-bag",
+          "productType": "Bags",
+          "vendor": "Redline Motor Club",
+          "tags": [
+            "dept:womens",
+            "drop:01",
+            "fit:regular",
+            "mat:patent-pu"
+          ],
+          "status": "ACTIVE",
+          "options": [
+            {
+              "name": "Color",
+              "values": [
+                "Black",
+                "Baby Pink",
+                "Cheetah",
+                "Chrome Silver"
+              ]
+            }
+          ],
+          "seo": {
+            "title": "Mini Bowling Bag | Redline Motor Club",
+            "description": "The Bowling Bag shrunk to a grab-and-go size. Same chrome hardware, same curved zip, detachable shoulder strap."
+          },
+          "media": {
+            "nodes": [
+              {
+                "alt": "Mini Bowling Bag in Baby Pink",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Mini Bowling Bag in Black",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Mini Bowling Bag in Cheetah",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Mini Bowling Bag in Chrome Silver",
+                "mediaContentType": "IMAGE"
+              }
+            ]
+          },
+          "variants": {
+            "nodes": [
+              {
+                "title": "Black",
+                "sku": "RMC-BAG-MBW-BLK-OS",
+                "price": "69.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 10,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Black"
+                  }
+                ]
+              },
+              {
+                "title": "Baby Pink",
+                "sku": "RMC-BAG-MBW-BPK-OS",
+                "price": "69.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 12,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Baby Pink"
+                  }
+                ]
+              },
+              {
+                "title": "Cheetah",
+                "sku": "RMC-BAG-MBW-CHT-OS",
+                "price": "69.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 57,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Cheetah"
+                  }
+                ]
+              },
+              {
+                "title": "Chrome Silver",
+                "sku": "RMC-BAG-MBW-CHR-OS",
+                "price": "69.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 3,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Chrome Silver"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "title": "Shoulder Bag",
+          "handle": "shoulder-bag",
+          "productType": "Bags",
+          "vendor": "Redline Motor Club",
+          "tags": [
+            "dept:womens",
+            "drop:01",
+            "fit:regular",
+            "mat:pebbled-pu"
+          ],
+          "status": "ACTIVE",
+          "options": [
+            {
+              "name": "Color",
+              "values": [
+                "Black",
+                "Bone",
+                "Indigo Wash",
+                "Cherry Red"
+              ]
+            }
+          ],
+          "seo": {
+            "title": "Shoulder Bag | Redline Motor Club",
+            "description": "Compact shoulder bag in pebbled PU with a chrome buckle strap and magnetic flap closure."
+          },
+          "media": {
+            "nodes": [
+              {
+                "alt": "Shoulder Bag in Bone",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Shoulder Bag in Black",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Shoulder Bag in Indigo Wash",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Shoulder Bag in Cherry Red",
+                "mediaContentType": "IMAGE"
+              }
+            ]
+          },
+          "variants": {
+            "nodes": [
+              {
+                "title": "Black",
+                "sku": "RMC-BAG-SHD-BLK-OS",
+                "price": "79.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 37,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Black"
+                  }
+                ]
+              },
+              {
+                "title": "Bone",
+                "sku": "RMC-BAG-SHD-BON-OS",
+                "price": "79.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 52,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Bone"
+                  }
+                ]
+              },
+              {
+                "title": "Indigo Wash",
+                "sku": "RMC-BAG-SHD-IND-OS",
+                "price": "79.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 19,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Indigo Wash"
+                  }
+                ]
+              },
+              {
+                "title": "Cherry Red",
+                "sku": "RMC-BAG-SHD-CHY-OS",
+                "price": "79.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 32,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Cherry Red"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "title": "Crossbody Sling",
+          "handle": "crossbody-sling",
+          "productType": "Bags",
+          "vendor": "Redline Motor Club",
+          "tags": [
+            "dept:unisex",
+            "drop:00",
+            "fit:regular",
+            "mat:ripstop",
+            "pgm:sale-2026-12-31"
+          ],
+          "status": "ACTIVE",
+          "options": [
+            {
+              "name": "Color",
+              "values": [
+                "Black",
+                "Desert Camo",
+                "Chrome Silver"
+              ]
+            }
+          ],
+          "seo": {
+            "title": "Crossbody Sling | Redline Motor Club",
+            "description": "Utility crossbody in coated ripstop with a wide adjustable strap and twin zip pockets. Drop 00 carryover."
+          },
+          "media": {
+            "nodes": [
+              {
+                "alt": "Crossbody Sling in Desert Camo",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Crossbody Sling in Black",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Crossbody Sling in Chrome Silver",
+                "mediaContentType": "IMAGE"
+              }
+            ]
+          },
+          "variants": {
+            "nodes": [
+              {
+                "title": "Black",
+                "sku": "RMC-BAG-SLG-BLK-OS",
+                "price": "52.00",
+                "compareAtPrice": "65.00",
+                "inventoryQuantity": 57,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Black"
+                  }
+                ]
+              },
+              {
+                "title": "Desert Camo",
+                "sku": "RMC-BAG-SLG-CAM-OS",
+                "price": "52.00",
+                "compareAtPrice": "65.00",
+                "inventoryQuantity": 3,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Desert Camo"
+                  }
+                ]
+              },
+              {
+                "title": "Chrome Silver",
+                "sku": "RMC-BAG-SLG-CHR-OS",
+                "price": "52.00",
+                "compareAtPrice": "65.00",
+                "inventoryQuantity": 0,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Chrome Silver"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "title": "Weekender Duffle",
+          "handle": "weekender-duffle",
+          "productType": "Bags",
+          "vendor": "Redline Motor Club",
+          "tags": [
+            "dept:unisex",
+            "drop:01",
+            "fit:regular",
+            "mat:canvas-pu"
+          ],
+          "status": "ACTIVE",
+          "options": [
+            {
+              "name": "Color",
+              "values": [
+                "Black",
+                "Bone",
+                "Desert Camo"
+              ]
+            }
+          ],
+          "seo": {
+            "title": "Weekender Duffle | Redline Motor Club",
+            "description": "Cabin-sized duffle in heavy canvas with PU trim, chrome feet, and a trolley sleeve."
+          },
+          "media": {
+            "nodes": [
+              {
+                "alt": "Weekender Duffle in Black",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Weekender Duffle in Bone",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Weekender Duffle in Desert Camo",
+                "mediaContentType": "IMAGE"
+              }
+            ]
+          },
+          "variants": {
+            "nodes": [
+              {
+                "title": "Black",
+                "sku": "RMC-BAG-DUF-BLK-OS",
+                "price": "149.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 58,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Black"
+                  }
+                ]
+              },
+              {
+                "title": "Bone",
+                "sku": "RMC-BAG-DUF-BON-OS",
+                "price": "149.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 33,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Bone"
+                  }
+                ]
+              },
+              {
+                "title": "Desert Camo",
+                "sku": "RMC-BAG-DUF-CAM-OS",
+                "price": "149.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 57,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Desert Camo"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "title": "Heavyweight Graphic Tee",
+          "handle": "heavyweight-graphic-tee",
+          "productType": "T-Shirts",
+          "vendor": "Redline Motor Club",
+          "tags": [
+            "dept:unisex",
+            "drop:01",
+            "fit:oversized",
+            "mat:cotton-240gsm"
+          ],
+          "status": "ACTIVE",
+          "options": [
+            {
+              "name": "Color",
+              "values": [
+                "Black",
+                "Bone",
+                "Cherry Red",
+                "Moss Green"
+              ]
+            },
+            {
+              "name": "Size",
+              "values": [
+                "S",
+                "M",
+                "L",
+                "XL",
+                "2XL"
+              ]
+            }
+          ],
+          "seo": {
+            "title": "Heavyweight Graphic Tee | Redline Motor Club",
+            "description": "240gsm ring-spun cotton with a boxy drop-shoulder cut and double-needle hems. Screen-printed back graphic."
+          },
+          "media": {
+            "nodes": [
+              {
+                "alt": "Heavyweight Graphic Tee in Bone, ghost mannequin front view",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Heavyweight Graphic Tee in Black",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Heavyweight Graphic Tee in Cherry Red",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Heavyweight Graphic Tee in Moss Green",
+                "mediaContentType": "IMAGE"
+              }
+            ]
+          },
+          "variants": {
+            "nodes": [
+              {
+                "title": "Black / S",
+                "sku": "RMC-TEE-GRP-BLK-SM",
+                "price": "48.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 44,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Black"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "S"
+                  }
+                ]
+              },
+              {
+                "title": "Black / M",
+                "sku": "RMC-TEE-GRP-BLK-MD",
+                "price": "48.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 54,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Black"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "M"
+                  }
+                ]
+              },
+              {
+                "title": "Black / L",
+                "sku": "RMC-TEE-GRP-BLK-LG",
+                "price": "48.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 5,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Black"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "L"
+                  }
+                ]
+              },
+              {
+                "title": "Black / XL",
+                "sku": "RMC-TEE-GRP-BLK-XL",
+                "price": "48.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 33,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Black"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "XL"
+                  }
+                ]
+              },
+              {
+                "title": "Black / 2XL",
+                "sku": "RMC-TEE-GRP-BLK-2XL",
+                "price": "48.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 8,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Black"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "2XL"
+                  }
+                ]
+              },
+              {
+                "title": "Bone / S",
+                "sku": "RMC-TEE-GRP-BON-SM",
+                "price": "48.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 70,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Bone"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "S"
+                  }
+                ]
+              },
+              {
+                "title": "Bone / M",
+                "sku": "RMC-TEE-GRP-BON-MD",
+                "price": "48.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 25,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Bone"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "M"
+                  }
+                ]
+              },
+              {
+                "title": "Bone / L",
+                "sku": "RMC-TEE-GRP-BON-LG",
+                "price": "48.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 50,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Bone"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "L"
+                  }
+                ]
+              },
+              {
+                "title": "Bone / XL",
+                "sku": "RMC-TEE-GRP-BON-XL",
+                "price": "48.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 23,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Bone"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "XL"
+                  }
+                ]
+              },
+              {
+                "title": "Bone / 2XL",
+                "sku": "RMC-TEE-GRP-BON-2XL",
+                "price": "48.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 70,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Bone"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "2XL"
+                  }
+                ]
+              },
+              {
+                "title": "Cherry Red / S",
+                "sku": "RMC-TEE-GRP-CHY-SM",
+                "price": "48.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 60,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Cherry Red"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "S"
+                  }
+                ]
+              },
+              {
+                "title": "Cherry Red / M",
+                "sku": "RMC-TEE-GRP-CHY-MD",
+                "price": "48.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 37,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Cherry Red"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "M"
+                  }
+                ]
+              },
+              {
+                "title": "Cherry Red / L",
+                "sku": "RMC-TEE-GRP-CHY-LG",
+                "price": "48.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 39,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Cherry Red"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "L"
+                  }
+                ]
+              },
+              {
+                "title": "Cherry Red / XL",
+                "sku": "RMC-TEE-GRP-CHY-XL",
+                "price": "48.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 24,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Cherry Red"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "XL"
+                  }
+                ]
+              },
+              {
+                "title": "Cherry Red / 2XL",
+                "sku": "RMC-TEE-GRP-CHY-2XL",
+                "price": "48.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 7,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Cherry Red"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "2XL"
+                  }
+                ]
+              },
+              {
+                "title": "Moss Green / S",
+                "sku": "RMC-TEE-GRP-MOS-SM",
+                "price": "48.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 29,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Moss Green"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "S"
+                  }
+                ]
+              },
+              {
+                "title": "Moss Green / M",
+                "sku": "RMC-TEE-GRP-MOS-MD",
+                "price": "48.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 2,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Moss Green"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "M"
+                  }
+                ]
+              },
+              {
+                "title": "Moss Green / L",
+                "sku": "RMC-TEE-GRP-MOS-LG",
+                "price": "48.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 15,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Moss Green"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "L"
+                  }
+                ]
+              },
+              {
+                "title": "Moss Green / XL",
+                "sku": "RMC-TEE-GRP-MOS-XL",
+                "price": "48.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 10,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Moss Green"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "XL"
+                  }
+                ]
+              },
+              {
+                "title": "Moss Green / 2XL",
+                "sku": "RMC-TEE-GRP-MOS-2XL",
+                "price": "48.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 35,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Moss Green"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "2XL"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "title": "Baby Tee",
+          "handle": "baby-tee",
+          "productType": "T-Shirts",
+          "vendor": "Redline Motor Club",
+          "tags": [
+            "dept:womens",
+            "drop:00",
+            "fit:cropped",
+            "mat:cotton-spandex",
+            "pgm:sale-2026-12-31"
+          ],
+          "status": "ACTIVE",
+          "options": [
+            {
+              "name": "Color",
+              "values": [
+                "White",
+                "Baby Pink",
+                "Black"
+              ]
+            },
+            {
+              "name": "Size",
+              "values": [
+                "XS",
+                "S",
+                "M",
+                "L",
+                "XL"
+              ]
+            }
+          ],
+          "seo": {
+            "title": "Baby Tee | Redline Motor Club",
+            "description": "Fitted 90s-cut baby tee in stretch cotton with a raised collar and cropped hem. Drop 00 carryover."
+          },
+          "media": {
+            "nodes": [
+              {
+                "alt": "Baby Tee in Baby Pink",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Baby Tee in White",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Baby Tee in Black",
+                "mediaContentType": "IMAGE"
+              }
+            ]
+          },
+          "variants": {
+            "nodes": [
+              {
+                "title": "White / XS",
+                "sku": "RMC-TEE-BBY-WHT-XS",
+                "price": "32.00",
+                "compareAtPrice": "42.00",
+                "inventoryQuantity": 59,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "White"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "XS"
+                  }
+                ]
+              },
+              {
+                "title": "White / S",
+                "sku": "RMC-TEE-BBY-WHT-SM",
+                "price": "32.00",
+                "compareAtPrice": "42.00",
+                "inventoryQuantity": 54,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "White"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "S"
+                  }
+                ]
+              },
+              {
+                "title": "White / M",
+                "sku": "RMC-TEE-BBY-WHT-MD",
+                "price": "32.00",
+                "compareAtPrice": "42.00",
+                "inventoryQuantity": 62,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "White"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "M"
+                  }
+                ]
+              },
+              {
+                "title": "White / L",
+                "sku": "RMC-TEE-BBY-WHT-LG",
+                "price": "32.00",
+                "compareAtPrice": "42.00",
+                "inventoryQuantity": 4,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "White"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "L"
+                  }
+                ]
+              },
+              {
+                "title": "White / XL",
+                "sku": "RMC-TEE-BBY-WHT-XL",
+                "price": "32.00",
+                "compareAtPrice": "42.00",
+                "inventoryQuantity": 40,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "White"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "XL"
+                  }
+                ]
+              },
+              {
+                "title": "Baby Pink / XS",
+                "sku": "RMC-TEE-BBY-BPK-XS",
+                "price": "32.00",
+                "compareAtPrice": "42.00",
+                "inventoryQuantity": 0,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Baby Pink"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "XS"
+                  }
+                ]
+              },
+              {
+                "title": "Baby Pink / S",
+                "sku": "RMC-TEE-BBY-BPK-SM",
+                "price": "32.00",
+                "compareAtPrice": "42.00",
+                "inventoryQuantity": 11,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Baby Pink"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "S"
+                  }
+                ]
+              },
+              {
+                "title": "Baby Pink / M",
+                "sku": "RMC-TEE-BBY-BPK-MD",
+                "price": "32.00",
+                "compareAtPrice": "42.00",
+                "inventoryQuantity": 1,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Baby Pink"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "M"
+                  }
+                ]
+              },
+              {
+                "title": "Baby Pink / L",
+                "sku": "RMC-TEE-BBY-BPK-LG",
+                "price": "32.00",
+                "compareAtPrice": "42.00",
+                "inventoryQuantity": 43,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Baby Pink"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "L"
+                  }
+                ]
+              },
+              {
+                "title": "Baby Pink / XL",
+                "sku": "RMC-TEE-BBY-BPK-XL",
+                "price": "32.00",
+                "compareAtPrice": "42.00",
+                "inventoryQuantity": 10,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Baby Pink"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "XL"
+                  }
+                ]
+              },
+              {
+                "title": "Black / XS",
+                "sku": "RMC-TEE-BBY-BLK-XS",
+                "price": "32.00",
+                "compareAtPrice": "42.00",
+                "inventoryQuantity": 21,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Black"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "XS"
+                  }
+                ]
+              },
+              {
+                "title": "Black / S",
+                "sku": "RMC-TEE-BBY-BLK-SM",
+                "price": "32.00",
+                "compareAtPrice": "42.00",
+                "inventoryQuantity": 2,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Black"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "S"
+                  }
+                ]
+              },
+              {
+                "title": "Black / M",
+                "sku": "RMC-TEE-BBY-BLK-MD",
+                "price": "32.00",
+                "compareAtPrice": "42.00",
+                "inventoryQuantity": 38,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Black"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "M"
+                  }
+                ]
+              },
+              {
+                "title": "Black / L",
+                "sku": "RMC-TEE-BBY-BLK-LG",
+                "price": "32.00",
+                "compareAtPrice": "42.00",
+                "inventoryQuantity": 19,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Black"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "L"
+                  }
+                ]
+              },
+              {
+                "title": "Black / XL",
+                "sku": "RMC-TEE-BBY-BLK-XL",
+                "price": "32.00",
+                "compareAtPrice": "42.00",
+                "inventoryQuantity": 54,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Black"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "XL"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "title": "Ribbed Tank",
+          "handle": "ribbed-tank",
+          "productType": "T-Shirts",
+          "vendor": "Redline Motor Club",
+          "tags": [
+            "dept:womens",
+            "drop:00",
+            "fit:regular",
+            "mat:cotton-rib",
+            "pgm:sale-2026-12-31"
+          ],
+          "status": "ACTIVE",
+          "options": [
+            {
+              "name": "Color",
+              "values": [
+                "Black",
+                "White",
+                "Hot Pink"
+              ]
+            },
+            {
+              "name": "Size",
+              "values": [
+                "XS",
+                "S",
+                "M",
+                "L",
+                "XL"
+              ]
+            }
+          ],
+          "seo": {
+            "title": "Ribbed Tank | Redline Motor Club",
+            "description": "Heavy 2x2 rib tank with a high neck and clean bound edges. Drop 00 carryover."
+          },
+          "media": {
+            "nodes": [
+              {
+                "alt": "Ribbed Tank in Black, ghost mannequin front view",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Ribbed Tank in White",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Ribbed Tank in Hot Pink",
+                "mediaContentType": "IMAGE"
+              }
+            ]
+          },
+          "variants": {
+            "nodes": [
+              {
+                "title": "Black / XS",
+                "sku": "RMC-TNK-RIB-BLK-XS",
+                "price": "28.00",
+                "compareAtPrice": "34.00",
+                "inventoryQuantity": 55,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Black"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "XS"
+                  }
+                ]
+              },
+              {
+                "title": "Black / S",
+                "sku": "RMC-TNK-RIB-BLK-SM",
+                "price": "28.00",
+                "compareAtPrice": "34.00",
+                "inventoryQuantity": 37,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Black"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "S"
+                  }
+                ]
+              },
+              {
+                "title": "Black / M",
+                "sku": "RMC-TNK-RIB-BLK-MD",
+                "price": "28.00",
+                "compareAtPrice": "34.00",
+                "inventoryQuantity": 45,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Black"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "M"
+                  }
+                ]
+              },
+              {
+                "title": "Black / L",
+                "sku": "RMC-TNK-RIB-BLK-LG",
+                "price": "28.00",
+                "compareAtPrice": "34.00",
+                "inventoryQuantity": 12,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Black"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "L"
+                  }
+                ]
+              },
+              {
+                "title": "Black / XL",
+                "sku": "RMC-TNK-RIB-BLK-XL",
+                "price": "28.00",
+                "compareAtPrice": "34.00",
+                "inventoryQuantity": 44,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Black"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "XL"
+                  }
+                ]
+              },
+              {
+                "title": "White / XS",
+                "sku": "RMC-TNK-RIB-WHT-XS",
+                "price": "28.00",
+                "compareAtPrice": "34.00",
+                "inventoryQuantity": 34,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "White"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "XS"
+                  }
+                ]
+              },
+              {
+                "title": "White / S",
+                "sku": "RMC-TNK-RIB-WHT-SM",
+                "price": "28.00",
+                "compareAtPrice": "34.00",
+                "inventoryQuantity": 6,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "White"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "S"
+                  }
+                ]
+              },
+              {
+                "title": "White / M",
+                "sku": "RMC-TNK-RIB-WHT-MD",
+                "price": "28.00",
+                "compareAtPrice": "34.00",
+                "inventoryQuantity": 62,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "White"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "M"
+                  }
+                ]
+              },
+              {
+                "title": "White / L",
+                "sku": "RMC-TNK-RIB-WHT-LG",
+                "price": "28.00",
+                "compareAtPrice": "34.00",
+                "inventoryQuantity": 68,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "White"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "L"
+                  }
+                ]
+              },
+              {
+                "title": "White / XL",
+                "sku": "RMC-TNK-RIB-WHT-XL",
+                "price": "28.00",
+                "compareAtPrice": "34.00",
+                "inventoryQuantity": 48,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "White"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "XL"
+                  }
+                ]
+              },
+              {
+                "title": "Hot Pink / XS",
+                "sku": "RMC-TNK-RIB-HPK-XS",
+                "price": "28.00",
+                "compareAtPrice": "34.00",
+                "inventoryQuantity": 0,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Hot Pink"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "XS"
+                  }
+                ]
+              },
+              {
+                "title": "Hot Pink / S",
+                "sku": "RMC-TNK-RIB-HPK-SM",
+                "price": "28.00",
+                "compareAtPrice": "34.00",
+                "inventoryQuantity": 3,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Hot Pink"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "S"
+                  }
+                ]
+              },
+              {
+                "title": "Hot Pink / M",
+                "sku": "RMC-TNK-RIB-HPK-MD",
+                "price": "28.00",
+                "compareAtPrice": "34.00",
+                "inventoryQuantity": 5,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Hot Pink"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "M"
+                  }
+                ]
+              },
+              {
+                "title": "Hot Pink / L",
+                "sku": "RMC-TNK-RIB-HPK-LG",
+                "price": "28.00",
+                "compareAtPrice": "34.00",
+                "inventoryQuantity": 34,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Hot Pink"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "L"
+                  }
+                ]
+              },
+              {
+                "title": "Hot Pink / XL",
+                "sku": "RMC-TNK-RIB-HPK-XL",
+                "price": "28.00",
+                "compareAtPrice": "34.00",
+                "inventoryQuantity": 70,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Hot Pink"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "XL"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "title": "Heavyweight Hoodie",
+          "handle": "heavyweight-hoodie",
+          "productType": "Sweatshirts",
+          "vendor": "Redline Motor Club",
+          "tags": [
+            "dept:unisex",
+            "drop:01",
+            "fit:oversized",
+            "mat:fleece-400gsm"
+          ],
+          "status": "ACTIVE",
+          "options": [
+            {
+              "name": "Color",
+              "values": [
+                "Black",
+                "Bone",
+                "Moss Green"
+              ]
+            },
+            {
+              "name": "Size",
+              "values": [
+                "S",
+                "M",
+                "L",
+                "XL",
+                "2XL"
+              ]
+            }
+          ],
+          "seo": {
+            "title": "Heavyweight Hoodie | Redline Motor Club",
+            "description": "400gsm brushed-back fleece with a double-lined hood, flat drawcords, and ribbed everything. Cut oversized."
+          },
+          "media": {
+            "nodes": [
+              {
+                "alt": "Heavyweight Hoodie in Moss Green, ghost mannequin front view",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Heavyweight Hoodie in Black",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Heavyweight Hoodie in Bone",
+                "mediaContentType": "IMAGE"
+              }
+            ]
+          },
+          "variants": {
+            "nodes": [
+              {
+                "title": "Black / S",
+                "sku": "RMC-HOD-HVY-BLK-SM",
+                "price": "128.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 9,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Black"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "S"
+                  }
+                ]
+              },
+              {
+                "title": "Black / M",
+                "sku": "RMC-HOD-HVY-BLK-MD",
+                "price": "128.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 25,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Black"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "M"
+                  }
+                ]
+              },
+              {
+                "title": "Black / L",
+                "sku": "RMC-HOD-HVY-BLK-LG",
+                "price": "128.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 29,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Black"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "L"
+                  }
+                ]
+              },
+              {
+                "title": "Black / XL",
+                "sku": "RMC-HOD-HVY-BLK-XL",
+                "price": "128.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 64,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Black"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "XL"
+                  }
+                ]
+              },
+              {
+                "title": "Black / 2XL",
+                "sku": "RMC-HOD-HVY-BLK-2XL",
+                "price": "128.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 55,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Black"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "2XL"
+                  }
+                ]
+              },
+              {
+                "title": "Bone / S",
+                "sku": "RMC-HOD-HVY-BON-SM",
+                "price": "128.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 66,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Bone"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "S"
+                  }
+                ]
+              },
+              {
+                "title": "Bone / M",
+                "sku": "RMC-HOD-HVY-BON-MD",
+                "price": "128.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 63,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Bone"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "M"
+                  }
+                ]
+              },
+              {
+                "title": "Bone / L",
+                "sku": "RMC-HOD-HVY-BON-LG",
+                "price": "128.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 66,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Bone"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "L"
+                  }
+                ]
+              },
+              {
+                "title": "Bone / XL",
+                "sku": "RMC-HOD-HVY-BON-XL",
+                "price": "128.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 40,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Bone"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "XL"
+                  }
+                ]
+              },
+              {
+                "title": "Bone / 2XL",
+                "sku": "RMC-HOD-HVY-BON-2XL",
+                "price": "128.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 29,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Bone"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "2XL"
+                  }
+                ]
+              },
+              {
+                "title": "Moss Green / S",
+                "sku": "RMC-HOD-HVY-MOS-SM",
+                "price": "128.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 0,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Moss Green"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "S"
+                  }
+                ]
+              },
+              {
+                "title": "Moss Green / M",
+                "sku": "RMC-HOD-HVY-MOS-MD",
+                "price": "128.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 12,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Moss Green"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "M"
+                  }
+                ]
+              },
+              {
+                "title": "Moss Green / L",
+                "sku": "RMC-HOD-HVY-MOS-LG",
+                "price": "128.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 16,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Moss Green"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "L"
+                  }
+                ]
+              },
+              {
+                "title": "Moss Green / XL",
+                "sku": "RMC-HOD-HVY-MOS-XL",
+                "price": "128.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 65,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Moss Green"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "XL"
+                  }
+                ]
+              },
+              {
+                "title": "Moss Green / 2XL",
+                "sku": "RMC-HOD-HVY-MOS-2XL",
+                "price": "128.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 31,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Moss Green"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "2XL"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "title": "Zip Track Jacket",
+          "handle": "zip-track-jacket",
+          "productType": "Outerwear",
+          "vendor": "Redline Motor Club",
+          "tags": [
+            "dept:unisex",
+            "drop:01",
+            "fit:regular",
+            "mat:poly-tricot"
+          ],
+          "status": "ACTIVE",
+          "options": [
+            {
+              "name": "Color",
+              "values": [
+                "Navy",
+                "Chrome Silver"
+              ]
+            },
+            {
+              "name": "Size",
+              "values": [
+                "XS",
+                "S",
+                "M",
+                "L",
+                "XL"
+              ]
+            }
+          ],
+          "seo": {
+            "title": "Zip Track Jacket | Redline Motor Club",
+            "description": "Retro tricot track jacket with contrast piping, chrome zip, and ribbed collar and cuffs."
+          },
+          "media": {
+            "nodes": [
+              {
+                "alt": "Zip Track Jacket in Navy",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Zip Track Jacket in Chrome Silver",
+                "mediaContentType": "IMAGE"
+              }
+            ]
+          },
+          "variants": {
+            "nodes": [
+              {
+                "title": "Navy / XS",
+                "sku": "RMC-JKT-TRK-NVY-XS",
+                "price": "115.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 10,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Navy"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "XS"
+                  }
+                ]
+              },
+              {
+                "title": "Navy / S",
+                "sku": "RMC-JKT-TRK-NVY-SM",
+                "price": "115.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 61,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Navy"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "S"
+                  }
+                ]
+              },
+              {
+                "title": "Navy / M",
+                "sku": "RMC-JKT-TRK-NVY-MD",
+                "price": "115.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 38,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Navy"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "M"
+                  }
+                ]
+              },
+              {
+                "title": "Navy / L",
+                "sku": "RMC-JKT-TRK-NVY-LG",
+                "price": "115.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 6,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Navy"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "L"
+                  }
+                ]
+              },
+              {
+                "title": "Navy / XL",
+                "sku": "RMC-JKT-TRK-NVY-XL",
+                "price": "115.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 27,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Navy"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "XL"
+                  }
+                ]
+              },
+              {
+                "title": "Chrome Silver / XS",
+                "sku": "RMC-JKT-TRK-CHR-XS",
+                "price": "115.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 45,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Chrome Silver"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "XS"
+                  }
+                ]
+              },
+              {
+                "title": "Chrome Silver / S",
+                "sku": "RMC-JKT-TRK-CHR-SM",
+                "price": "115.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 54,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Chrome Silver"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "S"
+                  }
+                ]
+              },
+              {
+                "title": "Chrome Silver / M",
+                "sku": "RMC-JKT-TRK-CHR-MD",
+                "price": "115.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 45,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Chrome Silver"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "M"
+                  }
+                ]
+              },
+              {
+                "title": "Chrome Silver / L",
+                "sku": "RMC-JKT-TRK-CHR-LG",
+                "price": "115.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 37,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Chrome Silver"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "L"
+                  }
+                ]
+              },
+              {
+                "title": "Chrome Silver / XL",
+                "sku": "RMC-JKT-TRK-CHR-XL",
+                "price": "115.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 20,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Chrome Silver"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "XL"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "title": "Mechanic Shirt",
+          "handle": "mechanic-shirt",
+          "productType": "Outerwear",
+          "vendor": "Redline Motor Club",
+          "tags": [
+            "dept:unisex",
+            "drop:01",
+            "fit:regular",
+            "mat:cotton-twill"
+          ],
+          "status": "ACTIVE",
+          "options": [
+            {
+              "name": "Color",
+              "values": [
+                "Bone",
+                "Navy"
+              ]
+            },
+            {
+              "name": "Size",
+              "values": [
+                "S",
+                "M",
+                "L",
+                "XL",
+                "2XL",
+                "3XL"
+              ]
+            }
+          ],
+          "seo": {
+            "title": "Mechanic Shirt | Redline Motor Club",
+            "description": "Camp-collar mechanic shirt in washed twill with twin chest pockets and a straight boxy hem. Extended size run."
+          },
+          "media": {
+            "nodes": [
+              {
+                "alt": "Mechanic Shirt in Bone",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Mechanic Shirt in Navy",
+                "mediaContentType": "IMAGE"
+              }
+            ]
+          },
+          "variants": {
+            "nodes": [
+              {
+                "title": "Bone / S",
+                "sku": "RMC-SHT-MEC-BON-SM",
+                "price": "79.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 22,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Bone"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "S"
+                  }
+                ]
+              },
+              {
+                "title": "Bone / M",
+                "sku": "RMC-SHT-MEC-BON-MD",
+                "price": "79.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 65,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Bone"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "M"
+                  }
+                ]
+              },
+              {
+                "title": "Bone / L",
+                "sku": "RMC-SHT-MEC-BON-LG",
+                "price": "79.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 27,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Bone"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "L"
+                  }
+                ]
+              },
+              {
+                "title": "Bone / XL",
+                "sku": "RMC-SHT-MEC-BON-XL",
+                "price": "79.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 26,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Bone"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "XL"
+                  }
+                ]
+              },
+              {
+                "title": "Bone / 2XL",
+                "sku": "RMC-SHT-MEC-BON-2XL",
+                "price": "79.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 55,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Bone"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "2XL"
+                  }
+                ]
+              },
+              {
+                "title": "Bone / 3XL",
+                "sku": "RMC-SHT-MEC-BON-3XL",
+                "price": "79.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 66,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Bone"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "3XL"
+                  }
+                ]
+              },
+              {
+                "title": "Navy / S",
+                "sku": "RMC-SHT-MEC-NVY-SM",
+                "price": "79.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 61,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Navy"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "S"
+                  }
+                ]
+              },
+              {
+                "title": "Navy / M",
+                "sku": "RMC-SHT-MEC-NVY-MD",
+                "price": "79.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 40,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Navy"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "M"
+                  }
+                ]
+              },
+              {
+                "title": "Navy / L",
+                "sku": "RMC-SHT-MEC-NVY-LG",
+                "price": "79.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 20,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Navy"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "L"
+                  }
+                ]
+              },
+              {
+                "title": "Navy / XL",
+                "sku": "RMC-SHT-MEC-NVY-XL",
+                "price": "79.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 25,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Navy"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "XL"
+                  }
+                ]
+              },
+              {
+                "title": "Navy / 2XL",
+                "sku": "RMC-SHT-MEC-NVY-2XL",
+                "price": "79.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 16,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Navy"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "2XL"
+                  }
+                ]
+              },
+              {
+                "title": "Navy / 3XL",
+                "sku": "RMC-SHT-MEC-NVY-3XL",
+                "price": "79.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 12,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Navy"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "3XL"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "title": "Straight-Leg Jean",
+          "handle": "straight-leg-jean",
+          "productType": "Bottoms",
+          "vendor": "Redline Motor Club",
+          "tags": [
+            "dept:unisex",
+            "drop:01",
+            "fit:regular",
+            "mat:denim-13oz"
+          ],
+          "status": "ACTIVE",
+          "options": [
+            {
+              "name": "Color",
+              "values": [
+                "Indigo Wash",
+                "Bone"
+              ]
+            },
+            {
+              "name": "Size",
+              "values": [
+                "28",
+                "30",
+                "32",
+                "34",
+                "36",
+                "38"
+              ]
+            }
+          ],
+          "seo": {
+            "title": "Straight-Leg Jean | Redline Motor Club",
+            "description": "13oz non-stretch denim with a true straight leg, zip fly, and chain-stitched hems. Waist sizing."
+          },
+          "media": {
+            "nodes": [
+              {
+                "alt": "Full-length fit reference: model is 6 ft 0 wearing Straight-Leg Jean in Indigo",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Straight-Leg Jean in Indigo Wash",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Straight-Leg Jean in Bone",
+                "mediaContentType": "IMAGE"
+              }
+            ]
+          },
+          "variants": {
+            "nodes": [
+              {
+                "title": "Indigo Wash / 28",
+                "sku": "RMC-JEA-STR-IND-28",
+                "price": "99.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 24,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Indigo Wash"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "28"
+                  }
+                ]
+              },
+              {
+                "title": "Indigo Wash / 30",
+                "sku": "RMC-JEA-STR-IND-30",
+                "price": "99.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 53,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Indigo Wash"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "30"
+                  }
+                ]
+              },
+              {
+                "title": "Indigo Wash / 32",
+                "sku": "RMC-JEA-STR-IND-32",
+                "price": "99.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 57,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Indigo Wash"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "32"
+                  }
+                ]
+              },
+              {
+                "title": "Indigo Wash / 34",
+                "sku": "RMC-JEA-STR-IND-34",
+                "price": "99.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 24,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Indigo Wash"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "34"
+                  }
+                ]
+              },
+              {
+                "title": "Indigo Wash / 36",
+                "sku": "RMC-JEA-STR-IND-36",
+                "price": "99.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 23,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Indigo Wash"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "36"
+                  }
+                ]
+              },
+              {
+                "title": "Indigo Wash / 38",
+                "sku": "RMC-JEA-STR-IND-38",
+                "price": "99.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 1,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Indigo Wash"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "38"
+                  }
+                ]
+              },
+              {
+                "title": "Bone / 28",
+                "sku": "RMC-JEA-STR-BON-28",
+                "price": "99.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 23,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Bone"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "28"
+                  }
+                ]
+              },
+              {
+                "title": "Bone / 30",
+                "sku": "RMC-JEA-STR-BON-30",
+                "price": "99.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 70,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Bone"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "30"
+                  }
+                ]
+              },
+              {
+                "title": "Bone / 32",
+                "sku": "RMC-JEA-STR-BON-32",
+                "price": "99.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 8,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Bone"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "32"
+                  }
+                ]
+              },
+              {
+                "title": "Bone / 34",
+                "sku": "RMC-JEA-STR-BON-34",
+                "price": "99.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 2,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Bone"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "34"
+                  }
+                ]
+              },
+              {
+                "title": "Bone / 36",
+                "sku": "RMC-JEA-STR-BON-36",
+                "price": "99.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 30,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Bone"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "36"
+                  }
+                ]
+              },
+              {
+                "title": "Bone / 38",
+                "sku": "RMC-JEA-STR-BON-38",
+                "price": "99.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 35,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Bone"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "38"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "title": "Board Swim Short",
+          "handle": "board-swim-short",
+          "productType": "Swimwear",
+          "vendor": "Redline Motor Club",
+          "tags": [
+            "dept:unisex",
+            "drop:01",
+            "fit:regular",
+            "mat:recycled-poly"
+          ],
+          "status": "ACTIVE",
+          "options": [
+            {
+              "name": "Color",
+              "values": [
+                "Black",
+                "Sunburst Yellow"
+              ]
+            },
+            {
+              "name": "Size",
+              "values": [
+                "XS",
+                "S",
+                "M",
+                "L",
+                "XL",
+                "1X",
+                "2X",
+                "3X"
+              ]
+            }
+          ],
+          "seo": {
+            "title": "Board Swim Short | Redline Motor Club",
+            "description": "Quick-dry recycled poly boardshort with a fixed waist, drawcord, and zip back pocket. Full extended run."
+          },
+          "media": {
+            "nodes": [
+              {
+                "alt": "Board Swim Short in Sunburst Yellow",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Board Swim Short in Black",
+                "mediaContentType": "IMAGE"
+              }
+            ]
+          },
+          "variants": {
+            "nodes": [
+              {
+                "title": "Black / XS",
+                "sku": "RMC-SWM-BRD-BLK-XS",
+                "price": "52.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 41,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Black"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "XS"
+                  }
+                ]
+              },
+              {
+                "title": "Black / S",
+                "sku": "RMC-SWM-BRD-BLK-SM",
+                "price": "52.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 18,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Black"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "S"
+                  }
+                ]
+              },
+              {
+                "title": "Black / M",
+                "sku": "RMC-SWM-BRD-BLK-MD",
+                "price": "52.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 37,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Black"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "M"
+                  }
+                ]
+              },
+              {
+                "title": "Black / L",
+                "sku": "RMC-SWM-BRD-BLK-LG",
+                "price": "52.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 57,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Black"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "L"
+                  }
+                ]
+              },
+              {
+                "title": "Black / XL",
+                "sku": "RMC-SWM-BRD-BLK-XL",
+                "price": "52.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 48,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Black"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "XL"
+                  }
+                ]
+              },
+              {
+                "title": "Black / 1X",
+                "sku": "RMC-SWM-BRD-BLK-1X",
+                "price": "52.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 47,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Black"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "1X"
+                  }
+                ]
+              },
+              {
+                "title": "Black / 2X",
+                "sku": "RMC-SWM-BRD-BLK-2X",
+                "price": "52.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 7,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Black"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "2X"
+                  }
+                ]
+              },
+              {
+                "title": "Black / 3X",
+                "sku": "RMC-SWM-BRD-BLK-3X",
+                "price": "52.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 16,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Black"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "3X"
+                  }
+                ]
+              },
+              {
+                "title": "Sunburst Yellow / XS",
+                "sku": "RMC-SWM-BRD-SUN-XS",
+                "price": "52.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 64,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Sunburst Yellow"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "XS"
+                  }
+                ]
+              },
+              {
+                "title": "Sunburst Yellow / S",
+                "sku": "RMC-SWM-BRD-SUN-SM",
+                "price": "52.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 5,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Sunburst Yellow"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "S"
+                  }
+                ]
+              },
+              {
+                "title": "Sunburst Yellow / M",
+                "sku": "RMC-SWM-BRD-SUN-MD",
+                "price": "52.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 24,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Sunburst Yellow"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "M"
+                  }
+                ]
+              },
+              {
+                "title": "Sunburst Yellow / L",
+                "sku": "RMC-SWM-BRD-SUN-LG",
+                "price": "52.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 12,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Sunburst Yellow"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "L"
+                  }
+                ]
+              },
+              {
+                "title": "Sunburst Yellow / XL",
+                "sku": "RMC-SWM-BRD-SUN-XL",
+                "price": "52.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 22,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Sunburst Yellow"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "XL"
+                  }
+                ]
+              },
+              {
+                "title": "Sunburst Yellow / 1X",
+                "sku": "RMC-SWM-BRD-SUN-1X",
+                "price": "52.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 35,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Sunburst Yellow"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "1X"
+                  }
+                ]
+              },
+              {
+                "title": "Sunburst Yellow / 2X",
+                "sku": "RMC-SWM-BRD-SUN-2X",
+                "price": "52.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 48,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Sunburst Yellow"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "2X"
+                  }
+                ]
+              },
+              {
+                "title": "Sunburst Yellow / 3X",
+                "sku": "RMC-SWM-BRD-SUN-3X",
+                "price": "52.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 0,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Sunburst Yellow"
+                  },
+                  {
+                    "name": "Size",
+                    "value": "3X"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "title": "Zip-Around Wallet",
+          "handle": "zip-around-wallet",
+          "productType": "Accessories",
+          "vendor": "Redline Motor Club",
+          "tags": [
+            "dept:unisex",
+            "drop:01",
+            "fit:regular",
+            "mat:pebbled-pu"
+          ],
+          "status": "ACTIVE",
+          "options": [
+            {
+              "name": "Color",
+              "values": [
+                "Black",
+                "Cherry Red",
+                "Cheetah",
+                "Baby Pink"
+              ]
+            }
+          ],
+          "seo": {
+            "title": "Zip-Around Wallet | Redline Motor Club",
+            "description": "Full zip-around wallet in pebbled PU with eight card slots and a coin pocket."
+          },
+          "media": {
+            "nodes": [
+              {
+                "alt": "Zip-Around Wallet in Cherry Red",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Zip-Around Wallet in Black",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Zip-Around Wallet in Cheetah",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Zip-Around Wallet in Baby Pink",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Accessories flat lay: wallet, keychain, sunglasses, and crew socks",
+                "mediaContentType": "IMAGE"
+              }
+            ]
+          },
+          "variants": {
+            "nodes": [
+              {
+                "title": "Black",
+                "sku": "RMC-WAL-ZIP-BLK-OS",
+                "price": "29.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 65,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Black"
+                  }
+                ]
+              },
+              {
+                "title": "Cherry Red",
+                "sku": "RMC-WAL-ZIP-CHY-OS",
+                "price": "29.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 50,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Cherry Red"
+                  }
+                ]
+              },
+              {
+                "title": "Cheetah",
+                "sku": "RMC-WAL-ZIP-CHT-OS",
+                "price": "29.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 2,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Cheetah"
+                  }
+                ]
+              },
+              {
+                "title": "Baby Pink",
+                "sku": "RMC-WAL-ZIP-BPK-OS",
+                "price": "29.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 64,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Baby Pink"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "title": "Halo Keychain",
+          "handle": "halo-keychain",
+          "productType": "Accessories",
+          "vendor": "Redline Motor Club",
+          "tags": [
+            "dept:unisex",
+            "drop:01",
+            "fit:regular",
+            "mat:zinc-alloy"
+          ],
+          "status": "ACTIVE",
+          "options": [
+            {
+              "name": "Color",
+              "values": [
+                "Chrome Silver",
+                "Black",
+                "Hot Pink",
+                "Sunburst Yellow"
+              ]
+            }
+          ],
+          "seo": {
+            "title": "Halo Keychain | Redline Motor Club",
+            "description": "Die-cast tachometer-needle keychain in a redline halo, enamel fill, split ring."
+          },
+          "media": {
+            "nodes": [
+              {
+                "alt": "Halo Keychain in Chrome Silver",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Halo Keychain in Black",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Halo Keychain in Hot Pink",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Halo Keychain in Sunburst Yellow",
+                "mediaContentType": "IMAGE"
+              }
+            ]
+          },
+          "variants": {
+            "nodes": [
+              {
+                "title": "Chrome Silver",
+                "sku": "RMC-KEY-HAL-CHR-OS",
+                "price": "20.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 12,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Chrome Silver"
+                  }
+                ]
+              },
+              {
+                "title": "Black",
+                "sku": "RMC-KEY-HAL-BLK-OS",
+                "price": "20.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 63,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Black"
+                  }
+                ]
+              },
+              {
+                "title": "Hot Pink",
+                "sku": "RMC-KEY-HAL-HPK-OS",
+                "price": "20.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 19,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Hot Pink"
+                  }
+                ]
+              },
+              {
+                "title": "Sunburst Yellow",
+                "sku": "RMC-KEY-HAL-SUN-OS",
+                "price": "20.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 54,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Sunburst Yellow"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "title": "Rectangle Sunglasses",
+          "handle": "rectangle-sunglasses",
+          "productType": "Accessories",
+          "vendor": "Redline Motor Club",
+          "tags": [
+            "dept:unisex",
+            "drop:01",
+            "fit:regular",
+            "mat:acetate"
+          ],
+          "status": "ACTIVE",
+          "options": [
+            {
+              "name": "Color",
+              "values": [
+                "Black",
+                "Chrome Silver",
+                "Cherry Red"
+              ]
+            }
+          ],
+          "seo": {
+            "title": "Rectangle Sunglasses | Redline Motor Club",
+            "description": "Slim Y2K rectangle frame with chrome temple hinges and UV400 lenses. Hard case included."
+          },
+          "media": {
+            "nodes": [
+              {
+                "alt": "Rectangle Sunglasses in Black",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Rectangle Sunglasses in Chrome Silver",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Rectangle Sunglasses in Cherry Red",
+                "mediaContentType": "IMAGE"
+              }
+            ]
+          },
+          "variants": {
+            "nodes": [
+              {
+                "title": "Black",
+                "sku": "RMC-SUN-REC-BLK-OS",
+                "price": "69.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 53,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Black"
+                  }
+                ]
+              },
+              {
+                "title": "Chrome Silver",
+                "sku": "RMC-SUN-REC-CHR-OS",
+                "price": "69.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 59,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Chrome Silver"
+                  }
+                ]
+              },
+              {
+                "title": "Cherry Red",
+                "sku": "RMC-SUN-REC-CHY-OS",
+                "price": "69.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 47,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Cherry Red"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "title": "Crew Socks 2-Pack",
+          "handle": "crew-socks-2-pack",
+          "productType": "Accessories",
+          "vendor": "Redline Motor Club",
+          "tags": [
+            "dept:unisex",
+            "drop:01",
+            "fit:regular",
+            "mat:cotton-blend"
+          ],
+          "status": "ACTIVE",
+          "options": [
+            {
+              "name": "Color",
+              "values": [
+                "Black",
+                "Bone",
+                "Cherry Red"
+              ]
+            }
+          ],
+          "seo": {
+            "title": "Crew Socks 2-Pack | Redline Motor Club",
+            "description": "Cushioned crew socks with an arch band, two pairs per pack."
+          },
+          "media": {
+            "nodes": [
+              {
+                "alt": "Crew Socks 2-Pack in Bone",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Crew Socks 2-Pack in Black",
+                "mediaContentType": "IMAGE"
+              },
+              {
+                "alt": "Crew Socks 2-Pack in Cherry Red",
+                "mediaContentType": "IMAGE"
+              }
+            ]
+          },
+          "variants": {
+            "nodes": [
+              {
+                "title": "Black",
+                "sku": "RMC-SOK-CRW-BLK-OS",
+                "price": "14.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 45,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Black"
+                  }
+                ]
+              },
+              {
+                "title": "Bone",
+                "sku": "RMC-SOK-CRW-BON-OS",
+                "price": "14.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 30,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Bone"
+                  }
+                ]
+              },
+              {
+                "title": "Cherry Red",
+                "sku": "RMC-SOK-CRW-CHY-OS",
+                "price": "14.00",
+                "compareAtPrice": null,
+                "inventoryQuantity": 31,
+                "barcode": null,
+                "selectedOptions": [
+                  {
+                    "name": "Color",
+                    "value": "Cherry Red"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "pageInfo": {
+        "hasNextPage": false,
+        "endCursor": "eyJsYXN0X2lkIjo5MzQyMDA5NzM3MzY1LCJsYXN0X3ZhbHVlIjoiMjAyNi0wOC0yMCAwMTozNDoyMC4wMDAwMDAifQ=="
+      }
+    }
+  }
+}

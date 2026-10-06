@@ -1,0 +1,72 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  backend:
+    name: Edge functions, database, engine bundle
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.9.x
+
+      - name: Format
+        run: deno fmt --check
+
+      - name: Lint
+        run: deno lint
+
+      - name: Type-check
+        run: deno task check
+
+      # Unit tests for the advice engine, Ecowitt/forecast parsing and both
+      # function handlers, plus database tests that run the migrations on
+      # PGlite (Postgres in WebAssembly) with row-level security enforced.
+      - name: Test
+        run: deno task test
+
+      - name: Browser engine bundle is up to date
+        run: |
+          deno task build:web
+          git diff --exit-code web/js/engine.js
+
+  web:
+    name: Web client (syntax and Playwright)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: e2e/package-lock.json
+
+      - name: node --check
+        run: for f in web/*.js web/js/*.js; do node --check "$f"; done
+
+      - name: Install Playwright
+        working-directory: e2e
+        run: |
+          npm ci
+          npx playwright install --with-deps chromium
+
+      - name: Browser tests
+        working-directory: e2e
+        run: npx playwright test
+
+      - name: Upload traces
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-traces
+          path: e2e/test-results/

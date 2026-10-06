@@ -1,0 +1,26 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "current": {
+    "logo": "shopify://shop_images/RMC-LOGO-01.png",
+    "color_palette": {
+      "background": "#FFFFFF",
+      "foreground": "#111111"
+    },
+    "type_body_font": "work_sans_n4",
+    "type_subheading_font": "work_sans_n5",
+    "type_heading_font": "archivo_black_n4",
+    "type_accent_font": "archivo_black_n4",
+    "cart_type": "drawer",
+    "currency_code_enabled_product_pages": false,
+    "currency_code_enabled_product_cards": false,
+    "currency_code_enabled_cart_items": false
+  }
+}

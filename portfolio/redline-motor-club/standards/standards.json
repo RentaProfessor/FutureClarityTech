@@ -1,0 +1,92 @@
+{
+  "brand_prefix": "RMC",
+  "sku_pattern": "{brand}-{category}-{style}-{color}-{size}",
+
+  "categories": {
+    "HAT": "Hats",
+    "KID": "Hats",
+    "BEA": "Beanies",
+    "BAG": "Bags",
+    "TEE": "T-Shirts",
+    "TNK": "T-Shirts",
+    "HOD": "Sweatshirts",
+    "JKT": "Outerwear",
+    "SHT": "Outerwear",
+    "JEA": "Bottoms",
+    "SWM": "Swimwear",
+    "WAL": "Accessories",
+    "KEY": "Accessories",
+    "SUN": "Accessories",
+    "SOK": "Accessories"
+  },
+
+  "colors": {
+    "BLK": "Black",
+    "WHT": "White",
+    "BON": "Bone",
+    "CHY": "Cherry Red",
+    "HPK": "Hot Pink",
+    "BPK": "Baby Pink",
+    "SKY": "Sky Blue",
+    "NVY": "Navy",
+    "IND": "Indigo Wash",
+    "MOS": "Moss Green",
+    "SUN": "Sunburst Yellow",
+    "CHR": "Chrome Silver",
+    "CHT": "Cheetah",
+    "CAM": "Desert Camo"
+  },
+
+  "sizes": {
+    "OS": "One size",
+    "XS": "XS",
+    "SM": "S",
+    "MD": "M",
+    "LG": "L",
+    "XL": "XL",
+    "2XL": "2XL",
+    "3XL": "3XL",
+    "1X": "1X",
+    "2X": "2X",
+    "3X": "3X",
+    "28": "28",
+    "30": "30",
+    "32": "32",
+    "34": "34",
+    "36": "36",
+    "38": "38"
+  },
+
+  "size_order": ["XS", "S", "M", "L", "XL", "1X", "2XL", "2X", "3XL", "3X"],
+
+  "extended_size_conventions": {
+    "letter": ["2XL", "3XL"],
+    "plus": ["1X", "2X", "3X"]
+  },
+
+  "tags": {
+    "required": ["dept", "drop", "fit", "mat"],
+    "allowed": {
+      "dept": ["unisex", "womens", "mens", "kids"],
+      "fit": ["regular", "oversized", "cropped", "relaxed", "slim"]
+    },
+    "patterns": {
+      "drop": "^\\d{2}$",
+      "mat": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "pgm": "^sale-\\d{4}-\\d{2}-\\d{2}$"
+    }
+  },
+
+  "media": {
+    "min_images": 2
+  },
+
+  "seo": {
+    "title_max": 60,
+    "description_max": 160
+  },
+
+  "inventory": {
+    "low_stock_threshold": 5
+  }
+}
