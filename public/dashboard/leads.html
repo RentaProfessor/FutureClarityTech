@@ -343,12 +343,12 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
       bad: [[/auto_dealer|dealer/i, 'Dealership service department', -40]], smog: true,
       why: 'Calls go unanswered while everyone is under a car or with a customer (up to 21% of calls to auto shops, per Marchex), and the average repair order is about $479. Most are single-location independents, so the owner is at the counter. Nearly all run shop software (Tekmetric, Shopmonkey), so sell what sits alongside it, not a replacement.',
       hook: 'Quick question: when you and your service writer are both tied up, what happens to the calls you miss?',
-      offer: 'I set it up so every missed call gets a text back right away with a way to book, customers get a reminder when service or smog is due, and happy customers get asked for a Google review. It works alongside the shop software you already use.',
+      offer: 'I set it up so every missed call gets a text back right away with a way to book, customers get a reminder when service or smog is due, and every customer gets asked for a Google review. It works alongside the shop software you already use.',
       vm: 'I help repair shops here in the Valley catch the calls they miss when everyone is tied up.',
       value: 'When everyone is under a car, the phone goes to voicemail, and with an average repair order around $480, every caller who books somewhere else is real money.',
       workflows: ['Missed-call text-back', 'Review requests', 'Rebooking nudges', 'Estimates & quotes', 'Online booking + reminders'],
       objections: [
-        ['"We already have Tekmetric / Shopmonkey."', 'Good, keep it. I don\'t replace it. I add what it isn\'t doing for you: texting back the calls you miss and asking happy customers for reviews. You see it working before you pay.'],
+        ['"We already have Tekmetric / Shopmonkey."', 'Good, keep it. I don\'t replace it. I add what it isn\'t doing for you: texting back the calls you miss and asking every customer for a review. You see it working before you pay.'],
         ['"We\'re too busy."', 'That\'s why it runs on its own. Ten minutes before you open or after 5. If the demo doesn\'t save you time, I\'m gone.'],
         ['"How much is it?"', 'One time, usually $400 to $1,800 depending on what you pick, and you see it working first. A lot of shops pay $300 to $700 a month for marketing add-ons; this is a one-time build, and monthly care is optional.'],
       ],
@@ -447,7 +447,7 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
       noun: 'business', plural: 'businesses', unit: 'sale', ticket: 0, booking: true,
       why: 'Type a kind of local business below, like "HVAC", "florist" or "nail salon". It searches about 11,000 other appointment and walk-in businesses by name and type. Scoring works the same way; the scripts stay general.',
       hook: 'How do you handle calls that come in while you\'re busy with a customer?',
-      offer: 'I set up the repeat work to run on its own: missed calls get a text back with a way to book, customers get reminders, and happy customers get asked for a review. You see it all on one simple screen.',
+      offer: 'I set up the repeat work to run on its own: missed calls get a text back with a way to book, customers get reminders, and every customer gets asked for a review. You see it all on one simple screen.',
       vm: 'I help local businesses here in the Valley catch the calls they miss and get more reviews.',
       value: 'Most local businesses lose a few customers a week to missed calls and slow follow-up.',
       workflows: ['Missed-call text-back', 'Review requests', 'Online booking + reminders'],
@@ -594,7 +594,10 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
           s.onPage && s.onPage.area === false && area && `no mention of ${area}`, !g.schema && 'no business details for Google'].filter(Boolean);
         if (gaps.length >= 2) add('seo', 6, 'Weak on Google basics', `Your website is missing a few basics that help Google show it to people nearby: ${gaps.join(', ')}.`);
       }
-      if (s.onPage && s.onPage.phone === false && p.phone) add('napphone', 3, "Listing's phone isn't on their site", `The phone number on your listing, ${p.phone}, isn't on your website, and Google trusts a business more when its details match everywhere.`);
+      // the call button dials a number that isn't the listing's, or the listing's number is nowhere on the page
+      const listed = String(p.phone || '').replace(/\D/g, '').slice(-10), dials = (s.phones || []).filter(d => d !== listed);
+      if (listed.length === 10 && dials.length && !(s.phones || []).includes(listed)) add('phonediff', 8, 'Site dials a different number', `The call button on your website dials ${usPhone(dials[0])}, but your Google listing says ${p.phone}.`);
+      else if (s.onPage && s.onPage.phone === false && p.phone) add('napphone', 3, "Listing's phone isn't on their site", `The phone number on your listing, ${p.phone}, isn't on your website, and Google trusts a business more when its details match everywhere.`);
     }
 
     const known = v => v !== null && v !== undefined && v !== '';
@@ -604,8 +607,8 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
     else if (n < 25) add('fewreviews', 14, `Only ${n} reviews`, `You have ${n} Google reviews; the ${V.plural} that show up first nearby usually have far more.`);
     else if (n < 80) add('somereviews', 7, `${n} reviews`, `You have ${n} Google reviews; a steady stream of new ones helps you show up first.`);
     if (r !== null && known(p.reviews) && n) {
-      if (r < 4.0) add('lowrating', 10, `Rated ${r.toFixed(1)}`, `Your Google rating is ${r.toFixed(1)}. Asking every happy customer for a review is the fastest way to lift it.`);
-      else if (r < 4.4) add('okrating', 5, `Rated ${r.toFixed(1)}`, `Your Google rating is ${r.toFixed(1)}; more reviews from happy customers would push it up.`);
+      if (r < 4.0) add('lowrating', 10, `Rated ${r.toFixed(1)}`, `Your Google rating is ${r.toFixed(1)}. Asking every customer for a review is the fastest way to lift it.`);
+      else if (r < 4.4) add('okrating', 5, `Rated ${r.toFixed(1)}`, `Your Google rating is ${r.toFixed(1)}; asking every customer for a review would push it up.`);
     }
 
     const score = Math.max(0, Math.min(100, 35 + sig.reduce((t, x) => t + x.pts, 0)));
@@ -628,20 +631,21 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
       placeholder: 'I tried your website and it only shows a placeholder page, nothing about your business.',
       notmine: `I clicked the website on your Google listing and it goes to a page that doesn't mention ${biz}.`,
       noindex: 'I noticed your website is set to hide from Google, so it won\'t come up when people search for you.',
+      phonediff: 'I noticed the call button on your website dials a different number than your Google listing, so some customers may be calling the wrong line.',
       seo: `I was looking up ${V.plural} near you, and your website is missing a few basics that help Google show it to people nearby.`,
       nobook: 'I was on your website and there\'s no way for customers to book online.',
       nomobile: 'I pulled up your website on my phone and it\'s hard to use on a small screen.',
       noreviews: `I noticed ${biz} doesn't have any Google reviews yet.`,
       fewreviews: `I saw you have ${n} Google reviews, and the ${V.plural} that show up first around you usually have a lot more.`,
       somereviews: `I saw you have ${n} Google reviews, and the ${V.plural} that show up first around you usually have a lot more.`,
-      lowrating: `I noticed your Google rating is ${(+p.rating).toFixed(1)}, and a steady stream of happy-customer reviews would lift that fast.`,
+      lowrating: `I noticed your Google rating is ${(+p.rating).toFixed(1)}, and a steady stream of new reviews would lift that fast.`,
       stale: `I was on your website and the footer still says ${(a.sig.find(x => x.k === 'stale') || {}).t?.replace(/\D+/g, '') || 'an old year'}.`,
     };
     const hook = (top[0] && HOOK[top[0].k]) || V.hook;
     const opener = `Hi, is this the owner? ... Great. My name is ${me()}, I'm with FutureClarity, we're local here in the Valley.\n\n${hook} ${V.offer}\n\nCould I stop by for 10 minutes this week and show you a quick demo? It's free, and you'd see it working before you pay anything.`;
     const callback = new Date(workdays(2) + 'T12:00').toLocaleDateString('en-US', { weekday: 'long' });
     const voicemail = `Hi, this is ${me()} with FutureClarity Technologies, calling for the owner of ${biz}. ${V.vm} I'll try you again ${callback}, or you can reach me at ${PHONE}. Again, ${me()}, ${PHONE}. Thanks!`;
-    const SUBJ = { nosite: `${biz} online`, profile: `${biz}'s website`, down: `${biz}'s website is down`, parked: `${biz}'s website`, gone: `${biz}'s web address`, placeholder: `${biz}'s website`, notmine: `The website on ${biz}'s listing`, noindex: `${biz} on Google`, seo: `${biz} on Google`, nobook: `Online booking for ${biz}`, nomobile: `${biz}'s website on phones`, noreviews: `${biz}'s Google reviews`, fewreviews: `${biz}'s Google reviews`, somereviews: `${biz}'s Google reviews`, lowrating: `${biz}'s Google rating` };
+    const SUBJ = { nosite: `${biz} online`, profile: `${biz}'s website`, down: `${biz}'s website is down`, parked: `${biz}'s website`, gone: `${biz}'s web address`, placeholder: `${biz}'s website`, notmine: `The website on ${biz}'s listing`, noindex: `${biz} on Google`, phonediff: `${biz}'s phone number`, seo: `${biz} on Google`, nobook: `Online booking for ${biz}`, nomobile: `${biz}'s website on phones`, noreviews: `${biz}'s Google reviews`, fewreviews: `${biz}'s Google reviews`, somereviews: `${biz}'s Google reviews`, lowrating: `${biz}'s Google rating` };
     const subject = (top[0] && SUBJ[top[0].k]) || `Quick idea for ${biz}`;
     const lines = top.slice(0, 3).map(x => '- ' + x.find).join('\n');
     const addr = (prefs.addr || '').trim();
@@ -1182,7 +1186,7 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
   function openAdd() {
     ['n-name', 'n-phone', 'n-web', 'n-addr', 'n-rating', 'n-reviews'].forEach(id => { $(id).value = ''; });
     $('n-v').innerHTML = VERTICALS.map(v => `<option value="${esc(v.k)}"${v.k === V.k ? ' selected' : ''}>${esc(v.label)}</option>`).join('');
-    $('n-err').hidden = true; $('addLayer').hidden = false; document.body.style.overflow = 'hidden'; setTimeout(() => $('n-name').focus(), 30);
+    $('n-err').hidden = true; $('addLayer').hidden = false; document.body.style.overflow = 'hidden'; setTimeout(() => { if (!$('addLayer').contains(document.activeElement)) $('n-name').focus(); }, 30);
   }
   function closeAdd() { $('addLayer').hidden = true; if ($('pLayer').hidden && $('meLayer').hidden) document.body.style.overflow = ''; }
   async function saveAdd() {
@@ -1277,7 +1281,7 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
   });
 
   // your details
-  function openMe() { $('me-name').value = prefs.me || ''; $('me-sign').value = prefs.sign || ''; $('me-sign').placeholder = signoff(); $('me-addr').value = prefs.addr || ''; $('meLayer').hidden = false; document.body.style.overflow = 'hidden'; setTimeout(() => $('me-name').focus(), 30); }
+  function openMe() { $('me-name').value = prefs.me || ''; $('me-sign').value = prefs.sign || ''; $('me-sign').placeholder = signoff(); $('me-addr').value = prefs.addr || ''; $('meLayer').hidden = false; document.body.style.overflow = 'hidden'; setTimeout(() => { if (!$('meLayer').contains(document.activeElement)) $('me-name').focus(); }, 30); }
   function closeMe() { prefs.me = $('me-name').value.trim(); prefs.sign = $('me-sign').value.trim(); prefs.addr = $('me-addr').value.trim(); savePrefs(); $('meLayer').hidden = true; if ($('pLayer').hidden) document.body.style.overflow = ''; else renderPanel(); }
   $('meBtn').addEventListener('click', openMe);
 

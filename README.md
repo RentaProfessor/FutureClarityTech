@@ -199,29 +199,57 @@ For a real site it also checks the basics Google looks for: a page title that
 isn't just "Home", a description, a "noindex" that hides the site, business
 details for Google (structured data), and whether the page mentions the business's
 area and shows the phone on its listing. "Not on the page" only counts when the
-whole page was read. It also notes other software (analytics, chat, payments,
-email, review widgets, app store links, forms) for the audit's suggestions.
+whole page was read. It also reads the numbers the page's call buttons dial (so
+a site that gives out a different number than the listing gets flagged), images
+with no description (alt text), a setting that blocks zooming on phones, and
+template filler ("lorem ipsum") left on the page. It notes other software
+(booking systems, analytics, chat, payments, email, review widgets, app store
+links, forms) for the audit's suggestions.
 
 The Lead Finder sends each business's name, area and phone along with its
 website for those checks. The checks run within the free plan's limits: about 2
-ms of CPU per page, under 7 ms for a full call.
+ms of CPU per page, about 8 ms for a full call of three sites.
 
 ### The downloadable audit
 
 Saved businesses get **Download audit (PDF)**: branded, written for the owner,
-usually two pages: what we found, then what we'd do. It has:
+two pages (one sheet printed double-sided): what we found and how to fix it, then
+what we'd do. It follows the conventions of our full, hand-researched audits
+(severity tags, how each finding was checked, the same footer), as a short first
+look. It has:
 
-- How many checks passed, and the three biggest openings.
+- What it covers, how many checks passed, and the biggest problems.
 - The checks in three groups (your website, getting found on Google, turning
-  visitors into customers). Problems get a plain-English reason; what's fine is
-  a short list of ticks.
+  visitors into customers). Each problem is tagged HIGH, MEDIUM or LOW with how
+  we know (checked live, domain records, Google Maps), says what's wrong in plain
+  English, and ends with a **Fix**: what to do, naming their site builder or
+  domain company when we know it (renew it with GoDaddy, the WordPress setting
+  that hides a site from Google). Page title and description fixes come with
+  ones written for the business from what we know for sure (name, trade, area,
+  rating, phone). Two or more low-severity problems share a "Smaller problems"
+  list. What's fine is a short list of ticks.
+- A Google listing checklist when there's room: the things no automated check
+  can see (hours, main category, photos, services, review replies, links).
 - Three things we'd set up for that kind of business: a website first when the
-  site is the problem, then getting found on Google, then the automations.
+  site is the problem, then getting found on Google, then the automations. It
+  never offers what a tool they already use does (estimates for a Tekmetric or
+  Urable shop, review requests for a Podium one, booking for anyone who books
+  online).
 - "More we could build for you": other things that fit what the site is missing,
   such as invoices and payment reminders, a quote form, a text-us button,
   visitor tracking or an app tune-up.
 - What one missed call is worth (the same estimate as the Lead Finder's).
 - The next step (a free in-person audit) and your sign-off from **Your details**.
+- How we checked, and what this first look doesn't cover (other directories,
+  photos, map rankings), which a full audit does.
+
+Review advice always says to ask *every* customer: Google's rules ban asking only
+the ones you expect to be happy, and the FTC warns against it too. The scripts
+and the review-requests workflow say the same.
+
+When everything won't fit on two pages, the checklist goes first, then "More we
+could build" shrinks to one line and goes, then the fixes for the smallest
+problems.
 
 The website is checked again right before the PDF is made, so it never repeats
 something they've since fixed. Rows only state what we saw. Reviews appear once
