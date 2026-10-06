@@ -28,6 +28,8 @@ npm run preview  # preview the production build
 - `public/`: favicons, Cloudflare `_headers` and `_redirects`, `robots.txt`
 - `functions/_middleware.js`: 301s any `*.pages.dev` hostname to the custom
   domain
+- `functions/api/prospects.js`: the Lead Finder's server side (Google search and
+  website checks). See "Lead Finder" below.
 
 ## SEO notes
 
@@ -100,3 +102,94 @@ requests stay in the visitor's own browser.
 `/plan` and `/dashboard/` are sent with `X-Robots-Tag: noindex` from
 `public/_headers`, and as static files in `public/` they are not in the
 sitemap.
+
+## Lead Finder: find businesses to call
+
+**`/dashboard/leads.html`** (button **Find leads** on the Client Pipeline) opens
+with the same dashboard code. Pick a kind of business and a neighborhood, and it:
+
+1. Searches Google Maps for up to 60 businesses (20 at a time).
+2. Opens each business's website once and checks what a cold call needs: no
+   website, a Facebook or booking-app page instead of a site, a broken or parked
+   site, no online booking, not built for phones, "Not secure", an old copyright
+   year, which booking or shop software they already use, and any email address.
+3. Scores each one 0–100 (**Hot** 70+, **Warm** 50+) and sorts the best first.
+   Chains, dealerships and vet clinics are hidden by default.
+4. For each business, gives a phone opener, voicemail and email built from what
+   it found, plus answers to the usual objections.
+5. **Save** puts it on the **Call list**. Tap what happened after each call
+   (no answer, left message, interested…) and it sets the status and the next
+   follow-up date. Download it as CSV anytime.
+6. **Book audit → Client Pipeline** creates the request (source *Cold call*) with
+   what we found already in the proposal's "What we found" and a suggested
+   starting scope.
+
+### Setup (three steps)
+
+1. **Supabase:** run `supabase/prospects.sql` in SQL Editor, after `schema.sql`
+   and `dashboard_code.sql`. Safe to re-run. Like `requests`, the table can only be
+   reached through `prospects_*` functions that require the dashboard code.
+2. **Google key** (console.cloud.google.com):
+   - New project → **Billing**: link a billing account. Google requires one even
+     for the free allowance.
+   - **APIs & Services → Library**: enable **Places API (New)**. Not the legacy
+     "Places API".
+   - **Google Maps Platform → Credentials → Create credentials → API key.** Edit
+     the key: Application restrictions *None* (Cloudflare has no fixed IP to
+     allow), API restrictions → *Restrict key* → **Places API (New)** only.
+   - **Google Maps Platform → Quotas → Places API (New)**: set the per-day limit
+     for Text Search to about **30**. That keeps a month under the free allowance
+     even on a busy day.
+3. **Cloudflare:** Workers & Pages → this project → **Settings → Variables and
+   Secrets → Add**, type *Secret*, name `GOOGLE_PLACES_API_KEY`, paste the key,
+   save, then **redeploy** (the secret only reaches new deployments).
+
+Until the key is set, the page explains what's missing and offers **sample
+businesses** (made up, clearly marked, can't be saved) so you can try the screens.
+
+### What it costs
+
+- **Google:** each search, and each "Load 20 more", is one *Text Search
+  Enterprise* request. Asking for the website, phone, rating and hours is what
+  makes it Enterprise. The first **1,000 a month are free**, and after that Google's
+  list price is about $35 per 1,000 (check Google's pricing page; it changes).
+- **Website checks:** free. They run in our own Cloudflare function, 3 per call,
+  sized for the free plan's 50-subrequest and 10 ms CPU limits.
+
+### Why these business types
+
+The order on the page is the recommendation, from research in October 2026:
+
+- **Auto repair (best fit):** up to 21% of calls to auto service businesses go
+  unanswered (Marchex), and the average repair order is about $479 (Tekmetric
+  TM-500). The owner is usually at the counter. Nearly all shops already run shop
+  software, so sell what sits alongside it (missed-call text-back, review requests,
+  service-due and smog-due nudges, an owner dashboard), not a replacement. Shops
+  already pay $294–$699 a month for marketing add-ons like Steer and Kukui.
+- **Pet groomers:** can't answer with a dog on the table. Regulars return every
+  4–8 weeks, no-shows run 5–15%, and few agencies call on them. Smaller tickets
+  (about $98 for a full groom in LA).
+- **Auto detailing & tint:** solo crews, slow quotes for coating, PPF and tint,
+  light software use, and they sit on the same streets as the repair shops.
+- **Lower priority:** barbershops and salons (Booksy, Squire and Vagaro already
+  send reminders, and many barbers rent their own chair). Med spas, dentists and
+  HVAC have the money but are crowded with agencies and $250–500/month software,
+  and the medical ones add HIPAA.
+
+To change the list, the scripts or the typical ticket used in the ROI line, edit
+`VERTICALS` at the top of the script in `public/dashboard/leads.html`.
+`workflows` must use the Client Pipeline's workflow names.
+
+### Outreach rules (practical, not legal advice)
+
+- **Calls and visits:** fine to businesses. Call by hand, 8am–9pm. No
+  autodialers, prerecorded messages or AI voices. Keep your own do-not-call
+  list: mark anyone who asks **Not interested** and don't call again.
+- **Don't cold-text.** Text only after someone asks you to ("text me the demo").
+  The TCPA and California Business & Professions Code §17538.41 both restrict
+  unsolicited texts.
+- **Email (CAN-SPAM):** honest subject, a real postal address, and a working
+  opt-out honored within 10 business days. The emails include the opt-out line.
+  Add your mailing address under **Your details** on the Lead Finder.
+- **California:** announce it if you record a call (all-party consent).
+

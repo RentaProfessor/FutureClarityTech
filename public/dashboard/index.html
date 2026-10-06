@@ -174,6 +174,7 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
       <span class="save" id="save" aria-live="polite"></span>
       <span class="whoami" id="who"></span>
       <button class="btn" id="signOut">Sign out</button>
+      <a class="btn" href="/dashboard/leads.html" style="text-decoration:none;color:inherit;display:inline-flex;align-items:center">Find leads</a>
       <button class="btn primary" id="addBtn">+ Add request</button>
     </div>
   </header>
@@ -186,7 +187,7 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
   </section>
 
   <div class="howto">
-    <b>How requests get here.</b> When a customer taps <b>Send my request</b> on the website, it shows up in this list on its own, marked New.
+    <b>How requests get here.</b> When a customer taps <b>Send my request</b> on the website, it shows up in this list on its own, marked New. Businesses you book from <a href="/dashboard/leads.html">Find leads</a> arrive as Cold call, with what we found already in the proposal.
     <ol>
       <li>Open it. Their details and picks are already filled in, and the audit &amp; proposal is already built.</li>
       <li>Fill in follow-up, scope, time and pricing as you go. Everything saves by itself.</li>
@@ -314,7 +315,7 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
       const what = c.items.length ? c.items.map(i => i[0]).join(' · ') : (r.needs || 'No scope yet');
       return `<button class="req" data-open="${esc(r.id)}" data-s="${esc(st)}"><span class="stripe"></span>
         <span class="body"><span class="name">${esc(r.business || r.name || 'Unnamed')}</span>
-          <span class="meta" style="display:block">${esc(r.name || '')}${r.btype ? ' · ' + esc(r.btype) : ''} · ${esc(r.contact || '')}</span>
+          <span class="meta" style="display:block">${[r.name, r.btype, r.contact].filter(Boolean).map(esc).join(' · ')}</span>
           <span class="meta" style="display:block">${esc(what)}</span></span>
         <span class="side"><span class="chip ${esc(st)}">${esc(st)}</span>${r.emailed === 'Yes' ? `<span class="chip good">Replied ${esc(nice(r.emailedDate))}</span>` : '<span class="chip New">Needs reply</span>'}
           <span class="muted" style="font-size:12px">${c.items.length ? (r.quote ? esc(r.quote) : money(c.lo) + '–' + money(c.hi)) : ''} ${r.createdAt ? '· ' + esc(nice(r.createdAt)) : ''}</span></span></button>`;
@@ -544,6 +545,9 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
     store.watch(rows => {
       reqs = rows.map(r => ({ ...r, ...(local.get(r.id) || {}) })); loaded = true;
       renderBoard(); renderList();
+      // /dashboard/#req=<id> (from Find Leads) opens that request once it has loaded
+      const m = location.hash.match(/^#req=([\w-]+)$/);
+      if (m && reqs.find(r => r.id === m[1])) { history.replaceState(null, '', location.pathname); openReq(m[1]); return; }
       if (openId && !editing()) { if (!reqs.find(r => r.id === openId)) closeReq(); else renderReq(); }
     }, () => setSave('Lost connection. Reload the page.', true));
   }

@@ -1,0 +1,1031 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Find Leads · FutureClarity</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: same system as the Client Pipeline. Two views: Find (search Google, scored results) and Call list (saved prospects + outreach log). Each business opens one screen with why it's a lead, what to say, and a call log. */
+:root {
+  --bg: #f3f4f8; --surface: #ffffff; --sunk: #eceef4; --line: #d6d9e4;
+  --fg: #151a2e; --muted: #5d6479; --accent: #3a3fc4; --accent-ink: #ffffff; --accent-soft: #e4e5fb;
+  --bad: #b3261e; --bad-soft: #fbe3e0; --warn: #8a5a00; --warn-soft: #fdf0d2; --ok: #1d6b3a; --ok-soft: #dcf1e3; --scrim: rgba(15, 18, 32, .45);
+  --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --body: "Public Sans", -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0f1220; --surface: #171b2c; --sunk: #1f2438; --line: #2d3350;
+  --fg: #e9ebf5; --muted: #9aa1ba; --accent: #8f94ff; --accent-ink: #10132a; --accent-soft: #262b55;
+  --bad: #ff8a7d; --bad-soft: #3a1f22; --warn: #f0c264; --warn-soft: #352c17; --ok: #7fd6a0; --ok-soft: #16301f; --scrim: rgba(0, 0, 0, .6); color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0f1220; --surface: #171b2c; --sunk: #1f2438; --line: #2d3350;
+  --fg: #e9ebf5; --muted: #9aa1ba; --accent: #8f94ff; --accent-ink: #10132a; --accent-soft: #262b55;
+  --bad: #ff8a7d; --bad-soft: #3a1f22; --warn: #f0c264; --warn-soft: #352c17; --ok: #7fd6a0; --ok-soft: #16301f; --scrim: rgba(0, 0, 0, .6); color-scheme: dark; }
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font: 15px/1.45 var(--body); margin: 0; }
+.wrap { max-width: 1180px; margin: 0 auto; padding: 22px 16px 48px; }
+h1, h2, h3 { font-family: var(--display); margin: 0; text-wrap: balance; }
+button, input, select, textarea { font: inherit; color: inherit; }
+a { color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+[hidden] { display: none !important; }
+.muted { color: var(--muted); }
+header.top { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 10px; }
+header.top h1 { font-size: 28px; font-weight: 800; letter-spacing: -.01em; }
+header.top p { margin: 3px 0 0; font-size: 13.5px; color: var(--muted); }
+.hbtns { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.save { font-size: 12.5px; color: var(--muted); min-height: 18px; }
+.save.err { color: var(--bad); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; background: var(--surface); border: 1px solid var(--line); border-radius: 9px; padding: 9px 14px; font-size: 14px; font-weight: 600; cursor: pointer; min-height: 40px; color: var(--fg); text-decoration: none; }
+.btn:hover { border-color: var(--accent); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.btn.sm { min-height: 34px; padding: 5px 11px; font-size: 13px; }
+.btn:disabled { opacity: .5; cursor: not-allowed; }
+.btn.danger { border-color: var(--bad); color: var(--bad); }
+
+/* view switch */
+.views { display: flex; gap: 4px; margin: 18px 0 14px; border-bottom: 1px solid var(--line); }
+.views button { border: 0; background: none; padding: 10px 14px; font-weight: 700; font-size: 15px; color: var(--muted); border-bottom: 2px solid transparent; cursor: pointer; margin-bottom: -1px; }
+.views button.on { color: var(--fg); border-bottom-color: var(--accent); }
+.views .n { font-family: var(--mono); font-size: 12px; font-weight: 500; background: var(--sunk); border-radius: 999px; padding: 1px 7px; margin-left: 4px; }
+
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px; display: grid; gap: 10px; align-content: start; min-width: 0; }
+.card h3 { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); font-weight: 700; font-family: var(--body); }
+.step { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: var(--muted); }
+.f input, .f select, .f textarea, .in { background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 9px 10px; font-size: 14.5px; font-weight: 400; color: var(--fg); width: 100%; min-width: 0; }
+.f textarea { min-height: 84px; resize: vertical; line-height: 1.4; }
+.row2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.grid2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+@media (max-width: 760px) { .grid2 { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 600px) { .row2 { grid-template-columns: minmax(0, 1fr); } }
+.hint { font-size: 12.5px; color: var(--muted); margin: 0; }
+
+/* business types */
+.vchips { display: flex; flex-wrap: wrap; gap: 6px; }
+.vchips button { border: 1px solid var(--line); background: var(--bg); border-radius: 10px; padding: 7px 12px; font-size: 14px; font-weight: 600; cursor: pointer; min-height: 40px; text-align: left; display: inline-flex; gap: 6px; align-items: center; }
+.vchips button.on { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.vchips .tag { font-size: 10.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 1px 6px; border-radius: 999px; background: var(--ok-soft); color: var(--ok); }
+.vchips button.on .tag { background: rgba(255, 255, 255, .22); color: inherit; }
+.vwhy { background: var(--sunk); border-radius: 10px; padding: 10px 12px; font-size: 13.5px; color: var(--muted); }
+.vwhy b { color: var(--fg); }
+.areas { display: flex; flex-wrap: wrap; gap: 5px; }
+.areas button { border: 1px solid var(--line); background: var(--bg); border-radius: 999px; padding: 4px 10px; font-size: 12.5px; cursor: pointer; min-height: 30px; color: var(--muted); }
+.areas button.on, .areas button:hover { border-color: var(--accent); color: var(--fg); }
+.searchrow { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; }
+
+/* results */
+.rbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; margin: 18px 0 10px; }
+.rbar h2 { font-size: 20px; font-weight: 700; }
+.toggles { display: flex; flex-wrap: wrap; gap: 12px; font-size: 13px; color: var(--muted); align-items: center; }
+.toggles label { display: inline-flex; gap: 6px; align-items: center; cursor: pointer; min-height: 32px; }
+.list { display: grid; gap: 8px; }
+.res { display: grid; grid-template-columns: 58px minmax(0, 1fr) auto; gap: 0 14px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; align-items: start; cursor: pointer; }
+.res:hover { border-color: var(--accent); }
+.res.dim { opacity: .62; }
+@media (max-width: 600px) { .res { grid-template-columns: 50px minmax(0, 1fr); } .res .acts { grid-column: 2; flex-direction: row; margin-top: 8px; } }
+.score { width: 54px; height: 54px; border-radius: 12px; display: grid; place-content: center; text-align: center; background: var(--sunk); color: var(--muted); }
+@media (max-width: 600px) { .score { width: 48px; height: 48px; } }
+.score b { font: 800 21px/1 var(--display); font-variant-numeric: tabular-nums; }
+.score span { font-size: 9.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; margin-top: 2px; }
+.score.Hot { background: var(--ok-soft); color: var(--ok); }
+.score.Warm { background: var(--warn-soft); color: var(--warn); }
+.nm { font-weight: 700; font-size: 16px; background: none; border: 0; padding: 0; text-align: left; cursor: pointer; color: var(--fg); }
+.meta { font-size: 13px; color: var(--muted); overflow-wrap: anywhere; }
+.meta a { color: inherit; }
+.sigs { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+.sig { font-size: 12px; padding: 2px 8px; border-radius: 999px; background: var(--warn-soft); color: var(--warn); white-space: nowrap; }
+.sig.neg { background: var(--sunk); color: var(--muted); }
+.sig.wait { background: var(--sunk); color: var(--muted); font-style: italic; }
+.acts { display: flex; flex-direction: column; gap: 6px; align-items: stretch; }
+.chip { display: inline-block; font-size: 11.5px; font-weight: 600; padding: 2px 9px; border-radius: 999px; background: var(--sunk); color: var(--muted); white-space: nowrap; }
+.chip.good { background: var(--ok-soft); color: var(--ok); }
+.chip.bad { background: var(--bad-soft); color: var(--bad); }
+.chip.acc { background: var(--accent-soft); color: var(--accent); }
+.chip.warn { background: var(--warn-soft); color: var(--warn); }
+.empty { background: var(--surface); border: 1px dashed var(--line); border-radius: 12px; padding: 26px 20px; text-align: center; color: var(--muted); }
+.empty h3 { color: var(--fg); font-size: 17px; margin-bottom: 6px; }
+.notice { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--warn); border-radius: 12px; padding: 14px 16px; display: grid; gap: 8px; font-size: 14px; }
+.notice h3 { font-size: 16px; }
+.notice ol { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
+.notice code { font-family: var(--mono); font-size: 12.5px; background: var(--sunk); padding: 1px 5px; border-radius: 4px; overflow-wrap: anywhere; }
+.more { display: flex; justify-content: center; margin-top: 12px; }
+#findNotice .notice { margin-top: 14px; }
+.sample-banner { background: var(--accent-soft); color: var(--accent); font-size: 13px; font-weight: 600; padding: 8px 12px; border-radius: 10px; }
+
+/* call list board */
+.board { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; margin-bottom: 16px; }
+@media (max-width: 860px) { .board { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .board { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.w { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; text-align: left; cursor: pointer; display: grid; gap: 2px; min-width: 0; }
+.w:hover, .w.on { border-color: var(--accent); }
+.w.on { box-shadow: inset 0 0 0 1px var(--accent); }
+.w .lab { font-size: 11.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.w b { font-family: var(--display); font-size: 30px; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.w .sub { font-size: 12px; color: var(--muted); }
+.w.due b { color: var(--warn); }
+.w.hot b { color: var(--ok); }
+.ltools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.ltools .in { max-width: 320px; }
+
+/* panels */
+.scrim { position: fixed; inset: 0; background: var(--scrim); z-index: 20; }
+.panel { position: fixed; z-index: 21; background: var(--bg); border-radius: 16px; display: flex; flex-direction: column; overflow: hidden;
+  top: calc(env(safe-area-inset-top, 0px) + 16px); bottom: calc(env(safe-area-inset-bottom, 0px) + 16px); left: 16px; right: 16px; max-width: 980px; margin: 0 auto; }
+.panel.small { max-width: 560px; }
+@media (max-width: 600px) { .panel { left: 0; right: 0; bottom: 0; top: calc(env(safe-area-inset-top, 0px) + 10px); border-radius: 16px 16px 0 0; } }
+.ph { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; justify-content: space-between; padding: 14px 16px; background: var(--surface); border-bottom: 1px solid var(--line); }
+.ph h2 { font-size: 20px; font-weight: 700; }
+.pbody { flex: 1; overflow: auto; }
+.pad { padding: 16px; display: grid; gap: 16px; }
+.topacts { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.bigscore { display: flex; gap: 12px; align-items: center; }
+.why { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.why li { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 8px; font-size: 14px; align-items: baseline; }
+.why .pts { font-family: var(--mono); font-size: 12.5px; color: var(--ok); text-align: right; }
+.why .pts.neg { color: var(--bad); }
+.facts { display: grid; gap: 6px; font-size: 14px; margin: 0; }
+.facts div { display: grid; grid-template-columns: 78px minmax(0, 1fr); gap: 8px; align-items: baseline; }
+.facts dt { font-size: 11.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.facts dd { margin: 0; overflow-wrap: anywhere; }
+.script { background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 12px; font-size: 14.5px; line-height: 1.55; white-space: pre-wrap; }
+.scripthead { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.scripthead b { font-size: 14px; }
+.obj { display: grid; gap: 8px; }
+.obj div { border-left: 3px solid var(--accent); padding: 4px 0 4px 10px; font-size: 14px; }
+.obj i { display: block; color: var(--muted); font-style: normal; font-weight: 600; font-size: 13px; }
+.roi { background: var(--ok-soft); color: var(--ok); border-radius: 10px; padding: 10px 12px; font-size: 13.5px; }
+.roi b { color: inherit; }
+.touches { display: flex; flex-wrap: wrap; gap: 6px; }
+.touches button { border: 1px solid var(--line); background: var(--bg); border-radius: 999px; padding: 7px 12px; font-size: 13.5px; font-weight: 600; cursor: pointer; min-height: 38px; }
+.touches button:hover { border-color: var(--accent); }
+.touches button.yes { border-color: var(--ok); color: var(--ok); }
+.touches button.no { color: var(--muted); }
+.seg { display: flex; flex-wrap: wrap; gap: 5px; }
+.seg button { border: 1px solid var(--line); background: var(--bg); border-radius: 999px; padding: 5px 11px; font-size: 13px; font-weight: 600; cursor: pointer; min-height: 32px; }
+.seg button.on { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.loglist { list-style: none; margin: 0; padding: 0; font-size: 13px; color: var(--muted); display: grid; gap: 3px; }
+.loglist b { color: var(--fg); font-weight: 600; }
+.navbar { display: flex; gap: 8px; justify-content: space-between; align-items: center; flex-wrap: wrap; padding: 12px 16px; background: var(--surface); border-top: 1px solid var(--line); }
+.confirm { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; font-size: 13px; }
+.demo-banner { background: var(--warn-soft); color: var(--warn); font-size: 13px; font-weight: 600; text-align: center; padding: 8px 16px; }
+.login { min-height: 100vh; display: grid; place-items: center; padding: 24px 16px; }
+.login .box { width: 100%; max-width: 420px; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 26px 24px; display: grid; gap: 14px; }
+.login h1 { font-size: 26px; font-weight: 800; }
+.login p { margin: 0; color: var(--muted); font-size: 14.5px; }
+.login .k { font-size: 11.5px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+.login .btn { width: 100%; min-height: 46px; }
+.login .msg { font-size: 13.5px; color: var(--bad); }
+</style>
+</head>
+<body>
+<div class="demo-banner" id="demoBanner" hidden>Demo mode: not connected to the database yet. Your call list is saved in this browser only.</div>
+
+<div class="login" id="loginView" hidden>
+  <form class="box" id="loginForm" novalidate>
+    <div class="k">FutureClarity team</div>
+    <h1>Find Leads</h1>
+    <p>Enter the dashboard code. This device will remember it until you sign out.</p>
+    <label class="f">Dashboard code<input id="l-code" type="password" autocomplete="current-password" placeholder="Dashboard code"></label>
+    <button class="btn primary" id="l-send" type="submit">Open</button>
+    <p class="msg" id="l-msg" role="alert" hidden></p>
+  </form>
+</div>
+
+<div class="wrap" id="app" hidden>
+  <header class="top">
+    <div>
+      <h1>Find Leads</h1>
+      <p>Local businesses that need what we build, scored and ready to call</p>
+    </div>
+    <div class="hbtns">
+      <span class="save" id="save" aria-live="polite"></span>
+      <button class="btn" id="meBtn">Your details</button>
+      <a class="btn" href="/dashboard/">Client Pipeline</a>
+      <button class="btn" id="signOut">Sign out</button>
+    </div>
+  </header>
+
+  <nav class="views" aria-label="Views">
+    <button data-view="find" class="on">Find businesses</button>
+    <button data-view="list">Call list <span class="n" id="listCount">0</span></button>
+  </nav>
+
+  <!-- FIND -->
+  <section id="findView">
+    <form class="card" id="searchForm" novalidate>
+      <div class="step">1 · What kind of business</div>
+      <div class="vchips" id="vchips"></div>
+      <div class="vwhy" id="vwhy"></div>
+      <input class="in" id="customQ" placeholder="What kind of business? e.g. upholstery shop" autocomplete="off" aria-label="What kind of business" hidden>
+      <div class="step">2 · Where</div>
+      <div class="searchrow">
+        <input class="in" id="area" placeholder="Neighborhood or city, e.g. Van Nuys, CA" autocomplete="off" aria-label="Neighborhood or city">
+        <button class="btn primary" id="go" type="submit">Find businesses</button>
+      </div>
+      <div class="areas" id="areas"></div>
+    </form>
+
+    <div id="findNotice"></div>
+
+    <div id="resultsWrap" hidden>
+      <div class="rbar">
+        <div><h2 id="rTitle"></h2><div class="muted" id="rSub" style="font-size:13px"></div></div>
+        <div class="toggles">
+          <label><input type="checkbox" id="hideSkip" checked> Hide chains &amp; poor fits</label>
+          <label><input type="checkbox" id="hideListed"> Hide ones already on my list</label>
+          <button class="btn sm" id="saveHot" type="button">Save all hot leads</button>
+        </div>
+      </div>
+      <div id="sampleBanner" class="sample-banner" hidden>Sample data: these are made-up businesses so you can try the tool. Real searches need the Google key (see README).</div>
+      <div class="list" id="results"></div>
+      <div class="more"><button class="btn" id="more" type="button" hidden>Load 20 more</button></div>
+    </div>
+  </section>
+
+  <!-- CALL LIST -->
+  <section id="listView" hidden>
+    <div id="listNotice"></div>
+    <div class="board" id="board" aria-label="Call list status"></div>
+    <div class="ltools">
+      <input class="in" id="lsearch" type="search" placeholder="Search your list" aria-label="Search your list">
+      <button class="btn sm" id="csv" type="button">Download CSV</button>
+    </div>
+    <div class="list" id="plist"></div>
+  </section>
+</div>
+
+<!-- one business -->
+<div id="pLayer" hidden>
+  <div class="scrim" data-close="p"></div>
+  <div class="panel" role="dialog" aria-modal="true" aria-labelledby="pTitle">
+    <div class="ph"><div><h2 id="pTitle"></h2><div class="muted" id="pSub" style="font-size:13px"></div></div><button class="btn" data-close="p">Done</button></div>
+    <div class="pbody" id="pBody"></div>
+    <div class="navbar" id="pNav"></div>
+  </div>
+</div>
+
+<!-- your details -->
+<div id="meLayer" hidden>
+  <div class="scrim" data-close="me"></div>
+  <div class="panel small" role="dialog" aria-modal="true" aria-labelledby="meTitle">
+    <div class="ph"><h2 id="meTitle">Your details</h2><button class="btn" data-close="me">Done</button></div>
+    <div class="pbody"><div class="pad">
+      <p class="hint">Used in the call scripts and emails. Saved on this device only.</p>
+      <label class="f">Your first name<input id="me-name" autocomplete="given-name"></label>
+      <label class="f">Email sign-off<textarea id="me-sign" rows="3"></textarea></label>
+      <label class="f">Mailing address for sales emails<input id="me-addr" autocomplete="street-address" placeholder="Street, city, ZIP (a PO box works)"></label>
+      <p class="hint">US law (CAN-SPAM) requires a real postal address in every sales email, and an easy way to opt out. The emails here already include the opt-out line.</p>
+    </div></div>
+  </div>
+</div>
+
+<script src="/fc-config.js"></script>
+<script src="/fc-store.js"></script>
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const iso = d => d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  const today = () => iso(new Date());
+  const workdays = n => { const d = new Date(); let k = 0; while (k < n) { d.setDate(d.getDate() + 1); if (d.getDay() % 6) k++; } return iso(d); };
+  const nice = s => s ? new Date(s.length > 10 ? s : s + 'T12:00').toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }) : '';
+  const money = n => '$' + Math.round(n).toLocaleString('en-US');
+  const digits = s => String(s || '').replace(/\D/g, '').slice(-10);
+  const norm = s => String(s || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+  const safeUrl = u => /^https?:\/\//i.test(String(u || '')) ? String(u) : '';
+  const hostOf = u => { try { return new URL(u).hostname.replace(/^www\./, ''); } catch (e) { return String(u || ''); } };
+  const YEAR = new Date().getFullYear();
+  const PHONE = '(818) 939-7964';
+
+  // ======================================================================
+  // Who to call. Order = priority; the first is the recommended focus.
+  // Each type sets the Google search, how the scripts talk, which
+  // automations to lead with, and its typical ticket (sources in README).
+  // workflows must use the Client Pipeline's names (dashboard/index.html).
+  // ======================================================================
+  const VERTICALS = [
+    {
+      k: 'auto', label: 'Auto repair', tag: 'Best fit', q: 'auto repair shop', type: 'car_repair',
+      noun: 'shop', plural: 'repair shops', unit: 'repair order', ticket: 479, booking: false,
+      bad: [[/car_dealer|dealer/i, 'Dealership service department', -40]], smog: true,
+      why: 'Calls go unanswered while everyone is under a car or with a customer (up to 21% of calls to auto shops, per Marchex), and the average repair order is about $479. Most are single-location independents, so the owner is at the counter. Nearly all run shop software (Tekmetric, Shopmonkey), so sell what sits alongside it, not a replacement.',
+      hook: 'Quick question: when you and your service writer are both tied up, what happens to the calls you miss?',
+      offer: 'I set it up so every missed call gets a text back right away with a way to book, customers get a reminder when service or smog is due, and happy customers get asked for a Google review. It works alongside the shop software you already use.',
+      vm: 'I help repair shops here in the Valley catch the calls they miss when everyone is tied up.',
+      value: 'When everyone is under a car, the phone goes to voicemail, and with an average repair order around $480, every caller who books somewhere else is real money.',
+      workflows: ['Missed-call text-back', 'Review requests', 'Rebooking nudges', 'Estimates & quotes', 'Online booking + reminders'],
+      objections: [
+        ['"We already have Tekmetric / Shopmonkey."', 'Good, keep it. I don\'t replace it. I add what it isn\'t doing for you: texting back the calls you miss and asking happy customers for reviews. You see it working before you pay.'],
+        ['"We\'re too busy."', 'That\'s why it runs on its own. Ten minutes before you open or after 5. If the demo doesn\'t save you time, I\'m gone.'],
+        ['"How much is it?"', 'One time, usually $400 to $1,800 depending on what you pick, and you see it working first. A lot of shops pay $300 to $700 a month for marketing add-ons; this is a one-time build, and monthly care is optional.'],
+      ],
+      sample: 'Auto Repair', suiteSample: 'Kukui', chainSample: 'Midas',
+    },
+    {
+      k: 'groom', label: 'Pet groomers', tag: 'Strong', q: 'dog grooming', type: '',
+      noun: 'groomer', plural: 'groomers', unit: 'groom', ticket: 98, booking: true,
+      bad: [[/veterinar/i, 'Vet clinic (grooming is a side service)', -30]],
+      why: 'A groomer can\'t pick up with a dog on the table. Regulars come back every 4–8 weeks, no-shows run 5–15%, and almost no agencies call on groomers. Smaller tickets (about $98 for a full groom in LA), so lead with rebooking nudges and reminders.',
+      hook: 'When you\'ve got a dog on the table and the phone rings, what happens to that call?',
+      offer: 'I set up automatic texts for groomers: if you miss a call, they get your booking link, clients get a reminder the day before, and regulars get a "time for Bella\'s next groom" text when they\'re due.',
+      vm: 'I set up automatic texts for groomers, so the calls you miss mid-groom still turn into bookings.',
+      value: 'A groomer can\'t answer with a dog on the table, and a regular on a 6-week cycle is worth roughly $650 to $850 a year.',
+      workflows: ['Missed-call text-back', 'Online booking + reminders', 'Rebooking nudges', 'Review requests'],
+      objections: [
+        ['"Paper works fine."', 'Keep it. This only texts back the calls you can\'t take and reminds people, so the book fills up.'],
+        ['"I can\'t afford software."', 'It\'s a one-time setup with no per-groomer fee. If one rebooked regular a month doesn\'t cover it, don\'t buy it. And you see it working first.'],
+        ['"We\'re booked weeks out."', 'Great problem. Reminders cut the no-shows that leave holes in your day, and regulars rebook before they leave.'],
+      ],
+      sample: 'Dog Grooming', suiteSample: 'MoeGo', chainSample: 'PetSmart Grooming',
+    },
+    {
+      k: 'detail', label: 'Auto detailing & tint', tag: 'Strong', q: 'auto detailing', type: '',
+      noun: 'shop', plural: 'detail shops', unit: 'detail', ticket: 278, booking: true,
+      bad: [[/car_dealer|dealer/i, 'Dealership detail department', -40], [/gas_station|gas station/i, 'Gas station car wash', -30]],
+      why: 'Solo or small crews who can\'t answer while they\'re polishing, and quotes for ceramic coating, PPF and tint go out slowly. Light software use, few agencies, and they sit on the same streets as the repair shops. A standard detail runs about $278, premium about $443.',
+      hook: 'When a call or DM for a quote comes in while you\'re mid-job, how fast does it get answered?',
+      offer: 'I set it up so a missed call gets an instant text with a quick quote form, quotes for coating, PPF or tint go out fast, past customers get reminded when maintenance is due, and finished customers get asked for a Google review.',
+      vm: 'I help detail and tint shops catch the leads that come in while their hands are full.',
+      value: 'Leads go cold while you\'re polishing, and a standard detail runs about $280, with coatings and PPF far more.',
+      workflows: ['Estimates & quotes', 'Missed-call text-back', 'Review requests', 'Rebooking nudges'],
+      objections: [
+        ['"Instagram is enough."', 'Then this just makes sure callers don\'t slip through, and it asks finished customers for Google reviews so new people find you.'],
+        ['"I use Urable / Square."', 'I can work alongside it. If your tool already does something, I\'ll tell you and you won\'t pay for it twice.'],
+        ['"How much is it?"', 'One time, usually $400 to $1,800, and you see a demo built on your own services before you pay.'],
+      ],
+      sample: 'Auto Detailing', suiteSample: 'Urable', chainSample: 'Mister Car Wash',
+    },
+    {
+      k: 'body', label: 'Auto body & collision', q: 'auto body shop', type: 'car_repair',
+      noun: 'shop', plural: 'body shops', unit: 'repair', ticket: 4800, booking: false,
+      bad: [[/car_dealer|dealer/i, 'Dealership body shop', -40]],
+      why: 'Big tickets (about $4,800 per collision repair) and slow estimate follow-up. Insurers steer a lot of work through partner networks, so focus on independents that win work by phone.',
+      hook: 'After you write an estimate, what happens when the customer goes quiet?',
+      offer: 'I set up automatic estimate follow-ups, a text back for every missed call, and a review request after every repair.',
+      vm: 'I help body shops follow up on estimates automatically, so fewer jobs walk.',
+      value: 'An estimate that never gets followed up is a few thousand dollars walking out the door.',
+      workflows: ['Estimates & quotes', 'Missed-call text-back', 'Review requests'],
+      objections: [
+        ['"Insurance sends us our work."', 'Keep that. This is for the customers who find you themselves and call around for estimates.'],
+        ['"How much is it?"', 'One time, usually $400 to $1,800, and you see it working before you pay.'],
+      ],
+      sample: 'Collision', suiteSample: 'Podium', chainSample: 'Caliber Collision',
+    },
+    {
+      k: 'dojo', label: 'Martial arts & fitness', q: 'martial arts school', type: '',
+      noun: 'school', plural: 'schools', unit: 'membership month', ticket: 135, booking: true,
+      why: 'Memberships run about $120–$150 a month, so each trial that turns into a member is worth $1,500+ a year. Following up on trial leads is the gap. Many already pay for Spark or Zen Planner.',
+      hook: 'When someone calls about a trial class while you\'re teaching, what happens to that call?',
+      offer: 'I set it up so missed calls get a text with a link to book a trial class, trial students get reminders, and anyone who goes quiet gets a friendly nudge to come back.',
+      vm: 'I help schools turn more trial-class calls into members, even while you\'re on the mat.',
+      value: 'A trial student who signs up is worth well over $1,000 a year, and most schools lose trial leads to slow follow-up.',
+      workflows: ['Missed-call text-back', 'Online booking + reminders', 'Rebooking nudges'],
+      objections: [
+        ['"We already use Spark / Zen Planner."', 'Good, keep it. I add the follow-up it isn\'t doing for you, and you see it working first.'],
+        ['"How much is it?"', 'One time, usually $400 to $1,800. One new member a month covers it.'],
+      ],
+      sample: 'Martial Arts', suiteSample: 'Spark Membership', chainSample: 'UFC Gym',
+    },
+    {
+      k: 'tattoo', label: 'Tattoo studios', q: 'tattoo shop', type: 'body_art_service',
+      noun: 'studio', plural: 'studios', unit: 'session hour', ticket: 150, booking: true,
+      why: 'No-shows run 20–30% without deposits, and booking lives in Instagram DMs. Good fit for deposit-backed booking and reminders, but artists often work independently, so ask for the shop owner.',
+      hook: 'How do you handle no-shows on big sessions right now?',
+      offer: 'I set it up so clients book with a deposit, get reminders before their session, and missed calls get a text with your booking link.',
+      vm: 'I help studios cut no-shows with deposit-backed booking and reminders.',
+      value: 'One no-show on a big session is a whole day\'s income gone.',
+      workflows: ['Online booking + reminders', 'Missed-call text-back', 'Review requests'],
+      objections: [
+        ['"We book through Instagram."', 'Keep it for inspiration and DMs. Booking and deposits just move to a link you send, so no-shows drop.'],
+        ['"How much is it?"', 'One time, usually $400 to $1,800, and you see it working first.'],
+      ],
+      sample: 'Tattoo', suiteSample: 'Square Appointments',
+    },
+    {
+      k: 'barber', label: 'Barbershops & salons', q: 'barbershop', type: 'barber_shop',
+      noun: 'shop', plural: 'barbershops', unit: 'cut', ticket: 68, booking: true,
+      why: 'On our homepage, but a harder sale: most already use Booksy, Squire or Vagaro (reminders built in), a cut is about $68, and many barbers rent their own chair. Go after owners with no booking tool at all.',
+      hook: 'How do clients book with you right now?',
+      offer: 'I set it up so clients book online any time, get a reminder the day before, and get a "time for your next cut?" text a few weeks later.',
+      vm: 'I help shops fill empty chairs with online booking and automatic rebooking texts.',
+      value: 'An empty chair at 2pm on a Tuesday is money you don\'t get back.',
+      workflows: ['Online booking + reminders', 'Rebooking nudges', 'Review requests'],
+      objections: [
+        ['"We use Booksy."', 'Then you\'re covered on booking. I\'d only add what it doesn\'t do for you, like a numbers screen for the whole shop. If it\'s nothing, I\'ll say so.'],
+        ['"How much is it?"', 'One time, usually $400 to $800 for one workflow, and you see it working first.'],
+      ],
+      sample: 'Barbershop', suiteSample: 'Booksy', chainSample: 'Supercuts',
+    },
+    {
+      k: 'custom', label: 'Something else', q: '', type: '',
+      noun: 'business', plural: 'businesses', unit: 'sale', ticket: 0, booking: true,
+      why: 'Type any kind of local business below. Scoring works the same way; the scripts stay general.',
+      hook: 'How do you handle calls that come in while you\'re busy with a customer?',
+      offer: 'I set up the repeat work to run on its own: missed calls get a text back with a way to book, customers get reminders, and happy customers get asked for a review. You see it all on one simple screen.',
+      vm: 'I help local businesses here in the Valley catch the calls they miss and get more reviews.',
+      value: 'Most local businesses lose a few customers a week to missed calls and slow follow-up.',
+      workflows: ['Missed-call text-back', 'Review requests', 'Online booking + reminders'],
+      objections: [
+        ['"We\'re too busy."', 'That\'s why it runs on its own. Ten minutes is all it takes to show you.'],
+        ['"How much is it?"', 'One time, usually $400 to $1,800, and you see it working before you pay.'],
+      ],
+      sample: 'Local Business', suiteSample: 'Square Appointments',
+    },
+  ];
+  const vOf = k => VERTICALS.find(v => v.k === k) || VERTICALS[0];
+
+  const AREAS = ['North Hollywood', 'Van Nuys', 'Burbank', 'Glendale', 'Sherman Oaks', 'Studio City', 'Encino', 'Tarzana', 'Reseda', 'Northridge', 'Canoga Park', 'Woodland Hills', 'Chatsworth', 'Granada Hills', 'Panorama City', 'Sun Valley', 'Pacoima', 'Sylmar', 'San Fernando', 'Valley Village'];
+
+  // Chains and franchises: the person who answers can't say yes.
+  const CHAINS = new RegExp('\\b(' + [
+    'supercuts', 'great clips', 'sport clips', 'fantastic sams', 'cost cutters', 'smartstyle', 'regis', "floyd'?s 99", 'hair cuttery', 'ulta', 'drybar', 'european wax', 'massage envy', 'hand ?& ?stone', 'elements massage', 'the joint chiropractic', 'amazing lash', 'deka lash', 'the lash lounge', 'regal nails', 'sola salon',
+    'jiffy lube', 'valvoline', 'midas', 'meineke', 'firestone', 'pep boys', 'goodyear', 'big o tires', 'les schwab', 'discount tire', "america'?s tire", 'ntb', 'monro', 'christian brothers', 'grease monkey', 'take 5', 'precision tune', 'aamco', 'caliber collision', 'gerber collision', 'maaco', 'service king', 'safelite', 'mister car wash', 'quick quack', 'ziebart', 'tire kingdom', 'just tires', 'brakes plus', 'mavis', 'carstar', 'fix auto', 'abra auto', 'speedee', 'oil changers', 'waterway', 'el car wash', "tommy'?s express",
+    'petco', 'petsmart', 'banfield', 'vca', 'dogtopia', 'camp bow wow', 'hounds town', 'woof gang', 'scenthound',
+    'orangetheory', 'premier martial arts', 'ata martial arts', 'planet fitness', '24 hour fitness', 'la fitness', 'crunch', 'equinox', "gold'?s gym", 'anytime fitness', 'f45', 'pure barre', 'club pilates', 'corepower', 'yogaworks', 'title boxing', '9round', 'ufc gym', 'snap fitness', 'eos fitness',
+    'mathnasium', 'kumon', 'sylvan', 'huntington learning', 'aspen dental', 'western dental', 'bright now', 'pacific dental', 'kaiser',
+    'roto-rooter', 'mr\\.? rooter', 'one hour heating', 'benjamin franklin plumbing', 'mister sparky', 'molly maid', 'merry maids', 'the maids', 'trugreen', 'terminix', 'orkin', 'pop-a-lock', 'two men and a truck', 'college hunks',
+  ].join('|') + ')\\b', 'i');
+
+  // ---------- this device: your details + filters ----------
+  const PREF = 'fc-leads-prefs';
+  let prefs = {}; try { prefs = JSON.parse(localStorage.getItem(PREF) || '{}') || {}; } catch (e) {}
+  function savePrefs() { try { localStorage.setItem(PREF, JSON.stringify(prefs)); } catch (e) {} }
+  const me = () => (prefs.me || '').trim() || '[your name]';
+  const signoff = () => (prefs.sign || '').trim() || `${me()}\nFutureClarity Technologies\n${PHONE} · futureclaritytechnologies.com`;
+
+  // ======================================================================
+  // Fit score: 35 to start, plus or minus each signal, 0–100.
+  // Hot 70+, Warm 50+. "find" is the line that goes into scripts, emails
+  // and (when they book) the proposal's "What we found".
+  // ======================================================================
+  // "Closes by 6 PM" / "Closed Sunday" from Google's weekday hours: after-hours callers get voicemail.
+  function hoursGap(h) {
+    if (!h) return null;
+    const lines = String(h).replace(/[\u202f\u2009\u00a0]/g, ' ').split('\n');
+    const shut = lines.filter(l => /^(saturday|sunday):\s*closed/i.test(l)).map(l => l.split(':')[0]);
+    const early = lines.filter(l => /^(monday|tuesday|wednesday|thursday|friday):/i.test(l)).some(l => {
+      const m = l.match(/(\d{1,2})(?::(\d{2}))?\s*([AP]M)\s*$/i);
+      return m && m[3].toUpperCase() === 'PM' && (+m[1] % 12) * 60 + (+m[2] || 0) <= 6 * 60;
+    });
+    if (!early && !shut.length) return null;
+    const days = shut.join(' & ');
+    return {
+      t: [early ? 'Closes by 6 PM' : '', shut.length ? 'Closed ' + days : ''].filter(Boolean).join(', '),
+      find: `You close ${[early ? 'by 6 PM on weekdays' : '', shut.length ? 'on ' + days : ''].filter(Boolean).join(' and ')}, so after-hours callers get voicemail; an automatic text back can still book them.`,
+    };
+  }
+
+  function assess(p) {
+    const V = vOf(p.vertical), biz = p.name || 'the business';
+    const s = p.site && p.site.kind ? p.site : (p.website ? siteCache.get(p.website) : null);
+    const sig = [];
+    const add = (k, pts, t, find) => sig.push({ k, pts, t, find: find || '' });
+    if (CHAINS.test(p.name || '')) add('chain', -45, 'Looks like a chain or franchise');
+    const kinds = (p.types || []).join(' ') + ' ' + (p.btype || '');
+    (V.bad || []).forEach(([re, t, pts]) => { if (re.test(kinds) && !sig.some(x => x.k === 'bad')) add('bad', pts, t); });
+    if (p.businessStatus === 'CLOSED_TEMPORARILY') add('closed', -40, 'Temporarily closed on Google');
+    if (!p.phone) add('nophone', -12, 'No phone number on Google');
+    if (V.smog && /smog/i.test(p.name || '')) add('smog', 3, 'Does smog checks (a built-in 2-year reminder)');
+    const gap = hoursGap(p.hours);
+    if (gap) add('afterhours', 4, gap.t, gap.find);
+
+    if (!p.website) add('nosite', 30, 'No website', `${biz} doesn't have a website, so people who find you on Google can only call, and if nobody picks up they try the next ${V.noun}.`);
+    else if (!s) add('checking', 0, 'Checking website…');
+    else if (s.kind === 'profile') add('profile', 22, `Website is a ${s.profile.replace(/ \(.*/, '')}`, `Your website link on Google goes to a ${s.profile.replace(/ \(.*/, '')}, not a site of your own.`);
+    else if (s.kind === 'down') add('down', 25, 'Website is broken', `Your website didn't load when I tried it (${s.error || 'error'}).`);
+    else if (s.kind !== 'site') add('unknown', 0, "Couldn't check the website");
+    else if (s.parked) add('parked', 25, 'Website domain is parked', 'Your web address shows a "domain for sale" page instead of your business.');
+    else {
+      if (s.thin) add('thin', 10, 'Website is nearly empty', 'Your website has almost nothing on it.');
+      const tools = s.tools || [], suite = tools.find(t => t.suite);
+      if (suite) add('suite', -18, `Already uses ${suite.name}`);
+      else if (tools[0]) add('tool', 0, `Books online with ${tools[0].name}`);
+      else if (!s.bookingWords) add('nobook', V.booking ? 18 : 10, 'No online booking', "There's no way to book online from your website.");
+      if (!s.mobile) add('nomobile', 12, "Site isn't built for phones", "Your website isn't set up for phones, which is where most people look you up.");
+      if (!s.https) add('nohttps', 5, 'Site shows "Not secure"', 'Browsers mark your website "Not secure" because it doesn\'t use https.');
+      if (s.year && s.year <= YEAR - 3) add('stale', 8, `Site footer says ${s.year}`, `Your website's footer says ${s.year}, so it can look out of date to new customers.`);
+      if (s.mobile && !s.tel) add('notel', 4, 'No tap-to-call button', "There's no tap-to-call button on your website.");
+      if (s.ms > 5000) add('slow', 5, `Site is slow (${Math.round(s.ms / 1000)}s)`, `Your website took about ${Math.round(s.ms / 1000)} seconds to load.`);
+    }
+
+    const n = +p.reviews || 0, r = p.rating === null || p.rating === '' || p.rating === undefined ? null : +p.rating;
+    if (!n) add('noreviews', 15, 'No Google reviews', `There are no Google reviews for ${biz} yet.`);
+    else if (n < 25) add('fewreviews', 14, `Only ${n} reviews`, `You have ${n} Google reviews; the ${V.plural} that show up first nearby usually have far more.`);
+    else if (n < 80) add('somereviews', 7, `${n} reviews`, `You have ${n} Google reviews; a steady stream of new ones helps you show up first.`);
+    if (r !== null && n) {
+      if (r < 4.0) add('lowrating', 10, `Rated ${r.toFixed(1)}`, `Your Google rating is ${r.toFixed(1)}. Asking every happy customer for a review is the fastest way to lift it.`);
+      else if (r < 4.4) add('okrating', 5, `Rated ${r.toFixed(1)}`, `Your Google rating is ${r.toFixed(1)}; more reviews from happy customers would push it up.`);
+    }
+    if (!p.hours) add('nohours', 3, 'No hours on Google', "Your hours aren't listed on Google.");
+
+    const score = Math.max(0, Math.min(100, 35 + sig.reduce((t, x) => t + x.pts, 0)));
+    return { score, level: score >= 70 ? 'Hot' : score >= 50 ? 'Warm' : 'Cold', sig, pending: sig.some(x => x.k === 'checking') };
+  }
+  const findings = a => a.sig.filter(x => x.pts > 0 && x.find).sort((x, y) => y.pts - x.pts);
+
+  // ======================================================================
+  // What to say: opener, voicemail, email. Built from the strongest signal.
+  // ======================================================================
+  function scripts(p, a) {
+    const V = vOf(p.vertical), biz = p.name || 'your business', top = findings(a);
+    const n = +p.reviews || 0;
+    const HOOK = {
+      nosite: `I was looking up ${V.plural} near you and noticed ${biz} doesn't have a website, so the only way to reach you from Google is a phone call.`,
+      profile: 'I noticed your Google listing sends people to a social page instead of a website of your own.',
+      down: 'I tried your website and it didn\'t load for me, so I wanted to give you a heads-up.',
+      parked: 'I tried your website and it\'s showing a "domain for sale" page.',
+      nobook: 'I was on your website and there\'s no way for customers to book online.',
+      nomobile: 'I pulled up your website on my phone and it\'s hard to use on a small screen.',
+      noreviews: `I noticed ${biz} doesn't have any Google reviews yet.`,
+      fewreviews: `I saw you have ${n} Google reviews, and the ${V.plural} that show up first around you usually have a lot more.`,
+      somereviews: `I saw you have ${n} Google reviews, and the ${V.plural} that show up first around you usually have a lot more.`,
+      lowrating: `I noticed your Google rating is ${(+p.rating).toFixed(1)}, and a steady stream of happy-customer reviews would lift that fast.`,
+      stale: `I was on your website and the footer still says ${(a.sig.find(x => x.k === 'stale') || {}).t?.replace(/\D+/g, '') || 'an old year'}.`,
+    };
+    const hook = (top[0] && HOOK[top[0].k]) || V.hook;
+    const opener = `Hi, is this the owner? ... Great. My name is ${me()}, I'm with FutureClarity, we're local here in the Valley.\n\n${hook} ${V.offer}\n\nCould I stop by for 10 minutes this week and show you a quick demo? It's free, and you'd see it working before you pay anything.`;
+    const callback = new Date(workdays(2) + 'T12:00').toLocaleDateString('en-US', { weekday: 'long' });
+    const voicemail = `Hi, this is ${me()} with FutureClarity Technologies, calling for the owner of ${biz}. ${V.vm} I'll try you again ${callback}, or you can reach me at ${PHONE}. Again, ${me()}, ${PHONE}. Thanks!`;
+    const SUBJ = { nosite: `${biz} on Google`, profile: `${biz}'s website`, down: `${biz}'s website is down`, parked: `${biz}'s website`, nobook: `Online booking for ${biz}`, nomobile: `${biz}'s website on phones`, noreviews: `${biz}'s Google reviews`, fewreviews: `${biz}'s Google reviews`, somereviews: `${biz}'s Google reviews`, lowrating: `${biz}'s Google rating` };
+    const subject = (top[0] && SUBJ[top[0].k]) || `Quick idea for ${biz}`;
+    const lines = top.slice(0, 3).map(x => '- ' + x.find).join('\n');
+    const addr = (prefs.addr || '').trim();
+    const email = `Hi ${biz} team,\n\nI'm ${me()} with FutureClarity Technologies, here in the San Fernando Valley. I was looking at ${biz} online${lines ? ' and noticed a few things:\n\n' + lines : '.'}\n\n${V.value}\n\nWe build local ${V.plural} one simple dashboard with the automations behind it: ${V.workflows.slice(0, 3).map(w => w.toLowerCase()).join(', ')}. You see a working demo before you pay anything, and you get a fixed quote up front.\n\nCould I stop by for a free 30-minute audit this week?\n\n${signoff()}${addr ? '\n' + addr : ''}\n\nNot interested? Just reply "no thanks" and I won't email again.`;
+    return { opener, voicemail, subject, email };
+  }
+
+  // ---------- state ----------
+  const store = window.FCStore;
+  let V = vOf(prefs.v);
+  let results = [], nextToken = '', lastQ = null, searching = false, sample = false;
+  let plist = [], listLoaded = false, listMissing = false, reqs = [];
+  let view = 'find', lfilter = '', openKey = null;
+  const byPlace = new Map();
+  const siteCache = new Map(); // url → website check result (null while checking)
+
+  function setSave(t, err) { const el = $('save'); el.textContent = t; el.classList.toggle('err', !!err); }
+  // Don't redraw the open business while someone is typing in it.
+  function editing() { const a = document.activeElement; return a && /TEXTAREA|INPUT|SELECT/.test(a.tagName) && a.closest('#pLayer'); }
+  function reindex() { byPlace.clear(); plist.forEach(p => byPlace.set(p.placeId, p)); $('listCount').textContent = plist.filter(p => isOpen(p)).length; }
+  const CLOSED = ['Not interested', 'Not a fit', 'In pipeline'];
+  const isOpen = p => !CLOSED.includes(p.status);
+  let pipePhones = new Set(), pipeNames = new Set();
+  function reindexPipe() { pipePhones = new Set(reqs.map(r => digits(r.contact)).filter(d => d.length === 10)); pipeNames = new Set(reqs.map(r => norm(r.business)).filter(Boolean)); }
+  const inPipeline = p => (digits(p.phone).length === 10 && pipePhones.has(digits(p.phone))) || pipeNames.has(norm(p.name));
+
+  // ---------- website checks: 3 per call, 2 calls at a time ----------
+  const siteQueue = []; let siteBusy = 0;
+  function queueSites(urls) {
+    urls.forEach(u => { if (u && !siteCache.has(u) && !siteQueue.includes(u)) siteQueue.push(u); });
+    pumpSites();
+  }
+  function pumpSites() {
+    while (siteBusy < 2 && siteQueue.length) {
+      const batch = siteQueue.splice(0, 3); siteBusy++;
+      batch.forEach(u => siteCache.set(u, null));
+      store.leads({ action: 'sites', urls: batch })
+        .then(r => (r.results || []).forEach(x => siteCache.set(x.url, x)))
+        .catch(e => { if (e.status === 401) store.signOut(); })
+        .then(() => {
+          batch.forEach(u => { if (!siteCache.get(u)) siteCache.set(u, { url: u, kind: 'error', error: 'check failed' }); });
+          siteBusy--; sitesDone(batch); pumpSites();
+        });
+    }
+  }
+  // A saved business whose website check just finished: store the result on it.
+  function sitesDone(batch) {
+    plist.filter(p => batch.includes(p.website) && !(p.site && p.site.kind) && siteCache.get(p.website)).forEach(p => {
+      const site = siteCache.get(p.website), a = assess({ ...p, site });
+      writeP(p.id, { site, score: a.score, signals: slim(a), ...(!p.email && site.emails && site.emails[0] ? { email: site.emails[0] } : {}) });
+    });
+    if (view === 'find') renderResults(); else renderList();
+    if (openKey && !editing()) renderPanel();
+  }
+  const slim = a => a.sig.filter(x => x.k !== 'checking').map(({ k, pts, t }) => ({ k, pts, t }));
+
+  // ---------- saving ----------
+  const pending = new Map();
+  function writeP(id, patch) {
+    const p = plist.find(x => x.id === id); if (!p) return Promise.resolve();
+    Object.assign(p, patch); setSave('Saving…');
+    const prev = pending.get(id) || Promise.resolve();
+    const next = prev.then(() => store.prospects.update(id, patch))
+      .then(() => { if (pending.get(id) === next) { pending.delete(id); setSave('All changes saved'); } })
+      .catch(() => { pending.delete(id); setSave('Could not save. Check your connection and try again.', true); });
+    pending.set(id, next); reindex();
+    return next;
+  }
+  function toRow(p, extra) {
+    const a = assess(p), site = p.website ? siteCache.get(p.website) || p.site || {} : {};
+    return { placeId: p.placeId, name: p.name || '', vertical: p.vertical || V.k, btype: p.btype || '', address: p.address || '', area: p.area || '', phone: p.phone || '', website: p.website || '', mapsUrl: p.mapsUrl || '', rating: p.rating ?? '', reviews: p.reviews ?? '', hours: p.hours || '', site: site || {}, score: a.score, signals: slim(a), email: (site && site.emails && site.emails[0]) || '', ...(extra || {}) };
+  }
+  async function saveResults(list, extra) {
+    if (sample && store.live) { setSave('Sample businesses can\'t be saved. Run a real search first.', true); return []; }
+    if (listMissing) { setSave('Turn on the call list first (see the Call list tab).', true); return []; }
+    setSave('Saving…');
+    try {
+      const saved = await store.prospects.save(list.map(p => toRow(p, extra)));
+      saved.forEach(s => { const i = plist.findIndex(x => x.id === s.id || x.placeId === s.placeId); if (i >= 0) plist[i] = { ...plist[i], ...s }; else plist.unshift(s); });
+      reindex(); setSave(saved.length === 1 ? 'Saved to your call list' : saved.length + ' saved to your call list');
+      return saved;
+    } catch (e) {
+      if (e.status === 404) { listMissing = true; renderListNotice(); }
+      setSave('Could not save. ' + (e.status === 404 ? 'The call list isn\'t set up yet.' : 'Try again.'), true);
+      return [];
+    }
+  }
+
+  // ======================================================================
+  // FIND
+  // ======================================================================
+  function renderSearch() {
+    $('vchips').innerHTML = VERTICALS.map(v => `<button type="button" data-v="${esc(v.k)}" class="${v.k === V.k ? 'on' : ''}">${esc(v.label)}${v.tag ? `<span class="tag">${esc(v.tag)}</span>` : ''}</button>`).join('');
+    $('vwhy').innerHTML = V.k === 'custom' ? esc(V.why) : `<b>Why ${esc(V.label.toLowerCase())}:</b> ${esc(V.why)}<br><b>Lead with:</b> ${esc(V.workflows.slice(0, 3).join(', ').toLowerCase())}.`;
+    $('customQ').hidden = V.k !== 'custom';
+    $('areas').innerHTML = AREAS.map(a => `<button type="button" data-area="${esc(a)}, CA" class="${$('area').value === a + ', CA' ? 'on' : ''}">${esc(a)}</button>`).join('');
+  }
+
+  async function runSearch(more) {
+    if (searching) return;
+    const area = $('area').value.trim() || 'San Fernando Valley, CA';
+    const what = V.k === 'custom' ? $('customQ').value.trim() : V.q;
+    if (!what) { $('findNotice').innerHTML = '<div class="notice"><h3>What kind of business?</h3><p class="hint">Type it in the box under "Something else", e.g. upholstery shop.</p></div>'; $('customQ').focus(); return; }
+    if (!more) { lastQ = { query: `${what} in ${area}`, type: V.type || '', v: V.k, area }; results = []; nextToken = ''; sample = false; prefs.area = area; prefs.v = V.k; savePrefs(); }
+    searching = true; $('findNotice').innerHTML = ''; renderResults();
+    try {
+      const r = await store.leads({ action: 'search', query: lastQ.query, type: lastQ.type, pageToken: more ? nextToken : '' });
+      if (r.typeDropped) lastQ.type = '';
+      const have = new Set(results.map(x => x.placeId));
+      (r.places || []).forEach(p => { if (!have.has(p.placeId)) results.push({ ...p, vertical: lastQ.v, area: lastQ.area }); });
+      nextToken = r.nextPageToken || '';
+      queueSites(results.filter(x => x.website && !(byPlace.get(x.placeId)?.site?.kind)).map(x => x.website));
+    } catch (e) {
+      searchError(e);
+    }
+    searching = false; renderResults();
+  }
+
+  function searchError(e) {
+    const steps = `<ol><li>Create a Google Maps Platform key for <b>Places API (New)</b>, with billing on. The first 1,000 searches a month are free (each search or "Load 20 more" is one).</li><li>In Cloudflare: Pages project &gt; Settings &gt; Variables and Secrets, add a secret named <code>GOOGLE_PLACES_API_KEY</code>, then redeploy.</li>${listMissing ? '<li>Run <code>supabase/prospects.sql</code> in Supabase &gt; SQL Editor to turn on the call list.</li>' : ''}</ol><p class="hint">Full steps are in README.md under "Lead Finder".</p>`;
+    const sampleBtn = '<div><button class="btn" type="button" data-sample>Try it with sample businesses</button></div>';
+    let html;
+    if (e.error === 'demo') html = `<h3>Searching Google needs the live site</h3><p class="hint">This page is in demo mode (no database connected), so it can't reach the search server.</p>${sampleBtn}`;
+    else if (e.error === 'not_configured') html = `<h3>Searching Google needs a key</h3>${steps}${sampleBtn}`;
+    else if (e.status === 401) { store.signOut(); return; }
+    else if (e.status === 404 || e.status === 405) html = `<h3>The search server isn't deployed yet</h3><p class="hint">Cloudflare hasn't picked up <code>functions/api/prospects.js</code>. Deploy the latest commit, then try again.</p>${sampleBtn}`;
+    else if (e.error === 'google_error') {
+      const R = {
+        SERVICE_DISABLED: 'Places API (New) is not turned on for this Google Cloud project. Google Cloud &gt; APIs &amp; Services &gt; Library &gt; "Places API (New)" &gt; Enable.',
+        BILLING_DISABLED: 'Billing is off for the Google Cloud project. Turn it on under Billing; searches stay free up to the monthly free allowance.',
+        API_KEY_INVALID: 'Google says the key is wrong. Copy it again into the Cloudflare secret and redeploy.',
+        API_KEY_SERVICE_BLOCKED: 'The key is restricted to other APIs. Edit the key and add "Places API (New)" to its API restrictions.',
+        RATE_LIMIT_EXCEEDED: 'Today\'s search cap is used up. It resets at midnight Pacific.',
+        RESOURCE_EXHAUSTED: 'Today\'s search cap is used up. It resets at midnight Pacific.',
+      };
+      html = `<h3>Google said no</h3><p>${R[e.reason] || esc(e.detail || e.reason || 'Unknown error')}</p>${R[e.reason] ? `<p class="hint">${esc(e.detail || '')}</p>` : ''}`;
+    } else html = `<h3>Couldn't search right now</h3><p class="hint">${esc(e.message || 'Check your connection and try again.')}</p>`;
+    $('findNotice').innerHTML = `<div class="notice">${html}</div>`;
+  }
+
+  function visibleResults() {
+    const hideSkip = $('hideSkip').checked, hideListed = $('hideListed').checked;
+    return results.map(p => ({ p, a: assess({ ...p, ...(byPlace.get(p.placeId) ? { site: byPlace.get(p.placeId).site } : {}) }), saved: byPlace.get(p.placeId) }))
+      .filter(({ a, saved }) => !(hideSkip && (a.sig.some(x => x.k === 'chain' || x.k === 'bad') || (saved && saved.status === 'Not a fit'))) && !(hideListed && saved))
+      .sort((x, y) => y.a.score - x.a.score);
+  }
+
+  function renderResults() {
+    $('resultsWrap').hidden = !results.length && !searching;
+    $('sampleBanner').hidden = !sample;
+    if (searching && !results.length) { $('rTitle').textContent = 'Searching…'; $('rSub').textContent = lastQ ? lastQ.query : ''; $('results').innerHTML = '<div class="empty"><h3>Looking on Google…</h3></div>'; $('more').hidden = true; return; }
+    if (!results.length) return;
+    const rows = visibleResults();
+    const hot = rows.filter(x => x.a.level === 'Hot' && !x.saved).length;
+    const checking = rows.filter(x => x.a.pending).length;
+    $('rTitle').textContent = `${rows.length} ${vOf(lastQ.v).label.toLowerCase()} businesses`;
+    $('rSub').textContent = `${lastQ.area} · best leads first · ${rows.filter(x => x.a.level === 'Hot').length} hot, ${rows.filter(x => x.a.level === 'Warm').length} warm` + (checking ? ` · checking ${checking} website${checking > 1 ? 's' : ''}…` : '') + (results.length > rows.length ? ` · ${results.length - rows.length} hidden` : '');
+    $('saveHot').disabled = !hot; $('saveHot').textContent = hot ? `Save ${hot} hot lead${hot > 1 ? 's' : ''}` : 'No unsaved hot leads';
+    $('results').innerHTML = rows.length ? rows.map(({ p, a, saved }) => {
+      const pipe = inPipeline(p);
+      const sigs = a.sig.filter(x => x.pts || x.k === 'checking' || x.k === 'tool').sort((x, y) => Math.abs(y.pts) - Math.abs(x.pts)).slice(0, 5);
+      return `<div class="res${saved && !isOpen(saved) ? ' dim' : ''}" data-open="${esc(p.placeId)}">
+        <div class="score ${a.level}" title="Fit score"><b>${a.score}</b><span>${a.level}</span></div>
+        <div style="min-width:0"><button class="nm" type="button" data-open="${esc(p.placeId)}">${esc(p.name)}</button>
+          <div class="meta">${esc(p.btype || '')}${p.rating ? ` · ${(+p.rating).toFixed(1)}★ (${p.reviews || 0})` : ' · no reviews'} · ${esc(p.short || p.address || '')}</div>
+          <div class="meta">${p.phone ? `<a href="tel:${esc(digits(p.phone))}">${esc(p.phone)}</a>` : 'No phone'} · ${safeUrl(p.website) ? esc(hostOf(p.website)) : 'No website'}</div>
+          <div class="sigs">${sigs.map(x => `<span class="sig${x.k === 'checking' ? ' wait' : x.pts < 0 || x.k === 'tool' ? ' neg' : ''}">${esc(x.t)}</span>`).join('')}</div></div>
+        <div class="acts">${pipe ? '<span class="chip acc">In Client Pipeline</span>' : ''}${saved ? `<span class="chip ${saved.status === 'To contact' ? 'warn' : 'acc'}">${esc(saved.status)}</span>` : `<button class="btn sm primary" type="button" data-save="${esc(p.placeId)}">Save</button><button class="btn sm" type="button" data-skip="${esc(p.placeId)}">Not a fit</button>`}</div>
+      </div>`;
+    }).join('') : '<div class="empty"><h3>Everything here is hidden</h3>Untick the filters above to see them.</div>';
+    $('more').hidden = !nextToken || sample;
+    $('more').disabled = searching; $('more').textContent = searching ? 'Loading…' : 'Load 20 more';
+  }
+
+  // Made-up businesses, so the tool can be tried before the Google key is set up.
+  function loadSample() {
+    const names = ['Oakwood', 'Laurel Canyon', 'Victory Blvd', 'Sherman Way', 'Riverside', 'Magnolia', 'Lankershim', 'Ventura', 'Roscoe', 'Tujunga', 'Vanowen', 'Reseda Blvd'];
+    const suffix = V.sample || V.label;
+    const suite = V.suiteSample || 'Booksy';
+    const S = (i, site) => { const url = `https://${norm(names[i])}-${V.k}.example`; siteCache.set(url, { url, ...site }); return url; };
+    const base = (i, x) => ({ placeId: `sample-${V.k}-${i}`, name: `${names[i]} ${suffix} (sample)`, btype: V.label, address: `${1000 + i * 137} ${names[i].replace(' Blvd', '')} Blvd, Van Nuys, CA 91401`, short: `${1000 + i * 137} ${names[i].replace(' Blvd', '')} Blvd, Van Nuys`, phone: `(818) 555-01${String(10 + i).padStart(2, '0')}`, mapsUrl: '', hours: 'Monday: 8 AM–6 PM', vertical: V.k, area: 'Van Nuys, CA', businessStatus: 'OPERATIONAL', rating: 4.5, reviews: 60, website: '', ...x });
+    const site = o => ({ kind: 'site', https: true, mobile: true, tel: true, bookingWords: false, tools: [], builder: '', year: YEAR, parked: false, thin: false, emails: [], ms: 900, ...o });
+    results = [
+      base(0, { rating: 4.6, reviews: 18 }),
+      base(1, { rating: 4.3, reviews: 42, website: S(1, { kind: 'profile', profile: 'Facebook page' }) }),
+      base(2, { rating: 4.2, reviews: 31, website: S(2, site({ https: false, mobile: false, tel: false, year: YEAR - 9, emails: ['service@' + norm(names[2]) + '.example'] })) }),
+      base(3, { rating: 4.8, reviews: 412, website: S(3, site({ tools: [{ name: suite, suite: true }], bookingWords: true })) }),
+      base(4, { rating: 4.0, reviews: 9, website: S(4, { kind: 'down', status: 500, error: 'the page answers with error 500' }) }),
+      base(5, { rating: 4.7, reviews: 128, website: S(5, site({ tools: [{ name: 'Square Appointments', suite: false }], bookingWords: true })) }),
+      V.chainSample ? base(6, { name: `${V.chainSample} (sample)`, rating: 4.1, reviews: 220, website: S(6, site({ bookingWords: true })) }) : base(6, { phone: '', rating: 4.4, reviews: 51, website: S(6, site({ mobile: false })) }),
+      base(7, { rating: 4.1, reviews: 65, website: S(7, site({ tel: false })) }),
+      base(8, { rating: null, reviews: 0, hours: '' }),
+      base(9, { rating: 3.8, reviews: 23, website: S(9, site({ parked: true, thin: true, mobile: false })) }),
+      base(10, { rating: 4.9, reviews: 233, website: S(10, { kind: 'blocked', status: 403 }) }),
+      base(11, { rating: 4.4, reviews: 30, website: S(11, site({ bookingWords: true, year: YEAR - 5, ms: 6400 })) }),
+    ];
+    lastQ = { query: `${V.q} in Van Nuys, CA (sample)`, type: '', v: V.k, area: 'Van Nuys, CA' }; nextToken = ''; sample = true;
+    $('findNotice').innerHTML = ''; renderResults();
+  }
+
+  // ======================================================================
+  // CALL LIST
+  // ======================================================================
+  const due = p => isOpen(p) && p.followUp && p.followUp <= today();
+  const LW = [
+    ['', 'Open leads', p => isOpen(p), 'Everyone still in play'],
+    ['due', 'Due today', due, 'Follow-ups to do now'],
+    ['new', 'To call', p => p.status === 'To contact', 'Not contacted yet'],
+    ['working', 'In progress', p => ['No answer', 'Left message', 'Emailed', 'Visited', 'Follow up'].includes(p.status), 'Reached out, no answer yet'],
+    ['hot', 'Interested', p => p.status === 'Interested', 'Book the audit'],
+    ['done', 'Closed', p => !isOpen(p), 'In pipeline, no, or not a fit'],
+  ];
+  function renderBoard() {
+    $('board').innerHTML = LW.map(([k, lab, fn, sub]) => `<button class="w ${k === 'due' ? 'due' : k === 'hot' ? 'hot' : ''}${lfilter === k ? ' on' : ''}" data-w="${k}"><span class="lab">${lab}</span><b>${listLoaded ? plist.filter(fn).length : '–'}</b><span class="sub">${sub}</span></button>`).join('');
+  }
+  function followText(p) {
+    if (!isOpen(p) || !p.followUp) return '';
+    const days = Math.round((new Date(p.followUp + 'T12:00') - new Date(today() + 'T12:00')) / 864e5);
+    return days < 0 ? `<span class="chip bad">Overdue ${-days}d</span>` : days === 0 ? '<span class="chip warn">Due today</span>' : `<span class="chip">Next: ${esc(nice(p.followUp))}</span>`;
+  }
+  function renderList() {
+    renderBoard(); renderListNotice();
+    if (!listLoaded) { $('plist').innerHTML = '<div class="empty"><h3>Loading your call list…</h3></div>'; return; }
+    const w = LW.find(x => x[0] === lfilter) || LW[0], q = norm($('lsearch').value);
+    const rows = plist.filter(w[2]).filter(p => !q || norm([p.name, p.phone, p.area, p.notes, p.email].join(' ')).includes(q))
+      .map(p => ({ p, a: assess(p) }))
+      .sort((x, y) => (due(y.p) - due(x.p)) || ((x.p.followUp || '9') < (y.p.followUp || '9') ? -1 : (x.p.followUp || '9') > (y.p.followUp || '9') ? 1 : 0) || y.a.score - x.a.score);
+    if (!rows.length) { $('plist').innerHTML = plist.length ? '<div class="empty"><h3>Nothing here right now</h3>Pick another box above.</div>' : '<div class="empty"><h3>Your call list is empty</h3>Find businesses, then tap <b>Save</b> on the ones worth a call.</div>'; return; }
+    $('plist').innerHTML = rows.map(({ p, a }) => `<div class="res${isOpen(p) ? '' : ' dim'}" data-open="${esc(p.placeId)}">
+      <div class="score ${a.level}"><b>${a.score}</b><span>${a.level}</span></div>
+      <div style="min-width:0"><button class="nm" type="button" data-open="${esc(p.placeId)}">${esc(p.name)}</button>
+        <div class="meta">${esc(vOf(p.vertical).label)} · ${esc(p.area || p.address || '')}${p.touches ? ` · ${p.touches} touch${p.touches > 1 ? 'es' : ''}, last ${esc(nice(p.lastTouch))}` : ''}</div>
+        <div class="meta">${p.phone ? `<a href="tel:${esc(digits(p.phone))}">${esc(p.phone)}</a>` : 'No phone'}${p.email ? ' · ' + esc(p.email) : ''}</div>
+        ${p.notes ? `<div class="meta" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(p.notes.split('\n')[0])}</div>` : ''}</div>
+      <div class="acts"><span class="chip ${p.status === 'Interested' ? 'good' : p.status === 'In pipeline' ? 'acc' : p.status === 'To contact' ? 'warn' : ''}">${esc(p.status)}</span>${followText(p)}</div>
+    </div>`).join('');
+  }
+  function renderListNotice() {
+    $('listNotice').innerHTML = listMissing ? '<div class="notice" style="margin-bottom:14px"><h3>Turn on the call list</h3><p>Run <code>supabase/prospects.sql</code> in Supabase &gt; SQL Editor (after the other two SQL files), then reload this page. Searching works without it, but nothing can be saved.</p></div>' : '';
+  }
+  function loadList() {
+    store.prospects.list().then(rows => {
+      plist = rows; listLoaded = true; listMissing = false; reindex();
+      queueSites(plist.filter(p => p.website && !(p.site && p.site.kind)).map(p => p.website));
+    }, e => {
+      if (e.status === 401 || e.status === 403) { store.signOut(); return; }
+      listLoaded = true; listMissing = e.status === 404;
+      if (!listMissing) setSave('Could not load your call list. Reload the page.', true);
+    }).then(() => { renderList(); renderResults(); });
+  }
+  function csv() {
+    const cols = [['Business', p => p.name], ['Type', p => vOf(p.vertical).label], ['Fit score', p => assess(p).score], ['Status', p => p.status], ['Phone', p => p.phone], ['Email', p => p.email], ['Website', p => p.website], ['Address', p => p.address], ['Rating', p => p.rating ?? ''], ['Reviews', p => p.reviews ?? ''], ['Next follow-up', p => p.followUp], ['Last touch', p => p.lastTouch], ['Touches', p => p.touches], ['What we found', p => findings(assess(p)).map(x => x.find).join(' | ')], ['Notes', p => p.notes], ['Google Maps', p => p.mapsUrl]];
+    const cell = v => { const s = String(v ?? ''); return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; };
+    const text = [cols.map(c => c[0]).join(','), ...plist.map(p => cols.map(c => cell(c[1](p))).join(','))].join('\r\n');
+    const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob(['﻿' + text], { type: 'text/csv' })); a.download = `call-list-${today()}.csv`;
+    document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+  }
+
+  // ======================================================================
+  // ONE BUSINESS
+  // ======================================================================
+  const TOUCHES = [
+    ['No answer', 'No answer', () => workdays(1), 'no'],
+    ['Left message', 'Left message', () => workdays(2), ''],
+    ['Emailed', 'Emailed', () => workdays(3), ''],
+    ['Visited', 'Visited', () => workdays(2), ''],
+    ['Call back later', 'Follow up', () => workdays(5), ''],
+    ['Interested!', 'Interested', () => workdays(1), 'yes'],
+    ['Not interested', 'Not interested', () => '', 'no'],
+    ['Not a fit', 'Not a fit', () => '', 'no'],
+  ];
+  const STATUSES = ['To contact', 'No answer', 'Left message', 'Emailed', 'Visited', 'Follow up', 'Interested', 'Not interested', 'Not a fit', 'In pipeline'];
+
+  function current() { return byPlace.get(openKey) || results.find(r => r.placeId === openKey) || null; }
+  function openP(key) { openKey = key; $('pLayer').hidden = false; document.body.style.overflow = 'hidden'; renderPanel(); $('pBody').scrollTop = 0; }
+  function closeP() { flushNotes(); $('pLayer').hidden = true; openKey = null; document.body.style.overflow = ''; if (view === 'find') renderResults(); else renderList(); }
+
+  function renderPanel() {
+    const p = current(); if (!p) { closeP(); return; }
+    const saved = byPlace.get(p.placeId), V = vOf(p.vertical), a = assess(p), sc = scripts(p, a);
+    const site = p.website ? (saved && saved.site && saved.site.kind ? saved.site : siteCache.get(p.website)) : null;
+    $('pTitle').textContent = p.name;
+    $('pSub').textContent = [V.label, p.rating ? `${(+p.rating).toFixed(1)}★ (${p.reviews || 0} reviews)` : 'no reviews', p.area].filter(Boolean).join(' · ');
+    const emails = [...new Set([saved && saved.email, ...((site && site.emails) || [])].filter(Boolean))];
+    const mailto = emails[0] ? `mailto:${encodeURIComponent(emails[0])}?subject=${encodeURIComponent(sc.subject)}&body=${encodeURIComponent(sc.email)}` : '';
+    const roiWeek = 2, roi = V.ticket * roiWeek * 0.5 * 4.33;
+    const why = a.sig.filter(x => x.k !== 'checking').sort((x, y) => y.pts - x.pts);
+    $('pBody').innerHTML = `<div class="pad">
+      ${saved ? '' : `<div class="topacts"><button class="btn primary" data-psave>Save to call list</button><button class="btn" data-pskip>Not a fit</button><span class="hint">Save it to log calls and set follow-ups.</span></div>`}
+      ${inPipeline(p) && !(saved && saved.requestId) ? '<div class="notice"><b>Heads up:</b> a business with this name or phone is already in the Client Pipeline.</div>' : ''}
+      <div class="grid2">
+        <div class="card"><h3>Why they're a lead</h3>
+          <div class="bigscore"><div class="score ${a.level}"><b>${a.score}</b><span>${a.level}</span></div><div class="hint">${a.pending ? 'Still checking their website…' : 'Fit score out of 100. Everything below is from Google and their website.'}</div></div>
+          <ul class="why">${why.map(x => `<li><span class="pts${x.pts < 0 ? ' neg' : ''}">${x.pts > 0 ? '+' + x.pts : x.pts || ''}</span><span>${esc(x.t)}</span></li>`).join('') || '<li><span></span><span class="muted">Nothing stands out. Probably a lower priority.</span></li>'}</ul>
+          ${V.ticket ? `<div class="roi">At a typical <b>${money(V.ticket)}</b> ${esc(V.unit)}, catching ${roiWeek} missed calls a week and booking half of them is about <b>${money(roi)} a month</b>, against a one-time build of $400–$1,800.</div>` : ''}
+        </div>
+        <div class="card"><h3>Contact</h3>
+          <dl class="facts">
+            <div><dt>Phone</dt><dd>${p.phone ? `<a href="tel:${esc(digits(p.phone))}">${esc(p.phone)}</a>` : '<span class="muted">None on Google</span>'}</dd></div>
+            <div><dt>Website</dt><dd>${safeUrl(p.website) ? `<a href="${esc(safeUrl(p.website))}" target="_blank" rel="noopener noreferrer">${esc(hostOf(p.website))}</a>${site && site.builder ? ` <span class="muted">(${esc(site.builder)})</span>` : ''}` : '<span class="muted">None</span>'}</dd></div>
+            <div><dt>Address</dt><dd>${esc(p.address || '—')}</dd></div>
+            <div><dt>Google</dt><dd>${safeUrl(p.mapsUrl) ? `<a href="${esc(safeUrl(p.mapsUrl))}" target="_blank" rel="noopener noreferrer">Open in Google Maps</a>` : '<span class="muted">—</span>'}</dd></div>
+            ${p.hours ? `<div><dt>Hours</dt><dd style="white-space:pre-line;font-size:13px">${esc(p.hours)}</dd></div>` : ''}
+          </dl>
+          ${saved ? `<label class="f">Email${emails.length > 1 ? ` <span class="muted" style="font-weight:400">· also found: ${esc(emails.filter(e => e !== saved.email).join(', '))}</span>` : ''}<input data-k="email" value="${esc(saved.email || '')}" placeholder="${emails[0] ? esc(emails[0]) : 'Not found on their site'}" autocomplete="off"></label>` : emails.length ? `<div class="hint">Email on their site: ${esc(emails.join(', '))}</div>` : ''}
+        </div>
+      </div>
+
+      ${saved ? `<div class="card"><h3>Log what happened</h3>
+        <div class="touches">${TOUCHES.map(([lab, , , cls]) => `<button data-touch="${esc(lab)}" class="${cls}">${esc(lab)}</button>`).join('')}</div>
+        <div class="row2">
+          <label class="f">Status<select data-k="status">${STATUSES.map(s => `<option${s === saved.status ? ' selected' : ''}>${esc(s)}</option>`).join('')}</select></label>
+          <label class="f">Next follow-up<input type="date" data-k="followUp" value="${esc(saved.followUp || '')}"></label>
+        </div>
+        <label class="f">Notes<textarea data-k="notes" placeholder="Owner's name, best time to call, what they said…">${esc(saved.notes || '')}</textarea></label>
+        ${(saved.log || []).length ? `<ul class="loglist">${saved.log.slice().reverse().slice(0, 12).map(l => `<li><b>${esc(l.t)}</b> · ${esc(nice(l.d))}</li>`).join('')}</ul>` : '<p class="hint">Tap what happened after each call or visit. It sets the status and the next follow-up for you.</p>'}
+      </div>` : ''}
+
+      <div class="card"><h3>What to say</h3>
+        <div class="scripthead"><b>On the phone</b><button class="btn sm" data-copy="opener">Copy</button></div>
+        <div class="script" id="s-opener">${esc(sc.opener)}</div>
+        <div class="scripthead"><b>Voicemail</b><button class="btn sm" data-copy="voicemail">Copy</button></div>
+        <div class="script" id="s-voicemail">${esc(sc.voicemail)}</div>
+        <b style="font-size:14px">If they say…</b>
+        <div class="obj">${V.objections.map(([q, r]) => `<div><i>${esc(q)}</i>${esc(r)}</div>`).join('')}</div>
+        <p class="hint">Before you pitch, call once around 10:30 or 12:30. If it goes to voicemail, open with that. Call or visit; don't cold-text. If someone asks you to stop, mark them Not interested.</p>
+        ${me() === '[your name]' ? '<p class="hint">Add your first name under <b>Your details</b> and it fills in here.</p>' : ''}
+      </div>
+
+      <div class="card"><h3>Email</h3>
+        <div class="scripthead"><b>Subject: ${esc(sc.subject)}</b><span style="display:flex;gap:6px;flex-wrap:wrap"><button class="btn sm" data-copy="email">Copy email</button>${mailto ? `<a class="btn sm primary" href="${esc(mailto)}" data-mailto>Open in email app</a>` : ''}</span></div>
+        <div class="script" id="s-email">${esc(sc.email)}</div>
+        ${(prefs.addr || '').trim() ? '' : '<p class="hint" style="color:var(--warn)">Add a mailing address under <b>Your details</b> before sending. Sales emails need one by law.</p>'}
+      </div>
+    </div>`;
+
+    const nav = [];
+    if (saved && saved.requestId) nav.push(`<a class="btn" href="/dashboard/#req=${esc(saved.requestId)}">Open in Client Pipeline</a>`);
+    else if (saved) nav.push(`<span class="confirm" id="bookBox"><button class="btn primary" data-book>Book audit → Client Pipeline</button></span>`);
+    else nav.push('<span></span>');
+    if (saved) nav.push('<span class="confirm" id="delBox"><button class="btn" data-del>Remove from list</button></span>');
+    $('pNav').innerHTML = nav.join('');
+  }
+
+  // Notes and email save while typing (debounced) and when the field loses focus.
+  const timers = new Map();
+  function writeSoon(id, k, el) { clearTimeout(timers.get(k)); setSave('Typing…'); timers.set(k, setTimeout(() => { timers.delete(k); delete el.dataset.dirty; writeP(id, { [k]: el.value }); }, 700)); }
+  function flushNotes() {
+    const p = current(), saved = p && byPlace.get(p.placeId); if (!saved) return;
+    for (const [k, t] of timers) { clearTimeout(t); timers.delete(k); }
+    document.querySelectorAll('#pBody [data-k]').forEach(el => { if (el.dataset.dirty) { delete el.dataset.dirty; writeP(saved.id, { [el.dataset.k]: el.value }); } });
+  }
+
+  function logTouch(saved, label) {
+    const t = TOUCHES.find(x => x[0] === label); if (!t) return;
+    const log = [...(saved.log || []), { d: today(), t: label }].slice(-50);
+    writeP(saved.id, { status: t[1], touches: (+saved.touches || 0) + 1, lastTouch: today(), followUp: t[2](), log });
+    setSave(t[2]() ? `Logged. Next follow-up ${nice(t[2]())}.` : 'Logged.');
+  }
+
+  async function bookAudit(saved, auditDate) {
+    const V = vOf(saved.vertical), a = assess(saved);
+    const badSite = !saved.website || a.sig.some(x => ['profile', 'down', 'parked', 'thin', 'nomobile'].includes(x.k));
+    setSave('Adding to Client Pipeline…');
+    try {
+      const row = await store.add({
+        name: '', business: saved.name, contact: [saved.phone, saved.email].filter(Boolean).join(' · '), website: saved.website || '', app: '',
+        btype: V.label, source: 'Cold call', status: auditDate ? 'Audit booked' : 'Contacted', emailed: 'Yes', emailedDate: today(), auditDate: auditDate || '',
+        needs: '', findings: findings(a).map(x => x.find).join('\n'),
+        notes: [saved.notes, `From Lead Finder: fit ${a.score}/100. ${saved.address || ''}${saved.mapsUrl ? '\n' + saved.mapsUrl : ''}`, 'Starting scope is a suggestion for this kind of business; adjust it after the audit.'].filter(Boolean).join('\n\n'),
+        scope: { wf: V.workflows.slice(0, 3), site: badSite ? 'landing' : '', app: false, care: false },
+      });
+      await writeP(saved.id, { status: 'In pipeline', requestId: row.id, followUp: '', log: [...(saved.log || []), { d: today(), t: auditDate ? `Audit booked for ${auditDate}` : 'Moved to Client Pipeline' }].slice(-50) });
+      reqs.push(row); reindexPipe();
+      setSave('Added to Client Pipeline'); renderPanel();
+    } catch (e) { setSave('Could not add it to the Client Pipeline. Try again.', true); }
+  }
+
+  // ---------- events ----------
+  document.querySelector('.views').addEventListener('click', e => {
+    const b = e.target.closest('[data-view]'); if (!b) return;
+    view = b.dataset.view; document.querySelectorAll('.views button').forEach(x => x.classList.toggle('on', x === b));
+    $('findView').hidden = view !== 'find'; $('listView').hidden = view !== 'list';
+    if (view === 'list') renderList(); else renderResults();
+  });
+  $('vchips').addEventListener('click', e => { const b = e.target.closest('[data-v]'); if (!b) return; V = vOf(b.dataset.v); prefs.v = V.k; savePrefs(); renderSearch(); });
+  $('areas').addEventListener('click', e => { const b = e.target.closest('[data-area]'); if (!b) return; $('area').value = b.dataset.area; renderSearch(); runSearch(false); });
+  $('area').addEventListener('input', () => document.querySelectorAll('#areas button').forEach(b => b.classList.toggle('on', b.dataset.area === $('area').value)));
+  $('searchForm').addEventListener('submit', e => { e.preventDefault(); runSearch(false); });
+  $('more').addEventListener('click', () => runSearch(true));
+  $('hideSkip').addEventListener('change', renderResults);
+  $('hideListed').addEventListener('change', renderResults);
+  $('saveHot').addEventListener('click', () => { const hot = visibleResults().filter(x => x.a.level === 'Hot' && !x.saved).map(x => x.p); if (hot.length) saveResults(hot).then(renderResults); });
+  $('findNotice').addEventListener('click', e => { if (e.target.closest('[data-sample]')) loadSample(); });
+  function listClick(e) {
+    if (e.target.closest('a')) return;
+    const s = e.target.closest('[data-save]'); if (s) { const p = results.find(r => r.placeId === s.dataset.save); if (p) saveResults([p]).then(renderResults); return; }
+    const k = e.target.closest('[data-skip]'); if (k) { const p = results.find(r => r.placeId === k.dataset.skip); if (p) saveResults([p], { status: 'Not a fit' }).then(renderResults); return; }
+    const o = e.target.closest('[data-open]'); if (o) openP(o.dataset.open);
+  }
+  $('results').addEventListener('click', listClick);
+  $('plist').addEventListener('click', listClick);
+  $('board').addEventListener('click', e => { const b = e.target.closest('[data-w]'); if (!b) return; lfilter = lfilter === b.dataset.w ? '' : b.dataset.w; renderList(); });
+  $('lsearch').addEventListener('input', renderList);
+  $('csv').addEventListener('click', csv);
+  document.addEventListener('click', e => { const c = e.target.closest('[data-close]'); if (!c) return; if (c.dataset.close === 'p') closeP(); else closeMe(); });
+  document.addEventListener('keydown', e => { if (e.key !== 'Escape') return; if (!$('meLayer').hidden) closeMe(); else if (!$('pLayer').hidden) closeP(); });
+
+  $('pBody').addEventListener('click', e => {
+    const p = current(); if (!p) return; const saved = byPlace.get(p.placeId);
+    if (e.target.closest('[data-psave]')) { saveResults([p]).then(renderPanel); return; }
+    if (e.target.closest('[data-pskip]')) { saveResults([p], { status: 'Not a fit' }).then(() => closeP()); return; }
+    const t = e.target.closest('[data-touch]'); if (t && saved) { flushNotes(); logTouch(saved, t.dataset.touch); renderPanel(); return; }
+    const c = e.target.closest('[data-copy]');
+    if (c) { const text = $('s-' + c.dataset.copy).textContent; const full = c.dataset.copy === 'email' ? 'Subject: ' + scripts(p, assess(p)).subject + '\n\n' + text : text; navigator.clipboard.writeText(full).then(() => { c.textContent = 'Copied'; setTimeout(() => { c.textContent = c.dataset.copy === 'email' ? 'Copy email' : 'Copy'; }, 1500); }, () => setSave('Select the text to copy it.')); return; }
+    if (e.target.closest('[data-mailto]') && saved && saved.status === 'To contact') logTouch(saved, 'Emailed');
+  });
+  $('pBody').addEventListener('change', e => {
+    const p = current(), saved = p && byPlace.get(p.placeId); if (!saved) return; const el = e.target, k = el.dataset.k; if (!k) return;
+    if (k === 'status' || k === 'followUp') { writeP(saved.id, { [k]: el.value }); if (k === 'status') renderPanel(); }
+  });
+  $('pBody').addEventListener('input', e => {
+    const p = current(), saved = p && byPlace.get(p.placeId); if (!saved) return; const el = e.target, k = el.dataset.k;
+    if (k === 'notes' || k === 'email') { el.dataset.dirty = '1'; writeSoon(saved.id, k, el); }
+  });
+  $('pBody').addEventListener('focusout', e => {
+    const p = current(), saved = p && byPlace.get(p.placeId); if (!saved) return; const el = e.target, k = el.dataset.k;
+    if ((k === 'notes' || k === 'email') && el.dataset.dirty) { clearTimeout(timers.get(k)); timers.delete(k); delete el.dataset.dirty; writeP(saved.id, { [k]: el.value }); }
+  });
+  $('pNav').addEventListener('click', e => {
+    const p = current(), saved = p && byPlace.get(p.placeId); if (!saved) return;
+    if (e.target.closest('[data-book]')) { $('bookBox').innerHTML = `<label class="f" style="grid-template-columns:auto auto;align-items:center;gap:8px">Audit date (optional)<input type="date" id="auditDate" class="in" style="width:auto"></label><button class="btn primary" data-bookgo>Add to Client Pipeline</button><button class="btn" data-bookno>Cancel</button>`; return; }
+    if (e.target.closest('[data-bookno]')) { renderPanel(); return; }
+    if (e.target.closest('[data-bookgo]')) { flushNotes(); e.target.closest('[data-bookgo]').disabled = true; bookAudit(saved, $('auditDate').value); return; }
+    if (e.target.closest('[data-del]')) { $('delBox').innerHTML = '<span>Remove this business from your list?</span><button class="btn" data-delno>Keep it</button><button class="btn danger" data-delyes>Remove</button>'; return; }
+    if (e.target.closest('[data-delno]')) { renderPanel(); return; }
+    if (e.target.closest('[data-delyes]')) {
+      const id = saved.id; plist = plist.filter(x => x.id !== id); reindex();
+      if (!results.find(r => r.placeId === saved.placeId)) closeP(); else renderPanel();
+      store.prospects.remove(id).then(() => setSave('Removed from your list')).catch(() => setSave('Could not remove it. Reload and try again.', true));
+    }
+  });
+
+  // your details
+  function openMe() { $('me-name').value = prefs.me || ''; $('me-sign').value = prefs.sign || ''; $('me-sign').placeholder = signoff(); $('me-addr').value = prefs.addr || ''; $('meLayer').hidden = false; document.body.style.overflow = 'hidden'; setTimeout(() => $('me-name').focus(), 30); }
+  function closeMe() { prefs.me = $('me-name').value.trim(); prefs.sign = $('me-sign').value.trim(); prefs.addr = $('me-addr').value.trim(); savePrefs(); $('meLayer').hidden = true; if ($('pLayer').hidden) document.body.style.overflow = ''; else renderPanel(); }
+  $('meBtn').addEventListener('click', openMe);
+
+  // ---------- sign-in (same dashboard code as the Client Pipeline) ----------
+  let started = false;
+  function showApp() {
+    $('loginView').hidden = true; $('app').hidden = false;
+    if (started) return; started = true;
+    $('area').value = prefs.area || 'Van Nuys, CA';
+    renderSearch(); loadList();
+    store.watch(rows => { reqs = rows; reindexPipe(); if (view === 'find') renderResults(); }, () => {});
+  }
+  function showLogin() { if (!$('pLayer').hidden) closeP(); $('app').hidden = true; $('loginView').hidden = false; }
+  $('loginForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const code = $('l-code').value.trim(), msg = $('l-msg'), btn = $('l-send');
+    if (!code) { msg.textContent = 'Enter the dashboard code.'; msg.hidden = false; return; }
+    msg.hidden = true; btn.disabled = true; btn.textContent = 'Checking…';
+    store.signIn(code).then(res => { if (res && res.demo) store.demoConfirm('Demo'); $('l-code').value = ''; })
+      .catch(() => { msg.textContent = "That code didn't work. Check it and try again."; msg.hidden = false; })
+      .then(() => { btn.disabled = false; btn.textContent = 'Open'; });
+  });
+  $('signOut').addEventListener('click', () => store.signOut());
+
+  $('demoBanner').hidden = store.live;
+  store.onAuth(who => { if (who) showApp(); else { started && location.reload(); showLogin(); } });
+})();
+</script>
+</body>
+</html>
