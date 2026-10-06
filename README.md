@@ -32,6 +32,8 @@ npm run preview  # preview the production build
   Finder" below.
 - `public/data/places/` and `scripts/build-places.py`: the Lead Finder's business
   list and the script that builds it from Overture Maps data.
+- `public/dashboard/audit.js`: makes the Lead Finder's downloadable audit PDFs, in
+  the browser.
 
 ## SEO notes
 
@@ -127,7 +129,9 @@ distance (1, 3, 5 or 10 miles), and it:
 5. **Save** puts it on the **Call list**. Tap what happened after each call
    (no answer, left message, interested…) and it sets the status and the next
    follow-up date. Download it as CSV anytime.
-6. **Book audit → Client Pipeline** creates the request (source *Cold call*) with
+6. **Download audit (PDF)** on a saved business makes a short audit for the
+   owner, to attach to the email or print for a visit (below).
+7. **Book audit → Client Pipeline** creates the request (source *Cold call*) with
    what we found already in the proposal's "What we found" and a suggested
    starting scope.
 
@@ -138,6 +142,36 @@ on Google Maps** (an ordinary link, no key) and boxes for the Google rating,
 reviews, website and phone. Type what you see there and the score and scripts
 update. A typed-in website gets checked like any other. Shops that aren't listed
 go in with **+ Add a business**.
+
+### The downloadable audit
+
+Saved businesses get **Download audit (PDF)**: one or two pages, branded, written
+for the owner. It has:
+
+- How many checks passed, and the three biggest openings.
+- Every check with a pass, fail or warning and a plain-English reason: website (or a
+  Facebook or booking page instead of one), works on phones, online booking,
+  tap-to-call, "Not secure", the copyright year, speed, and Google reviews.
+- Three things we'd set up for that kind of business, with a website first when
+  the site is the problem.
+- What one missed call is worth (the same estimate as the Lead Finder's).
+- The next step (a free in-person audit) and your sign-off from **Your details**.
+
+The website is checked again right before the PDF is made, so it never repeats
+something they've since fixed. Rows only state what we saw. Reviews appear once
+you've typed them in from Google, and a missing phone is left out rather than
+called missing. The card warns when there's no website on file, since the audit
+would then say we couldn't find one.
+
+On the **Call list**, **Download audits (PDF)** puts an audit for each business
+shown (the picked box and search, up to 50) into one PDF with a bookmark for each,
+for printing before a day of visits. Websites not checked in the last week are
+checked first.
+
+`public/dashboard/audit.js` writes the PDF itself, with no library and no server.
+It uses Helvetica, which every PDF viewer has built in, so a page is a few KB.
+Letters outside Western European ones are simplified or left out of names. The
+document title keeps the full name.
 
 ### The business list
 
