@@ -1,7 +1,8 @@
 // POST /api/prospects: the website checker behind the Lead Finder (public/dashboard/leads.html).
 //
-// Finding businesses happens in the browser (OpenStreetMap, no key). This function only does
-// what a browser can't: open another business's website. It needs no settings or secrets.
+// Finding businesses happens in the browser (the business list built into the site, no key).
+// This function only does what a browser can't: open another business's website, for the
+// scores and again right before a downloadable audit. It needs no settings or secrets.
 //
 //   { action: 'sites', code, urls: [up to 3] }
 //       Opens each business website once and reports what a prospect call needs: no online

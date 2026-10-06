@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: same system as the Client Pipeline. Two views: Find (search Google, scored results) and Call list (saved prospects + outreach log). Each business opens one screen with why it's a lead, what to say, and a call log. */
+/* Layout: same system as the Client Pipeline. Two views: Find (search the built-in business list, scored results) and Call list (saved prospects + outreach log). Each business opens one screen with why it's a lead, what to say, a call log and a downloadable audit. */
 :root {
   --bg: #f3f4f8; --surface: #ffffff; --sunk: #eceef4; --line: #d6d9e4;
   --fg: #151a2e; --muted: #5d6479; --accent: #3a3fc4; --accent-ink: #ffffff; --accent-soft: #e4e5fb;
@@ -262,7 +262,7 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
     <div class="board" id="board" aria-label="Call list status"></div>
     <div class="ltools">
       <input class="in" id="lsearch" type="search" placeholder="Search your list" aria-label="Search your list">
-      <button class="btn sm" id="csv" type="button">Download CSV</button>
+      <span class="hbtns"><button class="btn sm" id="auditsBtn" type="button" title="One PDF with an audit for each business shown below, to print for a day of visits">Download audits (PDF)</button><button class="btn sm" id="csv" type="button">Download CSV</button></span>
     </div>
     <div class="list" id="plist"></div>
   </section>
@@ -313,6 +313,7 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
 
 <script src="/fc-config.js"></script>
 <script src="/fc-store.js"></script>
+<script src="/dashboard/audit.js"></script>
 <script>
 (() => {
   const $ = id => document.getElementById(id);
@@ -646,7 +647,7 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
       const batch = siteQueue.splice(0, 3); siteBusy++;
       batch.forEach(u => siteCache.set(u, null));
       store.leads({ action: 'sites', urls: batch })
-        .then(r => (r.results || []).forEach(x => siteCache.set(x.url, x)))
+        .then(r => (r.results || []).forEach(x => siteCache.set(x.url, { ...x, at: today() })))
         .catch(e => { if (e.status === 401) store.signOut(); })
         .then(() => {
           batch.forEach(u => { if (!siteCache.get(u)) siteCache.set(u, { url: u, kind: 'error', error: 'check failed' }); });
@@ -867,13 +868,17 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
     const days = Math.round((new Date(p.followUp + 'T12:00') - new Date(today() + 'T12:00')) / 864e5);
     return days < 0 ? `<span class="chip bad">Overdue ${-days}d</span>` : days === 0 ? '<span class="chip warn">Due today</span>' : `<span class="chip">Next: ${esc(nice(p.followUp))}</span>`;
   }
+  // The call list as shown: the picked box, the search, due first, then by follow-up date and score.
+  function listRows() {
+    const w = LW.find(x => x[0] === lfilter) || LW[0], q = norm($('lsearch').value);
+    return plist.filter(w[2]).filter(p => !q || norm([p.name, p.phone, p.area, p.notes, p.email].join(' ')).includes(q))
+      .map(p => ({ p, a: assess(p) }))
+      .sort((x, y) => (due(y.p) - due(x.p)) || ((x.p.followUp || '9') < (y.p.followUp || '9') ? -1 : (x.p.followUp || '9') > (y.p.followUp || '9') ? 1 : 0) || y.a.score - x.a.score);
+  }
   function renderList() {
     renderBoard(); renderListNotice();
     if (!listLoaded) { $('plist').innerHTML = '<div class="empty"><h3>Loading your call list…</h3></div>'; return; }
-    const w = LW.find(x => x[0] === lfilter) || LW[0], q = norm($('lsearch').value);
-    const rows = plist.filter(w[2]).filter(p => !q || norm([p.name, p.phone, p.area, p.notes, p.email].join(' ')).includes(q))
-      .map(p => ({ p, a: assess(p) }))
-      .sort((x, y) => (due(y.p) - due(x.p)) || ((x.p.followUp || '9') < (y.p.followUp || '9') ? -1 : (x.p.followUp || '9') > (y.p.followUp || '9') ? 1 : 0) || y.a.score - x.a.score);
+    const rows = listRows();
     if (!rows.length) { $('plist').innerHTML = plist.length ? '<div class="empty"><h3>Nothing here right now</h3>Pick another box above.</div>' : '<div class="empty"><h3>Your call list is empty</h3>Find businesses, then tap <b>Save</b> on the ones worth a call.</div>'; return; }
     $('plist').innerHTML = rows.map(({ p, a }) => `<div class="res${isOpen(p) ? '' : ' dim'}" data-open="${esc(p.placeId)}">
       <div class="score ${a.level}"><b>${a.score}</b><span>${a.level}</span></div>
@@ -901,8 +906,7 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
     const cols = [['Business', p => p.name], ['Type', p => vOf(p.vertical).label], ['Fit score', p => assess(p).score], ['Status', p => p.status], ['Phone', p => p.phone], ['Email', p => p.email], ['Website', p => p.website], ['Address', p => p.address], ['Rating', p => p.rating ?? ''], ['Reviews', p => p.reviews ?? ''], ['Next follow-up', p => p.followUp], ['Last touch', p => p.lastTouch], ['Touches', p => p.touches], ['What we found', p => findings(assess(p)).map(x => x.find).join(' | ')], ['Notes', p => p.notes], ['Google Maps', p => p.mapsUrl]];
     const cell = v => { const s = String(v ?? ''); return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; };
     const text = [cols.map(c => c[0]).join(','), ...plist.map(p => cols.map(c => cell(c[1](p))).join(','))].join('\r\n');
-    const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob(['\ufeff' + text], { type: 'text/csv' })); a.download = `call-list-${today()}.csv`;
-    document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+    saveFile(new Blob(['\ufeff' + text], { type: 'text/csv' }), `call-list-${today()}.csv`);
   }
 
   // ======================================================================
@@ -973,6 +977,12 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
         ${(saved.log || []).length ? `<ul class="loglist">${saved.log.slice().reverse().slice(0, 12).map(l => `<li><b>${esc(l.t)}</b> · ${esc(nice(l.d))}</li>`).join('')}</ul>` : '<p class="hint">Tap what happened after each call or visit. It sets the status and the next follow-up for you.</p>'}
       </div>` : ''}
 
+      ${saved ? `<div class="card"><h3>Audit to send or print</h3>
+        <p class="hint">A short PDF for the owner: what we checked, what we found and what we'd set up, with your details. Attach it to the email below or bring a printed copy. Their website is checked again first, so it's current.</p>
+        ${auditGaps(p)}
+        <div class="topacts"><button class="btn primary" data-audit>Download audit (PDF)</button></div>
+      </div>` : ''}
+
       <div class="card"><h3>What to say</h3>
         <div class="scripthead"><b>On the phone</b><button class="btn sm" data-copy="opener">Copy</button></div>
         <div class="script" id="s-opener">${esc(sc.opener)}</div>
@@ -1031,6 +1041,87 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
       reqs.push(row); reindexPipe();
       setSave('Added to Client Pipeline'); renderPanel();
     } catch (e) { setSave('Could not add it to the Client Pipeline. Try again.', true); }
+  }
+
+  // ======================================================================
+  // DOWNLOADABLE AUDIT: dashboard/audit.js turns a saved business into a PDF for its owner.
+  // ======================================================================
+  const longDate = d => new Date((d || today()) + 'T12:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+  function auditGaps(p) {
+    const gaps = [];
+    if (!p.website) gaps.push("No website on file. If Google Maps shows one, add it above first, or the audit will say we couldn't find one.");
+    if (p.reviews === null || p.reviews === undefined || p.reviews === '') gaps.push('Add their Google rating and reviews above to include them.');
+    return gaps.length ? `<p class="hint" style="color:var(--warn)">${esc(gaps.join(' '))}</p>` : '';
+  }
+  function auditOf(p) {
+    // the newest website check: this session's, else the one stored with the business
+    const cached = p.website ? siteCache.get(p.website) : null;
+    const site = !p.website ? null : cached && cached.kind && cached.kind !== 'error' ? cached : p.site && p.site.kind ? p.site : null;
+    return {
+      name: p.name, btype: p.btype, address: p.address, phone: p.phone, website: p.website, rating: p.rating, reviews: p.reviews,
+      site, vertical: vOf(p.vertical), year: YEAR, date: longDate(), checkedOn: longDate(site && site.at),
+      // the email sign-off from "Your details", minus the placeholder while no name is set
+      from: signoff().split('\n').map(l => l.trim()).filter(l => l && l !== '[your name]'),
+    };
+  }
+  // Check websites again right before an audit (3 per call, 2 calls at a time), so it never repeats
+  // something they've since fixed. Results are stored on the business like any other check.
+  async function recheck(list) {
+    const urls = [...new Set(list.map(p => p.website).filter(Boolean))];
+    const run = async () => {
+      while (urls.length) {
+        const batch = urls.splice(0, 3);
+        const r = await store.leads({ action: 'sites', urls: batch }).catch(e => { if (e.status === 401) store.signOut(); return {}; });
+        (r.results || []).filter(x => x.kind !== 'error').forEach(x => siteCache.set(x.url, { ...x, at: today() }));
+      }
+    };
+    await Promise.all([run(), run()]);
+    list.forEach(p => {
+      const site = siteCache.get(p.website);
+      if (!site || site.at !== today() || !plist.includes(p)) return;
+      const a = assess({ ...p, site });
+      writeP(p.id, { site, score: a.score, signals: slim(a), ...(!p.email && site.emails && site.emails[0] ? { email: site.emails[0] } : {}) });
+    });
+  }
+  function saveFile(blob, name) {
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name;
+    document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 10000);
+  }
+  const pdfBlob = list => new Blob([window.FCAudit.pdf(list.map(auditOf))], { type: 'application/pdf' });
+
+  async function downloadAudit(saved, btn) {
+    if (!window.FCAudit) { setSave('Reload the page to make audits.', true); return; }
+    btn.disabled = true; btn.textContent = saved.website ? 'Checking their website…' : 'Making the PDF…';
+    flushNotes();
+    try {
+      if (saved.website) await recheck([saved]);
+      const p = plist.find(x => x.id === saved.id) || saved;
+      saveFile(pdfBlob([p]), window.FCAudit.fileName(p.name));
+      const log = p.log || [], last = log[log.length - 1];
+      if (!last || last.t !== 'Audit downloaded' || last.d !== today()) writeP(p.id, { log: [...log, { d: today(), t: 'Audit downloaded' }].slice(-50) });
+      setSave('Audit downloaded');
+    } catch (e) { setSave('Could not make the audit. Try again.', true); }
+    if (openKey === saved.placeId && !editing()) renderPanel();
+    else { btn.disabled = false; btn.textContent = 'Download audit (PDF)'; }
+  }
+
+  // One PDF with an audit for each business on the call list as shown (box + search), for a day of
+  // visits. Websites not checked in the last week are checked first.
+  const AUDIT_MAX = 50;
+  async function auditsPdf() {
+    const btn = $('auditsBtn'), all = listRows().map(x => x.p), rows = all.slice(0, AUDIT_MAX);
+    if (!window.FCAudit) { setSave('Reload the page to make audits.', true); return; }
+    if (!rows.length) { setSave('Nothing on this list to make audits for.', true); return; }
+    btn.disabled = true;
+    try {
+      const stale = rows.filter(p => p.website && !(p.site && p.site.at && (new Date(today()) - new Date(p.site.at)) / 864e5 < 7));
+      if (stale.length) { btn.textContent = `Checking ${stale.length} website${stale.length > 1 ? 's' : ''}…`; await recheck(stale); }
+      btn.textContent = 'Making the PDF…';
+      await new Promise(r => setTimeout(r, 0));
+      saveFile(pdfBlob(rows.map(p => plist.find(x => x.id === p.id) || p)), `audits-${today()}.pdf`);
+      setSave(`${rows.length} audit${rows.length > 1 ? 's' : ''} in one PDF${all.length > AUDIT_MAX ? ` (the first ${AUDIT_MAX} on this list)` : ''}`);
+    } catch (e) { setSave('Could not make the audits. Try again.', true); }
+    btn.disabled = false; btn.textContent = 'Download audits (PDF)';
   }
 
   // A fact typed in from Google Maps (rating, reviews, website, phone), for a saved business or a search result.
@@ -1107,6 +1198,7 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
   $('board').addEventListener('click', e => { const b = e.target.closest('[data-w]'); if (!b) return; lfilter = lfilter === b.dataset.w ? '' : b.dataset.w; renderList(); });
   $('lsearch').addEventListener('input', renderList);
   $('csv').addEventListener('click', csv);
+  $('auditsBtn').addEventListener('click', auditsPdf);
   document.addEventListener('click', e => { const c = e.target.closest('[data-close]'); if (!c) return; if (c.dataset.close === 'p') closeP(); else if (c.dataset.close === 'add') closeAdd(); else closeMe(); });
   document.addEventListener('keydown', e => { if (e.key !== 'Escape') return; if (!$('addLayer').hidden) closeAdd(); else if (!$('meLayer').hidden) closeMe(); else if (!$('pLayer').hidden) closeP(); });
 
@@ -1115,6 +1207,7 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
     if (e.target.closest('[data-psave]')) { saveResults([p]).then(renderPanel); return; }
     if (e.target.closest('[data-pskip]')) { saveResults([p], { status: 'Not a fit' }).then(() => closeP()); return; }
     const t = e.target.closest('[data-touch]'); if (t && saved) { flushNotes(); logTouch(saved, t.dataset.touch); renderPanel(); return; }
+    const au = e.target.closest('[data-audit]'); if (au && saved) { downloadAudit(saved, au); return; }
     const c = e.target.closest('[data-copy]');
     if (c) { const text = $('s-' + c.dataset.copy).textContent; const full = c.dataset.copy === 'email' ? 'Subject: ' + scripts(p, assess(p)).subject + '\n\n' + text : text; navigator.clipboard.writeText(full).then(() => { c.textContent = 'Copied'; setTimeout(() => { c.textContent = c.dataset.copy === 'email' ? 'Copy email' : 'Copy'; }, 1500); }, () => setSave('Select the text to copy it.')); return; }
     if (e.target.closest('[data-mailto]') && saved && saved.status === 'To contact') logTouch(saved, 'Emailed');
