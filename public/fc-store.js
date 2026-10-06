@@ -133,7 +133,7 @@
     },
     remove: function (id) { psave(prows().filter(function (q) { return q.id !== id; })); return Promise.resolve(); }
   };
-  // Searching Google needs the live site (the key lives in Cloudflare), so demo mode says so.
+  // Website checks need the live site (the checker asks Supabase for the dashboard code), so demo mode says so.
   demo.leads = function () { var e = new Error('demo mode'); e.error = 'demo'; return Promise.reject(e); };
 
   // ------------------------------------------------------------------ live mode (Supabase)
@@ -199,7 +199,7 @@
       update: function (id, patch) { return rpc('prospects_update', { code: getCode(), row_id: id, patch: pToDb(patch) }); },
       remove: function (id) { return rpc('prospects_delete', { code: getCode(), row_id: id }); }
     },
-    // Google search and website checks run in functions/api/prospects.js, which holds the key.
+    // Website checks run in functions/api/prospects.js: a browser can't read other websites itself.
     leads: function (body) {
       return fetch('/api/prospects', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(Object.assign({}, body, { code: getCode() })) })
         .then(function (r) {

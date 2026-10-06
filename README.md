@@ -28,8 +28,8 @@ npm run preview  # preview the production build
 - `public/`: favicons, Cloudflare `_headers` and `_redirects`, `robots.txt`
 - `functions/_middleware.js`: 301s any `*.pages.dev` hostname to the custom
   domain
-- `functions/api/prospects.js`: the Lead Finder's server side (Google search and
-  website checks). See "Lead Finder" below.
+- `functions/api/prospects.js`: the Lead Finder's website checker. See "Lead
+  Finder" below.
 
 ## SEO notes
 
@@ -46,7 +46,7 @@ These are load-bearing. Read the comments before changing any of them.
 - `public/_redirects` holds the 301 from the retired `/portfolio`. Never add a
   `/*  /index.html  200` catch-all; that produces soft 404s.
 - `public/_headers` sets the CSP. `connect-src` lists the only hosts the pages may
-  call (the Supabase project). Extensionless clean URLs do not
+  call (the Supabase project, and OpenStreetMap for the Lead Finder). Extensionless clean URLs do not
   match the `/*.html` cache rule, so any new route needs its own entry.
 - `Layout.astro` emits `Organization` and `WebSite` JSON-LD. Keep the name,
   phone and email byte-identical to the Google Business Profile listing. Add a
@@ -106,20 +106,22 @@ sitemap.
 ## Lead Finder: find businesses to call
 
 **`/dashboard/leads.html`** (button **Find leads** on the Client Pipeline) opens
-with the same dashboard code. Pick a kind of business and a neighborhood, and it:
+with the same dashboard code. Pick a kind of business, a neighborhood and a
+distance (1, 3, 5 or 10 miles), and it:
 
-1. Searches Google Maps for up to 60 businesses (20 at a time).
-2. Opens each business's website once and checks what a cold call needs: no
-   website, a Facebook or booking-app page instead of a site, a broken or parked
-   site, no online booking, not built for phones, "Not secure", an old copyright
-   year, which booking or shop software they already use, and any email address.
-3. Scores each one 0–100 (**Hot** 70+, **Warm** 50+) and sorts the best first.
-   Chains, dealerships and vet clinics are hidden by default.
+1. Searches **OpenStreetMap** for matching businesses, straight from the page.
+   It's free, needs no key or account, and the Valley neighborhoods are built in.
+   Any other place typed in is looked up once (OpenStreetMap's Nominatim) and
+   remembered on that device.
+2. Opens each business's website once and checks what a cold call needs: a
+   Facebook or booking-app page instead of a site, a broken or parked site, no
+   online booking, not built for phones, "Not secure", an old copyright year,
+   which booking or shop software they already use, and any email address.
+3. Scores each one 0–100 (**Hot** 60+, **Warm** 45+) and sorts the best first.
+   Chains (businesses OpenStreetMap tags with a brand), dealerships and vet clinics
+   are hidden by default.
 4. For each business, gives a phone opener, voicemail and email built from what
    it found, plus answers to the usual objections.
-   Google's own links (`googleMapsLinks`) sit next to it: **Read reviews**,
-   **Directions**, and their **review link**, the one their customers would tap in a
-   review request. That link also goes into the Client Pipeline notes when you book them.
 5. **Save** puts it on the **Call list**. Tap what happened after each call
    (no answer, left message, interested…) and it sets the status and the next
    follow-up date. Download it as CSV anytime.
@@ -127,37 +129,37 @@ with the same dashboard code. Pick a kind of business and a neighborhood, and it
    what we found already in the proposal's "What we found" and a suggested
    starting scope.
 
-### Setup (three steps)
+**What OpenStreetMap doesn't have.** It has no ratings or review counts, and it
+misses some shops and some websites and phone numbers. That's why the page says
+"No website found" (never "no website") and never guesses at reviews. Each business has
+**Look up on Google Maps** (an ordinary link, no key) and boxes for the Google
+rating, reviews, website and phone. Type what you see there and the score and
+scripts update. A typed-in website gets checked like any other. Shops that aren't
+on the map at all go in with **+ Add a business**.
 
-1. **Supabase:** run `supabase/prospects.sql` in SQL Editor, after `schema.sql`
-   and `dashboard_code.sql`. Safe to re-run. Like `requests`, the table can only be
-   reached through `prospects_*` functions that require the dashboard code.
-2. **Google key** (console.cloud.google.com):
-   - New project → **Billing**: link a billing account. Google requires one even
-     for the free allowance.
-   - **APIs & Services → Library**: enable **Places API (New)**. Not the legacy
-     "Places API".
-   - **Google Maps Platform → Credentials → Create credentials → API key.** Edit
-     the key: Application restrictions *None* (Cloudflare has no fixed IP to
-     allow), API restrictions → *Restrict key* → **Places API (New)** only.
-   - **Google Maps Platform → Quotas → Places API (New)**: set the per-day limit
-     for Text Search to about **30**. That keeps a month under the free allowance
-     even on a busy day.
-3. **Cloudflare:** Workers & Pages → this project → **Settings → Variables and
-   Secrets → Add**, type *Secret*, name `GOOGLE_PLACES_API_KEY`, paste the key,
-   save, then **redeploy** (the secret only reaches new deployments).
+### Setup
 
-Until the key is set, the page explains what's missing and offers **sample
-businesses** (made up, clearly marked, can't be saved) so you can try the screens.
+Run `supabase/prospects.sql` in Supabase > SQL Editor, after `schema.sql` and
+`dashboard_code.sql`. It's safe to re-run. Like `requests`, the table can only be reached
+through `prospects_*` functions that require the dashboard code. There's nothing
+else to set up: no keys, accounts or Cloudflare settings.
+
+The website check is `functions/api/prospects.js`, a Cloudflare Pages Function
+like `functions/_middleware.js`, deployed with the site. It exists only because
+browsers won't let a page read another website. It needs no settings, and it only
+answers when the dashboard code checks out, so it can't be used as a free web
+fetcher. If it isn't deployed, searching still works and each site shows
+"Couldn't check the website".
+
+`public/_headers` allows the page to call OpenStreetMap (two Overpass servers,
+the second as a fallback when the first is busy, and Nominatim).
 
 ### What it costs
 
-- **Google:** each search, and each "Load 20 more", is one *Text Search
-  Enterprise* request. Asking for the website, phone, rating and hours is what
-  makes it Enterprise. The first **1,000 a month are free**, and after that Google's
-  list price is about $35 per 1,000 (check Google's pricing page; it changes).
-- **Website checks:** free. They run in our own Cloudflare function, 3 per call,
-  sized for the free plan's 50-subrequest and 10 ms CPU limits.
+Nothing. OpenStreetMap is free; please keep searches to what you need, as its
+servers are run by volunteers. The website checks run on Cloudflare's free plan,
+3 sites per call, sized for its 50-subrequest and 10 ms CPU limits. Listings are
+© OpenStreetMap contributors, credited under the results.
 
 ### Why these business types
 
@@ -180,8 +182,9 @@ The order on the page is the recommendation, from research in October 2026:
   and the medical ones add HIPAA.
 
 To change the list, the scripts or the typical ticket used in the ROI line, edit
-`VERTICALS` at the top of the script in `public/dashboard/leads.html`.
-`workflows` must use the Client Pipeline's workflow names.
+`VERTICALS` at the top of the script in `public/dashboard/leads.html`. `osm` is
+each type's OpenStreetMap search (map tags such as `shop=car_repair`, in Overpass
+syntax), and `workflows` must use the Client Pipeline's workflow names.
 
 ### Outreach rules (practical, not legal advice)
 

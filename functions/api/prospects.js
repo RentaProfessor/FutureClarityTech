@@ -1,35 +1,19 @@
-// POST /api/prospects: the server side of the Lead Finder (public/dashboard/leads.html).
+// POST /api/prospects: the website checker behind the Lead Finder (public/dashboard/leads.html).
 //
-// Every call must carry the dashboard code. It is checked by Supabase, exactly like the
-// dashboard does it, so nobody else can spend the Google quota through this endpoint.
+// Finding businesses happens in the browser (OpenStreetMap, no key). This function only does
+// what a browser can't: open another business's website. It needs no settings or secrets.
 //
-//   { action: 'search', code, query, type?, pageToken? }
-//       Google Places Text Search (New). Returns up to 20 businesses and a nextPageToken
-//       (Google stops after 60 per search).
 //   { action: 'sites', code, urls: [up to 3] }
 //       Opens each business website once and reports what a prospect call needs: no online
 //       booking, no mobile layout, a stale copyright, a broken page, which booking tool
 //       they already use, and any email address on the page.
 //
-// The Google key lives in Cloudflare: Pages project > Settings > Variables and Secrets,
-// a secret named GOOGLE_PLACES_API_KEY. It is never sent to the browser and is not in
-// this repo. Setup steps are in README.md.
+// Every call must carry the dashboard code. It is checked by Supabase, exactly like the
+// dashboard does it, so nobody else can use this as a free web fetcher.
 
 // Same public values as public/fc-config.js (safe to publish; access is enforced in the database).
 const SUPABASE_URL = 'https://bzudkcybqhmqrybskwfn.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_te0V9b4k8S0M1iBO0q89Rg_ziCLo9CQ';
-
-const PLACES_URL = 'https://places.googleapis.com/v1/places:searchText';
-// Everything a lead needs in one call. rating, userRatingCount, websiteUri, the phone and
-// the opening hours bill this as a Text Search Enterprise request (see README for the cost).
-// googleMapsLinks (reviews, write-a-review and directions links) is a Pro field, so it adds
-// nothing on top: a request is billed once, at its highest tier.
-const FIELDS = [
-  'places.id', 'places.displayName', 'places.formattedAddress', 'places.shortFormattedAddress',
-  'places.types', 'places.primaryType', 'places.primaryTypeDisplayName', 'places.businessStatus',
-  'places.googleMapsUri', 'places.googleMapsLinks', 'places.websiteUri', 'places.nationalPhoneNumber',
-  'places.rating', 'places.userRatingCount', 'places.regularOpeningHours.weekdayDescriptions', 'nextPageToken',
-].join(',');
 
 const SITES_PER_CALL = 3; // keeps each call inside the free plan's subrequest and CPU limits
 const SITE_TIMEOUT_MS = 7000;
@@ -57,7 +41,6 @@ export async function onRequest({ request, env }) {
   if (ok === null) return reply({ error: 'auth_unavailable' }, 502);
   if (!ok) return reply({ error: 'wrong_code' }, 401);
 
-  if (body.action === 'search') return search(env, body);
   if (body.action === 'sites') return sites(body);
   return reply({ error: 'bad_request' }, 400);
 }
@@ -98,76 +81,6 @@ async function codeOk(env, code) {
 async function sha256(s) {
   const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s));
   return Array.from(new Uint8Array(buf), (b) => b.toString(16).padStart(2, '0')).join('');
-}
-
-// ---------------------------------------------------------------- search
-
-async function search(env, body) {
-  const key = env.GOOGLE_PLACES_API_KEY;
-  if (!key) return reply({ error: 'not_configured' }, 503);
-
-  const query = String(body.query || '').trim().slice(0, 200);
-  if (!query) return reply({ error: 'bad_request' }, 400);
-
-  // Google requires the exact same request body on every page of one search, plus the token.
-  const req = { textQuery: query, pageSize: 20, regionCode: 'us', languageCode: 'en' };
-  if (typeof body.type === 'string' && /^[a-z_]{2,60}$/.test(body.type)) req.includedType = body.type;
-  if (typeof body.pageToken === 'string' && body.pageToken && body.pageToken.length < 2000) req.pageToken = body.pageToken;
-
-  let { res, data } = await places(key, req);
-  // A place type Google doesn't recognise fails the whole search. Retry once on the words alone
-  // and tell the page, so it asks for the next pages the same way.
-  let typeDropped = false;
-  if (res && res.status === 400 && req.includedType && !req.pageToken) {
-    delete req.includedType;
-    typeDropped = true;
-    ({ res, data } = await places(key, req));
-  }
-  if (!res) return reply({ error: 'google_unreachable' }, 502);
-  if (!res.ok) {
-    // Pass Google's reason through: it is what tells you the API isn't enabled, billing is
-    // off, or the key is restricted to the wrong API. It never contains the key.
-    const g = (data && data.error) || {};
-    const detail = (Array.isArray(g.details) ? g.details : []).find((d) => d && d.reason);
-    return reply({ error: 'google_error', status: res.status, reason: (detail && detail.reason) || g.status || '', message: String(g.message || '').slice(0, 400) }, 502);
-  }
-
-  const found = (data.places || [])
-    .filter((p) => p && p.id && p.businessStatus !== 'CLOSED_PERMANENTLY')
-    .map((p) => ({
-      placeId: p.id,
-      name: (p.displayName && p.displayName.text) || '',
-      address: p.formattedAddress || '',
-      short: p.shortFormattedAddress || '',
-      btype: (p.primaryTypeDisplayName && p.primaryTypeDisplayName.text) || '',
-      types: p.types || [],
-      businessStatus: p.businessStatus || '',
-      mapsUrl: p.googleMapsUri || '',
-      links: {
-        reviews: (p.googleMapsLinks && p.googleMapsLinks.reviewsUri) || '',
-        writeReview: (p.googleMapsLinks && p.googleMapsLinks.writeAReviewUri) || '',
-        directions: (p.googleMapsLinks && p.googleMapsLinks.directionsUri) || '',
-      },
-      website: p.websiteUri || '',
-      phone: p.nationalPhoneNumber || '',
-      rating: typeof p.rating === 'number' ? p.rating : null,
-      reviews: typeof p.userRatingCount === 'number' ? p.userRatingCount : 0,
-      hours: ((p.regularOpeningHours && p.regularOpeningHours.weekdayDescriptions) || []).join('\n'),
-    }));
-  return reply({ places: found, nextPageToken: data.nextPageToken || '', typeDropped });
-}
-
-async function places(key, req) {
-  try {
-    const res = await fetch(PLACES_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'X-Goog-Api-Key': key, 'X-Goog-FieldMask': FIELDS },
-      body: JSON.stringify(req),
-    });
-    return { res, data: await res.json().catch(() => ({})) };
-  } catch {
-    return { res: null, data: null };
-  }
 }
 
 // ---------------------------------------------------------------- website check

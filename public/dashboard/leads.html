@@ -115,9 +115,12 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
 .notice h3 { font-size: 16px; }
 .notice ol { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
 .notice code { font-family: var(--mono); font-size: 12.5px; background: var(--sunk); padding: 1px 5px; border-radius: 4px; overflow-wrap: anywhere; }
-.more { display: flex; justify-content: center; margin-top: 12px; }
 #findNotice .notice { margin-top: 14px; }
-.sample-banner { background: var(--accent-soft); color: var(--accent); font-size: 13px; font-weight: 600; padding: 8px 12px; border-radius: 10px; }
+.radius { display: flex; flex-wrap: wrap; gap: 5px; align-items: center; font-size: 12.5px; color: var(--muted); }
+.radius button { border: 1px solid var(--line); background: var(--bg); border-radius: 999px; padding: 4px 11px; font-size: 12.5px; font-weight: 600; cursor: pointer; min-height: 30px; color: var(--muted); }
+.radius button.on { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.attrib { margin-top: 10px; }
+.checkg { background: var(--sunk); border-radius: 10px; padding: 10px 12px; display: grid; gap: 8px; }
 
 /* call list board */
 .board { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; margin-bottom: 16px; }
@@ -206,6 +209,7 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
     </div>
     <div class="hbtns">
       <span class="save" id="save" aria-live="polite"></span>
+      <button class="btn" id="addBtn">+ Add a business</button>
       <button class="btn" id="meBtn">Your details</button>
       <a class="btn" href="/dashboard/">Client Pipeline</a>
       <button class="btn" id="signOut">Sign out</button>
@@ -230,6 +234,7 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
         <button class="btn primary" id="go" type="submit">Find businesses</button>
       </div>
       <div class="areas" id="areas"></div>
+      <div class="radius" id="radius" role="group" aria-label="How far to look"></div>
     </form>
 
     <div id="findNotice"></div>
@@ -243,9 +248,8 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
           <button class="btn sm" id="saveHot" type="button">Save all hot leads</button>
         </div>
       </div>
-      <div id="sampleBanner" class="sample-banner" hidden>Sample data: these are made-up businesses so you can try the tool. Real searches need the Google key (see README).</div>
       <div class="list" id="results"></div>
-      <div class="more"><button class="btn" id="more" type="button" hidden>Load 20 more</button></div>
+      <p class="hint attrib">Business listings from <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">© OpenStreetMap contributors</a>. Some shops aren't on the map yet; add the ones you find with <b>+ Add a business</b>.</p>
     </div>
   </section>
 
@@ -286,6 +290,24 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
   </div>
 </div>
 
+<!-- add a business by hand -->
+<div id="addLayer" hidden>
+  <div class="scrim" data-close="add"></div>
+  <div class="panel small" role="dialog" aria-modal="true" aria-labelledby="addTitle">
+    <div class="ph"><h2 id="addTitle">Add a business</h2><button class="btn" data-close="add">Cancel</button></div>
+    <div class="pbody"><div class="pad">
+      <p class="hint">For shops you find on Google Maps, drive past, or hear about. It goes on your call list and gets the same website check and scripts.</p>
+      <label class="f">Business name<input id="n-name" autocomplete="off"></label>
+      <div class="row2"><label class="f">Kind of business<select id="n-v"></select></label><label class="f">Phone<input id="n-phone" inputmode="tel" autocomplete="off"></label></div>
+      <label class="f">Website (optional)<input id="n-web" inputmode="url" autocomplete="off" placeholder="Leave empty if they don't have one"></label>
+      <label class="f">Address (optional)<input id="n-addr" autocomplete="off"></label>
+      <div class="row2"><label class="f">Google rating (optional)<input id="n-rating" inputmode="decimal" placeholder="4.5" autocomplete="off"></label><label class="f">Google reviews (optional)<input id="n-reviews" inputmode="numeric" placeholder="120" autocomplete="off"></label></div>
+      <p class="hint" id="n-err" role="alert" hidden style="color:var(--bad)">Add at least the business name.</p>
+    </div></div>
+    <div class="navbar"><span></span><button class="btn primary" id="n-save">Save to call list</button></div>
+  </div>
+</div>
+
 <script src="/fc-config.js"></script>
 <script src="/fc-store.js"></script>
 <script>
@@ -312,9 +334,10 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
   // ======================================================================
   const VERTICALS = [
     {
-      k: 'auto', label: 'Auto repair', tag: 'Best fit', q: 'auto repair shop', type: 'car_repair',
+      k: 'auto', label: 'Auto repair', tag: 'Best fit',
+      osm: ['nwr["shop"="car_repair"]', 'nwr["craft"="car_repair"]', 'nwr["amenity"="vehicle_inspection"]', 'nwr["shop"="tyres"]["name"~"auto|repair|service|brake|smog",i]'],
       noun: 'shop', plural: 'repair shops', unit: 'repair order', ticket: 479, booking: false,
-      bad: [[/car_dealer|dealer/i, 'Dealership service department', -40]], smog: true,
+      bad: [[/shop=car( |$)|dealer/i, 'Dealership service department', -40]], smog: true,
       why: 'Calls go unanswered while everyone is under a car or with a customer (up to 21% of calls to auto shops, per Marchex), and the average repair order is about $479. Most are single-location independents, so the owner is at the counter. Nearly all run shop software (Tekmetric, Shopmonkey), so sell what sits alongside it, not a replacement.',
       hook: 'Quick question: when you and your service writer are both tied up, what happens to the calls you miss?',
       offer: 'I set it up so every missed call gets a text back right away with a way to book, customers get a reminder when service or smog is due, and happy customers get asked for a Google review. It works alongside the shop software you already use.',
@@ -326,12 +349,12 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
         ['"We\'re too busy."', 'That\'s why it runs on its own. Ten minutes before you open or after 5. If the demo doesn\'t save you time, I\'m gone.'],
         ['"How much is it?"', 'One time, usually $400 to $1,800 depending on what you pick, and you see it working first. A lot of shops pay $300 to $700 a month for marketing add-ons; this is a one-time build, and monthly care is optional.'],
       ],
-      sample: 'Auto Repair', suiteSample: 'Kukui', chainSample: 'Midas',
     },
     {
-      k: 'groom', label: 'Pet groomers', tag: 'Strong', q: 'dog grooming', type: '',
+      k: 'groom', label: 'Pet groomers', tag: 'Strong',
+      osm: ['nwr["shop"="pet_grooming"]', 'nwr["shop"="pet"]["name"~"groom|spa|bath",i]', 'nwr["amenity"="veterinary"]["name"~"groom",i]'],
       noun: 'groomer', plural: 'groomers', unit: 'groom', ticket: 98, booking: true,
-      bad: [[/veterinar/i, 'Vet clinic (grooming is a side service)', -30]],
+      bad: [[/amenity=veterinary|veterinar/i, 'Vet clinic (grooming is a side service)', -30]],
       why: 'A groomer can\'t pick up with a dog on the table. Regulars come back every 4–8 weeks, no-shows run 5–15%, and almost no agencies call on groomers. Smaller tickets (about $98 for a full groom in LA), so lead with rebooking nudges and reminders.',
       hook: 'When you\'ve got a dog on the table and the phone rings, what happens to that call?',
       offer: 'I set up automatic texts for groomers: if you miss a call, they get your booking link, clients get a reminder the day before, and regulars get a "time for Bella\'s next groom" text when they\'re due.',
@@ -343,12 +366,12 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
         ['"I can\'t afford software."', 'It\'s a one-time setup with no per-groomer fee. If one rebooked regular a month doesn\'t cover it, don\'t buy it. And you see it working first.'],
         ['"We\'re booked weeks out."', 'Great problem. Reminders cut the no-shows that leave holes in your day, and regulars rebook before they leave.'],
       ],
-      sample: 'Dog Grooming', suiteSample: 'MoeGo', chainSample: 'PetSmart Grooming',
     },
     {
-      k: 'detail', label: 'Auto detailing & tint', tag: 'Strong', q: 'auto detailing', type: '',
+      k: 'detail', label: 'Auto detailing & tint', tag: 'Strong',
+      osm: ['nwr["amenity"="car_wash"]', 'nwr["shop"~"^(car_repair|car_parts|car)$"]["name"~"detail|tint|ceramic|wrap|ppf|shine|polish",i]', 'nwr["craft"]["name"~"detail|tint",i]'],
       noun: 'shop', plural: 'detail shops', unit: 'detail', ticket: 278, booking: true,
-      bad: [[/car_dealer|dealer/i, 'Dealership detail department', -40], [/gas_station|gas station/i, 'Gas station car wash', -30]],
+      bad: [[/shop=car( |$)|dealer/i, 'Dealership detail department', -40], [/amenity=fuel|gas station/i, 'Gas station car wash', -30]],
       why: 'Solo or small crews who can\'t answer while they\'re polishing, and quotes for ceramic coating, PPF and tint go out slowly. Light software use, few agencies, and they sit on the same streets as the repair shops. A standard detail runs about $278, premium about $443.',
       hook: 'When a call or DM for a quote comes in while you\'re mid-job, how fast does it get answered?',
       offer: 'I set it up so a missed call gets an instant text with a quick quote form, quotes for coating, PPF or tint go out fast, past customers get reminded when maintenance is due, and finished customers get asked for a Google review.',
@@ -360,12 +383,12 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
         ['"I use Urable / Square."', 'I can work alongside it. If your tool already does something, I\'ll tell you and you won\'t pay for it twice.'],
         ['"How much is it?"', 'One time, usually $400 to $1,800, and you see a demo built on your own services before you pay.'],
       ],
-      sample: 'Auto Detailing', suiteSample: 'Urable', chainSample: 'Mister Car Wash',
     },
     {
-      k: 'body', label: 'Auto body & collision', q: 'auto body shop', type: 'car_repair',
+      k: 'body', label: 'Auto body & collision',
+      osm: ['nwr["shop"="car_repair"]["name"~"body|collision|paint|dent|frame",i]', 'nwr["shop"="car_repair"]["service:vehicle:body_repair"="yes"]', 'nwr["craft"="car_painter"]'],
       noun: 'shop', plural: 'body shops', unit: 'repair', ticket: 4800, booking: false,
-      bad: [[/car_dealer|dealer/i, 'Dealership body shop', -40]],
+      bad: [[/shop=car( |$)|dealer/i, 'Dealership body shop', -40]],
       why: 'Big tickets (about $4,800 per collision repair) and slow estimate follow-up. Insurers steer a lot of work through partner networks, so focus on independents that win work by phone.',
       hook: 'After you write an estimate, what happens when the customer goes quiet?',
       offer: 'I set up automatic estimate follow-ups, a text back for every missed call, and a review request after every repair.',
@@ -376,10 +399,10 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
         ['"Insurance sends us our work."', 'Keep that. This is for the customers who find you themselves and call around for estimates.'],
         ['"How much is it?"', 'One time, usually $400 to $1,800, and you see it working before you pay.'],
       ],
-      sample: 'Collision', suiteSample: 'Podium', chainSample: 'Caliber Collision',
     },
     {
-      k: 'dojo', label: 'Martial arts & fitness', q: 'martial arts school', type: '',
+      k: 'dojo', label: 'Martial arts & fitness',
+      osm: ['nwr["leisure"]["sport"~"martial_arts|karate|taekwondo|judo|jiu|kickboxing|mma|kung_fu|aikido|boxing|krav|muay",i]', 'nwr["leisure"~"^(fitness_centre|sports_centre|sports_hall)$"]["name"~"martial|karate|jiu|taekwondo|kung fu|mma|krav|dojo|boxing|muay|kickbox",i]'],
       noun: 'school', plural: 'schools', unit: 'membership month', ticket: 135, booking: true,
       why: 'Memberships run about $120–$150 a month, so each trial that turns into a member is worth $1,500+ a year. Following up on trial leads is the gap. Many already pay for Spark or Zen Planner.',
       hook: 'When someone calls about a trial class while you\'re teaching, what happens to that call?',
@@ -391,10 +414,10 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
         ['"We already use Spark / Zen Planner."', 'Good, keep it. I add the follow-up it isn\'t doing for you, and you see it working first.'],
         ['"How much is it?"', 'One time, usually $400 to $1,800. One new member a month covers it.'],
       ],
-      sample: 'Martial Arts', suiteSample: 'Spark Membership', chainSample: 'UFC Gym',
     },
     {
-      k: 'tattoo', label: 'Tattoo studios', q: 'tattoo shop', type: 'body_art_service',
+      k: 'tattoo', label: 'Tattoo studios',
+      osm: ['nwr["shop"="tattoo"]', 'nwr["shop"]["name"~"tattoo",i]'],
       noun: 'studio', plural: 'studios', unit: 'session hour', ticket: 150, booking: true,
       why: 'No-shows run 20–30% without deposits, and booking lives in Instagram DMs. Good fit for deposit-backed booking and reminders, but artists often work independently, so ask for the shop owner.',
       hook: 'How do you handle no-shows on big sessions right now?',
@@ -406,10 +429,10 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
         ['"We book through Instagram."', 'Keep it for inspiration and DMs. Booking and deposits just move to a link you send, so no-shows drop.'],
         ['"How much is it?"', 'One time, usually $400 to $1,800, and you see it working first.'],
       ],
-      sample: 'Tattoo', suiteSample: 'Square Appointments',
     },
     {
-      k: 'barber', label: 'Barbershops & salons', q: 'barbershop', type: 'barber_shop',
+      k: 'barber', label: 'Barbershops & salons',
+      osm: ['nwr["shop"="hairdresser"]', 'nwr["shop"="beauty"]["name"~"hair|salon|barber",i]'],
       noun: 'shop', plural: 'barbershops', unit: 'cut', ticket: 68, booking: true,
       why: 'On our homepage, but a harder sale: most already use Booksy, Squire or Vagaro (reminders built in), a cut is about $68, and many barbers rent their own chair. Go after owners with no booking tool at all.',
       hook: 'How do clients book with you right now?',
@@ -421,12 +444,11 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
         ['"We use Booksy."', 'Then you\'re covered on booking. I\'d only add what it doesn\'t do for you, like a numbers screen for the whole shop. If it\'s nothing, I\'ll say so.'],
         ['"How much is it?"', 'One time, usually $400 to $800 for one workflow, and you see it working first.'],
       ],
-      sample: 'Barbershop', suiteSample: 'Booksy', chainSample: 'Supercuts',
     },
     {
-      k: 'custom', label: 'Something else', q: '', type: '',
+      k: 'custom', label: 'Something else', osm: [], // built from the words typed in
       noun: 'business', plural: 'businesses', unit: 'sale', ticket: 0, booking: true,
-      why: 'Type any kind of local business below. Scoring works the same way; the scripts stay general.',
+      why: 'Type a kind of local business below, like "upholstery" or "bakery". It matches business names and map categories. Scoring works the same way; the scripts stay general.',
       hook: 'How do you handle calls that come in while you\'re busy with a customer?',
       offer: 'I set up the repeat work to run on its own: missed calls get a text back with a way to book, customers get reminders, and happy customers get asked for a review. You see it all on one simple screen.',
       vm: 'I help local businesses here in the Valley catch the calls they miss and get more reviews.',
@@ -436,12 +458,13 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
         ['"We\'re too busy."', 'That\'s why it runs on its own. Ten minutes is all it takes to show you.'],
         ['"How much is it?"', 'One time, usually $400 to $1,800, and you see it working before you pay.'],
       ],
-      sample: 'Local Business', suiteSample: 'Square Appointments',
     },
   ];
   const vOf = k => VERTICALS.find(v => v.k === k) || VERTICALS[0];
 
-  const AREAS = ['North Hollywood', 'Van Nuys', 'Burbank', 'Glendale', 'Sherman Oaks', 'Studio City', 'Encino', 'Tarzana', 'Reseda', 'Northridge', 'Canoga Park', 'Woodland Hills', 'Chatsworth', 'Granada Hills', 'Panorama City', 'Sun Valley', 'Pacoima', 'Sylmar', 'San Fernando', 'Valley Village'];
+  // Valley neighborhoods with their map centers, so these need no place lookup.
+  const AREAS = [['North Hollywood', 34.1722, -118.3789], ['Van Nuys', 34.1899, -118.4514], ['Burbank', 34.1808, -118.3090], ['Glendale', 34.1425, -118.2551], ['Sherman Oaks', 34.1508, -118.4490], ['Studio City', 34.1486, -118.3965], ['Encino', 34.1592, -118.5012], ['Tarzana', 34.1731, -118.5536], ['Reseda', 34.2011, -118.5363], ['Northridge', 34.2283, -118.5368], ['Canoga Park', 34.2011, -118.5981], ['Woodland Hills', 34.1683, -118.6059], ['Chatsworth', 34.2572, -118.6012], ['Granada Hills', 34.2647, -118.5232], ['Panorama City', 34.2247, -118.4490], ['Sun Valley', 34.2175, -118.3701], ['Pacoima', 34.2625, -118.4271], ['Sylmar', 34.3078, -118.4490], ['San Fernando', 34.2819, -118.4390], ['Valley Village', 34.1647, -118.3965]];
+  const RADII = [1, 3, 5, 10]; // miles
 
   // Chains and franchises: the person who answers can't say yes.
   const CHAINS = new RegExp('\\b(' + [
@@ -462,18 +485,46 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
 
   // ======================================================================
   // Fit score: 35 to start, plus or minus each signal, 0–100.
-  // Hot 70+, Warm 50+. "find" is the line that goes into scripts, emails
+  // Hot 60+, Warm 45+. "find" is the line that goes into scripts, emails
   // and (when they book) the proposal's "What we found".
   // ======================================================================
-  // "Closes by 6 PM" / "Closed Sunday" from Google's weekday hours: after-hours callers get voicemail.
+  // "Closes by 6 PM" / "Closed Sunday" from OpenStreetMap opening hours ("Mo-Fr 08:00-17:30; Sa 09:00-14:00").
+  // Days a rule doesn't mention are closed, as in OpenStreetMap. Anything unusual: no signal.
+  const DAYS = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
+  function weekHours(h) {
+    const s = String(h || '').trim();
+    if (!s) return null;
+    if (/^24\/7$/.test(s)) return { open: DAYS.map(() => true), close: DAYS.map(() => 24 * 60) };
+    const open = DAYS.map(() => false), close = DAYS.map(() => null);
+    let any = false;
+    for (const raw of s.split(';')) {
+      const r = raw.trim();
+      if (!r) continue;
+      const m = r.match(/^((?:Mo|Tu|We|Th|Fr|Sa|Su)(?:\s*-\s*(?:Mo|Tu|We|Th|Fr|Sa|Su))?(?:\s*,\s*(?:Mo|Tu|We|Th|Fr|Sa|Su)(?:\s*-\s*(?:Mo|Tu|We|Th|Fr|Sa|Su))?)*)?\s*(.*)$/);
+      const rest = m[2].trim();
+      let days = [];
+      if (m[1]) {
+        for (const seg of m[1].split(',')) {
+          const [a, b] = seg.split('-').map(x => DAYS.indexOf(x.trim()));
+          if (b === undefined) days.push(a);
+          else for (let i = a; ; i = (i + 1) % 7) { days.push(i); if (i === b) break; }
+        }
+      } else if (/^\d/.test(rest)) days = [0, 1, 2, 3, 4, 5, 6];
+      else continue; // holidays, seasons: skip
+      if (/^(off|closed)$/i.test(rest)) { days.forEach(i => { open[i] = false; close[i] = null; }); any = true; continue; }
+      const spans = [...rest.matchAll(/(\d{1,2}):(\d{2})\s*-\s*(\d{1,2}):(\d{2})/g)];
+      if (!spans.length) continue;
+      const end = Math.max(...spans.map(t => { const a = +t[1] * 60 + +t[2]; let b = +t[3] * 60 + +t[4]; if (b <= a) b += 24 * 60; return b; }));
+      days.forEach(i => { open[i] = true; close[i] = end; });
+      any = true;
+    }
+    return any ? { open, close } : null;
+  }
   function hoursGap(h) {
-    if (!h) return null;
-    const lines = String(h).replace(/[\u202f\u2009\u00a0]/g, ' ').split('\n');
-    const shut = lines.filter(l => /^(saturday|sunday):\s*closed/i.test(l)).map(l => l.split(':')[0]);
-    const early = lines.filter(l => /^(monday|tuesday|wednesday|thursday|friday):/i.test(l)).some(l => {
-      const m = l.match(/(\d{1,2})(?::(\d{2}))?\s*([AP]M)\s*$/i);
-      return m && m[3].toUpperCase() === 'PM' && (+m[1] % 12) * 60 + (+m[2] || 0) <= 6 * 60;
-    });
+    const w = weekHours(h);
+    if (!w) return null;
+    const early = [0, 1, 2, 3, 4].some(i => w.open[i] && w.close[i] <= 18 * 60);
+    const shut = [5, 6].filter(i => !w.open[i]).map(i => i === 5 ? 'Saturday' : 'Sunday');
     if (!early && !shut.length) return null;
     const days = shut.join(' & ');
     return {
@@ -481,22 +532,28 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
       find: `You close ${[early ? 'by 6 PM on weekdays' : '', shut.length ? 'on ' + days : ''].filter(Boolean).join(' and ')}, so after-hours callers get voicemail; an automatic text back can still book them.`,
     };
   }
+  const clock = (h, m) => { h = +h; return `${h % 12 || 12}${m === '00' ? '' : ':' + m} ${h % 24 < 12 ? 'AM' : 'PM'}`; };
+  const prettyHours = h => String(h || '').split(';').map(x => x.trim()
+    .replace(/\b(Mo|Tu|We|Th|Fr|Sa|Su)\b/g, d => ({ Mo: 'Mon', Tu: 'Tue', We: 'Wed', Th: 'Thu', Fr: 'Fri', Sa: 'Sat', Su: 'Sun' }[d]))
+    .replace(/00:00\s*-\s*24:00/g, 'open 24 hours')
+    .replace(/(\d{1,2}):(\d{2})\s*-\s*(\d{1,2}):(\d{2})/g, (_, a, b, c, d) => `${clock(a, b)}–${clock(c, d)}`)
+    .replace(/,\s*/g, ', ')
+    .replace(/\boff\b/, 'closed')).filter(Boolean).join('\n');
 
   function assess(p) {
     const V = vOf(p.vertical), biz = p.name || 'the business';
     const s = p.site && p.site.kind ? p.site : (p.website ? siteCache.get(p.website) : null);
     const sig = [];
     const add = (k, pts, t, find) => sig.push({ k, pts, t, find: find || '' });
-    if (CHAINS.test(p.name || '')) add('chain', -45, 'Looks like a chain or franchise');
+    if (CHAINS.test(p.name || '') || p.chain) add('chain', -45, 'Looks like a chain or franchise');
     const kinds = (p.types || []).join(' ') + ' ' + (p.btype || '');
     (V.bad || []).forEach(([re, t, pts]) => { if (re.test(kinds) && !sig.some(x => x.k === 'bad')) add('bad', pts, t); });
-    if (p.businessStatus === 'CLOSED_TEMPORARILY') add('closed', -40, 'Temporarily closed on Google');
-    if (!p.phone) add('nophone', -12, 'No phone number on Google');
+    if (!p.phone) add('nophone', 0, 'No phone on the map (look it up on Google)');
     if (V.smog && /smog/i.test(p.name || '')) add('smog', 3, 'Does smog checks (a built-in 2-year reminder)');
     const gap = hoursGap(p.hours);
     if (gap) add('afterhours', 4, gap.t, gap.find);
 
-    if (!p.website) add('nosite', 30, 'No website', `${biz} doesn't have a website, so people who find you on Google can only call, and if nobody picks up they try the next ${V.noun}.`);
+    if (!p.website) add('nosite', 25, 'No website found', `I couldn't find a website for ${biz}. Without one, people who look you up can only call, and if nobody picks up they try the next ${V.noun}.`);
     else if (!s) add('checking', 0, 'Checking website…');
     else if (s.kind === 'profile') add('profile', 22, `Website is a ${s.profile.replace(/ \(.*/, '')}`, `Your website link on Google goes to a ${s.profile.replace(/ \(.*/, '')}, not a site of your own.`);
     else if (s.kind === 'down') add('down', 25, 'Website is broken', `Your website didn't load when I tried it (${s.error || 'error'}).`);
@@ -515,18 +572,19 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
       if (s.ms > 5000) add('slow', 5, `Site is slow (${Math.round(s.ms / 1000)}s)`, `Your website took about ${Math.round(s.ms / 1000)} seconds to load.`);
     }
 
-    const n = +p.reviews || 0, r = p.rating === null || p.rating === '' || p.rating === undefined ? null : +p.rating;
-    if (!n) add('noreviews', 15, 'No Google reviews', `There are no Google reviews for ${biz} yet.`);
+    const known = v => v !== null && v !== undefined && v !== '';
+    const n = known(p.reviews) ? +p.reviews : 0, r = known(p.rating) ? +p.rating : null;
+    if (!known(p.reviews)) add('reviewsunknown', 0, 'Google rating: not added yet');
+    else if (!n) add('noreviews', 15, 'No Google reviews', `There are no Google reviews for ${biz} yet.`);
     else if (n < 25) add('fewreviews', 14, `Only ${n} reviews`, `You have ${n} Google reviews; the ${V.plural} that show up first nearby usually have far more.`);
     else if (n < 80) add('somereviews', 7, `${n} reviews`, `You have ${n} Google reviews; a steady stream of new ones helps you show up first.`);
-    if (r !== null && n) {
+    if (r !== null && known(p.reviews) && n) {
       if (r < 4.0) add('lowrating', 10, `Rated ${r.toFixed(1)}`, `Your Google rating is ${r.toFixed(1)}. Asking every happy customer for a review is the fastest way to lift it.`);
       else if (r < 4.4) add('okrating', 5, `Rated ${r.toFixed(1)}`, `Your Google rating is ${r.toFixed(1)}; more reviews from happy customers would push it up.`);
     }
-    if (!p.hours) add('nohours', 3, 'No hours on Google', "Your hours aren't listed on Google.");
 
     const score = Math.max(0, Math.min(100, 35 + sig.reduce((t, x) => t + x.pts, 0)));
-    return { score, level: score >= 70 ? 'Hot' : score >= 50 ? 'Warm' : 'Cold', sig, pending: sig.some(x => x.k === 'checking') };
+    return { score, level: score >= 60 ? 'Hot' : score >= 45 ? 'Warm' : 'Cold', sig, pending: sig.some(x => x.k === 'checking') };
   }
   const findings = a => a.sig.filter(x => x.pts > 0 && x.find).sort((x, y) => y.pts - x.pts);
 
@@ -537,7 +595,7 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
     const V = vOf(p.vertical), biz = p.name || 'your business', top = findings(a);
     const n = +p.reviews || 0;
     const HOOK = {
-      nosite: `I was looking up ${V.plural} near you and noticed ${biz} doesn't have a website, so the only way to reach you from Google is a phone call.`,
+      nosite: `I was looking up ${V.plural} near you and couldn't find a website for ${biz}. Without one, the only way new customers can reach you is a phone call.`,
       profile: 'I noticed your Google listing sends people to a social page instead of a website of your own.',
       down: 'I tried your website and it didn\'t load for me, so I wanted to give you a heads-up.',
       parked: 'I tried your website and it\'s showing a "domain for sale" page.',
@@ -553,7 +611,7 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
     const opener = `Hi, is this the owner? ... Great. My name is ${me()}, I'm with FutureClarity, we're local here in the Valley.\n\n${hook} ${V.offer}\n\nCould I stop by for 10 minutes this week and show you a quick demo? It's free, and you'd see it working before you pay anything.`;
     const callback = new Date(workdays(2) + 'T12:00').toLocaleDateString('en-US', { weekday: 'long' });
     const voicemail = `Hi, this is ${me()} with FutureClarity Technologies, calling for the owner of ${biz}. ${V.vm} I'll try you again ${callback}, or you can reach me at ${PHONE}. Again, ${me()}, ${PHONE}. Thanks!`;
-    const SUBJ = { nosite: `${biz} on Google`, profile: `${biz}'s website`, down: `${biz}'s website is down`, parked: `${biz}'s website`, nobook: `Online booking for ${biz}`, nomobile: `${biz}'s website on phones`, noreviews: `${biz}'s Google reviews`, fewreviews: `${biz}'s Google reviews`, somereviews: `${biz}'s Google reviews`, lowrating: `${biz}'s Google rating` };
+    const SUBJ = { nosite: `${biz} online`, profile: `${biz}'s website`, down: `${biz}'s website is down`, parked: `${biz}'s website`, nobook: `Online booking for ${biz}`, nomobile: `${biz}'s website on phones`, noreviews: `${biz}'s Google reviews`, fewreviews: `${biz}'s Google reviews`, somereviews: `${biz}'s Google reviews`, lowrating: `${biz}'s Google rating` };
     const subject = (top[0] && SUBJ[top[0].k]) || `Quick idea for ${biz}`;
     const lines = top.slice(0, 3).map(x => '- ' + x.find).join('\n');
     const addr = (prefs.addr || '').trim();
@@ -564,7 +622,7 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
   // ---------- state ----------
   const store = window.FCStore;
   let V = vOf(prefs.v);
-  let results = [], nextToken = '', lastQ = null, searching = false, sample = false;
+  let results = [], lastQ = null, searching = false;
   let plist = [], listLoaded = false, listMissing = false, reqs = [];
   let view = 'find', lfilter = '', openKey = null;
   const byPlace = new Map();
@@ -624,10 +682,9 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
   }
   function toRow(p, extra) {
     const a = assess(p), site = p.website ? siteCache.get(p.website) || p.site || {} : {};
-    return { placeId: p.placeId, name: p.name || '', vertical: p.vertical || V.k, btype: p.btype || '', address: p.address || '', area: p.area || '', phone: p.phone || '', website: p.website || '', mapsUrl: p.mapsUrl || '', links: p.links || {}, rating: p.rating ?? '', reviews: p.reviews ?? '', hours: p.hours || '', site: site || {}, score: a.score, signals: slim(a), email: (site && site.emails && site.emails[0]) || '', ...(extra || {}) };
+    return { placeId: p.placeId, name: p.name || '', vertical: p.vertical || V.k, btype: p.btype || '', address: p.address || '', area: p.area || '', phone: p.phone || '', website: p.website || '', mapsUrl: p.mapsUrl || '', links: p.links || {}, rating: p.rating ?? '', reviews: p.reviews ?? '', hours: p.hours || '', site: site || {}, score: a.score, signals: slim(a), email: p.email || (site && site.emails && site.emails[0]) || '', ...(extra || {}) };
   }
   async function saveResults(list, extra) {
-    if (sample && store.live) { setSave('Sample businesses can\'t be saved. Run a real search first.', true); return []; }
     if (listMissing) { setSave('Turn on the call list first (see the Call list tab).', true); return []; }
     setSave('Saving…');
     try {
@@ -649,23 +706,110 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
     $('vchips').innerHTML = VERTICALS.map(v => `<button type="button" data-v="${esc(v.k)}" class="${v.k === V.k ? 'on' : ''}">${esc(v.label)}${v.tag ? `<span class="tag">${esc(v.tag)}</span>` : ''}</button>`).join('');
     $('vwhy').innerHTML = V.k === 'custom' ? esc(V.why) : `<b>Why ${esc(V.label.toLowerCase())}:</b> ${esc(V.why)}<br><b>Lead with:</b> ${esc(V.workflows.slice(0, 3).join(', ').toLowerCase())}.`;
     $('customQ').hidden = V.k !== 'custom';
-    $('areas').innerHTML = AREAS.map(a => `<button type="button" data-area="${esc(a)}, CA" class="${$('area').value === a + ', CA' ? 'on' : ''}">${esc(a)}</button>`).join('');
+    $('areas').innerHTML = AREAS.map(([a]) => `<button type="button" data-area="${esc(a)}, CA" class="${$('area').value === a + ', CA' ? 'on' : ''}">${esc(a)}</button>`).join('');
+    const mi = prefs.radius || 3;
+    $('radius').innerHTML = 'Within ' + RADII.map(r => `<button type="button" data-radius="${r}" class="${r === mi ? 'on' : ''}">${r} mi</button>`).join('');
   }
 
-  async function runSearch(more) {
+  // ---------- OpenStreetMap: free, no key, called straight from this page ----------
+  const OVERPASS = ['https://overpass-api.de/api/interpreter', 'https://overpass.kumi.systems/api/interpreter'];
+  const NOMINATIM = 'https://nominatim.openstreetmap.org/search';
+  const MILE = 1609.34;
+  const LABELS = { 'shop=car_repair': 'Auto repair shop', 'craft=car_repair': 'Auto repair', 'amenity=vehicle_inspection': 'Smog check', 'shop=tyres': 'Tire shop', 'amenity=car_wash': 'Car wash', 'craft=car_painter': 'Auto paint shop', 'shop=pet_grooming': 'Pet groomer', 'shop=pet': 'Pet store', 'amenity=veterinary': 'Veterinarian', 'shop=tattoo': 'Tattoo shop', 'shop=hairdresser': 'Hair salon', 'shop=beauty': 'Beauty salon', 'leisure=fitness_centre': 'Gym', 'leisure=sports_centre': 'Sports center', 'shop=car': 'Car dealer', 'shop=car_parts': 'Auto parts' };
+  const usPhone = v => { const first = String(v || '').split(/[;,]/)[0].trim(), d = first.replace(/\D/g, '').replace(/^1(?=\d{10}$)/, ''); return d.length === 10 ? `(${d.slice(0, 3)}) ${d.slice(3, 6)}-${d.slice(6)}` : first; };
+  // Website from a map tag or a typed value; bare Facebook/Instagram handles become profile links.
+  const asUrl = (v, profile) => {
+    const u = String(v || '').split(';')[0].trim();
+    if (!u) return '';
+    if (/^https?:\/\//i.test(u)) return u;
+    if (profile && /^@?[\w.-]+$/.test(u) && !/\.(com|net|org)$/i.test(u)) return profile + u.replace(/^@/, '');
+    return /^[\w-]+(\.[\w-]+)+([/?#].*)?$/.test(u) ? 'http://' + u : '';
+  };
+  const mapsSearch = (name, where) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent([name, where].filter(Boolean).join(', '))}`;
+  const milesBetween = (a, b, c, d) => { const r = x => x * Math.PI / 180, h = Math.sin(r(c - a) / 2) ** 2 + Math.cos(r(a)) * Math.cos(r(c)) * Math.sin(r(d - b) / 2) ** 2; return 7917.6 * Math.asin(Math.sqrt(h)); };
+
+  async function overpass(query) {
+    let last;
+    for (const url of OVERPASS) {
+      try {
+        const r = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: 'data=' + encodeURIComponent(query) });
+        if (r.ok) return await r.json();
+        last = Object.assign(new Error('OpenStreetMap answered ' + r.status), { status: r.status });
+        if (r.status !== 429 && r.status < 500) break; // the other server would say the same
+      } catch (e) { last = e; }
+    }
+    throw last || new Error('unreachable');
+  }
+
+  // A Valley neighborhood from the list, or anything else looked up once and remembered.
+  async function locate(text) {
+    const key = text.trim().replace(/,?\s*(ca|california)$/i, '').trim().toLowerCase();
+    const hit = AREAS.find(([n]) => n.toLowerCase() === key);
+    if (hit) return { lat: hit[1], lon: hit[2], label: hit[0] };
+    let cache = {}; try { cache = JSON.parse(localStorage.getItem('fc-leads-places') || '{}') || {}; } catch (e) {}
+    if (cache[key]) return cache[key];
+    const r = await fetch(`${NOMINATIM}?format=jsonv2&limit=1&countrycodes=us&q=${encodeURIComponent(text.trim())}`, { headers: { Accept: 'application/json' } });
+    if (!r.ok) throw Object.assign(new Error('place lookup failed'), { status: r.status });
+    const [first] = await r.json();
+    if (!first) throw Object.assign(new Error('place not found'), { error: 'notfound' });
+    const loc = { lat: +first.lat, lon: +first.lon, label: text.trim().replace(/,?\s*(ca|california)$/i, '') };
+    cache[key] = loc; try { localStorage.setItem('fc-leads-places', JSON.stringify(cache)); } catch (e) {}
+    return loc;
+  }
+
+  // "Something else": the typed words become a name/category match ("upholstery" also finds "upholsterer").
+  function customSelectors(text) {
+    const STOP = new Set(['shop', 'shops', 'store', 'stores', 'service', 'services', 'company', 'business', 'center', 'centre', 'the', 'and', 'inc', 'llc', 'near', 'local']);
+    const words = text.toLowerCase().replace(/[^a-z0-9 ]/g, ' ').split(/\s+/).filter(w => w.length >= 3 && !STOP.has(w)).map(w => w.length > 5 ? w.slice(0, -2) : w).slice(0, 4);
+    if (!words.length) return [];
+    const re = words.join('|');
+    return ['shop', 'craft', 'amenity', 'office', 'healthcare', 'leisure'].map(k => `nwr["${k}"]["name"~"${re}",i]`).concat([`nwr["shop"~"${re}",i]`, `nwr["craft"~"${re}",i]`]);
+  }
+
+  function fromOsm(el, loc) {
+    const t = el.tags || {}, name = (t.name || '').trim();
+    if (!name) return null;
+    const lat = el.lat ?? (el.center && el.center.lat), lon = el.lon ?? (el.center && el.center.lon);
+    const street = [t['addr:housenumber'], t['addr:street']].filter(Boolean).join(' '), city = t['addr:city'] || '';
+    const types = ['shop', 'craft', 'amenity', 'leisure', 'office', 'healthcare'].filter(k => t[k]).map(k => `${k}=${t[k]}`);
+    let btype = LABELS[types[0]] || (types[0] ? types[0].split('=')[1].replace(/_/g, ' ').replace(/^./, c => c.toUpperCase()) : '');
+    if (t.shop === 'hairdresser' && (t.hairdresser === 'barber' || /barber/i.test(name))) btype = 'Barbershop';
+    return {
+      placeId: `osm:${el.type}/${el.id}`, name, types, btype,
+      chain: !!t['brand:wikidata'], // chains carry a brand id on the map
+      address: [street, city, [street || city ? t['addr:state'] || 'CA' : '', t['addr:postcode']].filter(Boolean).join(' ')].filter(Boolean).join(', '),
+      short: [street, city].filter(Boolean).join(', '),
+      phone: usPhone(t.phone || t['contact:phone'] || t['contact:mobile'] || ''),
+      website: asUrl(t.website || t['contact:website'] || t.url) || asUrl(t['contact:facebook'] || t.facebook, 'https://www.facebook.com/') || asUrl(t['contact:instagram'] || t.instagram, 'https://www.instagram.com/'),
+      email: t.email || t['contact:email'] || '',
+      hours: t.opening_hours || '',
+      mapsUrl: mapsSearch(name, street ? [street, city || loc.label].join(', ') : loc.label),
+      rating: null, reviews: null,
+      dist: lat != null && lon != null ? milesBetween(loc.lat, loc.lon, lat, lon) : null,
+    };
+  }
+
+  async function runSearch() {
     if (searching) return;
-    const area = $('area').value.trim() || 'San Fernando Valley, CA';
-    const what = V.k === 'custom' ? $('customQ').value.trim() : V.q;
-    if (!what) { $('findNotice').innerHTML = '<div class="notice"><h3>What kind of business?</h3><p class="hint">Type it in the box under "Something else", e.g. upholstery shop.</p></div>'; $('customQ').focus(); return; }
-    if (!more) { lastQ = { query: `${what} in ${area}`, type: V.type || '', v: V.k, area }; results = []; nextToken = ''; sample = false; prefs.area = area; prefs.v = V.k; savePrefs(); }
-    searching = true; $('findNotice').innerHTML = ''; renderResults();
+    const area = $('area').value.trim() || 'Van Nuys, CA';
+    const custom = $('customQ').value.trim();
+    const sel = V.k === 'custom' ? customSelectors(custom) : V.osm;
+    if (!sel.length) { $('findNotice').innerHTML = '<div class="notice"><h3>What kind of business?</h3><p class="hint">Type it in the box under "Something else", like "upholstery" or "bakery".</p></div>'; $('customQ').focus(); return; }
+    const radius = prefs.radius || 3;
+    prefs.area = area; prefs.v = V.k; savePrefs();
+    searching = true; results = []; lastQ = { v: V.k, area, radius, what: custom }; $('findNotice').innerHTML = ''; renderResults();
     try {
-      const r = await store.leads({ action: 'search', query: lastQ.query, type: lastQ.type, pageToken: more ? nextToken : '' });
-      if (r.typeDropped) lastQ.type = '';
-      const have = new Set(results.map(x => x.placeId));
-      (r.places || []).forEach(p => { if (!have.has(p.placeId)) results.push({ ...p, vertical: lastQ.v, area: lastQ.area }); });
-      nextToken = r.nextPageToken || '';
-      queueSites(results.filter(x => x.website && !(byPlace.get(x.placeId)?.site?.kind)).map(x => x.website));
+      const loc = await locate(area);
+      const around = `(around:${Math.round(radius * MILE)},${loc.lat.toFixed(5)},${loc.lon.toFixed(5)})`;
+      const data = await overpass(`[out:json][timeout:25];(${sel.map(x => x + around + ';').join('')});out tags center 400;`);
+      const seen = new Set();
+      results = (data.elements || []).map(el => fromOsm(el, loc)).filter(Boolean)
+        .filter(p => { const k = norm(p.name) + '|' + (digits(p.phone) || norm(p.short)); if (seen.has(k)) return false; seen.add(k); return true; })
+        .map(p => ({ ...p, vertical: V.k, area: loc.label }));
+      lastQ.area = loc.label;
+      if (!results.length) $('findNotice').innerHTML = `<div class="notice"><h3>Nothing on the map there yet</h3><p class="hint">OpenStreetMap has no ${esc(V.k === 'custom' ? custom : V.label.toLowerCase())} listed within ${radius} mi of ${esc(loc.label)}. Try a wider distance, a nearby area, or add the ones you know with <b>+ Add a business</b>.</p></div>`;
+      // check websites, most promising first
+      queueSites(visibleResults().map(x => x.p).filter(p => p.website && !(byPlace.get(p.placeId)?.site?.kind)).map(p => p.website));
     } catch (e) {
       searchError(e);
     }
@@ -673,85 +817,42 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
   }
 
   function searchError(e) {
-    const steps = `<ol><li>Create a Google Maps Platform key for <b>Places API (New)</b>, with billing on. The first 1,000 searches a month are free (each search or "Load 20 more" is one).</li><li>In Cloudflare: Pages project &gt; Settings &gt; Variables and Secrets, add a secret named <code>GOOGLE_PLACES_API_KEY</code>, then redeploy.</li>${listMissing ? '<li>Run <code>supabase/prospects.sql</code> in Supabase &gt; SQL Editor to turn on the call list.</li>' : ''}</ol><p class="hint">Full steps are in README.md under "Lead Finder".</p>`;
-    const sampleBtn = '<div><button class="btn" type="button" data-sample>Try it with sample businesses</button></div>';
     let html;
-    if (e.error === 'demo') html = `<h3>Searching Google needs the live site</h3><p class="hint">This page is in demo mode (no database connected), so it can't reach the search server.</p>${sampleBtn}`;
-    else if (e.error === 'not_configured') html = `<h3>Searching Google needs a key</h3>${steps}${sampleBtn}`;
-    else if (e.status === 401) { store.signOut(); return; }
-    else if (e.status === 404 || e.status === 405) html = `<h3>The search server isn't deployed yet</h3><p class="hint">Cloudflare hasn't picked up <code>functions/api/prospects.js</code>. Deploy the latest commit, then try again.</p>${sampleBtn}`;
-    else if (e.error === 'google_error') {
-      const R = {
-        SERVICE_DISABLED: 'Places API (New) is not turned on for this Google Cloud project. Google Cloud &gt; APIs &amp; Services &gt; Library &gt; "Places API (New)" &gt; Enable.',
-        BILLING_DISABLED: 'Billing is off for the Google Cloud project. Turn it on under Billing; searches stay free up to the monthly free allowance.',
-        API_KEY_INVALID: 'Google says the key is wrong. Copy it again into the Cloudflare secret and redeploy.',
-        API_KEY_SERVICE_BLOCKED: 'The key is restricted to other APIs. Edit the key and add "Places API (New)" to its API restrictions.',
-        RATE_LIMIT_EXCEEDED: 'Today\'s search cap is used up. It resets at midnight Pacific.',
-        RESOURCE_EXHAUSTED: 'Today\'s search cap is used up. It resets at midnight Pacific.',
-      };
-      html = `<h3>Google said no</h3><p>${R[e.reason] || esc(e.detail || e.reason || 'Unknown error')}</p>${R[e.reason] ? `<p class="hint">${esc(e.detail || '')}</p>` : ''}`;
-    } else html = `<h3>Couldn't search right now</h3><p class="hint">${esc(e.message || 'Check your connection and try again.')}</p>`;
+    if (e.error === 'notfound') html = '<h3>Couldn\'t find that place</h3><p class="hint">Try a neighborhood and state, like "Van Nuys, CA", or tap one of the Valley areas.</p>';
+    else if (e.status === 429) html = '<h3>OpenStreetMap is busy</h3><p class="hint">Too many searches in a row. Wait a minute and try again.</p>';
+    else html = '<h3>Couldn\'t search right now</h3><p class="hint">OpenStreetMap didn\'t answer. Check your connection and try again in a minute.</p>';
     $('findNotice').innerHTML = `<div class="notice">${html}</div>`;
   }
 
   function visibleResults() {
     const hideSkip = $('hideSkip').checked, hideListed = $('hideListed').checked;
-    return results.map(p => ({ p, a: assess({ ...p, ...(byPlace.get(p.placeId) ? { site: byPlace.get(p.placeId).site } : {}) }), saved: byPlace.get(p.placeId) }))
+    return results.map(p => { const saved = byPlace.get(p.placeId); return { p, a: assess(saved ? { ...p, site: saved.site, rating: saved.rating, reviews: saved.reviews, website: saved.website || p.website } : p), saved }; })
       .filter(({ a, saved }) => !(hideSkip && (a.sig.some(x => x.k === 'chain' || x.k === 'bad') || (saved && saved.status === 'Not a fit'))) && !(hideListed && saved))
-      .sort((x, y) => y.a.score - x.a.score);
+      .sort((x, y) => y.a.score - x.a.score || (x.p.dist ?? 99) - (y.p.dist ?? 99));
   }
 
   function renderResults() {
     $('resultsWrap').hidden = !results.length && !searching;
-    $('sampleBanner').hidden = !sample;
-    if (searching && !results.length) { $('rTitle').textContent = 'Searching…'; $('rSub').textContent = lastQ ? lastQ.query : ''; $('results').innerHTML = '<div class="empty"><h3>Looking on Google…</h3></div>'; $('more').hidden = true; return; }
+    if (searching && !results.length) { $('rTitle').textContent = 'Searching…'; $('rSub').textContent = lastQ ? `${lastQ.area}, within ${lastQ.radius} mi` : ''; $('results').innerHTML = '<div class="empty"><h3>Looking on OpenStreetMap…</h3></div>'; return; }
     if (!results.length) return;
     const rows = visibleResults();
     const hot = rows.filter(x => x.a.level === 'Hot' && !x.saved).length;
     const checking = rows.filter(x => x.a.pending).length;
-    $('rTitle').textContent = `${rows.length} ${vOf(lastQ.v).label.toLowerCase()} businesses`;
-    $('rSub').textContent = `${lastQ.area} · best leads first · ${rows.filter(x => x.a.level === 'Hot').length} hot, ${rows.filter(x => x.a.level === 'Warm').length} warm` + (checking ? ` · checking ${checking} website${checking > 1 ? 's' : ''}…` : '') + (results.length > rows.length ? ` · ${results.length - rows.length} hidden` : '');
+    $('rTitle').textContent = lastQ.v === 'custom' ? `${rows.length} matches for "${lastQ.what}"` : `${rows.length} ${vOf(lastQ.v).label.toLowerCase()} businesses`;
+    $('rSub').textContent = `within ${lastQ.radius} mi of ${lastQ.area} · best leads first · ${rows.filter(x => x.a.level === 'Hot').length} hot, ${rows.filter(x => x.a.level === 'Warm').length} warm` + (checking ? ` · checking ${checking} website${checking > 1 ? 's' : ''}…` : '') + (results.length > rows.length ? ` · ${results.length - rows.length} hidden` : '');
     $('saveHot').disabled = !hot; $('saveHot').textContent = hot ? `Save ${hot} hot lead${hot > 1 ? 's' : ''}` : 'No unsaved hot leads';
     $('results').innerHTML = rows.length ? rows.map(({ p, a, saved }) => {
-      const pipe = inPipeline(p);
+      const pipe = inPipeline(p), q = saved || p;
       const sigs = a.sig.filter(x => x.pts || x.k === 'checking' || x.k === 'tool').sort((x, y) => Math.abs(y.pts) - Math.abs(x.pts)).slice(0, 5);
       return `<div class="res${saved && !isOpen(saved) ? ' dim' : ''}" data-open="${esc(p.placeId)}">
         <div class="score ${a.level}" title="Fit score"><b>${a.score}</b><span>${a.level}</span></div>
         <div style="min-width:0"><button class="nm" type="button" data-open="${esc(p.placeId)}">${esc(p.name)}</button>
-          <div class="meta">${esc(p.btype || '')}${p.rating ? ` · ${(+p.rating).toFixed(1)}★ (${p.reviews || 0})` : ' · no reviews'} · ${esc(p.short || p.address || '')}</div>
-          <div class="meta">${p.phone ? `<a href="tel:${esc(digits(p.phone))}">${esc(p.phone)}</a>` : 'No phone'} · ${safeUrl(p.website) ? esc(hostOf(p.website)) : 'No website'}</div>
+          <div class="meta">${[esc(p.btype || ''), p.dist != null ? p.dist.toFixed(1) + ' mi' : '', q.rating ? `${(+q.rating).toFixed(1)}★ (${q.reviews || 0})` : '', esc(p.short || p.address || '')].filter(Boolean).join(' · ')}</div>
+          <div class="meta">${q.phone ? `<a href="tel:${esc(digits(q.phone))}">${esc(q.phone)}</a>` : 'No phone on the map'} · ${safeUrl(q.website) ? esc(hostOf(q.website)) : 'No website found'}</div>
           <div class="sigs">${sigs.map(x => `<span class="sig${x.k === 'checking' ? ' wait' : x.pts < 0 || x.k === 'tool' ? ' neg' : ''}">${esc(x.t)}</span>`).join('')}</div></div>
         <div class="acts">${pipe ? '<span class="chip acc">In Client Pipeline</span>' : ''}${saved ? `<span class="chip ${saved.status === 'To contact' ? 'warn' : 'acc'}">${esc(saved.status)}</span>` : `<button class="btn sm primary" type="button" data-save="${esc(p.placeId)}">Save</button><button class="btn sm" type="button" data-skip="${esc(p.placeId)}">Not a fit</button>`}</div>
       </div>`;
     }).join('') : '<div class="empty"><h3>Everything here is hidden</h3>Untick the filters above to see them.</div>';
-    $('more').hidden = !nextToken || sample;
-    $('more').disabled = searching; $('more').textContent = searching ? 'Loading…' : 'Load 20 more';
-  }
-
-  // Made-up businesses, so the tool can be tried before the Google key is set up.
-  function loadSample() {
-    const names = ['Oakwood', 'Laurel Canyon', 'Victory Blvd', 'Sherman Way', 'Riverside', 'Magnolia', 'Lankershim', 'Ventura', 'Roscoe', 'Tujunga', 'Vanowen', 'Reseda Blvd'];
-    const suffix = V.sample || V.label;
-    const suite = V.suiteSample || 'Booksy';
-    const S = (i, site) => { const url = `https://${norm(names[i])}-${V.k}.example`; siteCache.set(url, { url, ...site }); return url; };
-    const base = (i, x) => ({ placeId: `sample-${V.k}-${i}`, name: `${names[i]} ${suffix} (sample)`, btype: V.label, address: `${1000 + i * 137} ${names[i].replace(' Blvd', '')} Blvd, Van Nuys, CA 91401`, short: `${1000 + i * 137} ${names[i].replace(' Blvd', '')} Blvd, Van Nuys`, phone: `(818) 555-01${String(10 + i).padStart(2, '0')}`, mapsUrl: '', hours: 'Monday: 8 AM–6 PM', vertical: V.k, area: 'Van Nuys, CA', businessStatus: 'OPERATIONAL', rating: 4.5, reviews: 60, website: '', ...x });
-    const site = o => ({ kind: 'site', https: true, mobile: true, tel: true, bookingWords: false, tools: [], builder: '', year: YEAR, parked: false, thin: false, emails: [], ms: 900, ...o });
-    results = [
-      base(0, { rating: 4.6, reviews: 18 }),
-      base(1, { rating: 4.3, reviews: 42, website: S(1, { kind: 'profile', profile: 'Facebook page' }) }),
-      base(2, { rating: 4.2, reviews: 31, website: S(2, site({ https: false, mobile: false, tel: false, year: YEAR - 9, emails: ['service@' + norm(names[2]) + '.example'] })) }),
-      base(3, { rating: 4.8, reviews: 412, website: S(3, site({ tools: [{ name: suite, suite: true }], bookingWords: true })) }),
-      base(4, { rating: 4.0, reviews: 9, website: S(4, { kind: 'down', status: 500, error: 'the page answers with error 500' }) }),
-      base(5, { rating: 4.7, reviews: 128, website: S(5, site({ tools: [{ name: 'Square Appointments', suite: false }], bookingWords: true })) }),
-      V.chainSample ? base(6, { name: `${V.chainSample} (sample)`, rating: 4.1, reviews: 220, website: S(6, site({ bookingWords: true })) }) : base(6, { phone: '', rating: 4.4, reviews: 51, website: S(6, site({ mobile: false })) }),
-      base(7, { rating: 4.1, reviews: 65, website: S(7, site({ tel: false })) }),
-      base(8, { rating: null, reviews: 0, hours: '' }),
-      base(9, { rating: 3.8, reviews: 23, website: S(9, site({ parked: true, thin: true, mobile: false })) }),
-      base(10, { rating: 4.9, reviews: 233, website: S(10, { kind: 'blocked', status: 403 }) }),
-      base(11, { rating: 4.4, reviews: 30, website: S(11, site({ bookingWords: true, year: YEAR - 5, ms: 6400 })) }),
-    ];
-    lastQ = { query: `${V.q} in Van Nuys, CA (sample)`, type: '', v: V.k, area: 'Van Nuys, CA' }; nextToken = ''; sample = true;
-    $('findNotice').innerHTML = ''; renderResults();
   }
 
   // ======================================================================
@@ -808,7 +909,7 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
     const cols = [['Business', p => p.name], ['Type', p => vOf(p.vertical).label], ['Fit score', p => assess(p).score], ['Status', p => p.status], ['Phone', p => p.phone], ['Email', p => p.email], ['Website', p => p.website], ['Address', p => p.address], ['Rating', p => p.rating ?? ''], ['Reviews', p => p.reviews ?? ''], ['Next follow-up', p => p.followUp], ['Last touch', p => p.lastTouch], ['Touches', p => p.touches], ['What we found', p => findings(assess(p)).map(x => x.find).join(' | ')], ['Notes', p => p.notes], ['Google Maps', p => p.mapsUrl]];
     const cell = v => { const s = String(v ?? ''); return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; };
     const text = [cols.map(c => c[0]).join(','), ...plist.map(p => cols.map(c => cell(c[1](p))).join(','))].join('\r\n');
-    const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob(['﻿' + text], { type: 'text/csv' })); a.download = `call-list-${today()}.csv`;
+    const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob(['\ufeff' + text], { type: 'text/csv' })); a.download = `call-list-${today()}.csv`;
     document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
   }
 
@@ -836,32 +937,36 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
     const saved = byPlace.get(p.placeId), V = vOf(p.vertical), a = assess(p), sc = scripts(p, a);
     const site = p.website ? (saved && saved.site && saved.site.kind ? saved.site : siteCache.get(p.website)) : null;
     $('pTitle').textContent = p.name;
-    $('pSub').textContent = [V.label, p.rating ? `${(+p.rating).toFixed(1)}★ (${p.reviews || 0} reviews)` : 'no reviews', p.area].filter(Boolean).join(' · ');
+    $('pSub').textContent = [p.btype || V.label, p.rating ? `${(+p.rating).toFixed(1)}★ (${p.reviews || 0} reviews)` : '', p.area].filter(Boolean).join(' · ');
     const emails = [...new Set([saved && saved.email, ...((site && site.emails) || [])].filter(Boolean))];
     const mailto = emails[0] ? `mailto:${encodeURIComponent(emails[0])}?subject=${encodeURIComponent(sc.subject)}&body=${encodeURIComponent(sc.email)}` : '';
     const roiWeek = 2, roi = V.ticket * roiWeek * 0.5 * 4.33;
     const why = a.sig.filter(x => x.k !== 'checking').sort((x, y) => y.pts - x.pts);
-    // Google's own links (googleMapsLinks). Directions fall back to a Maps URL built from the place ID.
-    const L = p.links || {}, real = p.placeId && !/^sample-/.test(p.placeId);
-    const directions = L.directions || (real ? `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(p.address || p.name)}&destination_place_id=${encodeURIComponent(p.placeId)}` : '');
+    // Google Maps links need no key: a search for the business, and directions to its address.
+    const lookup = safeUrl(p.mapsUrl) || mapsSearch(p.name, p.address || p.area);
+    const directions = p.address ? `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(p.name + ', ' + p.address)}` : '';
     $('pBody').innerHTML = `<div class="pad">
       ${saved ? '' : `<div class="topacts"><button class="btn primary" data-psave>Save to call list</button><button class="btn" data-pskip>Not a fit</button><span class="hint">Save it to log calls and set follow-ups.</span></div>`}
       ${inPipeline(p) && !(saved && saved.requestId) ? '<div class="notice"><b>Heads up:</b> a business with this name or phone is already in the Client Pipeline.</div>' : ''}
       <div class="grid2">
         <div class="card"><h3>Why they're a lead</h3>
-          <div class="bigscore"><div class="score ${a.level}"><b>${a.score}</b><span>${a.level}</span></div><div class="hint">${a.pending ? 'Still checking their website…' : 'Fit score out of 100. Everything below is from Google and their website.'}</div></div>
+          <div class="bigscore"><div class="score ${a.level}"><b>${a.score}</b><span>${a.level}</span></div><div class="hint">${a.pending ? 'Still checking their website…' : 'Fit score out of 100, from the map listing, their website, and anything you add from Google.'}</div></div>
           <ul class="why">${why.map(x => `<li><span class="pts${x.pts < 0 ? ' neg' : ''}">${x.pts > 0 ? '+' + x.pts : x.pts || ''}</span><span>${esc(x.t)}</span></li>`).join('') || '<li><span></span><span class="muted">Nothing stands out. Probably a lower priority.</span></li>'}</ul>
           ${V.ticket ? `<div class="roi">At a typical <b>${money(V.ticket)}</b> ${esc(V.unit)}, catching ${roiWeek} missed calls a week and booking half of them is about <b>${money(roi)} a month</b>, against a one-time build of $400–$1,800.</div>` : ''}
         </div>
         <div class="card"><h3>Contact</h3>
           <dl class="facts">
-            <div><dt>Phone</dt><dd>${p.phone ? `<a href="tel:${esc(digits(p.phone))}">${esc(p.phone)}</a>` : '<span class="muted">None on Google</span>'}</dd></div>
-            <div><dt>Website</dt><dd>${safeUrl(p.website) ? `<a href="${esc(safeUrl(p.website))}" target="_blank" rel="noopener noreferrer">${esc(hostOf(p.website))}</a>${site && site.builder ? ` <span class="muted">(${esc(site.builder)})</span>` : ''}` : '<span class="muted">None</span>'}</dd></div>
+            <div><dt>Phone</dt><dd>${p.phone ? `<a href="tel:${esc(digits(p.phone))}">${esc(p.phone)}</a>` : '<span class="muted">Not on the map</span>'}</dd></div>
+            <div><dt>Website</dt><dd>${safeUrl(p.website) ? `<a href="${esc(safeUrl(p.website))}" target="_blank" rel="noopener noreferrer">${esc(hostOf(p.website))}</a>${site && site.builder ? ` <span class="muted">(${esc(site.builder)})</span>` : ''}` : '<span class="muted">None found</span>'}</dd></div>
             <div><dt>Address</dt><dd>${esc(p.address || '—')}</dd></div>
-            <div><dt>Google</dt><dd>${[[p.mapsUrl, 'Open in Google Maps'], [L.reviews, 'Read reviews'], [directions, 'Directions']].filter(([u]) => safeUrl(u)).map(([u, t]) => `<a href="${esc(safeUrl(u))}" target="_blank" rel="noopener noreferrer">${t}</a>`).join(' · ') || '<span class="muted">—</span>'}</dd></div>
-            ${safeUrl(L.writeReview) ? '<div><dt>Review link</dt><dd><button class="btn sm" data-copylink>Copy</button> <span class="muted" style="font-size:12.5px">what their customers would tap in a review-request text. Handy in the demo.</span></dd></div>' : ''}
-            ${p.hours ? `<div><dt>Hours</dt><dd style="white-space:pre-line;font-size:13px">${esc(p.hours)}</dd></div>` : ''}
+            <div><dt>Google</dt><dd><a href="${esc(lookup)}" target="_blank" rel="noopener noreferrer">Look up on Google Maps</a>${directions ? ` · <a href="${esc(directions)}" target="_blank" rel="noopener noreferrer">Directions</a>` : ''}</dd></div>
+            ${p.hours ? `<div><dt>Hours</dt><dd style="white-space:pre-line;font-size:13px">${esc(prettyHours(p.hours))}</dd></div>` : ''}
           </dl>
+          <div class="checkg">
+            <div class="hint"><b>From Google Maps:</b> the map listing has no ratings. Open "Look up on Google Maps" and copy what you see; the score updates.</div>
+            <div class="row2"><label class="f">Google rating<input data-g="rating" inputmode="decimal" placeholder="e.g. 4.4" value="${esc(p.rating ?? '')}" autocomplete="off"></label><label class="f">Reviews<input data-g="reviews" inputmode="numeric" placeholder="e.g. 37" value="${esc(p.reviews ?? '')}" autocomplete="off"></label></div>
+            <div class="row2"><label class="f">Website<input data-g="website" inputmode="url" placeholder="None found" value="${esc(p.website || '')}" autocomplete="off"></label><label class="f">Phone<input data-g="phone" inputmode="tel" placeholder="Not on the map" value="${esc(p.phone || '')}" autocomplete="off"></label></div>
+          </div>
           ${saved ? `<label class="f">Email${emails.length > 1 ? ` <span class="muted" style="font-weight:400">· also found: ${esc(emails.filter(e => e !== saved.email).join(', '))}</span>` : ''}<input data-k="email" value="${esc(saved.email || '')}" placeholder="${emails[0] ? esc(emails[0]) : 'Not found on their site'}" autocomplete="off"></label>` : emails.length ? `<div class="hint">Email on their site: ${esc(emails.join(', '))}</div>` : ''}
         </div>
       </div>
@@ -897,9 +1002,9 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
     const nav = [];
     if (saved && saved.requestId) nav.push(`<a class="btn" href="/dashboard/#req=${esc(saved.requestId)}">Open in Client Pipeline</a>`);
     else if (saved) nav.push(`<span class="confirm" id="bookBox"><button class="btn primary" data-book>Book audit → Client Pipeline</button></span>`);
-    else nav.push('<span></span>');
     if (saved) nav.push('<span class="confirm" id="delBox"><button class="btn" data-del>Remove from list</button></span>');
     $('pNav').innerHTML = nav.join('');
+    $('pNav').hidden = !saved; // nothing to do down here until it's on the list
   }
 
   // Notes and email save while typing (debounced) and when the field loses focus.
@@ -927,7 +1032,7 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
         name: '', business: saved.name, contact: [saved.phone, saved.email].filter(Boolean).join(' · '), website: saved.website || '', app: '',
         btype: V.label, source: 'Cold call', status: auditDate ? 'Audit booked' : 'Contacted', emailed: 'Yes', emailedDate: today(), auditDate: auditDate || '',
         needs: '', findings: findings(a).map(x => x.find).join('\n'),
-        notes: [saved.notes, `From Lead Finder: fit ${a.score}/100. ${saved.address || ''}${saved.mapsUrl ? '\n' + saved.mapsUrl : ''}`, safeUrl((saved.links || {}).writeReview) ? `Their Google review link (for review requests): ${saved.links.writeReview}` : '', 'Starting scope is a suggestion for this kind of business; adjust it after the audit.'].filter(Boolean).join('\n\n'),
+        notes: [saved.notes, `From Lead Finder: fit ${a.score}/100. ${saved.address || ''}${saved.mapsUrl ? '\n' + saved.mapsUrl : ''}`, 'Starting scope is a suggestion for this kind of business; adjust it after the audit.'].filter(Boolean).join('\n\n'),
         scope: { wf: V.workflows.slice(0, 3), site: badSite ? 'landing' : '', app: false, care: false },
       });
       await writeP(saved.id, { status: 'In pipeline', requestId: row.id, followUp: '', log: [...(saved.log || []), { d: today(), t: auditDate ? `Audit booked for ${auditDate}` : 'Moved to Client Pipeline' }].slice(-50) });
@@ -935,6 +1040,53 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
       setSave('Added to Client Pipeline'); renderPanel();
     } catch (e) { setSave('Could not add it to the Client Pipeline. Try again.', true); }
   }
+
+  // A fact typed in from Google Maps (rating, reviews, website, phone), for a saved business or a search result.
+  function setFact(p, k, raw) {
+    let v = String(raw || '').trim();
+    if (k === 'rating') { const x = parseFloat(v.replace(',', '.')); v = v === '' ? '' : isFinite(x) && x >= 0 && x <= 5 ? Math.round(x * 10) / 10 : null; }
+    if (k === 'reviews') { const x = parseInt(v.replace(/[^\d]/g, ''), 10); v = v === '' ? '' : isFinite(x) ? x : null; }
+    if (k === 'website') v = v ? asUrl(v) || null : '';
+    if (k === 'phone') v = v ? usPhone(v) : '';
+    if (v === null) { setSave(k === 'website' ? "That doesn't look like a web address." : 'Use a number, like 4.4 or 37.', true); renderPanel(); return; }
+    const saved = byPlace.get(p.placeId), patch = { [k]: v };
+    if (k === 'website') patch.site = {}; // a new address gets a fresh check
+    const r = results.find(x => x.placeId === p.placeId); if (r) Object.assign(r, patch);
+    if (saved) { const a = assess({ ...saved, ...patch }); writeP(saved.id, { ...patch, score: a.score, signals: slim(a) }); }
+    else Object.assign(p, patch);
+    if (k === 'website' && v) queueSites([v]);
+    renderPanel(); if (view === 'find') renderResults(); else renderList();
+  }
+
+  // ---------- add a business by hand ----------
+  function openAdd() {
+    ['n-name', 'n-phone', 'n-web', 'n-addr', 'n-rating', 'n-reviews'].forEach(id => { $(id).value = ''; });
+    $('n-v').innerHTML = VERTICALS.map(v => `<option value="${esc(v.k)}"${v.k === V.k ? ' selected' : ''}>${esc(v.label)}</option>`).join('');
+    $('n-err').hidden = true; $('addLayer').hidden = false; document.body.style.overflow = 'hidden'; setTimeout(() => $('n-name').focus(), 30);
+  }
+  function closeAdd() { $('addLayer').hidden = true; if ($('pLayer').hidden && $('meLayer').hidden) document.body.style.overflow = ''; }
+  async function saveAdd() {
+    const name = $('n-name').value.trim();
+    if (!name) { $('n-err').hidden = false; $('n-name').focus(); return; }
+    const num = (v, max) => { const x = parseFloat(String(v).replace(',', '.')); return isFinite(x) && x >= 0 && x <= max ? x : ''; };
+    const address = $('n-addr').value.trim(), v = $('n-v').value;
+    const p = {
+      placeId: 'manual:' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7),
+      name, vertical: v, btype: vOf(v).label, phone: usPhone($('n-phone').value), website: asUrl($('n-web').value),
+      address, area: '', mapsUrl: mapsSearch(name, address),
+      rating: num($('n-rating').value, 5), reviews: $('n-reviews').value.trim() === '' ? '' : Math.round(num($('n-reviews').value, 1e7)),
+    };
+    $('n-save').disabled = true;
+    const saved = await saveResults([p]);
+    $('n-save').disabled = false;
+    if (!saved.length) return;
+    closeAdd();
+    if (p.website) queueSites([p.website]);
+    document.querySelector('[data-view="list"]').click();
+    openP(p.placeId);
+  }
+  $('addBtn').addEventListener('click', openAdd);
+  $('n-save').addEventListener('click', saveAdd);
 
   // ---------- events ----------
   document.querySelector('.views').addEventListener('click', e => {
@@ -944,14 +1096,13 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
     if (view === 'list') renderList(); else renderResults();
   });
   $('vchips').addEventListener('click', e => { const b = e.target.closest('[data-v]'); if (!b) return; V = vOf(b.dataset.v); prefs.v = V.k; savePrefs(); renderSearch(); });
-  $('areas').addEventListener('click', e => { const b = e.target.closest('[data-area]'); if (!b) return; $('area').value = b.dataset.area; renderSearch(); runSearch(false); });
+  $('areas').addEventListener('click', e => { const b = e.target.closest('[data-area]'); if (!b) return; $('area').value = b.dataset.area; renderSearch(); runSearch(); });
   $('area').addEventListener('input', () => document.querySelectorAll('#areas button').forEach(b => b.classList.toggle('on', b.dataset.area === $('area').value)));
-  $('searchForm').addEventListener('submit', e => { e.preventDefault(); runSearch(false); });
-  $('more').addEventListener('click', () => runSearch(true));
+  $('searchForm').addEventListener('submit', e => { e.preventDefault(); runSearch(); });
+  $('radius').addEventListener('click', e => { const b = e.target.closest('[data-radius]'); if (!b) return; prefs.radius = +b.dataset.radius; savePrefs(); renderSearch(); if (results.length) runSearch(); });
   $('hideSkip').addEventListener('change', renderResults);
   $('hideListed').addEventListener('change', renderResults);
   $('saveHot').addEventListener('click', () => { const hot = visibleResults().filter(x => x.a.level === 'Hot' && !x.saved).map(x => x.p); if (hot.length) saveResults(hot).then(renderResults); });
-  $('findNotice').addEventListener('click', e => { if (e.target.closest('[data-sample]')) loadSample(); });
   function listClick(e) {
     if (e.target.closest('a')) return;
     const s = e.target.closest('[data-save]'); if (s) { const p = results.find(r => r.placeId === s.dataset.save); if (p) saveResults([p]).then(renderResults); return; }
@@ -963,8 +1114,8 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
   $('board').addEventListener('click', e => { const b = e.target.closest('[data-w]'); if (!b) return; lfilter = lfilter === b.dataset.w ? '' : b.dataset.w; renderList(); });
   $('lsearch').addEventListener('input', renderList);
   $('csv').addEventListener('click', csv);
-  document.addEventListener('click', e => { const c = e.target.closest('[data-close]'); if (!c) return; if (c.dataset.close === 'p') closeP(); else closeMe(); });
-  document.addEventListener('keydown', e => { if (e.key !== 'Escape') return; if (!$('meLayer').hidden) closeMe(); else if (!$('pLayer').hidden) closeP(); });
+  document.addEventListener('click', e => { const c = e.target.closest('[data-close]'); if (!c) return; if (c.dataset.close === 'p') closeP(); else if (c.dataset.close === 'add') closeAdd(); else closeMe(); });
+  document.addEventListener('keydown', e => { if (e.key !== 'Escape') return; if (!$('addLayer').hidden) closeAdd(); else if (!$('meLayer').hidden) closeMe(); else if (!$('pLayer').hidden) closeP(); });
 
   $('pBody').addEventListener('click', e => {
     const p = current(); if (!p) return; const saved = byPlace.get(p.placeId);
@@ -973,11 +1124,10 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
     const t = e.target.closest('[data-touch]'); if (t && saved) { flushNotes(); logTouch(saved, t.dataset.touch); renderPanel(); return; }
     const c = e.target.closest('[data-copy]');
     if (c) { const text = $('s-' + c.dataset.copy).textContent; const full = c.dataset.copy === 'email' ? 'Subject: ' + scripts(p, assess(p)).subject + '\n\n' + text : text; navigator.clipboard.writeText(full).then(() => { c.textContent = 'Copied'; setTimeout(() => { c.textContent = c.dataset.copy === 'email' ? 'Copy email' : 'Copy'; }, 1500); }, () => setSave('Select the text to copy it.')); return; }
-    const cl = e.target.closest('[data-copylink]');
-    if (cl) { navigator.clipboard.writeText((p.links || {}).writeReview || '').then(() => { cl.textContent = 'Copied'; setTimeout(() => { cl.textContent = 'Copy'; }, 1500); }, () => setSave('Could not copy. Open "Read reviews" instead.')); return; }
     if (e.target.closest('[data-mailto]') && saved && saved.status === 'To contact') logTouch(saved, 'Emailed');
   });
   $('pBody').addEventListener('change', e => {
+    if (e.target.dataset.g && current()) { setFact(current(), e.target.dataset.g, e.target.value); return; }
     const p = current(), saved = p && byPlace.get(p.placeId); if (!saved) return; const el = e.target, k = el.dataset.k; if (!k) return;
     if (k === 'status' || k === 'followUp') { writeP(saved.id, { [k]: el.value }); if (k === 'status') renderPanel(); }
   });
