@@ -98,7 +98,7 @@ const PROFILE_HOSTS = [
   [/(^|\.)instagram\.com$/, 'Instagram profile'],
   [/(^|\.)linktr\.ee$|(^|\.)linkin\.bio$|(^|\.)beacons\.ai$/, 'link-in-bio page'],
   [/(^|\.)yelp\.com$/, 'Yelp page'],
-  [/(^|\.)business\.site$/, 'Google business.site page (Google shut these down in 2024)'],
+  [/(^|\.)business\.site$|(^|\.)negocio\.site$/, 'Google business.site page (Google shut these down in 2024)'],
   [/(^|\.)sites\.google\.com$/, 'Google Sites page'],
   [/(^|\.)tiktok\.com$/, 'TikTok profile'],
   [/(^|\.)booksy\.com$/, 'Booksy profile'],
