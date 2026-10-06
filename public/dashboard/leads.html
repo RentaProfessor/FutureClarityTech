@@ -1026,7 +1026,7 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
         <div class="script" id="s-voicemail">${esc(sc.voicemail)}</div>
         <b style="font-size:14px">If they say…</b>
         <div class="obj">${V.objections.map(([q, r]) => `<div><i>${esc(q)}</i>${esc(r)}</div>`).join('')}</div>
-        <p class="hint">Before you pitch, skim their reviews for "never called back" or "hard to reach", and call once around 10:30 or 12:30: if it goes to voicemail, open with that. Call or visit; don't cold-text. If someone asks you to stop, mark them Not interested.</p>
+        <p class="hint">Before you pitch, skim their reviews for "never called back" or "hard to reach", and call once around 10:30 or 12:30: if it goes to voicemail, open with that. Call or visit; don't cold-text. If the number looks like the owner's personal cell, check the Do Not Call list first. If someone asks you to stop, mark them Not interested.</p>
         ${me() === '[your name]' ? '<p class="hint">Add your first name under <b>Your details</b> and it fills in here.</p>' : ''}
       </div>
 

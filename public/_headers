@@ -40,6 +40,15 @@
 /*.html
   Cache-Control: public, max-age=0, must-revalidate
 
+# Privacy, terms and accessibility. Astro writes these as folders, so they're
+# served at /privacy/ and so on: revalidate like every other page.
+/privacy/
+  Cache-Control: public, max-age=0, must-revalidate
+/terms/
+  Cache-Control: public, max-age=0, must-revalidate
+/accessibility/
+  Cache-Control: public, max-age=0, must-revalidate
+
 # Step 2 of the audit booking and the team dashboard are app pages, not
 # content: keep them out of search results. noindex (not a robots.txt
 # Disallow) so crawlers can still fetch them and see the instruction.

@@ -8,10 +8,10 @@ import Footer from '../components/Footer.astro';
 // public/fc-store.js. It lands on the team dashboard at /dashboard/.
 ---
 
-<Layout title="FutureClarity Technologies">
+<Layout title="FutureClarity Technologies" main="#top">
   <Header />
 
-  <main id="top">
+  <main id="top" tabindex="-1">
     <!-- HERO -->
     <section class="hero">
       <div class="wrap">
@@ -348,49 +348,34 @@ import Footer from '../components/Footer.astro';
         </p>
         <form id="lead" class="glass" novalidate>
           <div class="two">
-            <input
-              id="f-name"
-              name="name"
-              placeholder="Your name"
-              autocomplete="name"
-              aria-label="Your name"
-              required
-            />
-            <input
-              id="f-business"
-              name="business"
-              placeholder="Business name"
-              autocomplete="organization"
-              aria-label="Business name"
-              required
-            />
+            <label class="fld"
+              ><span>Your name</span><input id="f-name" name="name" autocomplete="name" required /></label
+            >
+            <label class="fld"
+              ><span>Business name</span><input id="f-business" name="business" autocomplete="organization" required /></label
+            >
           </div>
-          <input
-            id="f-contact"
-            name="contact"
-            placeholder="Email or phone"
-            autocomplete="email"
-            aria-label="Email or phone"
-            required
-          />
+          <label class="fld"
+            ><span>Email or phone</span><input id="f-contact" name="contact" autocomplete="email" required /></label
+          >
           <div class="two">
-            <input
-              id="f-site"
-              name="website"
-              placeholder="Website (optional)"
-              autocomplete="url"
-              inputmode="url"
-              aria-label="Website, optional"
-            />
-            <input id="f-app" name="app" placeholder="App name (optional)" aria-label="App name, optional" />
+            <label class="fld"
+              ><span>Website <i>optional</i></span><input id="f-site" name="website" autocomplete="url" inputmode="url" /></label
+            >
+            <label class="fld"><span>App name <i>optional</i></span><input id="f-app" name="app" /></label>
           </div>
-          <textarea
-            id="f-msg"
-            name="msg"
-            rows="3"
-            placeholder="What do you wish ran itself? Or what would you want on your dashboard?"
-            aria-label="What do you wish ran itself?"></textarea>
+          <label class="fld"
+            ><span>What do you wish ran itself? <i>optional</i></span><textarea
+              id="f-msg"
+              name="msg"
+              rows="3"
+              placeholder="Or what would you want on your dashboard?"></textarea></label
+          >
           <button class="btn btn-primary" type="submit">Book my free audit</button>
+          <p class="consent">
+            We'll use your details only to set up your audit, and we may call, text or email you about it.
+            Reply STOP to any text to stop. Msg &amp; data rates may apply. <a href="/privacy/">Privacy Policy</a>
+          </p>
           <div id="formerr" role="alert">
             Add your name, business name and an email or phone so we can reach you.
           </div>
@@ -417,10 +402,10 @@ import Footer from '../components/Footer.astro';
 
   <Footer />
 
-  <div class="callbar">
+  <aside class="callbar" aria-label="Call or book a free audit">
     <a class="btn" href="tel:+18189397964">Call (818) 939-7964</a>
     <a class="btn btn-primary" href="#contact">Free audit</a>
-  </div>
+  </aside>
 </Layout>
 
 <script is:inline src="/fc-config.js"></script>
@@ -451,14 +436,14 @@ import Footer from '../components/Footer.astro';
 
   document.addEventListener('click', (e) => {
     const a = (e.target as HTMLElement).closest('a[href^="#"]');
-    if (!a) return;
+    if (!a || a.classList.contains('skip')) return;
     const id = a.getAttribute('href');
     if (!id || id.length < 2) return;
     if (goTo(id)) e.preventDefault();
   });
 
   // Highlight the section you are in.
-  const links = Array.from(document.querySelectorAll('nav a'));
+  const links = Array.from(document.querySelectorAll('header nav a'));
   const secs = links.map((a) => document.querySelector(a.getAttribute('href') || ''));
 
   function mark() {

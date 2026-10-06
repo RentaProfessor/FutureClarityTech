@@ -1,0 +1,27 @@
+---
+// A plain text page (privacy, terms, accessibility): the site's header and footer around a
+// readable column.
+import Layout from './Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  kicker: string;
+  updated: string;
+}
+
+const { title, description, kicker, updated } = Astro.props;
+---
+
+<Layout title={`${title} | FutureClarity Technologies`} description={description}>
+  <Header home={false} />
+  <main id="main" tabindex="-1" class="wrap doc">
+    <div class="label">{kicker}</div>
+    <h1>{title}</h1>
+    <p class="updated">Last updated {updated}</p>
+    <slot />
+  </main>
+  <Footer home={false} />
+</Layout>

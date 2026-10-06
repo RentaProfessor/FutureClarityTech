@@ -4,7 +4,8 @@ interface Props {
   label?: string;
 }
 
-const { href = '#top', label = 'FutureClarity Technologies, home' } = Astro.props;
+// The spoken name includes the visible words "Future Clarity" so voice control can find it (WCAG 2.5.3).
+const { href = '#top', label = 'Future Clarity Technologies, home' } = Astro.props;
 ---
 
 <a href={href} class="logo" aria-label={label}>
