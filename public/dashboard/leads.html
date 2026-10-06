@@ -624,7 +624,7 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
   }
   function toRow(p, extra) {
     const a = assess(p), site = p.website ? siteCache.get(p.website) || p.site || {} : {};
-    return { placeId: p.placeId, name: p.name || '', vertical: p.vertical || V.k, btype: p.btype || '', address: p.address || '', area: p.area || '', phone: p.phone || '', website: p.website || '', mapsUrl: p.mapsUrl || '', rating: p.rating ?? '', reviews: p.reviews ?? '', hours: p.hours || '', site: site || {}, score: a.score, signals: slim(a), email: (site && site.emails && site.emails[0]) || '', ...(extra || {}) };
+    return { placeId: p.placeId, name: p.name || '', vertical: p.vertical || V.k, btype: p.btype || '', address: p.address || '', area: p.area || '', phone: p.phone || '', website: p.website || '', mapsUrl: p.mapsUrl || '', links: p.links || {}, rating: p.rating ?? '', reviews: p.reviews ?? '', hours: p.hours || '', site: site || {}, score: a.score, signals: slim(a), email: (site && site.emails && site.emails[0]) || '', ...(extra || {}) };
   }
   async function saveResults(list, extra) {
     if (sample && store.live) { setSave('Sample businesses can\'t be saved. Run a real search first.', true); return []; }
@@ -841,6 +841,9 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
     const mailto = emails[0] ? `mailto:${encodeURIComponent(emails[0])}?subject=${encodeURIComponent(sc.subject)}&body=${encodeURIComponent(sc.email)}` : '';
     const roiWeek = 2, roi = V.ticket * roiWeek * 0.5 * 4.33;
     const why = a.sig.filter(x => x.k !== 'checking').sort((x, y) => y.pts - x.pts);
+    // Google's own links (googleMapsLinks). Directions fall back to a Maps URL built from the place ID.
+    const L = p.links || {}, real = p.placeId && !/^sample-/.test(p.placeId);
+    const directions = L.directions || (real ? `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(p.address || p.name)}&destination_place_id=${encodeURIComponent(p.placeId)}` : '');
     $('pBody').innerHTML = `<div class="pad">
       ${saved ? '' : `<div class="topacts"><button class="btn primary" data-psave>Save to call list</button><button class="btn" data-pskip>Not a fit</button><span class="hint">Save it to log calls and set follow-ups.</span></div>`}
       ${inPipeline(p) && !(saved && saved.requestId) ? '<div class="notice"><b>Heads up:</b> a business with this name or phone is already in the Client Pipeline.</div>' : ''}
@@ -855,7 +858,8 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
             <div><dt>Phone</dt><dd>${p.phone ? `<a href="tel:${esc(digits(p.phone))}">${esc(p.phone)}</a>` : '<span class="muted">None on Google</span>'}</dd></div>
             <div><dt>Website</dt><dd>${safeUrl(p.website) ? `<a href="${esc(safeUrl(p.website))}" target="_blank" rel="noopener noreferrer">${esc(hostOf(p.website))}</a>${site && site.builder ? ` <span class="muted">(${esc(site.builder)})</span>` : ''}` : '<span class="muted">None</span>'}</dd></div>
             <div><dt>Address</dt><dd>${esc(p.address || '—')}</dd></div>
-            <div><dt>Google</dt><dd>${safeUrl(p.mapsUrl) ? `<a href="${esc(safeUrl(p.mapsUrl))}" target="_blank" rel="noopener noreferrer">Open in Google Maps</a>` : '<span class="muted">—</span>'}</dd></div>
+            <div><dt>Google</dt><dd>${[[p.mapsUrl, 'Open in Google Maps'], [L.reviews, 'Read reviews'], [directions, 'Directions']].filter(([u]) => safeUrl(u)).map(([u, t]) => `<a href="${esc(safeUrl(u))}" target="_blank" rel="noopener noreferrer">${t}</a>`).join(' · ') || '<span class="muted">—</span>'}</dd></div>
+            ${safeUrl(L.writeReview) ? '<div><dt>Review link</dt><dd><button class="btn sm" data-copylink>Copy</button> <span class="muted" style="font-size:12.5px">what their customers would tap in a review-request text. Handy in the demo.</span></dd></div>' : ''}
             ${p.hours ? `<div><dt>Hours</dt><dd style="white-space:pre-line;font-size:13px">${esc(p.hours)}</dd></div>` : ''}
           </dl>
           ${saved ? `<label class="f">Email${emails.length > 1 ? ` <span class="muted" style="font-weight:400">· also found: ${esc(emails.filter(e => e !== saved.email).join(', '))}</span>` : ''}<input data-k="email" value="${esc(saved.email || '')}" placeholder="${emails[0] ? esc(emails[0]) : 'Not found on their site'}" autocomplete="off"></label>` : emails.length ? `<div class="hint">Email on their site: ${esc(emails.join(', '))}</div>` : ''}
@@ -879,7 +883,7 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
         <div class="script" id="s-voicemail">${esc(sc.voicemail)}</div>
         <b style="font-size:14px">If they say…</b>
         <div class="obj">${V.objections.map(([q, r]) => `<div><i>${esc(q)}</i>${esc(r)}</div>`).join('')}</div>
-        <p class="hint">Before you pitch, call once around 10:30 or 12:30. If it goes to voicemail, open with that. Call or visit; don't cold-text. If someone asks you to stop, mark them Not interested.</p>
+        <p class="hint">Before you pitch, skim their reviews for "never called back" or "hard to reach", and call once around 10:30 or 12:30: if it goes to voicemail, open with that. Call or visit; don't cold-text. If someone asks you to stop, mark them Not interested.</p>
         ${me() === '[your name]' ? '<p class="hint">Add your first name under <b>Your details</b> and it fills in here.</p>' : ''}
       </div>
 
@@ -923,7 +927,7 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
         name: '', business: saved.name, contact: [saved.phone, saved.email].filter(Boolean).join(' · '), website: saved.website || '', app: '',
         btype: V.label, source: 'Cold call', status: auditDate ? 'Audit booked' : 'Contacted', emailed: 'Yes', emailedDate: today(), auditDate: auditDate || '',
         needs: '', findings: findings(a).map(x => x.find).join('\n'),
-        notes: [saved.notes, `From Lead Finder: fit ${a.score}/100. ${saved.address || ''}${saved.mapsUrl ? '\n' + saved.mapsUrl : ''}`, 'Starting scope is a suggestion for this kind of business; adjust it after the audit.'].filter(Boolean).join('\n\n'),
+        notes: [saved.notes, `From Lead Finder: fit ${a.score}/100. ${saved.address || ''}${saved.mapsUrl ? '\n' + saved.mapsUrl : ''}`, safeUrl((saved.links || {}).writeReview) ? `Their Google review link (for review requests): ${saved.links.writeReview}` : '', 'Starting scope is a suggestion for this kind of business; adjust it after the audit.'].filter(Boolean).join('\n\n'),
         scope: { wf: V.workflows.slice(0, 3), site: badSite ? 'landing' : '', app: false, care: false },
       });
       await writeP(saved.id, { status: 'In pipeline', requestId: row.id, followUp: '', log: [...(saved.log || []), { d: today(), t: auditDate ? `Audit booked for ${auditDate}` : 'Moved to Client Pipeline' }].slice(-50) });
@@ -969,6 +973,8 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
     const t = e.target.closest('[data-touch]'); if (t && saved) { flushNotes(); logTouch(saved, t.dataset.touch); renderPanel(); return; }
     const c = e.target.closest('[data-copy]');
     if (c) { const text = $('s-' + c.dataset.copy).textContent; const full = c.dataset.copy === 'email' ? 'Subject: ' + scripts(p, assess(p)).subject + '\n\n' + text : text; navigator.clipboard.writeText(full).then(() => { c.textContent = 'Copied'; setTimeout(() => { c.textContent = c.dataset.copy === 'email' ? 'Copy email' : 'Copy'; }, 1500); }, () => setSave('Select the text to copy it.')); return; }
+    const cl = e.target.closest('[data-copylink]');
+    if (cl) { navigator.clipboard.writeText((p.links || {}).writeReview || '').then(() => { cl.textContent = 'Copied'; setTimeout(() => { cl.textContent = 'Copy'; }, 1500); }, () => setSave('Could not copy. Open "Read reviews" instead.')); return; }
     if (e.target.closest('[data-mailto]') && saved && saved.status === 'To contact') logTouch(saved, 'Emailed');
   });
   $('pBody').addEventListener('change', e => {

@@ -22,11 +22,13 @@ const SUPABASE_KEY = 'sb_publishable_te0V9b4k8S0M1iBO0q89Rg_ziCLo9CQ';
 const PLACES_URL = 'https://places.googleapis.com/v1/places:searchText';
 // Everything a lead needs in one call. rating, userRatingCount, websiteUri, the phone and
 // the opening hours bill this as a Text Search Enterprise request (see README for the cost).
+// googleMapsLinks (reviews, write-a-review and directions links) is a Pro field, so it adds
+// nothing on top: a request is billed once, at its highest tier.
 const FIELDS = [
   'places.id', 'places.displayName', 'places.formattedAddress', 'places.shortFormattedAddress',
   'places.types', 'places.primaryType', 'places.primaryTypeDisplayName', 'places.businessStatus',
-  'places.googleMapsUri', 'places.websiteUri', 'places.nationalPhoneNumber', 'places.rating',
-  'places.userRatingCount', 'places.regularOpeningHours.weekdayDescriptions', 'nextPageToken',
+  'places.googleMapsUri', 'places.googleMapsLinks', 'places.websiteUri', 'places.nationalPhoneNumber',
+  'places.rating', 'places.userRatingCount', 'places.regularOpeningHours.weekdayDescriptions', 'nextPageToken',
 ].join(',');
 
 const SITES_PER_CALL = 3; // keeps each call inside the free plan's subrequest and CPU limits
@@ -141,6 +143,11 @@ async function search(env, body) {
       types: p.types || [],
       businessStatus: p.businessStatus || '',
       mapsUrl: p.googleMapsUri || '',
+      links: {
+        reviews: (p.googleMapsLinks && p.googleMapsLinks.reviewsUri) || '',
+        writeReview: (p.googleMapsLinks && p.googleMapsLinks.writeAReviewUri) || '',
+        directions: (p.googleMapsLinks && p.googleMapsLinks.directionsUri) || '',
+      },
       website: p.websiteUri || '',
       phone: p.nationalPhoneNumber || '',
       rating: typeof p.rating === 'number' ? p.rating : null,
@@ -291,7 +298,7 @@ function inspect(html) {
     if (seen.size < 2000) seen.add(m[1].replace(/\\\//g, '/'));
   }
   if (low.includes('/wp-content/')) seen.add('wp-content');
-  const links = [...seen].join('\n');
+  const hosts = [...seen].join('\n');
 
   // Email addresses: mailto links, then anything around an @ (anchoring on the @ is far cheaper
   // than scanning every word for a possible address).
@@ -319,8 +326,8 @@ function inspect(html) {
     mobile: /<meta[^>]+name=["']?viewport/.test(low),
     tel: /href=["']?tel:/.test(low),
     bookingWords: /book (now|online|an appointment|appointment)|schedule (now|online|an appointment|service)|request an appointment|reserve (now|online)/.test(low),
-    tools: TOOLS.filter(([, re]) => re.test(links)).map(([name, , suite]) => ({ name, suite })),
-    builder: (BUILDERS.find(([, re]) => re.test(links)) || [''])[0],
+    tools: TOOLS.filter(([, re]) => re.test(hosts)).map(([name, , suite]) => ({ name, suite })),
+    builder: (BUILDERS.find(([, re]) => re.test(hosts)) || [''])[0],
     year: years.length ? Math.max(...years) : null,
     // parked-domain pages are tiny; skip the check on real pages
     parked: low.length < 30000 && /domain (is|may be) for sale|buy this domain|parked free|this domain is parked|sedoparking|parkingcrew/.test(low),

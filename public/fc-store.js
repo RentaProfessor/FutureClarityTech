@@ -99,7 +99,7 @@
   }
   // What a new search may refresh on a business already on the list. Status, notes,
   // follow-up and history belong to the team and are never overwritten.
-  var P_FACTS = ['name', 'btype', 'address', 'phone', 'website', 'mapsUrl', 'rating', 'reviews', 'hours', 'site', 'score', 'signals'];
+  var P_FACTS = ['name', 'btype', 'address', 'phone', 'website', 'mapsUrl', 'links', 'rating', 'reviews', 'hours', 'site', 'score', 'signals'];
   var P_IF_EMPTY = ['vertical', 'area', 'email'];
 
   // demo mode: the outreach list stays in this browser

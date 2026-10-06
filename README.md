@@ -117,6 +117,9 @@ with the same dashboard code. Pick a kind of business and a neighborhood, and it
    Chains, dealerships and vet clinics are hidden by default.
 4. For each business, gives a phone opener, voicemail and email built from what
    it found, plus answers to the usual objections.
+   Google's own links (`googleMapsLinks`) sit next to it: **Read reviews**,
+   **Directions**, and their **review link**, the one their customers would tap in a
+   review request. That link also goes into the Client Pipeline notes when you book them.
 5. **Save** puts it on the **Call list**. Tap what happened after each call
    (no answer, left message, interested…) and it sets the status and the next
    follow-up date. Download it as CSV anytime.

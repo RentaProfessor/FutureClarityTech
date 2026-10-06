@@ -44,6 +44,12 @@ constraint signals_is_array check (jsonb_typeof(signals) = 'array' and pg_column
 constraint log_is_array check (jsonb_typeof(log) = 'array' and pg_column_size(log) <= 20000)
 );
 
+-- Google Maps links to the business's reviews, its review form and directions. Added after the
+-- first release, so it is added here rather than above: running this file again upgrades a table
+-- made by the earlier version.
+alter table public.prospects add column if not exists links jsonb not null default '{}'::jsonb
+check (jsonb_typeof(links) = 'object' and pg_column_size(links) <= 4000);
+
 create index if not exists prospects_follow_up_idx on public.prospects (follow_up);
 
 drop trigger if exists prospects_touch_updated_at on public.prospects;
@@ -71,14 +77,15 @@ begin
 if not public._dashboard_ok(code) then raise exception 'wrong dashboard code' using errcode = '28000'; end if;
 if jsonb_typeof(new_rows) <> 'array' or jsonb_array_length(new_rows) > 100 then raise exception 'send 1 to 100 rows' using errcode = '22023'; end if;
 return query
-insert into public.prospects as t (place_id, name, vertical, btype, address, area, phone, website, maps_url, rating, reviews, hours, site, score, signals, email, status, notes)
-select distinct on (p.place_id) p.place_id, coalesce(p.name, ''), coalesce(p.vertical, ''), coalesce(p.btype, ''), coalesce(p.address, ''), coalesce(p.area, ''), coalesce(p.phone, ''), coalesce(p.website, ''), coalesce(p.maps_url, ''), p.rating, p.reviews, coalesce(p.hours, ''), coalesce(p.site, '{}'::jsonb), coalesce(p.score, 0), coalesce(p.signals, '[]'::jsonb), coalesce(p.email, ''), coalesce(p.status, 'To contact'), coalesce(p.notes, '')
+insert into public.prospects as t (place_id, name, vertical, btype, address, area, phone, website, maps_url, links, rating, reviews, hours, site, score, signals, email, status, notes)
+select distinct on (p.place_id) p.place_id, coalesce(p.name, ''), coalesce(p.vertical, ''), coalesce(p.btype, ''), coalesce(p.address, ''), coalesce(p.area, ''), coalesce(p.phone, ''), coalesce(p.website, ''), coalesce(p.maps_url, ''), coalesce(p.links, '{}'::jsonb), p.rating, p.reviews, coalesce(p.hours, ''), coalesce(p.site, '{}'::jsonb), coalesce(p.score, 0), coalesce(p.signals, '[]'::jsonb), coalesce(p.email, ''), coalesce(p.status, 'To contact'), coalesce(p.notes, '')
 from jsonb_populate_recordset(null::public.prospects, new_rows) p
 where coalesce(btrim(p.place_id), '') <> ''
 on conflict (place_id) do update set
 name = excluded.name, btype = excluded.btype, address = excluded.address, phone = excluded.phone,
 website = excluded.website, maps_url = excluded.maps_url, rating = excluded.rating, reviews = excluded.reviews,
 hours = excluded.hours, site = excluded.site, score = excluded.score, signals = excluded.signals,
+links = case when excluded.links = '{}'::jsonb then t.links else excluded.links end,
 vertical = case when t.vertical = '' then excluded.vertical else t.vertical end,
 area = case when t.area = '' then excluded.area else t.area end,
 email = case when t.email = '' then excluded.email else t.email end
