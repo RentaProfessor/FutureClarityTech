@@ -151,8 +151,11 @@ answers when the dashboard code checks out, so it can't be used as a free web
 fetcher. If it isn't deployed, searching still works and each site shows
 "Couldn't check the website".
 
-`public/_headers` allows the page to call OpenStreetMap (two Overpass servers,
-the second as a fallback when the first is busy, and Nominatim).
+`public/_headers` allows the page to call OpenStreetMap: two Overpass servers and
+Nominatim. Private.coffee's server goes first because the main one (overpass-api.de)
+is often rate-limited. If the first hasn't answered in 8 seconds, the page asks the
+other too and uses whichever answers first. After 30 seconds it stops and says the
+servers are busy, instead of spinning.
 
 ### What it costs
 

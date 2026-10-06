@@ -712,7 +712,9 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
   }
 
   // ---------- OpenStreetMap: free, no key, called straight from this page ----------
-  const OVERPASS = ['https://overpass-api.de/api/interpreter', 'https://overpass.kumi.systems/api/interpreter'];
+  // Free map servers run by volunteers. The main one (overpass-api.de) is often rate-limited or
+  // overloaded, so Private.coffee's (no rate limit) goes first and the main one is the backup.
+  const OVERPASS = ['https://overpass.private.coffee/api/interpreter', 'https://overpass-api.de/api/interpreter'];
   const NOMINATIM = 'https://nominatim.openstreetmap.org/search';
   const MILE = 1609.34;
   const LABELS = { 'shop=car_repair': 'Auto repair shop', 'craft=car_repair': 'Auto repair', 'amenity=vehicle_inspection': 'Smog check', 'shop=tyres': 'Tire shop', 'amenity=car_wash': 'Car wash', 'craft=car_painter': 'Auto paint shop', 'shop=pet_grooming': 'Pet groomer', 'shop=pet': 'Pet store', 'amenity=veterinary': 'Veterinarian', 'shop=tattoo': 'Tattoo shop', 'shop=hairdresser': 'Hair salon', 'shop=beauty': 'Beauty salon', 'leisure=fitness_centre': 'Gym', 'leisure=sports_centre': 'Sports center', 'shop=car': 'Car dealer', 'shop=car_parts': 'Auto parts' };
@@ -728,17 +730,36 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
   const mapsSearch = (name, where) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent([name, where].filter(Boolean).join(', '))}`;
   const milesBetween = (a, b, c, d) => { const r = x => x * Math.PI / 180, h = Math.sin(r(c - a) / 2) ** 2 + Math.cos(r(a)) * Math.cos(r(c)) * Math.sin(r(d - b) / 2) ** 2; return 7917.6 * Math.asin(Math.sqrt(h)); };
 
-  async function overpass(query) {
-    let last;
-    for (const url of OVERPASS) {
-      try {
-        const r = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: 'data=' + encodeURIComponent(query) });
-        if (r.ok) return await r.json();
-        last = Object.assign(new Error('OpenStreetMap answered ' + r.status), { status: r.status });
-        if (r.status !== 429 && r.status < 500) break; // the other server would say the same
-      } catch (e) { last = e; }
-    }
-    throw last || new Error('unreachable');
+  // Ask the first server. If it hasn't answered in 8 seconds (or says no), ask the next one too
+  // and take whichever answers first. After 30 seconds, give up and say so instead of spinning.
+  function overpass(query, onSlow) {
+    return new Promise((resolve, reject) => {
+      let started = 0, failed = 0, done = false;
+      const ctrls = [], timers = [];
+      const end = (ok, v) => { if (done) return; done = true; timers.forEach(clearTimeout); ctrls.forEach(c => c.abort()); (ok ? resolve : reject)(v); };
+      const ask = () => {
+        if (done || started >= OVERPASS.length) return;
+        const c = new AbortController(), url = OVERPASS[started++];
+        ctrls.push(c);
+        if (started > 1 && onSlow) onSlow();
+        fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: 'data=' + encodeURIComponent(query), signal: c.signal })
+          .then(r => r.ok ? r.json() : Promise.reject(Object.assign(new Error('OpenStreetMap answered ' + r.status), { status: r.status })))
+          .then(data => {
+            // a search that ran out of time comes back as 200 with a "runtime error" remark
+            if (/runtime error/i.test(data.remark || '') && !(data.elements || []).length) throw Object.assign(new Error(data.remark), { status: 504 });
+            end(true, data);
+          })
+          .catch(e => {
+            if (done) return;
+            if (e.status === 400) return end(false, e); // a broken query fails on every server
+            if (++failed >= OVERPASS.length) return end(false, e);
+            ask(); // this one said no: ask the next now
+          });
+        timers.push(setTimeout(ask, 8000));
+      };
+      timers.push(setTimeout(() => end(false, Object.assign(new Error('OpenStreetMap took too long'), { error: 'timeout' })), 30000));
+      ask();
+    });
   }
 
   // A Valley neighborhood from the list, or anything else looked up once and remembered.
@@ -748,7 +769,13 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
     if (hit) return { lat: hit[1], lon: hit[2], label: hit[0] };
     let cache = {}; try { cache = JSON.parse(localStorage.getItem('fc-leads-places') || '{}') || {}; } catch (e) {}
     if (cache[key]) return cache[key];
-    const r = await fetch(`${NOMINATIM}?format=jsonv2&limit=1&countrycodes=us&q=${encodeURIComponent(text.trim())}`, { headers: { Accept: 'application/json' } });
+    const c = new AbortController(), t = setTimeout(() => c.abort(), 10000);
+    let r;
+    try {
+      r = await fetch(`${NOMINATIM}?format=jsonv2&limit=1&countrycodes=us&q=${encodeURIComponent(text.trim())}`, { headers: { Accept: 'application/json' }, signal: c.signal });
+    } catch (e) {
+      throw Object.assign(new Error('place lookup failed'), { error: e.name === 'AbortError' ? 'timeout' : '' });
+    } finally { clearTimeout(t); }
     if (!r.ok) throw Object.assign(new Error('place lookup failed'), { status: r.status });
     const [first] = await r.json();
     if (!first) throw Object.assign(new Error('place not found'), { error: 'notfound' });
@@ -798,10 +825,13 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
     const radius = prefs.radius || 3;
     prefs.area = area; prefs.v = V.k; savePrefs();
     searching = true; results = []; lastQ = { v: V.k, area, radius, what: custom }; $('findNotice').innerHTML = ''; renderResults();
+    const waiting = h => { if (searching) $('results').innerHTML = `<div class="empty"><h3>Still looking…</h3>${h}</div>`; };
+    const slow = setTimeout(() => waiting('OpenStreetMap\'s free servers can be slow. If this one doesn\'t answer soon, a backup server is asked too.'), 4000);
     try {
       const loc = await locate(area);
       const around = `(around:${Math.round(radius * MILE)},${loc.lat.toFixed(5)},${loc.lon.toFixed(5)})`;
-      const data = await overpass(`[out:json][timeout:25];(${sel.map(x => x + around + ';').join('')});out tags center 400;`);
+      const data = await overpass(`[out:json][timeout:25];(${sel.map(x => x + around + ';').join('')});out tags center 400;`,
+        () => waiting('The first map server is slow, so a backup server is being asked too. This can take up to half a minute.'));
       const seen = new Set();
       results = (data.elements || []).map(el => fromOsm(el, loc)).filter(Boolean)
         .filter(p => { const k = norm(p.name) + '|' + (digits(p.phone) || norm(p.short)); if (seen.has(k)) return false; seen.add(k); return true; })
@@ -813,12 +843,14 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
     } catch (e) {
       searchError(e);
     }
+    clearTimeout(slow);
     searching = false; renderResults();
   }
 
   function searchError(e) {
     let html;
     if (e.error === 'notfound') html = '<h3>Couldn\'t find that place</h3><p class="hint">Try a neighborhood and state, like "Van Nuys, CA", or tap one of the Valley areas.</p>';
+    else if (e.error === 'timeout') html = '<h3>The free map servers are busy</h3><p class="hint">OpenStreetMap didn\'t answer within 30 seconds. Try again in a minute, or pick a smaller distance.</p>';
     else if (e.status === 429) html = '<h3>OpenStreetMap is busy</h3><p class="hint">Too many searches in a row. Wait a minute and try again.</p>';
     else html = '<h3>Couldn\'t search right now</h3><p class="hint">OpenStreetMap didn\'t answer. Check your connection and try again in a minute.</p>';
     $('findNotice').innerHTML = `<div class="notice">${html}</div>`;
