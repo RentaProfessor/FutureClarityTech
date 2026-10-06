@@ -380,14 +380,17 @@ function inspect(html, hint, host, robotsHeader) {
   // that keeps the site out of Google altogether (builders leave it on by mistake).
   const end = low.indexOf('</head>');
   const head = low.slice(0, end > 0 ? Math.min(end, 60000) : 20000);
-  let desc = 0, viewport = false, og = false, noindex = /noindex/.test(String(robotsHeader).toLowerCase());
+  let desc = 0, viewport = false, noZoom = false, og = false, noindex = /noindex/.test(String(robotsHeader).toLowerCase());
   for (const m of head.matchAll(/<meta\b[^>]*>/g)) {
     const tag = m[0], key = (tag.match(/\b(?:name|property)\s*=\s*["']?([\w:.-]+)/) || [])[1];
     if (!key) continue;
     const c = tag.match(/\bcontent\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/), val = c ? c[1] ?? c[2] ?? c[3] ?? '' : '';
     if (key === 'description') desc = decodeEntities(val).trim().length;
     else if (key === 'robots' || key === 'googlebot') noindex = noindex || val.includes('noindex');
-    else if (key === 'viewport') viewport = true;
+    else if (key === 'viewport') {
+      viewport = true;
+      noZoom = /user-scalable\s*=\s*(?:no|0)\b|maximum-scale\s*=\s*1(?:\.0*)?(?![.\d])/.test(val); // zooming blocked: an accessibility failure
+    }
     else if (key === 'og:title' || key === 'og:image') og = true;
   }
   let schema = low.includes('schema.org/localbusiness') || low.includes('schema.org/autorepair');
@@ -401,6 +404,30 @@ function inspect(html, hint, host, robotsHeader) {
   }
   if (!extras.analytics && (low.includes("fbq('init'") || low.includes('fbq("init"'))) extras.analytics = ['Meta Pixel'];
   if (!extras.form && low.includes('<form') && /<textarea|type=["']?(?:email|tel)\b|name=["']?(?:e-?mail|phone|message)\b/.test(low)) extras.form = ['form'];
+
+  // The numbers the page's call buttons dial, so the audit can name one that isn't the listing's.
+  const phones = [];
+  for (const m of low.matchAll(/href\s*=\s*["']?tel:([^"'>]{7,40})/g)) {
+    const d = decodeSafe(m[1]).split(/[;,pw]/)[0].replace(/\D/g, '').replace(/^1(?=\d{10}$)/, '');
+    if (d.length === 10 && !phones.includes(d)) phones.push(d);
+    if (phones.length >= 3) break;
+  }
+  // Images with no description at all (alt text): screen readers and image search skip them.
+  // alt="" is a deliberate "decorative" mark, and 1-pixel tracking images don't count.
+  let imgs = 0, noAlt = 0;
+  for (const m of low.matchAll(/<img\b[^>]*>/g)) {
+    if (/\b(?:width|height)\s*=\s*["']?1["'\s/>]/.test(m[0])) continue;
+    imgs++;
+    if (!/\balt\s*=/.test(m[0])) noAlt++;
+    if (imgs >= 500) break;
+  }
+  // Template filler ("lorem ipsum") left where visitors can read it: in the page's text, not in a
+  // script, a style or a tag's attributes.
+  let filler = false;
+  for (let i = low.indexOf('lorem ipsum'), k = 0; i >= 0 && k < 5 && !filler; i = low.indexOf('lorem ipsum', i + 11), k++) {
+    filler = low.lastIndexOf('<script', i) <= low.lastIndexOf('</script', i) && low.lastIndexOf('<style', i) <= low.lastIndexOf('</style', i) &&
+      low.lastIndexOf('<', i) < low.lastIndexOf('>', i);
+  }
 
   // The business's own name, area and phone on the page (hints from the Lead Finder). "Not there"
   // only counts when the whole page was read; a cut-off page says nothing either way.
@@ -436,6 +463,11 @@ function inspect(html, hint, host, robotsHeader) {
     emails: [...emails].slice(0, 3),
     seo: { desc, noindex, schema, og, h1: low.includes('<h1') },
     extras,
+    phones,
+    imgs,
+    noAlt,
+    ...(noZoom ? { noZoom } : {}),
+    ...(filler ? { filler } : {}),
     ...(onPage ? { onPage } : {}),
     ...(notMine ? { notMine } : {}),
     full,

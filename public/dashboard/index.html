@@ -486,7 +486,7 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
   }
   const A = ['name', 'business', 'contact', 'website', 'app', 'btype', 'needs'];
   let addScope = null, addEst = '';
-  function openAdd() { addScope = null; addEst = ''; $('a-scope').hidden = true; A.forEach(k => $('a-' + k).value = ''); $('a-paste').value = ''; $('a-source').value = 'Website form'; $('a-err').hidden = true; $('addLayer').hidden = false; document.body.style.overflow = 'hidden'; setTimeout(() => $('a-paste').focus(), 30); }
+  function openAdd() { addScope = null; addEst = ''; $('a-scope').hidden = true; A.forEach(k => $('a-' + k).value = ''); $('a-paste').value = ''; $('a-source').value = 'Website form'; $('a-err').hidden = true; $('addLayer').hidden = false; document.body.style.overflow = 'hidden'; setTimeout(() => { if (!$('addLayer').contains(document.activeElement)) $('a-paste').focus(); }, 30); }
   function closeAdd() { $('addLayer').hidden = true; if ($('reqLayer').hidden) document.body.style.overflow = ''; }
   $('a-paste').addEventListener('input', e => {
     const p = parsePaste(e.target.value); A.forEach(k => { if (p[k] && $('a-' + k)) $('a-' + k).value = p[k]; });
