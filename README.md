@@ -28,6 +28,8 @@ npm run preview  # preview the production build
 - `public/`: favicons, Cloudflare `_headers` and `_redirects`, `robots.txt`
 - `functions/_middleware.js`: 301s any `*.pages.dev` hostname to the custom
   domain
+- `functions/api/prospects.js`: the Lead Finder's website checker. See "Lead
+  Finder" below.
 
 ## SEO notes
 
@@ -44,7 +46,7 @@ These are load-bearing. Read the comments before changing any of them.
 - `public/_redirects` holds the 301 from the retired `/portfolio`. Never add a
   `/*  /index.html  200` catch-all; that produces soft 404s.
 - `public/_headers` sets the CSP. `connect-src` lists the only hosts the pages may
-  call (the Supabase project). Extensionless clean URLs do not
+  call (the Supabase project, and OpenStreetMap for the Lead Finder). Extensionless clean URLs do not
   match the `/*.html` cache rule, so any new route needs its own entry.
 - `Layout.astro` emits `Organization` and `WebSite` JSON-LD. Keep the name,
   phone and email byte-identical to the Google Business Profile listing. Add a
@@ -100,3 +102,100 @@ requests stay in the visitor's own browser.
 `/plan` and `/dashboard/` are sent with `X-Robots-Tag: noindex` from
 `public/_headers`, and as static files in `public/` they are not in the
 sitemap.
+
+## Lead Finder: find businesses to call
+
+**`/dashboard/leads.html`** (button **Find leads** on the Client Pipeline) opens
+with the same dashboard code. Pick a kind of business, a neighborhood and a
+distance (1, 3, 5 or 10 miles), and it:
+
+1. Searches **OpenStreetMap** for matching businesses, straight from the page.
+   It's free, needs no key or account, and the Valley neighborhoods are built in.
+   Any other place typed in is looked up once (OpenStreetMap's Nominatim) and
+   remembered on that device.
+2. Opens each business's website once and checks what a cold call needs: a
+   Facebook or booking-app page instead of a site, a broken or parked site, no
+   online booking, not built for phones, "Not secure", an old copyright year,
+   which booking or shop software they already use, and any email address.
+3. Scores each one 0–100 (**Hot** 60+, **Warm** 45+) and sorts the best first.
+   Chains (businesses OpenStreetMap tags with a brand), dealerships and vet clinics
+   are hidden by default.
+4. For each business, gives a phone opener, voicemail and email built from what
+   it found, plus answers to the usual objections.
+5. **Save** puts it on the **Call list**. Tap what happened after each call
+   (no answer, left message, interested…) and it sets the status and the next
+   follow-up date. Download it as CSV anytime.
+6. **Book audit → Client Pipeline** creates the request (source *Cold call*) with
+   what we found already in the proposal's "What we found" and a suggested
+   starting scope.
+
+**What OpenStreetMap doesn't have.** It has no ratings or review counts, and it
+misses some shops and some websites and phone numbers. That's why the page says
+"No website found" (never "no website") and never guesses at reviews. Each business has
+**Look up on Google Maps** (an ordinary link, no key) and boxes for the Google
+rating, reviews, website and phone. Type what you see there and the score and
+scripts update. A typed-in website gets checked like any other. Shops that aren't
+on the map at all go in with **+ Add a business**.
+
+### Setup
+
+Run `supabase/prospects.sql` in Supabase > SQL Editor, after `schema.sql` and
+`dashboard_code.sql`. It's safe to re-run. Like `requests`, the table can only be reached
+through `prospects_*` functions that require the dashboard code. There's nothing
+else to set up: no keys, accounts or Cloudflare settings.
+
+The website check is `functions/api/prospects.js`, a Cloudflare Pages Function
+like `functions/_middleware.js`, deployed with the site. It exists only because
+browsers won't let a page read another website. It needs no settings, and it only
+answers when the dashboard code checks out, so it can't be used as a free web
+fetcher. If it isn't deployed, searching still works and each site shows
+"Couldn't check the website".
+
+`public/_headers` allows the page to call OpenStreetMap (two Overpass servers,
+the second as a fallback when the first is busy, and Nominatim).
+
+### What it costs
+
+Nothing. OpenStreetMap is free; please keep searches to what you need, as its
+servers are run by volunteers. The website checks run on Cloudflare's free plan,
+3 sites per call, sized for its 50-subrequest and 10 ms CPU limits. Listings are
+© OpenStreetMap contributors, credited under the results.
+
+### Why these business types
+
+The order on the page is the recommendation, from research in October 2026:
+
+- **Auto repair (best fit):** up to 21% of calls to auto service businesses go
+  unanswered (Marchex), and the average repair order is about $479 (Tekmetric
+  TM-500). The owner is usually at the counter. Nearly all shops already run shop
+  software, so sell what sits alongside it (missed-call text-back, review requests,
+  service-due and smog-due nudges, an owner dashboard), not a replacement. Shops
+  already pay $294–$699 a month for marketing add-ons like Steer and Kukui.
+- **Pet groomers:** can't answer with a dog on the table. Regulars return every
+  4–8 weeks, no-shows run 5–15%, and few agencies call on them. Smaller tickets
+  (about $98 for a full groom in LA).
+- **Auto detailing & tint:** solo crews, slow quotes for coating, PPF and tint,
+  light software use, and they sit on the same streets as the repair shops.
+- **Lower priority:** barbershops and salons (Booksy, Squire and Vagaro already
+  send reminders, and many barbers rent their own chair). Med spas, dentists and
+  HVAC have the money but are crowded with agencies and $250–500/month software,
+  and the medical ones add HIPAA.
+
+To change the list, the scripts or the typical ticket used in the ROI line, edit
+`VERTICALS` at the top of the script in `public/dashboard/leads.html`. `osm` is
+each type's OpenStreetMap search (map tags such as `shop=car_repair`, in Overpass
+syntax), and `workflows` must use the Client Pipeline's workflow names.
+
+### Outreach rules (practical, not legal advice)
+
+- **Calls and visits:** fine to businesses. Call by hand, 8am–9pm. No
+  autodialers, prerecorded messages or AI voices. Keep your own do-not-call
+  list: mark anyone who asks **Not interested** and don't call again.
+- **Don't cold-text.** Text only after someone asks you to ("text me the demo").
+  The TCPA and California Business & Professions Code §17538.41 both restrict
+  unsolicited texts.
+- **Email (CAN-SPAM):** honest subject, a real postal address, and a working
+  opt-out honored within 10 business days. The emails include the opt-out line.
+  Add your mailing address under **Your details** on the Lead Finder.
+- **California:** announce it if you record a call (all-party consent).
+

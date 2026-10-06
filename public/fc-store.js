@@ -71,6 +71,71 @@
     remove: function (id) { save(rows().filter(function (q) { return q.id !== id; })); return Promise.resolve(); }
   };
 
+  // ------------------------------------------------------------------ lead finder: shared bits
+  // Prospects (the Lead Finder's outreach list, /dashboard/leads.html) are snake_case in the
+  // database and camelCase here. Empty dates and numbers go to the database as null.
+  function camel(k) { return k.replace(/_([a-z])/g, function (m, c) { return c.toUpperCase(); }); }
+  function snake(k) { return k.replace(/[A-Z]/g, function (c) { return '_' + c.toLowerCase(); }); }
+  var P_NULLS = { last_touch: 1, follow_up: 1, request_id: 1, rating: 1, reviews: 1 };
+  function pToDb(o) {
+    var r = {};
+    Object.keys(o).forEach(function (k) {
+      if (k === 'id' || k === 'createdAt' || k === 'updatedAt') return;
+      var s = snake(k), v = o[k];
+      if (P_NULLS[s] && (v === '' || v === undefined)) v = null;
+      r[s] = v;
+    });
+    return r;
+  }
+  function pFromDb(row) {
+    var o = {};
+    Object.keys(row).forEach(function (k) {
+      var v = row[k];
+      if (v === null && k !== 'rating' && k !== 'reviews') v = '';
+      if (k === 'rating' && v !== null) v = Number(v);
+      o[camel(k)] = v;
+    });
+    return o;
+  }
+  // What a new search may refresh on a business already on the list. Status, notes,
+  // follow-up and history belong to the team and are never overwritten.
+  var P_FACTS = ['name', 'btype', 'address', 'phone', 'website', 'mapsUrl', 'links', 'rating', 'reviews', 'hours', 'site', 'score', 'signals'];
+  var P_IF_EMPTY = ['vertical', 'area', 'email'];
+
+  // demo mode: the outreach list stays in this browser
+  var PKEY = 'fc-demo-prospects';
+  function prows() { try { return JSON.parse(get(PKEY) || '[]'); } catch (e) { return []; } }
+  function psave(r) { set(PKEY, JSON.stringify(r)); }
+  function newId() { return 'p' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6); }
+  demo.prospects = {
+    list: function () { return Promise.resolve(prows()); },
+    save: function (list) {
+      var all = prows(), now = new Date().toISOString(), out = [];
+      list.forEach(function (n) {
+        if (!n.placeId) return;
+        var x = all.filter(function (q) { return q.placeId === n.placeId; })[0];
+        if (x) {
+          P_FACTS.forEach(function (k) { if (k in n) x[k] = n[k]; });
+          P_IF_EMPTY.forEach(function (k) { if (!x[k] && n[k]) x[k] = n[k]; });
+          x.updatedAt = now;
+        } else {
+          x = Object.assign({ status: 'To contact', touches: 0, notes: '', log: [], email: '', lastTouch: '', followUp: '', requestId: '', site: {}, signals: [] }, n, { id: newId(), createdAt: now, updatedAt: now });
+          all.push(x);
+        }
+        out.push(JSON.parse(JSON.stringify(x)));
+      });
+      psave(all); return Promise.resolve(out);
+    },
+    update: function (id, patch) {
+      var all = prows(), x = all.filter(function (q) { return q.id === id; })[0];
+      if (!x) return Promise.reject(new Error('not found'));
+      Object.assign(x, patch, { updatedAt: new Date().toISOString() }); psave(all); return Promise.resolve();
+    },
+    remove: function (id) { psave(prows().filter(function (q) { return q.id !== id; })); return Promise.resolve(); }
+  };
+  // Website checks need the live site (the checker asks Supabase for the dashboard code), so demo mode says so.
+  demo.leads = function () { var e = new Error('demo mode'); e.error = 'demo'; return Promise.reject(e); };
+
   // ------------------------------------------------------------------ live mode (Supabase)
   // The dashboard opens with a code, checked by the database (see supabase/dashboard_code.sql).
   // The public key alone can only add a request; reading or editing needs the code.
@@ -125,7 +190,27 @@
     },
     add: function (row) { return rpc('dashboard_add', { code: getCode(), new_row: toDb(row) }).then(fromDb); },
     update: function (id, patch) { return rpc('dashboard_update', { code: getCode(), row_id: id, patch: toDb(patch) }); },
-    remove: function (id) { return rpc('dashboard_delete', { code: getCode(), row_id: id }); }
+    remove: function (id) { return rpc('dashboard_delete', { code: getCode(), row_id: id }); },
+
+    // Lead Finder outreach list (supabase/prospects.sql). A 404 means that file hasn't been run yet.
+    prospects: {
+      list: function () { return rpc('prospects_rows', { code: getCode() }).then(function (r) { return (r || []).map(pFromDb); }); },
+      save: function (list) { return rpc('prospects_save', { code: getCode(), new_rows: list.map(pToDb) }).then(function (r) { return (r || []).map(pFromDb); }); },
+      update: function (id, patch) { return rpc('prospects_update', { code: getCode(), row_id: id, patch: pToDb(patch) }); },
+      remove: function (id) { return rpc('prospects_delete', { code: getCode(), row_id: id }); }
+    },
+    // Website checks run in functions/api/prospects.js: a browser can't read other websites itself.
+    leads: function (body) {
+      return fetch('/api/prospects', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(Object.assign({}, body, { code: getCode() })) })
+        .then(function (r) {
+          return r.json().catch(function () { return {}; }).then(function (j) {
+            if (r.ok) return j;
+            var e = new Error(j.message || j.error || 'Request failed (' + r.status + ')');
+            e.status = r.status; e.error = j.error || ''; e.reason = j.reason || ''; e.detail = j.message || '';
+            throw e;
+          });
+        });
+    }
   };
 
   window.FCStore = live ? liveStore : demo;
