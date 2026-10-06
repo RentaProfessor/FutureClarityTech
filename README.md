@@ -117,10 +117,10 @@ distance (1, 3, 5 or 10 miles), and it:
    Overture Maps open data, below). It's instant and needs no outside server, key
    or account. Any Valley neighborhood, city or ZIP code works, with suggestions
    as you type.
-2. Opens each business's website once and checks what a cold call needs: a
-   Facebook or booking-app page instead of a site, a broken or parked site, no
-   online booking, not built for phones, "Not secure", an old copyright year,
-   which booking or shop software they already use, and any email address.
+2. Opens each business's website once and checks what a cold call needs (see
+   "The website check" below): whether it's a real website at all, phones,
+   booking, "Not secure", an old copyright year, the basics Google looks for,
+   which software they already use, and any email address.
 3. Scores each one 0–100 (**Hot** 60+, **Warm** 45+) and sorts the best first.
    Chains (listings with a brand, or a known chain name), dealerships and vet
    clinics are hidden by default. Results show 150 at a time.
@@ -143,17 +143,53 @@ reviews, website and phone. Type what you see there and the score and scripts
 update. A typed-in website gets checked like any other. Shops that aren't listed
 go in with **+ Add a business**.
 
+### The website check
+
+Many website links in the business list are stale, so the check first decides
+whether the address is a real website at all:
+
+- **For sale or parked.** A redirect to a domain marketplace or registrar
+  (GoDaddy, Afternic, Sedo, HugeDomains, Namecheap and others) or parking code on
+  the page (GoDaddy's parking page, ad-parking scripts). "For sale" is only said
+  when the page or marketplace says so; otherwise it's a parking page, which can
+  also be a domain the owner never connected.
+- **Expired or not registered.** When a site is down or parked, the check asks
+  the domain's registry (RDAP, public and free): not registered at all, expired
+  or on hold, or pointed at a parking service.
+- **Placeholder.** "Coming soon", a web host's default page, "account
+  suspended", "website expired", a builder's "not connected" page, a redirect to
+  the host's homepage, or a blank page.
+- **Someone else's site.** A real page that never mentions the business's name
+  or its trade (a law firm on an auto shop's listing). A rebranded shop still
+  mentions its trade, so it isn't flagged.
+- A Facebook, booking-app or directory page (Yelp, Hub.biz, Yellow Pages...)
+  instead of a site, a free builder address (name.wixsite.com), and a broken site.
+
+For a real site it also checks the basics Google looks for: a page title that
+isn't just "Home", a description, a "noindex" that hides the site, business
+details for Google (structured data), and whether the page mentions the business's
+area and shows the phone on its listing. "Not on the page" only counts when the
+whole page was read. It also notes other software (analytics, chat, payments,
+email, review widgets, app store links, forms) for the audit's suggestions.
+
+The Lead Finder sends each business's name, area and phone along with its
+website for those checks. The checks run within the free plan's limits: about 2
+ms of CPU per page, under 7 ms for a full call.
+
 ### The downloadable audit
 
-Saved businesses get **Download audit (PDF)**: one or two pages, branded, written
-for the owner. It has:
+Saved businesses get **Download audit (PDF)**: branded, written for the owner,
+usually two pages: what we found, then what we'd do. It has:
 
 - How many checks passed, and the three biggest openings.
-- Every check with a pass, fail or warning and a plain-English reason: website (or a
-  Facebook or booking page instead of one), works on phones, online booking,
-  tap-to-call, "Not secure", the copyright year, speed, and Google reviews.
-- Three things we'd set up for that kind of business, with a website first when
-  the site is the problem.
+- The checks in three groups (your website, getting found on Google, turning
+  visitors into customers). Problems get a plain-English reason; what's fine is
+  a short list of ticks.
+- Three things we'd set up for that kind of business: a website first when the
+  site is the problem, then getting found on Google, then the automations.
+- "More we could build for you": other things that fit what the site is missing,
+  such as invoices and payment reminders, a quote form, a text-us button,
+  visitor tracking or an app tune-up.
 - What one missed call is worth (the same estimate as the Lead Finder's).
 - The next step (a free in-person audit) and your sign-off from **Your details**.
 

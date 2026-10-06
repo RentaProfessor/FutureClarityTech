@@ -537,6 +537,19 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
     .replace(/,\s*/g, ', ')
     .replace(/\boff\b/, 'closed')).filter(Boolean).join('\n');
 
+  // What a placeholder page means: [short line, what we found (after "Your web address, x.com,")].
+  const PLACEHOLDER = {
+    'coming soon': ['Website is just "coming soon"', 'only shows a "coming soon" page'],
+    'default page': ["Website is a host's default page", "shows your web host's default page instead of a website"],
+    suspended: ['Website account is suspended', 'shows an "account suspended" page from the web host, usually over an unpaid bill'],
+    expired: ['Website plan has expired', 'shows a "website expired" page from the site builder or host'],
+    'not connected': ["Web address isn't connected to a site", "isn't connected to a website; the site builder shows a setup page instead"],
+    'host home': ["Web address goes to the host's homepage", "sends visitors to {by}'s homepage instead of your website"],
+    unavailable: ['Website says it\'s unavailable', 'says the site is currently unavailable'],
+    blank: ['Website is a blank page', 'shows an empty page with nothing about your business'],
+  };
+  const GENERIC_TITLE = /^(home|home page|homepage|welcome|index|untitled|my site|new site)$/i;
+
   function assess(p) {
     const V = vOf(p.vertical), biz = p.name || 'the business';
     const s = p.site && p.site.kind ? p.site : (p.website ? siteCache.get(p.website) : null);
@@ -554,9 +567,13 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
     if (!p.website) add('nosite', 25, 'No website found', `I couldn't find a website for ${biz}. Without one, people who look you up can only call, and if nobody picks up they try the next ${V.noun}.`);
     else if (!s) add('checking', 0, 'Checking website…');
     else if (s.kind === 'profile') add('profile', 22, `Website is a ${s.profile.replace(/ \(.*/, '')}`, `Your website link on Google goes to a ${s.profile.replace(/ \(.*/, '')}, not a site of your own.`);
+    else if (s.kind === 'unregistered') add('gone', 25, "Web address isn't registered", `Your web address, ${hostOf(p.website)}, isn't registered to anyone anymore, so it doesn't load and anyone could buy it.`);
+    else if (s.kind === 'expired') add('gone', 25, 'Domain registration expired', `Your web address, ${hostOf(p.website)}, has expired, so your website doesn't come up anymore.`);
+    else if (s.kind === 'parked' || s.parked) add('parked', 25, `Website domain ${s.sale ? 'is for sale' : 'shows a parking page'}${s.by ? ` (${s.by})` : ''}`, `Your web address, ${hostOf(p.website)}, shows ${s.sale ? 'a "for sale" page' : 'a parking page'}${s.by ? ` from ${s.by}` : ''} instead of your business.`);
+    else if (s.kind === 'placeholder') { const [t, find] = PLACEHOLDER[s.reason] || PLACEHOLDER.blank; add('placeholder', 25, t, `Your web address, ${hostOf(p.website)}, ${find.replace('{by}', s.by || 'the hosting company')}.`); }
     else if (s.kind === 'down') add('down', 25, 'Website is broken', `Your website didn't load when I tried it (${s.error || 'error'}).`);
     else if (s.kind !== 'site') add('unknown', 0, "Couldn't check the website");
-    else if (s.parked) add('parked', 25, 'Website domain is parked', 'Your web address shows a "domain for sale" page instead of your business.');
+    else if (s.notMine) add('notmine', 20, "Website doesn't mention them", `The website on your listing, ${hostOf(s.finalUrl || p.website)}, doesn't mention ${biz}, so it may not be yours anymore.`);
     else {
       if (s.thin) add('thin', 10, 'Website is nearly empty', 'Your website has almost nothing on it.');
       const tools = s.tools || [], suite = tools.find(t => t.suite);
@@ -568,6 +585,16 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
       if (s.year && s.year <= YEAR - 3) add('stale', 8, `Site footer says ${s.year}`, `Your website's footer says ${s.year}, so it can look out of date to new customers.`);
       if (s.mobile && !s.tel) add('notel', 4, 'No tap-to-call button', "There's no tap-to-call button on your website.");
       if (s.ms > 5000) add('slow', 5, `Site is slow (${Math.round(s.ms / 1000)}s)`, `Your website took about ${Math.round(s.ms / 1000)} seconds to load.`);
+      if (s.freeHost) add('freehost', 6, `Site is on a free ${s.freeHost} address`, `Your website is on a free ${s.freeHost} address (${hostOf(s.finalUrl || p.website)}) instead of a web address of your own.`);
+      // Google basics (checks from before these existed have no seo field)
+      const g = s.seo, area = placesOf(p)[0];
+      if (g && g.noindex) add('noindex', 12, 'Site is hidden from Google', 'Your website is set to hide from Google (a "noindex" setting), so it doesn\'t show up in search.');
+      else if (g) {
+        const gaps = [!s.title ? 'no page title' : GENERIC_TITLE.test(s.title) ? `a page title that just says "${s.title}"` : '', !g.desc && 'no description for Google',
+          s.onPage && s.onPage.area === false && area && `no mention of ${area}`, !g.schema && 'no business details for Google'].filter(Boolean);
+        if (gaps.length >= 2) add('seo', 6, 'Weak on Google basics', `Your website is missing a few basics that help Google show it to people nearby: ${gaps.join(', ')}.`);
+      }
+      if (s.onPage && s.onPage.phone === false && p.phone) add('napphone', 3, "Listing's phone isn't on their site", `The phone number on your listing, ${p.phone}, isn't on your website, and Google trusts a business more when its details match everywhere.`);
     }
 
     const known = v => v !== null && v !== undefined && v !== '';
@@ -596,7 +623,12 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
       nosite: `I was looking up ${V.plural} near you and couldn't find a website for ${biz}. Without one, the only way new customers can reach you is a phone call.`,
       profile: 'I noticed your Google listing sends people to a social page instead of a website of your own.',
       down: 'I tried your website and it didn\'t load for me, so I wanted to give you a heads-up.',
-      parked: 'I tried your website and it\'s showing a "domain for sale" page.',
+      parked: /for sale/.test((a.sig.find(x => x.k === 'parked') || {}).t || '') ? 'I tried your website and it\'s showing a "domain for sale" page.' : 'I tried your website and it\'s showing a parking page instead of your business.',
+      gone: `I tried your website and ${hostOf(p.website)} doesn't come up anymore. It looks like the domain lapsed.`,
+      placeholder: 'I tried your website and it only shows a placeholder page, nothing about your business.',
+      notmine: `I clicked the website on your Google listing and it goes to a page that doesn't mention ${biz}.`,
+      noindex: 'I noticed your website is set to hide from Google, so it won\'t come up when people search for you.',
+      seo: `I was looking up ${V.plural} near you, and your website is missing a few basics that help Google show it to people nearby.`,
       nobook: 'I was on your website and there\'s no way for customers to book online.',
       nomobile: 'I pulled up your website on my phone and it\'s hard to use on a small screen.',
       noreviews: `I noticed ${biz} doesn't have any Google reviews yet.`,
@@ -609,7 +641,7 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
     const opener = `Hi, is this the owner? ... Great. My name is ${me()}, I'm with FutureClarity, we're local here in the Valley.\n\n${hook} ${V.offer}\n\nCould I stop by for 10 minutes this week and show you a quick demo? It's free, and you'd see it working before you pay anything.`;
     const callback = new Date(workdays(2) + 'T12:00').toLocaleDateString('en-US', { weekday: 'long' });
     const voicemail = `Hi, this is ${me()} with FutureClarity Technologies, calling for the owner of ${biz}. ${V.vm} I'll try you again ${callback}, or you can reach me at ${PHONE}. Again, ${me()}, ${PHONE}. Thanks!`;
-    const SUBJ = { nosite: `${biz} online`, profile: `${biz}'s website`, down: `${biz}'s website is down`, parked: `${biz}'s website`, nobook: `Online booking for ${biz}`, nomobile: `${biz}'s website on phones`, noreviews: `${biz}'s Google reviews`, fewreviews: `${biz}'s Google reviews`, somereviews: `${biz}'s Google reviews`, lowrating: `${biz}'s Google rating` };
+    const SUBJ = { nosite: `${biz} online`, profile: `${biz}'s website`, down: `${biz}'s website is down`, parked: `${biz}'s website`, gone: `${biz}'s web address`, placeholder: `${biz}'s website`, notmine: `The website on ${biz}'s listing`, noindex: `${biz} on Google`, seo: `${biz} on Google`, nobook: `Online booking for ${biz}`, nomobile: `${biz}'s website on phones`, noreviews: `${biz}'s Google reviews`, fewreviews: `${biz}'s Google reviews`, somereviews: `${biz}'s Google reviews`, lowrating: `${biz}'s Google rating` };
     const subject = (top[0] && SUBJ[top[0].k]) || `Quick idea for ${biz}`;
     const lines = top.slice(0, 3).map(x => '- ' + x.find).join('\n');
     const addr = (prefs.addr || '').trim();
@@ -637,16 +669,20 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
   const inPipeline = p => (digits(p.phone).length === 10 && pipePhones.has(digits(p.phone))) || pipeNames.has(norm(p.name));
 
   // ---------- website checks: 3 per call, 2 calls at a time ----------
+  // Each check also looks for the business's own name, area and phone on its page.
+  const siteHints = new Map(); // url → { name, places, phone }
+  const placesOf = p => { const parts = String(p.address || '').split(',').map(x => x.trim()), i = parts.findIndex(x => /^CA\b/i.test(x)); return [...new Set([i > 0 ? parts[i - 1] : '', p.area || ''].filter(x => x && !/^\d+$/.test(x)))]; };
+  const hintFor = p => ({ name: p.name || '', places: placesOf(p), phone: p.phone || '' });
   const siteQueue = []; let siteBusy = 0;
-  function queueSites(urls) {
-    urls.forEach(u => { if (u && !siteCache.has(u) && !siteQueue.includes(u)) siteQueue.push(u); });
+  function queueSites(list) {
+    list.forEach(p => { const u = p.website; if (!u) return; siteHints.set(u, hintFor(p)); if (!siteCache.has(u) && !siteQueue.includes(u)) siteQueue.push(u); });
     pumpSites();
   }
   function pumpSites() {
     while (siteBusy < 2 && siteQueue.length) {
       const batch = siteQueue.splice(0, 3); siteBusy++;
       batch.forEach(u => siteCache.set(u, null));
-      store.leads({ action: 'sites', urls: batch })
+      store.leads({ action: 'sites', urls: batch, hints: batch.map(u => siteHints.get(u) || null) })
         .then(r => (r.results || []).forEach(x => siteCache.set(x.url, { ...x, at: today() })))
         .catch(e => { if (e.status === 401) store.signOut(); })
         .then(() => {
@@ -825,7 +861,7 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
     if (!results.length) return;
     const all = visibleResults(), rows = all.slice(0, shown);
     // check the websites of what's on screen, most promising first
-    queueSites(rows.map(x => x.p).filter(p => p.website && !(byPlace.get(p.placeId)?.site?.kind)).map(p => p.website));
+    queueSites(rows.map(x => x.p).filter(p => p.website && !(byPlace.get(p.placeId)?.site?.kind)));
     const hot = all.filter(x => x.a.level === 'Hot' && !x.saved).length;
     const checking = rows.filter(x => x.a.pending).length;
     $('rTitle').textContent = lastQ.v === 'custom' ? `${all.length} matches for "${lastQ.what}"` : `${all.length} ${vOf(lastQ.v).label.toLowerCase()} businesses`;
@@ -895,7 +931,7 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
   function loadList() {
     store.prospects.list().then(rows => {
       plist = rows; listLoaded = true; listMissing = false; reindex();
-      queueSites(plist.filter(p => p.website && !(p.site && p.site.kind)).map(p => p.website));
+      queueSites(plist.filter(p => p.website && !(p.site && p.site.kind)));
     }, e => {
       if (e.status === 401 || e.status === 403) { store.signOut(); return; }
       listLoaded = true; listMissing = e.status === 404;
@@ -1027,7 +1063,7 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
 
   async function bookAudit(saved, auditDate) {
     const V = vOf(saved.vertical), a = assess(saved);
-    const badSite = !saved.website || a.sig.some(x => ['profile', 'down', 'parked', 'thin', 'nomobile'].includes(x.k));
+    const badSite = !saved.website || a.sig.some(x => ['profile', 'down', 'parked', 'gone', 'placeholder', 'notmine', 'freehost', 'thin', 'nomobile'].includes(x.k));
     setSave('Adding to Client Pipeline…');
     try {
       const row = await store.add({
@@ -1059,7 +1095,7 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
     const site = !p.website ? null : cached && cached.kind && cached.kind !== 'error' ? cached : p.site && p.site.kind ? p.site : null;
     return {
       name: p.name, btype: p.btype, address: p.address, phone: p.phone, website: p.website, rating: p.rating, reviews: p.reviews,
-      site, vertical: vOf(p.vertical), year: YEAR, date: longDate(), checkedOn: longDate(site && site.at),
+      site, areas: placesOf(p), vertical: vOf(p.vertical), year: YEAR, date: longDate(), checkedOn: longDate(site && site.at),
       // the email sign-off from "Your details", minus the placeholder while no name is set
       from: signoff().split('\n').map(l => l.trim()).filter(l => l && l !== '[your name]'),
     };
@@ -1067,11 +1103,12 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
   // Check websites again right before an audit (3 per call, 2 calls at a time), so it never repeats
   // something they've since fixed. Results are stored on the business like any other check.
   async function recheck(list) {
+    list.forEach(p => { if (p.website) siteHints.set(p.website, hintFor(p)); });
     const urls = [...new Set(list.map(p => p.website).filter(Boolean))];
     const run = async () => {
       while (urls.length) {
         const batch = urls.splice(0, 3);
-        const r = await store.leads({ action: 'sites', urls: batch }).catch(e => { if (e.status === 401) store.signOut(); return {}; });
+        const r = await store.leads({ action: 'sites', urls: batch, hints: batch.map(u => siteHints.get(u) || null) }).catch(e => { if (e.status === 401) store.signOut(); return {}; });
         (r.results || []).filter(x => x.kind !== 'error').forEach(x => siteCache.set(x.url, { ...x, at: today() }));
       }
     };
@@ -1137,7 +1174,7 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
     const r = results.find(x => x.placeId === p.placeId); if (r) Object.assign(r, patch);
     if (saved) { const a = assess({ ...saved, ...patch }); writeP(saved.id, { ...patch, score: a.score, signals: slim(a) }); }
     else Object.assign(p, patch);
-    if (k === 'website' && v) queueSites([v]);
+    if (k === 'website' && v) queueSites([{ ...p, website: v }]);
     renderPanel(); if (view === 'find') renderResults(); else renderList();
   }
 
@@ -1164,7 +1201,7 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
     $('n-save').disabled = false;
     if (!saved.length) return;
     closeAdd();
-    if (p.website) queueSites([p.website]);
+    if (p.website) queueSites([p]);
     document.querySelector('[data-view="list"]').click();
     openP(p.placeId);
   }
