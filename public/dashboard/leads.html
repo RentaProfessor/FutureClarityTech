@@ -120,6 +120,7 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
 .radius button { border: 1px solid var(--line); background: var(--bg); border-radius: 999px; padding: 4px 11px; font-size: 12.5px; font-weight: 600; cursor: pointer; min-height: 30px; color: var(--muted); }
 .radius button.on { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
 .attrib { margin-top: 10px; }
+.more { display: flex; justify-content: center; margin-top: 12px; }
 .checkg { background: var(--sunk); border-radius: 10px; padding: 10px 12px; display: grid; gap: 8px; }
 
 /* call list board */
@@ -227,10 +228,11 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
       <div class="step">1 · What kind of business</div>
       <div class="vchips" id="vchips"></div>
       <div class="vwhy" id="vwhy"></div>
-      <input class="in" id="customQ" placeholder="What kind of business? e.g. upholstery shop" autocomplete="off" aria-label="What kind of business" hidden>
+      <input class="in" id="customQ" placeholder="What kind of business? e.g. HVAC, florist, nail salon" autocomplete="off" aria-label="What kind of business" hidden>
       <div class="step">2 · Where</div>
       <div class="searchrow">
-        <input class="in" id="area" placeholder="Neighborhood or city, e.g. Van Nuys, CA" autocomplete="off" aria-label="Neighborhood or city">
+        <input class="in" id="area" list="areaList" placeholder="Neighborhood, city or ZIP, e.g. Van Nuys" autocomplete="off" aria-label="Neighborhood, city or ZIP">
+        <datalist id="areaList"></datalist>
         <button class="btn primary" id="go" type="submit">Find businesses</button>
       </div>
       <div class="areas" id="areas"></div>
@@ -249,7 +251,8 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
         </div>
       </div>
       <div class="list" id="results"></div>
-      <p class="hint attrib">Business listings from <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">© OpenStreetMap contributors</a>. Some shops aren't on the map yet; add the ones you find with <b>+ Add a business</b>.</p>
+      <div class="more"><button class="btn" id="more" type="button" hidden></button></div>
+      <p class="hint attrib" id="attrib">Business listings: <a href="https://docs.overturemaps.org/attribution/" target="_blank" rel="noopener noreferrer">Overture Maps Foundation</a> (CDLA-Permissive-2.0), with data from Meta, Microsoft, Foursquare and others. Missing a shop? Add it with <b>+ Add a business</b>.</p>
     </div>
   </section>
 
@@ -335,9 +338,8 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
   const VERTICALS = [
     {
       k: 'auto', label: 'Auto repair', tag: 'Best fit',
-      osm: ['nwr["shop"="car_repair"]', 'nwr["craft"="car_repair"]', 'nwr["amenity"="vehicle_inspection"]', 'nwr["shop"="tyres"]["name"~"auto|repair|service|brake|smog",i]'],
       noun: 'shop', plural: 'repair shops', unit: 'repair order', ticket: 479, booking: false,
-      bad: [[/shop=car( |$)|dealer/i, 'Dealership service department', -40]], smog: true,
+      bad: [[/auto_dealer|dealer/i, 'Dealership service department', -40]], smog: true,
       why: 'Calls go unanswered while everyone is under a car or with a customer (up to 21% of calls to auto shops, per Marchex), and the average repair order is about $479. Most are single-location independents, so the owner is at the counter. Nearly all run shop software (Tekmetric, Shopmonkey), so sell what sits alongside it, not a replacement.',
       hook: 'Quick question: when you and your service writer are both tied up, what happens to the calls you miss?',
       offer: 'I set it up so every missed call gets a text back right away with a way to book, customers get a reminder when service or smog is due, and happy customers get asked for a Google review. It works alongside the shop software you already use.',
@@ -352,9 +354,8 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
     },
     {
       k: 'groom', label: 'Pet groomers', tag: 'Strong',
-      osm: ['nwr["shop"="pet_grooming"]', 'nwr["shop"="pet"]["name"~"groom|spa|bath",i]', 'nwr["amenity"="veterinary"]["name"~"groom",i]'],
       noun: 'groomer', plural: 'groomers', unit: 'groom', ticket: 98, booking: true,
-      bad: [[/amenity=veterinary|veterinar/i, 'Vet clinic (grooming is a side service)', -30]],
+      bad: [[/veterinar/i, 'Vet clinic (grooming is a side service)', -30]],
       why: 'A groomer can\'t pick up with a dog on the table. Regulars come back every 4–8 weeks, no-shows run 5–15%, and almost no agencies call on groomers. Smaller tickets (about $98 for a full groom in LA), so lead with rebooking nudges and reminders.',
       hook: 'When you\'ve got a dog on the table and the phone rings, what happens to that call?',
       offer: 'I set up automatic texts for groomers: if you miss a call, they get your booking link, clients get a reminder the day before, and regulars get a "time for Bella\'s next groom" text when they\'re due.',
@@ -369,9 +370,8 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
     },
     {
       k: 'detail', label: 'Auto detailing & tint', tag: 'Strong',
-      osm: ['nwr["amenity"="car_wash"]', 'nwr["shop"~"^(car_repair|car_parts|car)$"]["name"~"detail|tint|ceramic|wrap|ppf|shine|polish",i]', 'nwr["craft"]["name"~"detail|tint",i]'],
       noun: 'shop', plural: 'detail shops', unit: 'detail', ticket: 278, booking: true,
-      bad: [[/shop=car( |$)|dealer/i, 'Dealership detail department', -40], [/amenity=fuel|gas station/i, 'Gas station car wash', -30]],
+      bad: [[/auto_dealer|dealer/i, 'Dealership detail department', -40], [/gas_station|gas station/i, 'Gas station car wash', -30]],
       why: 'Solo or small crews who can\'t answer while they\'re polishing, and quotes for ceramic coating, PPF and tint go out slowly. Light software use, few agencies, and they sit on the same streets as the repair shops. A standard detail runs about $278, premium about $443.',
       hook: 'When a call or DM for a quote comes in while you\'re mid-job, how fast does it get answered?',
       offer: 'I set it up so a missed call gets an instant text with a quick quote form, quotes for coating, PPF or tint go out fast, past customers get reminded when maintenance is due, and finished customers get asked for a Google review.',
@@ -386,9 +386,8 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
     },
     {
       k: 'body', label: 'Auto body & collision',
-      osm: ['nwr["shop"="car_repair"]["name"~"body|collision|paint|dent|frame",i]', 'nwr["shop"="car_repair"]["service:vehicle:body_repair"="yes"]', 'nwr["craft"="car_painter"]'],
       noun: 'shop', plural: 'body shops', unit: 'repair', ticket: 4800, booking: false,
-      bad: [[/shop=car( |$)|dealer/i, 'Dealership body shop', -40]],
+      bad: [[/auto_dealer|dealer/i, 'Dealership body shop', -40]],
       why: 'Big tickets (about $4,800 per collision repair) and slow estimate follow-up. Insurers steer a lot of work through partner networks, so focus on independents that win work by phone.',
       hook: 'After you write an estimate, what happens when the customer goes quiet?',
       offer: 'I set up automatic estimate follow-ups, a text back for every missed call, and a review request after every repair.',
@@ -402,7 +401,6 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
     },
     {
       k: 'dojo', label: 'Martial arts & fitness',
-      osm: ['nwr["leisure"]["sport"~"martial_arts|karate|taekwondo|judo|jiu|kickboxing|mma|kung_fu|aikido|boxing|krav|muay",i]', 'nwr["leisure"~"^(fitness_centre|sports_centre|sports_hall)$"]["name"~"martial|karate|jiu|taekwondo|kung fu|mma|krav|dojo|boxing|muay|kickbox",i]'],
       noun: 'school', plural: 'schools', unit: 'membership month', ticket: 135, booking: true,
       why: 'Memberships run about $120–$150 a month, so each trial that turns into a member is worth $1,500+ a year. Following up on trial leads is the gap. Many already pay for Spark or Zen Planner.',
       hook: 'When someone calls about a trial class while you\'re teaching, what happens to that call?',
@@ -417,7 +415,6 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
     },
     {
       k: 'tattoo', label: 'Tattoo studios',
-      osm: ['nwr["shop"="tattoo"]', 'nwr["shop"]["name"~"tattoo",i]'],
       noun: 'studio', plural: 'studios', unit: 'session hour', ticket: 150, booking: true,
       why: 'No-shows run 20–30% without deposits, and booking lives in Instagram DMs. Good fit for deposit-backed booking and reminders, but artists often work independently, so ask for the shop owner.',
       hook: 'How do you handle no-shows on big sessions right now?',
@@ -432,7 +429,6 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
     },
     {
       k: 'barber', label: 'Barbershops & salons',
-      osm: ['nwr["shop"="hairdresser"]', 'nwr["shop"="beauty"]["name"~"hair|salon|barber",i]'],
       noun: 'shop', plural: 'barbershops', unit: 'cut', ticket: 68, booking: true,
       why: 'On our homepage, but a harder sale: most already use Booksy, Squire or Vagaro (reminders built in), a cut is about $68, and many barbers rent their own chair. Go after owners with no booking tool at all.',
       hook: 'How do clients book with you right now?',
@@ -446,9 +442,9 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
       ],
     },
     {
-      k: 'custom', label: 'Something else', osm: [], // built from the words typed in
+      k: 'custom', label: 'Something else',
       noun: 'business', plural: 'businesses', unit: 'sale', ticket: 0, booking: true,
-      why: 'Type a kind of local business below, like "upholstery" or "bakery". It matches business names and map categories. Scoring works the same way; the scripts stay general.',
+      why: 'Type a kind of local business below, like "HVAC", "florist" or "nail salon". It searches about 11,000 other appointment and walk-in businesses by name and type. Scoring works the same way; the scripts stay general.',
       hook: 'How do you handle calls that come in while you\'re busy with a customer?',
       offer: 'I set up the repeat work to run on its own: missed calls get a text back with a way to book, customers get reminders, and happy customers get asked for a review. You see it all on one simple screen.',
       vm: 'I help local businesses here in the Valley catch the calls they miss and get more reviews.',
@@ -549,7 +545,8 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
     const kinds = (p.types || []).join(' ') + ' ' + (p.btype || '');
     (V.bad || []).forEach(([re, t, pts]) => { if (re.test(kinds) && !sig.some(x => x.k === 'bad')) add('bad', pts, t); });
     if (!p.phone) add('nophone', 0, 'No phone on the map (look it up on Google)');
-    if (V.smog && /smog/i.test(p.name || '')) add('smog', 3, 'Does smog checks (a built-in 2-year reminder)');
+    if (V.smog && /smog/i.test((p.name || '') + ' ' + (p.btype || ''))) add('smog', 3, 'Does smog checks (a built-in 2-year reminder)');
+    if (p.conf && p.conf < 0.6) add('lowconf', -5, 'Listing may be out of date');
     const gap = hoursGap(p.hours);
     if (gap) add('afterhours', 4, gap.t, gap.find);
 
@@ -688,7 +685,8 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
     if (listMissing) { setSave('Turn on the call list first (see the Call list tab).', true); return []; }
     setSave('Saving…');
     try {
-      const saved = await store.prospects.save(list.map(p => toRow(p, extra)));
+      const saved = [];
+      for (let i = 0; i < list.length; i += 100) saved.push(...await store.prospects.save(list.slice(i, i + 100).map(p => toRow(p, extra))));
       saved.forEach(s => { const i = plist.findIndex(x => x.id === s.id || x.placeId === s.placeId); if (i >= 0) plist[i] = { ...plist[i], ...s }; else plist.unshift(s); });
       reindex(); setSave(saved.length === 1 ? 'Saved to your call list' : saved.length + ' saved to your call list');
       return saved;
@@ -711,15 +709,24 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
     $('radius').innerHTML = 'Within ' + RADII.map(r => `<button type="button" data-radius="${r}" class="${r === mi ? 'on' : ''}">${r} mi</button>`).join('');
   }
 
-  // ---------- OpenStreetMap: free, no key, called straight from this page ----------
-  // Free map servers run by volunteers. The main one (overpass-api.de) is often rate-limited or
-  // overloaded, so Private.coffee's (no rate limit) goes first and the main one is the backup.
-  const OVERPASS = ['https://overpass.private.coffee/api/interpreter', 'https://overpass-api.de/api/interpreter'];
-  const NOMINATIM = 'https://nominatim.openstreetmap.org/search';
-  const MILE = 1609.34;
-  const LABELS = { 'shop=car_repair': 'Auto repair shop', 'craft=car_repair': 'Auto repair', 'amenity=vehicle_inspection': 'Smog check', 'shop=tyres': 'Tire shop', 'amenity=car_wash': 'Car wash', 'craft=car_painter': 'Auto paint shop', 'shop=pet_grooming': 'Pet groomer', 'shop=pet': 'Pet store', 'amenity=veterinary': 'Veterinarian', 'shop=tattoo': 'Tattoo shop', 'shop=hairdresser': 'Hair salon', 'shop=beauty': 'Beauty salon', 'leisure=fitness_centre': 'Gym', 'leisure=sports_centre': 'Sports center', 'shop=car': 'Car dealer', 'shop=car_parts': 'Auto parts' };
+  // ---------- the business list: Overture Maps open data, served from this site ----------
+  // scripts/build-places.py writes /data/places/<kind>.json, so a search needs no outside
+  // server, key or account, and it can't be rate-limited or time out.
+  const DATA = '/data/places/', PAGE = 150;
+  const files = new Map();
+  const loadJSON = name => {
+    if (!files.has(name)) {
+      files.set(name, fetch(DATA + name + '.json').then(r => r.ok ? r.json() : Promise.reject(Object.assign(new Error('list missing'), { status: r.status })))
+        .catch(e => { files.delete(name); throw e; }));
+    }
+    return files.get(name);
+  };
+  const TYPE_LABELS = { automotive_repair: 'Auto repair shop', automotive_service: 'Auto service', tire_dealer_and_repair: 'Tire shop', tire_shop: 'Tire shop', emissions_inspection: 'Smog check', car_inspection: 'Smog check', oil_change_station: 'Oil change', transmission_repair: 'Transmission shop', brake_service_and_repair: 'Brake shop', engine_repair_service: 'Engine repair', auto_electrical_repair: 'Auto electrical', exhaust_and_muffler_repair: 'Muffler shop', auto_body_shop: 'Body shop', auto_restoration_service: 'Auto restoration', car_wash: 'Car wash', auto_detailing: 'Auto detailing', car_window_tinting: 'Window tint', auto_customization: 'Auto customization', vehicle_wrap: 'Vehicle wraps', pet_groomer: 'Pet groomer', tattoo_and_piercing: 'Tattoo & piercing', barber: 'Barbershop', hair_salon: 'Hair salon', beauty_salon: 'Beauty salon', martial_arts_club: 'Martial arts', chinese_martial_arts_club: 'Martial arts', boxing_gym: 'Boxing gym', gym: 'Gym', hvac_service: 'HVAC', key_and_locksmith: 'Locksmith', pest_control_service: 'Pest control' };
+  const typeLabel = t => TYPE_LABELS[t] || String(t || '').replace(/_/g, ' ').replace(/^./, c => c.toUpperCase());
+  const mapsSearch = (name, where) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent([name, where].filter(Boolean).join(', '))}`;
+  const milesBetween = (a, b, c, d) => { const r = x => x * Math.PI / 180, h = Math.sin(r(c - a) / 2) ** 2 + Math.cos(r(a)) * Math.cos(r(c)) * Math.sin(r(d - b) / 2) ** 2; return 7917.6 * Math.asin(Math.sqrt(h)); };
   const usPhone = v => { const first = String(v || '').split(/[;,]/)[0].trim(), d = first.replace(/\D/g, '').replace(/^1(?=\d{10}$)/, ''); return d.length === 10 ? `(${d.slice(0, 3)}) ${d.slice(3, 6)}-${d.slice(6)}` : first; };
-  // Website from a map tag or a typed value; bare Facebook/Instagram handles become profile links.
+  // A typed website (or a bare Facebook/Instagram handle) as a link.
   const asUrl = (v, profile) => {
     const u = String(v || '').split(';')[0].trim();
     if (!u) return '';
@@ -727,132 +734,80 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
     if (profile && /^@?[\w.-]+$/.test(u) && !/\.(com|net|org)$/i.test(u)) return profile + u.replace(/^@/, '');
     return /^[\w-]+(\.[\w-]+)+([/?#].*)?$/.test(u) ? 'http://' + u : '';
   };
-  const mapsSearch = (name, where) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent([name, where].filter(Boolean).join(', '))}`;
-  const milesBetween = (a, b, c, d) => { const r = x => x * Math.PI / 180, h = Math.sin(r(c - a) / 2) ** 2 + Math.cos(r(a)) * Math.cos(r(c)) * Math.sin(r(d - b) / 2) ** 2; return 7917.6 * Math.asin(Math.sqrt(h)); };
 
-  // Ask the first server. If it hasn't answered in 8 seconds (or says no), ask the next one too
-  // and take whichever answers first. After 30 seconds, give up and say so instead of spinning.
-  function overpass(query, onSlow) {
-    return new Promise((resolve, reject) => {
-      let started = 0, failed = 0, done = false;
-      const ctrls = [], timers = [];
-      const end = (ok, v) => { if (done) return; done = true; timers.forEach(clearTimeout); ctrls.forEach(c => c.abort()); (ok ? resolve : reject)(v); };
-      const ask = () => {
-        if (done || started >= OVERPASS.length) return;
-        const c = new AbortController(), url = OVERPASS[started++];
-        ctrls.push(c);
-        if (started > 1 && onSlow) onSlow();
-        fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: 'data=' + encodeURIComponent(query), signal: c.signal })
-          .then(r => r.ok ? r.json() : Promise.reject(Object.assign(new Error('OpenStreetMap answered ' + r.status), { status: r.status })))
-          .then(data => {
-            // a search that ran out of time comes back as 200 with a "runtime error" remark
-            if (/runtime error/i.test(data.remark || '') && !(data.elements || []).length) throw Object.assign(new Error(data.remark), { status: 504 });
-            end(true, data);
-          })
-          .catch(e => {
-            if (done) return;
-            if (e.status === 400) return end(false, e); // a broken query fails on every server
-            if (++failed >= OVERPASS.length) return end(false, e);
-            ask(); // this one said no: ask the next now
-          });
-        timers.push(setTimeout(ask, 8000));
-      };
-      timers.push(setTimeout(() => end(false, Object.assign(new Error('OpenStreetMap took too long'), { error: 'timeout' })), 30000));
-      ask();
-    });
-  }
-
-  // A Valley neighborhood from the list, or anything else looked up once and remembered.
+  // Where to search from: a Valley neighborhood from the list, or any neighborhood, city or ZIP
+  // in the business list's area (meta.json has their centers).
   async function locate(text) {
-    const key = text.trim().replace(/,?\s*(ca|california)$/i, '').trim().toLowerCase();
-    const hit = AREAS.find(([n]) => n.toLowerCase() === key);
+    const key = norm(text.replace(/,?\s*(ca|california)$/i, ''));
+    const hit = AREAS.find(([n]) => norm(n) === key);
     if (hit) return { lat: hit[1], lon: hit[2], label: hit[0] };
-    let cache = {}; try { cache = JSON.parse(localStorage.getItem('fc-leads-places') || '{}') || {}; } catch (e) {}
-    if (cache[key]) return cache[key];
-    const c = new AbortController(), t = setTimeout(() => c.abort(), 10000);
-    let r;
-    try {
-      r = await fetch(`${NOMINATIM}?format=jsonv2&limit=1&countrycodes=us&q=${encodeURIComponent(text.trim())}`, { headers: { Accept: 'application/json' }, signal: c.signal });
-    } catch (e) {
-      throw Object.assign(new Error('place lookup failed'), { error: e.name === 'AbortError' ? 'timeout' : '' });
-    } finally { clearTimeout(t); }
-    if (!r.ok) throw Object.assign(new Error('place lookup failed'), { status: r.status });
-    const [first] = await r.json();
-    if (!first) throw Object.assign(new Error('place not found'), { error: 'notfound' });
-    const loc = { lat: +first.lat, lon: +first.lon, label: text.trim().replace(/,?\s*(ca|california)$/i, '') };
-    cache[key] = loc; try { localStorage.setItem('fc-leads-places', JSON.stringify(cache)); } catch (e) {}
-    return loc;
+    const m = await loadJSON('meta');
+    const a = m.areas.find(([n]) => norm(n) === key) || m.zips.find(([z]) => z === key);
+    if (a) return { lat: a[1], lon: a[2], label: a[0] };
+    throw Object.assign(new Error('place not found'), { error: 'notfound' });
+  }
+  function fillAreaList() {
+    loadJSON('meta').then(m => {
+      const names = [...new Set([...AREAS.map(a => a[0]), ...m.areas.map(a => a[0])])].sort();
+      $('areaList').innerHTML = names.map(n => `<option value="${esc(n)}">`).join('') + m.zips.map(z => `<option value="${esc(z[0])}">`).join('');
+      $('attrib').insertAdjacentHTML('beforeend', ` List updated from Overture's ${esc(m.release.slice(0, 7))} release.`);
+    }, () => {});
   }
 
-  // "Something else": the typed words become a name/category match ("upholstery" also finds "upholsterer").
-  function customSelectors(text) {
+  // "Something else": the typed words, matched against business names and types ("upholstery" also finds "reupholstery").
+  function customMatcher(text) {
     const STOP = new Set(['shop', 'shops', 'store', 'stores', 'service', 'services', 'company', 'business', 'center', 'centre', 'the', 'and', 'inc', 'llc', 'near', 'local']);
     const words = text.toLowerCase().replace(/[^a-z0-9 ]/g, ' ').split(/\s+/).filter(w => w.length >= 3 && !STOP.has(w)).map(w => w.length > 5 ? w.slice(0, -2) : w).slice(0, 4);
-    if (!words.length) return [];
-    const re = words.join('|');
-    return ['shop', 'craft', 'amenity', 'office', 'healthcare', 'leisure'].map(k => `nwr["${k}"]["name"~"${re}",i]`).concat([`nwr["shop"~"${re}",i]`, `nwr["craft"~"${re}",i]`]);
+    return words.length ? new RegExp(words.join('|'), 'i') : null;
   }
 
-  function fromOsm(el, loc) {
-    const t = el.tags || {}, name = (t.name || '').trim();
-    if (!name) return null;
-    const lat = el.lat ?? (el.center && el.center.lat), lon = el.lon ?? (el.center && el.center.lon);
-    const street = [t['addr:housenumber'], t['addr:street']].filter(Boolean).join(' '), city = t['addr:city'] || '';
-    const types = ['shop', 'craft', 'amenity', 'leisure', 'office', 'healthcare'].filter(k => t[k]).map(k => `${k}=${t[k]}`);
-    let btype = LABELS[types[0]] || (types[0] ? types[0].split('=')[1].replace(/_/g, ' ').replace(/^./, c => c.toUpperCase()) : '');
-    if (t.shop === 'hairdresser' && (t.hairdresser === 'barber' || /barber/i.test(name))) btype = 'Barbershop';
+  function fromRow(r, types, loc) {
+    const [id, name, lat, lon, ti, phone, website, email, social, street, city, zip, conf, chain] = r;
+    const t = types[ti] || '';
     return {
-      placeId: `osm:${el.type}/${el.id}`, name, types, btype,
-      chain: !!t['brand:wikidata'], // chains carry a brand id on the map
-      address: [street, city, [street || city ? t['addr:state'] || 'CA' : '', t['addr:postcode']].filter(Boolean).join(' ')].filter(Boolean).join(', '),
+      placeId: 'ovr:' + id, name, types: [t], btype: typeLabel(t), chain: !!chain, conf,
+      address: [street, city, [street || city ? 'CA' : '', zip].filter(Boolean).join(' ')].filter(Boolean).join(', '),
       short: [street, city].filter(Boolean).join(', '),
-      phone: usPhone(t.phone || t['contact:phone'] || t['contact:mobile'] || ''),
-      website: asUrl(t.website || t['contact:website'] || t.url) || asUrl(t['contact:facebook'] || t.facebook, 'https://www.facebook.com/') || asUrl(t['contact:instagram'] || t.instagram, 'https://www.instagram.com/'),
-      email: t.email || t['contact:email'] || '',
-      hours: t.opening_hours || '',
-      mapsUrl: mapsSearch(name, street ? [street, city || loc.label].join(', ') : loc.label),
+      phone, website: website || social || '', email, hours: '',
+      mapsUrl: mapsSearch(name, [street, city].filter(Boolean).join(', ') || loc.label),
       rating: null, reviews: null,
-      dist: lat != null && lon != null ? milesBetween(loc.lat, loc.lon, lat, lon) : null,
+      dist: milesBetween(loc.lat, loc.lon, lat, lon),
     };
   }
 
+  let shown = PAGE;
   async function runSearch() {
     if (searching) return;
     const area = $('area').value.trim() || 'Van Nuys, CA';
     const custom = $('customQ').value.trim();
-    const sel = V.k === 'custom' ? customSelectors(custom) : V.osm;
-    if (!sel.length) { $('findNotice').innerHTML = '<div class="notice"><h3>What kind of business?</h3><p class="hint">Type it in the box under "Something else", like "upholstery" or "bakery".</p></div>'; $('customQ').focus(); return; }
+    const match = V.k === 'custom' ? customMatcher(custom) : null;
+    if (V.k === 'custom' && !match) { $('findNotice').innerHTML = '<div class="notice"><h3>What kind of business?</h3><p class="hint">Type it in the box under "Something else", like "HVAC", "florist" or "nail salon".</p></div>'; $('customQ').focus(); return; }
     const radius = prefs.radius || 3;
     prefs.area = area; prefs.v = V.k; savePrefs();
-    searching = true; results = []; lastQ = { v: V.k, area, radius, what: custom }; $('findNotice').innerHTML = ''; renderResults();
-    const waiting = h => { if (searching) $('results').innerHTML = `<div class="empty"><h3>Still looking…</h3>${h}</div>`; };
-    const slow = setTimeout(() => waiting('OpenStreetMap\'s free servers can be slow. If this one doesn\'t answer soon, a backup server is asked too.'), 4000);
+    searching = true; results = []; shown = PAGE; lastQ = { v: V.k, area, radius, what: custom, edge: false }; $('findNotice').innerHTML = ''; renderResults();
     try {
-      const loc = await locate(area);
-      const around = `(around:${Math.round(radius * MILE)},${loc.lat.toFixed(5)},${loc.lon.toFixed(5)})`;
-      const data = await overpass(`[out:json][timeout:25];(${sel.map(x => x + around + ';').join('')});out tags center 400;`,
-        () => waiting('The first map server is slow, so a backup server is being asked too. This can take up to half a minute.'));
-      const seen = new Set();
-      results = (data.elements || []).map(el => fromOsm(el, loc)).filter(Boolean)
-        .filter(p => { const k = norm(p.name) + '|' + (digits(p.phone) || norm(p.short)); if (seen.has(k)) return false; seen.add(k); return true; })
-        .map(p => ({ ...p, vertical: V.k, area: loc.label }));
+      const [loc, m, data] = await Promise.all([locate(area), loadJSON('meta'), loadJSON(V.k === 'custom' ? 'other' : V.k)]);
+      const [w, s, e, n] = m.box;
+      if (loc.lon < w || loc.lon > e || loc.lat < s || loc.lat > n) throw Object.assign(new Error('outside'), { error: 'outside' });
+      // does the circle reach past the list's edge? (a degree is about 69 miles north-south, 57 east-west here)
+      lastQ.edge = loc.lat - radius / 69 < s || loc.lat + radius / 69 > n || loc.lon - radius / 57 < w || loc.lon + radius / 57 > e;
       lastQ.area = loc.label;
-      if (!results.length) $('findNotice').innerHTML = `<div class="notice"><h3>Nothing on the map there yet</h3><p class="hint">OpenStreetMap has no ${esc(V.k === 'custom' ? custom : V.label.toLowerCase())} listed within ${radius} mi of ${esc(loc.label)}. Try a wider distance, a nearby area, or add the ones you know with <b>+ Add a business</b>.</p></div>`;
-      // check websites, most promising first
-      queueSites(visibleResults().map(x => x.p).filter(p => p.website && !(byPlace.get(p.placeId)?.site?.kind)).map(p => p.website));
+      results = data.rows
+        .filter(r => milesBetween(loc.lat, loc.lon, r[2], r[3]) <= radius && (!match || match.test(r[1]) || match.test(String(data.types[r[4]]).replace(/_/g, ' '))))
+        .map(r => ({ ...fromRow(r, data.types, loc), vertical: V.k, area: loc.label }));
+      if (!results.length) $('findNotice').innerHTML = `<div class="notice"><h3>None found there</h3><p class="hint">The business list has no ${esc(V.k === 'custom' ? custom : V.label.toLowerCase())} within ${radius} mi of ${esc(loc.label)}. Try a wider distance or a nearby area, or add the ones you know with <b>+ Add a business</b>.</p></div>`;
     } catch (e) {
       searchError(e);
     }
-    clearTimeout(slow);
     searching = false; renderResults();
   }
 
   function searchError(e) {
     let html;
-    if (e.error === 'notfound') html = '<h3>Couldn\'t find that place</h3><p class="hint">Try a neighborhood and state, like "Van Nuys, CA", or tap one of the Valley areas.</p>';
-    else if (e.error === 'timeout') html = '<h3>The free map servers are busy</h3><p class="hint">OpenStreetMap didn\'t answer within 30 seconds. Try again in a minute, or pick a smaller distance.</p>';
-    else if (e.status === 429) html = '<h3>OpenStreetMap is busy</h3><p class="hint">Too many searches in a row. Wait a minute and try again.</p>';
-    else html = '<h3>Couldn\'t search right now</h3><p class="hint">OpenStreetMap didn\'t answer. Check your connection and try again in a minute.</p>';
+    if (e.error === 'notfound') html = '<h3>Couldn\'t find that place</h3><p class="hint">Type a Valley neighborhood, city or ZIP code (suggestions appear as you type), or tap one of the areas.</p>';
+    else if (e.error === 'outside') html = '<h3>That\'s outside the business list</h3><p class="hint">The list covers the San Fernando Valley and nearby: Calabasas to Glendale, the Hollywood Hills and west Pasadena. Ask to have it expanded.</p>';
+    else if (e.status === 404) html = '<h3>The business list isn\'t on the site yet</h3><p class="hint">Deploy the latest commit (it adds <code>public/data/places/</code>), then try again.</p>';
+    else html = '<h3>Couldn\'t load the business list</h3><p class="hint">Check your connection and try again.</p>';
     $('findNotice').innerHTML = `<div class="notice">${html}</div>`;
   }
 
@@ -865,13 +820,15 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
 
   function renderResults() {
     $('resultsWrap').hidden = !results.length && !searching;
-    if (searching && !results.length) { $('rTitle').textContent = 'Searching…'; $('rSub').textContent = lastQ ? `${lastQ.area}, within ${lastQ.radius} mi` : ''; $('results').innerHTML = '<div class="empty"><h3>Looking on OpenStreetMap…</h3></div>'; return; }
+    if (searching && !results.length) { $('rTitle').textContent = 'Searching…'; $('rSub').textContent = lastQ ? `${lastQ.area}, within ${lastQ.radius} mi` : ''; $('results').innerHTML = '<div class="empty"><h3>Loading the business list…</h3></div>'; $('more').hidden = true; return; }
     if (!results.length) return;
-    const rows = visibleResults();
-    const hot = rows.filter(x => x.a.level === 'Hot' && !x.saved).length;
+    const all = visibleResults(), rows = all.slice(0, shown);
+    // check the websites of what's on screen, most promising first
+    queueSites(rows.map(x => x.p).filter(p => p.website && !(byPlace.get(p.placeId)?.site?.kind)).map(p => p.website));
+    const hot = all.filter(x => x.a.level === 'Hot' && !x.saved).length;
     const checking = rows.filter(x => x.a.pending).length;
-    $('rTitle').textContent = lastQ.v === 'custom' ? `${rows.length} matches for "${lastQ.what}"` : `${rows.length} ${vOf(lastQ.v).label.toLowerCase()} businesses`;
-    $('rSub').textContent = `within ${lastQ.radius} mi of ${lastQ.area} · best leads first · ${rows.filter(x => x.a.level === 'Hot').length} hot, ${rows.filter(x => x.a.level === 'Warm').length} warm` + (checking ? ` · checking ${checking} website${checking > 1 ? 's' : ''}…` : '') + (results.length > rows.length ? ` · ${results.length - rows.length} hidden` : '');
+    $('rTitle').textContent = lastQ.v === 'custom' ? `${all.length} matches for "${lastQ.what}"` : `${all.length} ${vOf(lastQ.v).label.toLowerCase()} businesses`;
+    $('rSub').textContent = `within ${lastQ.radius} mi of ${lastQ.area} · best leads first · ${all.filter(x => x.a.level === 'Hot').length} hot, ${all.filter(x => x.a.level === 'Warm').length} warm` + (checking ? ` · checking ${checking} website${checking > 1 ? 's' : ''}…` : '') + (results.length > all.length ? ` · ${results.length - all.length} hidden` : '') + (lastQ.edge ? ' · reaches past the list\'s area' : '');
     $('saveHot').disabled = !hot; $('saveHot').textContent = hot ? `Save ${hot} hot lead${hot > 1 ? 's' : ''}` : 'No unsaved hot leads';
     $('results').innerHTML = rows.length ? rows.map(({ p, a, saved }) => {
       const pipe = inPipeline(p), q = saved || p;
@@ -880,11 +837,14 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
         <div class="score ${a.level}" title="Fit score"><b>${a.score}</b><span>${a.level}</span></div>
         <div style="min-width:0"><button class="nm" type="button" data-open="${esc(p.placeId)}">${esc(p.name)}</button>
           <div class="meta">${[esc(p.btype || ''), p.dist != null ? p.dist.toFixed(1) + ' mi' : '', q.rating ? `${(+q.rating).toFixed(1)}★ (${q.reviews || 0})` : '', esc(p.short || p.address || '')].filter(Boolean).join(' · ')}</div>
-          <div class="meta">${q.phone ? `<a href="tel:${esc(digits(q.phone))}">${esc(q.phone)}</a>` : 'No phone on the map'} · ${safeUrl(q.website) ? esc(hostOf(q.website)) : 'No website found'}</div>
+          <div class="meta">${q.phone ? `<a href="tel:${esc(digits(q.phone))}">${esc(q.phone)}</a>` : 'No phone listed'} · ${safeUrl(q.website) ? esc(hostOf(q.website)) : 'No website found'}</div>
           <div class="sigs">${sigs.map(x => `<span class="sig${x.k === 'checking' ? ' wait' : x.pts < 0 || x.k === 'tool' ? ' neg' : ''}">${esc(x.t)}</span>`).join('')}</div></div>
         <div class="acts">${pipe ? '<span class="chip acc">In Client Pipeline</span>' : ''}${saved ? `<span class="chip ${saved.status === 'To contact' ? 'warn' : 'acc'}">${esc(saved.status)}</span>` : `<button class="btn sm primary" type="button" data-save="${esc(p.placeId)}">Save</button><button class="btn sm" type="button" data-skip="${esc(p.placeId)}">Not a fit</button>`}</div>
       </div>`;
     }).join('') : '<div class="empty"><h3>Everything here is hidden</h3>Untick the filters above to see them.</div>';
+    const left = all.length - rows.length;
+    $('more').hidden = left <= 0;
+    $('more').textContent = `Show ${Math.min(PAGE, left)} more (${left} left)`;
   }
 
   // ======================================================================
@@ -1131,6 +1091,7 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
   $('areas').addEventListener('click', e => { const b = e.target.closest('[data-area]'); if (!b) return; $('area').value = b.dataset.area; renderSearch(); runSearch(); });
   $('area').addEventListener('input', () => document.querySelectorAll('#areas button').forEach(b => b.classList.toggle('on', b.dataset.area === $('area').value)));
   $('searchForm').addEventListener('submit', e => { e.preventDefault(); runSearch(); });
+  $('more').addEventListener('click', () => { shown += PAGE; renderResults(); });
   $('radius').addEventListener('click', e => { const b = e.target.closest('[data-radius]'); if (!b) return; prefs.radius = +b.dataset.radius; savePrefs(); renderSearch(); if (results.length) runSearch(); });
   $('hideSkip').addEventListener('change', renderResults);
   $('hideListed').addEventListener('change', renderResults);
@@ -1196,7 +1157,7 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
     $('loginView').hidden = true; $('app').hidden = false;
     if (started) return; started = true;
     $('area').value = prefs.area || 'Van Nuys, CA';
-    renderSearch(); loadList();
+    renderSearch(); fillAreaList(); loadList();
     store.watch(rows => { reqs = rows; reindexPipe(); if (view === 'find') renderResults(); }, () => {});
   }
   function showLogin() { if (!$('pLayer').hidden) closeP(); $('app').hidden = true; $('loginView').hidden = false; }

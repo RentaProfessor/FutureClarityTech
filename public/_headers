@@ -5,14 +5,12 @@
   Strict-Transport-Security: max-age=31536000
   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
   Cross-Origin-Opener-Policy: same-origin
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://bzudkcybqhmqrybskwfn.supabase.co https://overpass.private.coffee https://overpass-api.de https://nominatim.openstreetmap.org; form-action 'self'; frame-src 'none'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://bzudkcybqhmqrybskwfn.supabase.co; form-action 'self'; frame-src 'none'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests
 
 # connect-src: the homepage (dashboard-code check), /plan.html and /dashboard/
-# talk to the Supabase project, over https. The Lead Finder
-# (/dashboard/leads.html) also searches OpenStreetMap: two Overpass servers
-# (Private.coffee first, the main overpass-api.de as the backup when it is slow)
-# and Nominatim, which turns a typed place name into map coordinates. No form posts anywhere off-site, so
-# form-action is 'self'.
+# talk to the Supabase project only, over https. The Lead Finder's business list
+# is served from this site (/data/places/), so it needs nothing else. No form
+# posts anywhere off-site, so form-action is 'self'.
 #
 # frame-src is 'none' since the portfolio page and its demo iframes were
 # retired. Restore an explicit allowlist if embeds come back — never '*'.
@@ -56,6 +54,13 @@
 /dashboard/*
   X-Robots-Tag: noindex, nofollow
   Cache-Control: public, max-age=0, must-revalidate
+
+# The Lead Finder's business list (scripts/build-places.py). Revalidate so a
+# refreshed list shows up right away; it's data, not content, so keep it out of
+# search results.
+/data/*
+  Cache-Control: public, max-age=0, must-revalidate
+  X-Robots-Tag: noindex, nofollow
 
 # Site settings and the data layer must never be served stale after an edit.
 /fc-config.js
