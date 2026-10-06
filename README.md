@@ -21,6 +21,8 @@ npm run preview  # preview the production build
   (`#how`, `#custom`, `#web`, `#pricing`, `#process`, `#working`, `#contact`)
 - `src/pages/404.astro`: real 404 page, so unmatched paths return HTTP 404
   instead of a soft 404
+- `src/pages/privacy.astro`, `terms.astro`, `accessibility.astro` and their
+  layout `src/layouts/Doc.astro`: the legal pages. See "Compliance" below.
 - `src/components/`: `Header`, `Footer`, `LogoMark`, and `SvgDefs` (the shared
   gradients and glow filter the lens mark depends on)
 - `src/layouts/Layout.astro`: HTML shell, meta tags, font loading, JSON-LD
@@ -106,6 +108,34 @@ requests stay in the visitor's own browser.
 `/plan` and `/dashboard/` are sent with `X-Robots-Tag: noindex` from
 `public/_headers`, and as static files in `public/` they are not in the
 sitemap.
+
+## Compliance: the website
+
+Practical, not legal advice. It's worth having a lawyer read the privacy policy and
+terms once.
+
+- **Privacy policy** at `/privacy/`. California's Online Privacy Protection Act
+  (CalOPPA) requires one on any site that collects personal information, linked
+  so it stands out. It's in every page's footer and next to the Send buttons on
+  both booking steps. It describes what the site actually does: no analytics,
+  advertising or tracking cookies; requests stored in Supabase; hosting by
+  Cloudflare; fonts from Google; outreach using public business information.
+  **Update it before** adding analytics or a chat widget, switching providers, or
+  texting anyone who didn't ask.
+- **Terms** at `/terms/`. Prices are typical ranges and the written quote
+  governs. Monthly care and pay-monthly websites renew monthly and cancel
+  anytime, with written confirmation and 30 days' notice before a price change,
+  which California's automatic renewal law expects. Clients are responsible for
+  consent to the texts their workflows send. Keep this matching how you bill.
+- **Booking notice** under both Send buttons: the details are only used to set
+  up the audit, and we may call, text or email about it (reply STOP to stop).
+- **Accessibility** at `/accessibility/`: aims for WCAG 2.1 AA and says how to
+  report a problem. Every public page passes an automated WCAG scan (axe) at
+  desktop and phone width, form fields have visible labels, and every page has
+  a "Skip to content" link. Re-check after design changes with the free axe
+  DevTools or WAVE browser extension.
+- **No cookie banner needed:** the site sets no tracking cookies and doesn't sell
+  or share personal information.
 
 ## Lead Finder: find businesses to call
 
@@ -282,9 +312,16 @@ categories go into each kind of business is set in `GROUPS` in
 
 ### Outreach rules (practical, not legal advice)
 
-- **Calls and visits:** fine to businesses. Call by hand, 8am–9pm. No
-  autodialers, prerecorded messages or AI voices. Keep your own do-not-call
-  list: mark anyone who asks **Not interested** and don't call again.
+- **Calls and visits:** fine to businesses. Call by hand, 8am–9pm, and say who
+  you are and who you're with up front (the scripts do). No autodialers,
+  prerecorded messages, AI voices or "ringless" voicemail drops (those count as
+  calls too). Keep your own do-not-call list: mark anyone who asks **Not
+  interested** and don't call again.
+- **Personal cell phones:** many small shops list the owner's cell. Do Not Call
+  rules protect personal numbers, so if a number looks like a cell rather than
+  the shop's line, check it against the National Do Not Call Registry first
+  (free for up to five area codes at telemarketing.donotcall.gov), or visit
+  instead.
 - **Don't cold-text.** Text only after someone asks you to ("text me the demo").
   The TCPA and California Business & Professions Code §17538.41 both restrict
   unsolicited texts.

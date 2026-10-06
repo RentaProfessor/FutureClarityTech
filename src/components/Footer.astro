@@ -6,11 +6,17 @@ interface Props {
 }
 
 const { home = true } = Astro.props;
+const year = new Date().getFullYear();
 ---
 
 <footer>
   <div class="wrap">
-    <LogoMark href={home ? '#top' : '/'} label="FutureClarity Technologies" />
+    <LogoMark href={home ? '#top' : '/'} label="Future Clarity Technologies" />
     <span>Custom dashboards, workflows, websites &amp; app cleanup</span>
+  </div>
+  <!-- The privacy link has to stand out from the text around it (California's CalOPPA). -->
+  <div class="wrap legal">
+    <span>© {year} FutureClarity Technologies · San Fernando Valley, California</span>
+    <span class="links"><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms</a><a href="/accessibility/">Accessibility</a></span>
   </div>
 </footer>

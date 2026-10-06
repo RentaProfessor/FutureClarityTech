@@ -5,11 +5,14 @@ import SvgDefs from '../components/SvgDefs.astro';
 export interface Props {
   title: string;
   description?: string;
+  // where "Skip to content" goes: the page's <main>
+  main?: string;
 }
 
 const {
   title,
   description = 'FutureClarity builds local businesses a custom dashboard and the automations behind it, plus websites and app cleanups. See it working before you pay.',
+  main = '#main',
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -100,6 +103,7 @@ const structuredData = {
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)} is:inline />
   </head>
   <body>
+    <a class="skip" href={main}>Skip to content</a>
     <SvgDefs />
     <slot />
   </body>

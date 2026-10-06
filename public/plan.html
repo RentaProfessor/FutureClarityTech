@@ -82,6 +82,18 @@ input[aria-invalid="true"]{border-color:var(--bad)}
 .sendrow .btn{flex:1 1 150px}
 .note{font-size:13.5px;color:var(--muted)}
 .sel{color:var(--lav);user-select:all}
+.skip{position:absolute;left:12px;top:-80px;z-index:100;background:var(--deep);color:#fff;padding:10px 16px;border-radius:10px;font-size:14px;font-weight:500}
+.skip:focus{top:calc(12px + env(safe-area-inset-top,0px))}
+main:focus{outline:none}
+.fld{display:grid;gap:6px;min-width:0}
+.fld>span{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.fld>span i{font-style:normal;text-transform:none;letter-spacing:.02em;color:var(--dim);margin-left:4px}
+.consent{font-size:12.5px;line-height:1.5;color:var(--muted);margin-top:12px}
+.consent a,footer a{color:var(--lav);text-decoration:underline;text-underline-offset:3px}
+footer{border-top:1px solid var(--line);padding:24px 0 32px;font-size:12.5px;color:var(--dim)}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 18px;max-width:1080px}
+footer .links{display:flex;flex-wrap:wrap;gap:6px 18px}
+footer a{display:inline-flex;align-items:center;min-height:32px}
 @media (max-width:640px){
   .wrap{padding:0 16px}
   main{padding-top:18px}
@@ -95,9 +107,10 @@ input[aria-invalid="true"]{border-color:var(--bad)}
 </style>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 <header>
   <div class="wrap">
-    <a href="/" class="logo" aria-label="FutureClarity Technologies, home" data-back>
+    <a href="/" class="logo" aria-label="Future Clarity Technologies, home" data-back>
       <svg viewBox="190 50 220 180" aria-hidden="true">
         <defs>
           <linearGradient id="lf" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#07082a"/><stop offset=".6" stop-color="#3a3fc4"/><stop offset="1" stop-color="#d8d3fb"/></linearGradient>
@@ -112,7 +125,7 @@ input[aria-invalid="true"]{border-color:var(--bad)}
   </div>
 </header>
 
-<main>
+<main id="main" tabindex="-1">
   <div class="wrap">
     <ol class="bsteps" aria-label="Booking steps">
       <li class="done"><b>✓</b>Your details</li>
@@ -128,11 +141,11 @@ input[aria-invalid="true"]{border-color:var(--bad)}
       <div class="card" id="whoCard">
         <div class="summary" id="whoSummary"></div>
         <div class="details" id="whoFields" hidden>
-          <input id="p-name" placeholder="Your name" autocomplete="name" aria-label="Your name">
-          <input id="p-business" placeholder="Business name" autocomplete="organization" aria-label="Business name">
-          <input id="p-contact" class="full" placeholder="Email or phone" autocomplete="email" aria-label="Email or phone">
-          <input id="p-site" placeholder="Website (optional)" autocomplete="url" aria-label="Website, optional">
-          <input id="p-app" placeholder="App name (optional)" aria-label="App name, optional">
+          <label class="fld"><span>Your name</span><input id="p-name" autocomplete="name"></label>
+          <label class="fld"><span>Business name</span><input id="p-business" autocomplete="organization"></label>
+          <label class="fld full"><span>Email or phone</span><input id="p-contact" autocomplete="email"></label>
+          <label class="fld"><span>Website <i>optional</i></span><input id="p-site" autocomplete="url"></label>
+          <label class="fld"><span>App name <i>optional</i></span><input id="p-app"></label>
         </div>
       </div>
 
@@ -184,6 +197,7 @@ input[aria-invalid="true"]{border-color:var(--bad)}
       <p class="sub">One tap sends everything below straight to our team. We reply within one business day to set up your free audit.</p>
       <div class="card"><dl class="recap" id="recap"></dl></div>
       <div class="sendrow"><button class="btn btn-primary" id="sendBtn" type="button">Send my request</button></div>
+      <p class="consent">We'll use your details only to set up your audit, and we may call, text or email you about it. Reply STOP to any text to stop. Msg &amp; data rates may apply. <a href="/privacy/">Privacy Policy</a></p>
       <div id="fallback" hidden>
         <p class="err" role="alert" style="margin:14px 0 10px">That didn't go through. Try again, or send it to us yourself:</p>
         <div class="sendrow">
@@ -206,6 +220,13 @@ input[aria-invalid="true"]{border-color:var(--bad)}
     </section>
   </div>
 </main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="yr">2026</span> FutureClarity Technologies · San Fernando Valley, California</span>
+    <span class="links"><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms</a><a href="/accessibility/">Accessibility</a></span>
+  </div>
+</footer>
 
 <script src="/fc-config.js"></script>
 <script src="/fc-store.js"></script>
@@ -316,6 +337,7 @@ input[aria-invalid="true"]{border-color:var(--bad)}
   $('skipBtn').addEventListener('click', function () { st = { wf: [], site: '', app: false, care: false }; render(); goSend(); });
   $('editBtn').addEventListener('click', function () { $('sendView').hidden = true; $('planView').hidden = false; $('st2').className = 'on'; $('st2').querySelector('b').textContent = '2'; $('st3').className = ''; toTop(); });
   document.querySelectorAll('[data-back]').forEach(function (a) { a.addEventListener('click', function (e) { if (window.history.length > 1) { e.preventDefault(); window.history.back(); } }); });
+  $('yr').textContent = new Date().getFullYear();
   render();
 })();
 </script>
