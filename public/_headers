@@ -7,7 +7,8 @@
   Cross-Origin-Opener-Policy: same-origin
   Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://bzudkcybqhmqrybskwfn.supabase.co; form-action 'self'; frame-src 'none'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests
 
-# connect-src: the homepage (dashboard-code check), /plan.html and /dashboard/
+# connect-src: the homepage (the free-audit form and the dashboard-code check),
+# /plan.html and /dashboard/
 # talk to the Supabase project only, over https. The Lead Finder's business list
 # is served from this site (/data/places/), so it needs nothing else. No form
 # posts anywhere off-site, so form-action is 'self'.
