@@ -1,0 +1,97 @@
+---
+// The free-audit form: one submit saves the request, then the form thanks the
+// visitor in place. There is no step 2. Used in the hero (where ad clicks land)
+// and again at the bottom of the page; the script in index.astro drives every
+// form[data-lead], and a request sent from either one marks both as done.
+const SITE = { email: 'beng@futureclaritytechnologies.com', phoneTel: '+18189397964', phoneDisplay: '(818) 939-7964' };
+
+export interface Props {
+  // prefix for this form's field ids, unique on the page
+  id: string;
+  // the hero form carries its own title; the contact section has one already
+  title?: string;
+}
+
+const { id, title } = Astro.props;
+
+// Optional quick picks, standing in for the old step 2. A pick that names a
+// workflow goes into scope.wf (the dashboard prices it); 'app' sets scope.app.
+// Every pick is also written into "what they need" in plain words.
+const picks = [
+  ['Online booking + reminders', 'Booking & reminders'],
+  ['Missed-call text-back', 'Missed-call text-back'],
+  ['Review requests', 'More reviews'],
+  ['website', 'A website'],
+  ['app', 'Fix my app'],
+];
+---
+
+<form class="lead glass" id={id} data-lead novalidate>
+  <div class="lead-fields">
+    {
+      title && (
+        <div class="lead-head">
+          <h2>{title}</h2>
+          <p>30 minutes at your business. No obligation.</p>
+        </div>
+      )
+    }
+    <div class="two">
+      <label class="fld"
+        ><span>Your name</span><input id={`${id}-name`} name="name" autocomplete="name" required /></label
+      >
+      <label class="fld"
+        ><span>Business name</span><input
+          id={`${id}-business`}
+          name="business"
+          autocomplete="organization"
+          required
+        /></label
+      >
+    </div>
+    <label class="fld"
+      ><span>Phone or email</span><input id={`${id}-contact`} name="contact" autocomplete="tel" required /></label
+    >
+    <fieldset class="picks">
+      <legend>What would help most? <i>optional</i></legend>
+      <div class="chips">
+        {picks.map(([value, label]) => <button type="button" data-pick={value} aria-pressed="false">{label}</button>)}
+      </div>
+    </fieldset>
+    <details class="note">
+      <summary>Add a note <i>optional</i></summary>
+      <textarea
+        id={`${id}-msg`}
+        name="msg"
+        rows="3"
+        aria-label="Add a note, optional"
+        placeholder="What do you wish ran itself? Tools you already use?"></textarea>
+    </details>
+    <!-- Bots fill every field; people never see this one. -->
+    <label class="hp" aria-hidden="true">Leave this empty<input name="company_site" tabindex="-1" autocomplete="off" /></label>
+    <button class="btn btn-primary" type="submit">Get my free audit</button>
+    <p class="lead-trust">
+      We reply within one business day · or call <a href={`tel:${SITE.phoneTel}`}>{SITE.phoneDisplay}</a>
+    </p>
+    <div class="formerr" role="alert" hidden>
+      Add your name, business name and a phone number or email so we can reach you.
+    </div>
+    <div class="sendfail" role="alert" hidden>
+      <p>That didn't go through. Try again, or send it to us yourself:</p>
+      <div class="row">
+        <a class="btn" data-mail href={`mailto:${SITE.email}`}>Email it</a>
+        <a class="btn" data-sms href={`sms:${SITE.phoneTel}`}>Text it</a>
+      </div>
+    </div>
+    <p class="consent">
+      We'll use your details only to set up your audit, and we may call, text or email you about it. Reply STOP
+      to any text to stop. Msg &amp; data rates may apply. <a href="/privacy/">Privacy Policy</a>
+    </p>
+  </div>
+  <div class="lead-done" role="status" tabindex="-1" hidden>
+    <div class="ok" aria-hidden="true">✓</div>
+    <h3 data-done-title>Request sent. We've got it.</h3>
+    <p>We'll call or text you within one business day to set up your free audit. Nothing else to do.</p>
+    <p class="lead-trust">Need us sooner? <a href={`tel:${SITE.phoneTel}`}>Call {SITE.phoneDisplay}</a></p>
+  </div>
+</form>

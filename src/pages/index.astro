@@ -2,17 +2,21 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import LeadForm from '../components/LeadForm.astro';
 
-// Booking a free audit: this form (step 1) hands the visitor's details to
-// /plan.html (step 2), which sends the full request to Supabase via
-// public/fc-store.js. It lands on the team dashboard at /dashboard/.
+// Booking a free audit lands on the team dashboard at /dashboard/ either way.
+// Wider screens: the original form under #contact (step 1) hands off to
+// /plan.html (step 2), which sends the request via public/fc-store.js.
+// Phones: LeadForm sends it in one submit, in the hero (where ad clicks land)
+// and again under #contact.
 ---
 
 <Layout title="FutureClarity Technologies" main="#top">
   <Header />
 
   <main id="top" tabindex="-1">
-    <!-- HERO -->
+    <!-- HERO. Wider screens: the centered pitch with the lens and two buttons.
+         Phones: a short pitch, then the form (so an ad click lands on it), then the promises. -->
     <section class="hero">
       <div class="wrap">
         <svg class="mark" viewBox="150 30 300 220" aria-hidden="true">
@@ -34,13 +38,21 @@ import Footer from '../components/Footer.astro';
         <div class="label c">Dashboards &amp; automations for local businesses</div>
         <h1>Your business, <span class="grad">on one dashboard.</span></h1>
         <p class="sub">
-          We build you a custom dashboard and set up the automations behind it, around what your
-          business needs. Bookings, reminders, reviews and follow-ups run on their own, and you see
-          it all in one place.
+          <span class="sub-wide"
+            >We build you a custom dashboard and set up the automations behind it, around what your
+            business needs. Bookings, reminders, reviews and follow-ups run on their own, and you see
+            it all in one place.</span
+          ><span class="sub-phone"
+            >Missed calls get texted back, clients get reminders, reviews get asked for. Automatically,
+            on one screen built for your business.</span
+          >
         </p>
         <div class="ctas">
           <a class="btn btn-primary" href="#contact">Book a free audit</a>
           <a class="btn" href="#how">See how it works</a>
+        </div>
+        <div class="hero-form">
+          <LeadForm id="hf" title="Book your free audit" />
         </div>
         <div class="who" aria-label="Who we work with">
           <span class="on">Barbershops &amp; salons</span><span>Auto repair &amp; detailing</span><span
@@ -50,6 +62,18 @@ import Footer from '../components/Footer.astro';
         <div class="meta">
           <span>Free audit &amp; <b>fixed quote</b></span><span>Monthly care <b>optional</b></span><span
           >Demo <b>before you pay</b></span>
+        </div>
+        <!-- phones: what you can count on, and who it's for, under the form -->
+        <div class="hero-notes">
+          <ul class="promises">
+            <li>Free audit at your business, then a fixed quote</li>
+            <li>Try a working demo before you pay</li>
+            <li>Monthly care is optional</li>
+          </ul>
+          <p class="for">
+            Made for barbershops, salons, auto shops, pet groomers, tattoo studios, gyms and any
+            appointment or walk-in business.
+          </p>
         </div>
       </div>
     </section>
@@ -261,6 +285,7 @@ import Footer from '../components/Footer.astro';
             <a class="btn" href="#contact">Get a quote</a>
           </div>
         </div>
+        <p class="swipe-hint">Swipe to compare plans</p>
         <p class="carenote">
           Care is optional. It covers the texts your workflows send, the software behind them,
           monitoring, fixes when a connected app changes, and small tweaks. Skip it and we set
@@ -343,9 +368,15 @@ import Footer from '../components/Footer.astro';
         <div class="label c">Get started</div>
         <h2>Book your free audit.</h2>
         <p class="sub">
-          30 minutes at your business. No obligation. Next, you'll pick what you'd like built so we
-          can prep before we meet.
+          <span class="sub-wide"
+            >30 minutes at your business. No obligation. Next, you'll pick what you'd like built so we
+            can prep before we meet.</span
+          ><span class="sub-phone"
+            >30 minutes at your business. No obligation. Send this once and we'll call or text within one
+            business day to pick a time.</span
+          >
         </p>
+        <!-- wider screens: the original two-step form (step 2 is /plan.html) -->
         <form id="lead" class="glass" novalidate>
           <div class="two">
             <label class="fld"
@@ -384,6 +415,8 @@ import Footer from '../components/Footer.astro';
             <a class="btn btn-primary" id="toPlan" href="/plan.html">Continue to step 2</a>
           </div>
         </form>
+        <!-- phones: the one-step form -->
+        <div class="contact-phone"><LeadForm id="cf" /></div>
         <div class="direct">
           <div class="dline">
             <span class="dl">Call or text</span><a class="sel" id="c-phone" href="tel:+18189397964"
@@ -402,13 +435,10 @@ import Footer from '../components/Footer.astro';
 
   <Footer />
 
-  <aside class="callbar" aria-label="Call or book a free audit">
-    <a class="btn" href="tel:+18189397964">Call (818) 939-7964</a>
-    <a class="btn btn-primary" href="#contact">Free audit</a>
-  </aside>
 </Layout>
 
 <script is:inline src="/fc-config.js"></script>
+<script is:inline src="/fc-store.js"></script>
 
 <script>
   // ---- in-page navigation -------------------------------------------------
@@ -427,7 +457,11 @@ import Footer from '../components/Footer.astro';
     window.scrollTo({ top: Math.max(0, y), behavior: reduce ? 'auto' : 'smooth' });
     if (id === '#contact') {
       setTimeout(
-        () => document.getElementById('f-name')?.focus({ preventScroll: true }),
+        () =>
+          ['f-name', 'cf-name']
+            .map((id) => document.getElementById(id))
+            .find((el) => el && el.offsetParent)
+            ?.focus({ preventScroll: true }),
         reduce ? 0 : 650
       );
     }
@@ -497,11 +531,65 @@ import Footer from '../components/Footer.astro';
     });
   });
 
-  // ---- lead form ----------------------------------------------------------
-  // Step 1 of booking. Nothing is sent from here: the details are handed to
-  // /plan.html, which sends the whole request to Supabase on its Send button.
+  // ---- header call to action ---------------------------------------------
+  // On a phone the header holds the page's actions: Call to begin with, and a
+  // Free audit button once neither form is on screen. (Not a bar along the
+  // bottom: iOS Safari's floating toolbar sits on top of one.)
+  if ('IntersectionObserver' in window) {
+    const onScreen = new Map<Element, boolean>();
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => onScreen.set(e.target, e.isIntersecting));
+      header.classList.toggle('cta-on', ![...onScreen.values()].some(Boolean));
+    });
+    document.querySelectorAll('form[data-lead]').forEach((f) => io.observe(f));
+  }
+
+  // ---- where the visitor came from -----------------------------------------
+  // Ad links carry utm_* tags or a click id (gclid and friends); other sites
+  // show up as the referrer. Saved for 30 days so a visitor who clicks an ad,
+  // leaves and comes back still counts for that ad, and sent with the request
+  // as scope.src so the dashboard can say which ad brought each lead.
+  const SRC_KEY = 'fc-src';
+  const SRC_DAYS = 30;
+  const TAGS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid', 'fbclid', 'msclkid'];
+
+  function readSource(): Record<string, string> | null {
+    const q = new URLSearchParams(window.location.search);
+    const now: Record<string, string> = {};
+    TAGS.forEach((k) => {
+      const v = q.get(k);
+      if (v) now[k] = v.slice(0, 200);
+    });
+    try {
+      const r = new URL(document.referrer);
+      if (r.host && r.host !== window.location.host) now.ref = r.host.slice(0, 100);
+    } catch {}
+
+    let saved: Record<string, string> | null = null;
+    try { saved = JSON.parse(localStorage.getItem(SRC_KEY) || 'null'); } catch {}
+    if (saved && Date.now() - Date.parse(saved.at || '') > SRC_DAYS * 864e5) saved = null;
+
+    // A new ad click replaces the old one; a plain referrer only fills a gap.
+    const isAd = TAGS.some((k) => now[k]);
+    if (isAd || (!saved && now.ref)) {
+      saved = { ...now, at: new Date().toISOString() };
+      try { localStorage.setItem(SRC_KEY, JSON.stringify(saved)); } catch {}
+    }
+    return saved;
+  }
+  const source = readSource();
+
+  // ---- lead forms ---------------------------------------------------------
+  // Wider screens: #lead is step 1 of booking. Nothing is sent from it: the
+  // details are handed to /plan.html, which sends the whole request to Supabase
+  // on its Send button.
+  // Phones: the form[data-lead] forms send the request straight to Supabase
+  // (public/fc-store.js) in one submit, then thank the visitor in place.
 
   const form = document.getElementById('lead') as HTMLFormElement | null;
+
+  const forms = Array.from(document.querySelectorAll<HTMLFormElement>('form[data-lead]'));
+  const BOOKED_KEY = 'fc-booked';
 
   // Team shortcut: typing the dashboard code as the whole message opens
   // /dashboard/ instead of booking. The code is checked by the database
@@ -578,4 +666,109 @@ import Footer from '../components/Footer.astro';
       window.location.href = '/plan.html';
     });
   }
+  // A phone number (7+ digits) or something shaped like an email address.
+  const reachable = (s: string) => s.replace(/\D/g, '').length >= 7 || /^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i.test(s);
+
+  // Both forms switch to the thank-you, so nobody sends the same request twice.
+  function showDone(name: string, focus?: HTMLFormElement) {
+    forms.forEach((f) => {
+      f.querySelector<HTMLElement>('.lead-fields')!.hidden = true;
+      const done = f.querySelector<HTMLElement>('.lead-done')!;
+      done.hidden = false;
+      const first = name.split(' ')[0];
+      if (first) done.querySelector('[data-done-title]')!.textContent = `Thanks, ${first}. We've got it.`;
+    });
+    focus?.querySelector<HTMLElement>('.lead-done')?.focus();
+  }
+
+  try {
+    const booked = sessionStorage.getItem(BOOKED_KEY);
+    if (booked !== null) showDone(booked);
+  } catch {}
+
+  forms.forEach((form) => {
+    const el = (name: string) => form.elements.namedItem(name) as HTMLInputElement;
+    const val = (name: string) => el(name).value.trim();
+    const err = form.querySelector<HTMLElement>('.formerr')!;
+    const fail = form.querySelector<HTMLElement>('.sendfail')!;
+    const btn = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+    let sending = false;
+
+    // A field stops looking wrong as soon as it's being fixed.
+    form.addEventListener('input', (e) => (e.target as HTMLElement).removeAttribute('aria-invalid'));
+
+    form.querySelectorAll<HTMLButtonElement>('[data-pick]').forEach((b) => {
+      b.addEventListener('click', () => b.setAttribute('aria-pressed', String(b.getAttribute('aria-pressed') !== 'true')));
+    });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (sending) return;
+
+      if (await tryDashboardCode(val('msg'))) {
+        window.location.href = '/dashboard/';
+        return;
+      }
+
+      const bad = ['name', 'business', 'contact'].filter((n) => {
+        const v = val(n);
+        const wrong = !v || (n === 'contact' && !reachable(v));
+        el(n).setAttribute('aria-invalid', wrong ? 'true' : 'false');
+        return wrong;
+      });
+      if (bad.length) {
+        err.hidden = false;
+        el(bad[0]).focus();
+        return;
+      }
+      err.hidden = true;
+
+      const name = val('name');
+      // A filled honeypot is a bot: look sent, send nothing.
+      if (val('company_site')) {
+        showDone(name, form);
+        return;
+      }
+
+      const picked = Array.from(form.querySelectorAll<HTMLButtonElement>('[data-pick][aria-pressed="true"]'));
+      const keys = picked.map((b) => b.dataset.pick || '');
+      const labels = picked.map((b) => b.textContent || '');
+      const needs = [labels.length ? 'Interested in: ' + labels.join(', ') : '', val('msg')].filter(Boolean).join('\n');
+      const payload = {
+        name,
+        business: val('business'),
+        contact: val('contact'),
+        needs,
+        scope: {
+          wf: keys.filter((k) => k !== 'website' && k !== 'app'),
+          site: '',
+          app: keys.includes('app'),
+          care: false,
+          ...(source ? { src: source } : {}),
+        },
+      };
+
+      // If saving fails, the email and text buttons carry the request instead.
+      const body = `Name: ${payload.name}\nBusiness: ${payload.business}\nPhone or email: ${payload.contact}${needs ? '\n' + needs : ''}`;
+      const subject = 'Free audit request: ' + payload.business;
+      form.querySelector<HTMLAnchorElement>('[data-mail]')!.href =
+        'mailto:beng@futureclaritytechnologies.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+      form.querySelector<HTMLAnchorElement>('[data-sms]')!.href = 'sms:+18189397964?&body=' + encodeURIComponent(subject + '\n' + body);
+
+      sending = true;
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+      try {
+        await (window as any).FCStore.submit(payload);
+        try { sessionStorage.setItem(BOOKED_KEY, name); } catch {}
+        fail.hidden = true;
+        showDone(name, form);
+      } catch {
+        btn.textContent = 'Try again';
+        fail.hidden = false;
+      }
+      sending = false;
+      btn.disabled = false;
+    });
+  });
 </script>

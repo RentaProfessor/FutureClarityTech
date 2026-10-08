@@ -159,6 +159,32 @@ header .btn { padding: 9px 18px; font-size: 14px; }
 @keyframes beam { 0%, 100% { opacity: 0.55; } 50% { opacity: 1; } }
 @keyframes glow { 0%, 100% { opacity: 0.85; } 50% { opacity: 1; } }
 
+/* Phones get the free-audit form inside the hero, where an ad click lands (see
+   the 640px block). Wider screens keep the two buttons and the form under #contact. */
+.hero-form, .hero-notes, .sub-phone { display: none; }
+.hero-form .lead {
+  position: relative;
+  background: rgba(7, 8, 18, 0.62);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border-color: var(--line-strong);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(216, 211, 251, 0.1);
+}
+/* the lens's beam lands on the form: a lit top edge */
+.hero-form .lead::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 12%;
+  right: 12%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), var(--lav), var(--accent), transparent);
+  box-shadow: 0 0 14px 1px rgba(124, 131, 240, 0.55);
+  pointer-events: none;
+}
+.hcall { display: none; }
+.swipe-hint { display: none; }
+
 .who { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 26px; }
 .who span { font-size: 13px; padding: 6px 13px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); }
 .who span.on { border-color: var(--line-strong); color: var(--lav); }
@@ -446,6 +472,65 @@ input[aria-invalid="true"] { border-color: #ff9c8f; }
 #thanks p { margin: 0; }
 #thanks .btn { margin-top: 10px; }
 #formerr { display: none; color: #ff9c8f; font-size: 14px; text-align: center; }
+/* The phones' one-step form (LeadForm.astro): one card in the hero, one under #contact */
+.contact-phone { display: none; }
+.lead { width: 100%; }
+.lead-fields { display: grid; gap: 12px; }
+.lead[hidden], .lead [hidden] { display: none !important; }
+.lead-head h2 { font-size: 26px; font-weight: 300; margin: 0 0 4px; }
+.lead-head p { color: var(--muted); font-size: 14.5px; margin-bottom: 4px; }
+.picks { border: 0; min-width: 0; display: grid; gap: 8px; }
+.picks legend,
+.note summary { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.picks legend { margin-bottom: 8px; }
+.picks legend i,
+.note summary i { font-style: normal; text-transform: none; letter-spacing: 0.02em; color: var(--dim); margin-left: 4px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chips button {
+  font: 500 14px var(--sans);
+  color: var(--muted);
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 8px 14px;
+  min-height: 40px;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+.chips button:hover { border-color: var(--accent); color: var(--ink); }
+.chips button[aria-pressed="true"] { background: rgba(58, 63, 196, 0.3); border-color: var(--accent); color: var(--ink); }
+.chips button[aria-pressed="true"]::before { content: "\2713\00a0"; color: var(--good); }
+.note summary { cursor: pointer; display: inline-flex; align-items: center; min-height: 32px; list-style: none; }
+.note summary::-webkit-details-marker { display: none; }
+.note summary::before { content: "+"; font-size: 14px; color: var(--accent); margin-right: 8px; }
+.note[open] summary::before { content: "\2212"; }
+.note textarea { margin-top: 8px; }
+.lead .btn-primary { width: 100%; font-size: 16px; padding: 15px 22px; margin-top: 4px; }
+.lead .btn-primary:disabled { opacity: 0.7; cursor: progress; }
+.lead-trust { font-size: 13.5px; color: var(--muted); text-align: center; }
+.lead-trust a { color: var(--lav); white-space: nowrap; }
+.hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+.formerr { color: #ff9c8f; font-size: 14px; text-align: center; }
+.sendfail { display: grid; gap: 10px; text-align: center; color: #ff9c8f; font-size: 14px; }
+.sendfail .row { display: flex; gap: 8px; }
+.sendfail .btn { flex: 1; }
+.lead .consent { font-size: 11.5px; color: var(--dim); }
+.lead-done { text-align: center; padding: 18px 6px; display: grid; gap: 10px; justify-items: center; }
+.lead-done:focus { outline: none; }
+.lead-done .ok {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+  color: var(--good);
+  border: 1px solid rgba(95, 211, 164, 0.45);
+  background: rgba(95, 211, 164, 0.1);
+  box-shadow: 0 0 30px rgba(95, 211, 164, 0.2);
+}
+.lead-done h3 { font-size: 24px; font-weight: 300; }
+.lead-done p { color: var(--muted); font-size: 15px; max-width: 380px; }
 .direct { margin: 24px auto 0; max-width: 560px; display: grid; gap: 8px; }
 .dline { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 6px 12px; font-size: 15px; color: var(--muted); }
 .dline .dl { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--dim); }
@@ -488,7 +573,6 @@ footer .legal a { display: inline-flex; align-items: center; min-height: 32px; }
 .notfound .ctas { display: flex; gap: 12px; flex-wrap: wrap; }
 
 /* ------------------------------------------------------ responsive ----- */
-.callbar { display: none; }
 
 @media (max-width: 900px) {
   header .wrap { flex-wrap: wrap; height: auto; padding-top: 10px; }
@@ -519,18 +603,93 @@ footer .legal a { display: inline-flex; align-items: center; min-height: 32px; }
   section { padding: 56px 0; }
   .wrap { padding: 0 16px; }
   .head { margin-bottom: 28px; }
-  header .btn { display: none; }
+  /* an ad landing page: one row, no section menu. Call to begin with; once
+     the forms are off screen, Call folds to its icon and Free audit slides in. */
+  header .wrap { flex-wrap: nowrap; justify-content: flex-start; gap: 8px; height: 60px; padding-top: 0; }
+  header nav { display: none; }
+  .hcall {
+    order: 2;
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    min-width: 40px;
+    min-height: 40px;
+    padding: 0 15px;
+    border-radius: 999px;
+    border: 1px solid var(--line-strong);
+    background: rgba(58, 63, 196, 0.2);
+    font-size: 14px;
+    font-weight: 500;
+    transition: padding 0.3s ease, gap 0.3s ease;
+  }
+  .hcall svg { flex: none; width: 15px; height: 15px; fill: var(--lav); }
+  .hcall .lbl { display: inline-block; max-width: 40px; overflow: hidden; transition: max-width 0.3s ease, opacity 0.2s ease; }
+  header .btn {
+    order: 3;
+    display: inline-flex;
+    max-width: 0;
+    padding: 9px 0;
+    border-width: 0;
+    opacity: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    visibility: hidden;
+    margin-left: -8px; /* folded away, it gives back the header's gap too */
+    transition: max-width 0.3s ease, padding 0.3s ease, margin 0.3s ease, opacity 0.25s ease, visibility 0s 0.3s;
+  }
+  header.cta-on .hcall { padding: 0; gap: 0; }
+  header.cta-on .hcall .lbl { max-width: 0; opacity: 0; }
+  header.cta-on .btn {
+    max-width: 140px;
+    padding: 9px 16px;
+    border-width: 1px;
+    opacity: 1;
+    visibility: visible;
+    margin-left: 0;
+    transition: max-width 0.3s ease, padding 0.3s ease, margin 0.3s ease, opacity 0.25s ease 0.05s, visibility 0s;
+  }
   .logo .wm { font-size: 13px; letter-spacing: 0.22em; }
   h1 { font-size: 42px; }
   h2 { font-size: 28px; margin: 10px 0 8px; }
   .sub { font-size: 15px; }
   .label { font-size: 11px; letter-spacing: 0.16em; }
-  .hero { padding: 12px 0 40px; }
-  .hero .mark { width: 200px; margin: 0 auto -12px; }
-  .hero .label.c::before, .hero .label.c::after { display: none; }
-  .hero .sub { font-size: 16px; margin: 14px auto 22px; }
-  .hero .ctas .btn { flex: 1 1 140px; white-space: nowrap; padding: 13px 14px; }
-  .hero .meta { margin-top: 22px; gap: 6px 16px; font-size: 10.5px; letter-spacing: 0.1em; }
+  /* Phone hero: a short pitch, then the form, then who it's for. Left-aligned,
+     with a glow in place of the lens and the two buttons. */
+  .hero { padding: 26px 0 40px; text-align: left; overflow-x: clip; isolation: isolate; }
+  .hero::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    left: -20%;
+    right: -20%;
+    top: -120px;
+    height: 640px;
+    background:
+      radial-gradient(50% 45% at 72% 42%, rgba(58, 63, 196, 0.34), transparent 70%),
+      radial-gradient(35% 30% at 10% 12%, rgba(124, 131, 240, 0.12), transparent 70%);
+    pointer-events: none;
+  }
+  .hero .wrap { display: flex; flex-direction: column; }
+  .hero .mark, .hero .label, .sub-wide, .hero .ctas, .hero .who, .hero .meta { display: none; }
+  .sub-phone { display: inline; }
+  .hero h1 { margin-top: 0; font-size: 44px; }
+  .hero h1 .grad { display: block; } /* "Your business," then the promise, never "on" left dangling */
+  .hero .sub { font-size: 16px; margin: 14px 0 0; }
+  .hero-form { display: block; margin-top: 26px; }
+  .lead-head h2 { font-size: 23px; }
+  /* under the form: plain promises, not pills that look like the form's chips */
+  .hero-notes { display: block; margin-top: 24px; padding: 0 4px; }
+  /* phones: the one-step form under #contact instead of the two-step one */
+  #lead { display: none; }
+  .contact-phone { display: block; }
+  /* 16px: iOS Safari zooms the page when a smaller field takes focus */
+  input, textarea { font-size: 16px; }
+  .promises { list-style: none; display: grid; gap: 10px; }
+  .promises li { display: grid; grid-template-columns: 22px 1fr; align-items: start; font-size: 15px; line-height: 1.45; color: var(--ink); }
+  .promises li::before { content: "\2713"; color: var(--good); font-weight: 600; }
+  .hero-notes .for { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 14px; line-height: 1.55; color: var(--muted); }
   .who { margin-top: 18px; }
   .who span { font-size: 12px; padding: 5px 10px; }
   .dash, .back { padding: 16px; }
@@ -539,8 +698,21 @@ footer .legal a { display: inline-flex; align-items: center; min-height: 32px; }
   .ctas-left .btn { width: 100%; }
   .stages span { padding: 10px 4px; font-size: 12px; }
   .card { padding: 22px; }
-  .plans { gap: 12px; }
-  .plan { padding: 22px; }
+  /* plans side by side, swiped like cards, instead of three screens of scrolling */
+  .plans {
+    display: flex;
+    max-width: none;
+    margin: 0 -16px;
+    padding: 6px 16px 14px;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding: 0 16px;
+    scrollbar-width: none;
+  }
+  .plans::-webkit-scrollbar { display: none; }
+  .plan { flex: 0 0 86%; scroll-snap-align: start; padding: 22px; }
+  .swipe-hint { display: block; margin-top: 4px; font-size: 13px; color: var(--dim); }
   .plan.hot { order: -1; }
   .plan .price { font-size: 32px; }
   .fine { flex-direction: column; }
@@ -553,30 +725,14 @@ footer .legal a { display: inline-flex; align-items: center; min-height: 32px; }
   .way h3, .way p { grid-column: 2; }
   .way h3 { font-size: 16px; margin: 0 0 2px; }
   .two { grid-template-columns: 1fr; }
+  /* name and business still fit side by side: one less row before the button */
+  .lead .two { grid-template-columns: 1fr 1fr; gap: 10px; }
   form { padding: 18px; }
-  .callbar {
-    display: flex;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 30;
-    gap: 8px;
-    padding: 8px 12px calc(8px + env(safe-area-inset-bottom, 0px));
-    background: rgba(4, 5, 10, 0.92);
-    backdrop-filter: blur(10px);
-    border-top: 1px solid var(--line);
-  }
-  .callbar a { flex: 1; }
-  .callbar .btn { padding: 11px; }
-  body { padding-bottom: 64px; }
-  html { scroll-padding-bottom: 84px; }
-  #contact { padding-bottom: 96px; }
 }
 
 @media (max-width: 360px) {
+  .lead .two { grid-template-columns: 1fr; }
   h1 { font-size: 36px; }
-  .hero .ctas .btn { flex-basis: 100%; }
   .logo .wm { font-size: 12px; letter-spacing: 0.18em; }
 }
 

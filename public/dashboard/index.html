@@ -256,6 +256,12 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
   ];
   const STATUSES = ['New', 'Contacted', 'Audit booked', 'Quoted', 'Won', 'Lost'];
 
+  // Where a website request came from: the ad tags or referrer the homepage saved (scope.src).
+  function srcText(r) {
+    const s = (r.scope || {}).src; if (!s) return '';
+    const from = s.utm_source || (s.gclid ? 'Google Ads' : s.fbclid ? 'Facebook/Instagram' : s.msclkid ? 'Microsoft Ads' : s.ref || '');
+    return from ? 'via ' + from + (s.utm_campaign ? ' (' + s.utm_campaign + ')' : '') : '';
+  }
   function calc(r) {
     const sc = r.scope || {}; const items = []; let lo = 0, hi = 0, dLo = 0, dHi = 0, monthly = 0;
     const wf = (sc.wf || []).slice(0, 5); const n = wf.length;
@@ -315,7 +321,7 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
       const what = c.items.length ? c.items.map(i => i[0]).join(' · ') : (r.needs || 'No scope yet');
       return `<button class="req" data-open="${esc(r.id)}" data-s="${esc(st)}"><span class="stripe"></span>
         <span class="body"><span class="name">${esc(r.business || r.name || 'Unnamed')}</span>
-          <span class="meta" style="display:block">${[r.name, r.btype, r.contact].filter(Boolean).map(esc).join(' · ')}</span>
+          <span class="meta" style="display:block">${[r.name, r.btype, r.contact, srcText(r)].filter(Boolean).map(esc).join(' · ')}</span>
           <span class="meta" style="display:block">${esc(what)}</span></span>
         <span class="side"><span class="chip ${esc(st)}">${esc(st)}</span>${r.emailed === 'Yes' ? `<span class="chip good">Replied ${esc(nice(r.emailedDate))}</span>` : '<span class="chip New">Needs reply</span>'}
           <span class="muted" style="font-size:12px">${c.items.length ? (r.quote ? esc(r.quote) : money(c.lo) + '–' + money(c.hi)) : ''} ${r.createdAt ? '· ' + esc(nice(r.createdAt)) : ''}</span></span></button>`;
@@ -330,7 +336,7 @@ label.f { display: grid; gap: 4px; font-size: 12.5px; font-weight: 600; color: v
   function renderReq() {
     const r = reqs.find(x => x.id === openId); if (!r) return;
     $('reqTitle').textContent = r.business || r.name || 'Request';
-    $('reqSub').textContent = [r.name, r.btype, r.source, r.createdAt ? 'received ' + nice(r.createdAt) : ''].filter(Boolean).join(' · ');
+    $('reqSub').textContent = [r.name, r.btype, r.source, srcText(r), r.createdAt ? 'received ' + nice(r.createdAt) : ''].filter(Boolean).join(' · ');
     document.querySelectorAll('.tabs button').forEach(b => b.classList.toggle('on', b.dataset.tab === tab));
     if (tab === 'audit') { $('reqBody').innerHTML = `<div class="pad" style="padding-bottom:0"><div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><button class="btn primary" data-print>Print / save proposal</button><span class="hint">Opens the print window. Pick your printer, or choose Save as PDF.</span></div></div><div class="paperwrap"><div class="paper">${proposalBody(r)}</div></div>`; return; }
     const c = calc(r), sc = r.scope || {}, wf = sc.wf || [];
