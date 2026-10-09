@@ -54,7 +54,7 @@ import LeadForm from '../components/LeadForm.astro';
         <div class="hero-form">
           <LeadForm id="hf" title="Book your free audit" />
         </div>
-        <div class="who" aria-label="Who we work with">
+        <div class="who" role="group" aria-label="Who we work with">
           <span class="on">Barbershops &amp; salons</span><span>Auto repair &amp; detailing</span><span
           >Pet groomers</span><span>Tattoo studios</span><span>Fitness &amp; martial arts</span><span
           >Any appointment or walk-in business</span>
@@ -90,7 +90,7 @@ import LeadForm from '../components/LeadForm.astro';
           </p>
         </div>
         <div class="fb">
-          <div class="dash glass" aria-label="Example dashboard for a barbershop">
+          <div class="dash glass" role="group" aria-label="Example dashboard for a barbershop">
             <div class="side-label">
               <span>Front end · your dashboard</span><em>Example: a barbershop</em>
             </div>
@@ -108,7 +108,7 @@ import LeadForm from '../components/LeadForm.astro';
               <div><i>11:30</i><span>Open chair · Luis</span><em>Rebook list: 17</em></div>
             </div>
           </div>
-          <div class="back glass" aria-label="Automations running behind the dashboard">
+          <div class="back glass" role="group" aria-label="Automations running behind the dashboard">
             <div class="side-label"><span>Back end · your workflows</span></div>
             <div class="auto">
               <i>01</i>
@@ -162,7 +162,7 @@ import LeadForm from '../components/LeadForm.astro';
               <a class="btn btn-primary" href="#contact">Tell us what you need</a>
             </div>
           </div>
-          <div class="flow" aria-label="Example: from a request to a working workflow">
+          <div class="flow" role="group" aria-label="Example: from a request to a working workflow">
             <div class="bubble">
               <span class="whoby">What the owner asked for</span>
               "Text clients a reminder the day before, and show me each barber's total at the end of
@@ -404,8 +404,7 @@ import LeadForm from '../components/LeadForm.astro';
           >
           <button class="btn btn-primary" type="submit">Book my free audit</button>
           <p class="consent">
-            We'll use your details only to set up your audit, and we may call, text or email you about it.
-            Reply STOP to any text to stop. Msg &amp; data rates may apply. <a href="/privacy/">Privacy Policy</a>
+            By sending this request, you agree FutureClarity Technologies may call, text or email you about it, including by automated means. Consent isn't required to buy anything. Msg frequency varies; msg &amp; data rates may apply. Reply STOP to opt out, HELP for help. <a href="/privacy/">Privacy Policy</a> · <a href="/terms/">Terms</a>
           </p>
           <div id="formerr" role="alert">
             Add your name, business name and an email or phone so we can reach you.
