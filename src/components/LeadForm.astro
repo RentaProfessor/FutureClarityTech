@@ -70,6 +70,10 @@ const picks = [
     <!-- Bots fill every field; people never see this one. -->
     <label class="hp" aria-hidden="true">Leave this empty<input name="company_site" tabindex="-1" autocomplete="off" /></label>
     <button class="btn btn-primary" type="submit">Get my free audit</button>
+    <!-- Consent sits right under the button it applies to (TCPA, carrier texting rules). -->
+    <p class="consent">
+      By sending this request, you agree FutureClarity Technologies may call, text or email you about it, including by automated means. Consent isn't required to buy anything. Msg frequency varies; msg &amp; data rates may apply. Reply STOP to opt out, HELP for help. <a href="/privacy/">Privacy Policy</a> · <a href="/terms/">Terms</a>
+    </p>
     <p class="lead-trust">
       We reply within one business day · or call <a href={`tel:${SITE.phoneTel}`}>{SITE.phoneDisplay}</a>
     </p>
@@ -83,10 +87,6 @@ const picks = [
         <a class="btn" data-sms href={`sms:${SITE.phoneTel}`}>Text it</a>
       </div>
     </div>
-    <p class="consent">
-      We'll use your details only to set up your audit, and we may call, text or email you about it. Reply STOP
-      to any text to stop. Msg &amp; data rates may apply. <a href="/privacy/">Privacy Policy</a>
-    </p>
   </div>
   <div class="lead-done" role="status" tabindex="-1" hidden>
     <div class="ok" aria-hidden="true">✓</div>
