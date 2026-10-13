@@ -115,7 +115,6 @@ header nav a:hover, header nav a.on { color: var(--ink); border-color: var(--bra
 }
 header .btn { min-height: 42px; padding: 0 18px; font-size: 15px; }
 .hcall { display: none; }
-.btn-short { display: none; }
 
 /* ------------------------------------------------------------------ hero -- */
 .hero { padding: 64px 0 72px; background: linear-gradient(180deg, var(--soft), var(--bg)); }
@@ -484,59 +483,31 @@ footer .legal .linkish { display: inline-flex; align-items: center; min-height: 
   h2 { font-size: 30px; }
   h3 { font-size: 22px; }
 
-  /* the header: logo, then Call; Book swaps in once the forms are off screen */
+  /* the header: the logo and a Call button. The forms on the page do the booking. */
   header .wrap { height: 62px; gap: 8px; }
-  .hright { gap: 8px; }
-  /* the full "Book a free audit" doesn't fit beside the logo on a phone */
-  .btn-long { display: none; }
-  .btn-short { display: inline; }
+  header .btn { display: none; }
   .logo .wm { font-size: 13.5px; letter-spacing: 0.1em; }
   .hcall {
     display: inline-flex;
     align-items: center;
     gap: 7px;
     min-height: 42px;
-    min-width: 42px;
-    justify-content: center;
     padding: 0 15px;
     border-radius: 10px;
     border: 1.5px solid var(--ink);
     font-size: 15px;
     font-weight: 600;
     color: var(--ink);
-    transition: padding 0.3s ease, gap 0.3s ease;
   }
   .hcall svg { width: 16px; height: 16px; fill: var(--ink); flex: none; }
-  .hcall .lbl { display: inline-block; max-width: 40px; overflow: hidden; transition: max-width 0.3s ease, opacity 0.2s ease; }
-  header .btn {
-    order: 3;
-    max-width: 0;
-    padding: 0;
-    border-width: 0;
-    opacity: 0;
-    overflow: hidden;
-    white-space: nowrap;
-    visibility: hidden;
-    margin-left: -8px;
-    transition: max-width 0.3s ease, padding 0.3s ease, margin 0.3s ease, opacity 0.25s ease, visibility 0s 0.3s;
-  }
-  header.cta-on .hcall { padding: 0; gap: 0; }
-  header.cta-on .hcall .lbl { max-width: 0; opacity: 0; }
-  header.cta-on .btn {
-    max-width: 180px;
-    padding: 0 14px;
-    border-width: 1.5px;
-    opacity: 1;
-    visibility: visible;
-    margin-left: 0;
-    transition: max-width 0.3s ease, padding 0.3s ease, margin 0.3s ease, opacity 0.25s ease 0.05s, visibility 0s;
-  }
 
   .hero { padding: 32px 0 8px; }
   .kicker { font-size: 14px; }
-  .ctas { margin-top: 24px; }
-  .ctas .btn-lg { width: 100%; }
-  .call-line { width: 100%; text-align: center; }
+  /* phones: no kicker or audit button up top, so the photo comes into view sooner; the form is right below it */
+  .hero .kicker, .hero .ctas .btn-lg, .call-line .or { display: none; }
+  .ctas { margin-top: 20px; }
+  .call-line { width: 100%; }
+  .call-line::first-letter { text-transform: uppercase; }
   .checks { flex-direction: column; gap: 8px; margin-top: 22px; }
   .hero-media img { aspect-ratio: 4 / 3; border-radius: 16px; object-position: 50% 45%; }
   .chip.sms { left: 10px; right: 10px; bottom: 10px; max-width: none; font-size: 14px; padding: 11px 13px; }
@@ -590,8 +561,6 @@ footer .legal .linkish { display: inline-flex; align-items: center; min-height: 
 @media (max-width: 360px) {
   h1 { font-size: 34px; }
   .logo .wm { font-size: 12.5px; letter-spacing: 0.1em; }
-  /* the smallest phones fit the logo and one action: Call, then Free audit once scrolled */
-  header.cta-on .hcall { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
