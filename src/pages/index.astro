@@ -4,437 +4,409 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import LeadForm from '../components/LeadForm.astro';
 
-// Booking a free audit lands on the team dashboard at /dashboard/ either way.
-// Wider screens: the original form under #contact (step 1) hands off to
-// /plan.html (step 2), which sends the request via public/fc-store.js.
-// Phones: LeadForm sends it in one submit, in the hero (where ad clicks land)
-// and again under #contact.
+// Booking a free audit is one step on every screen size: LeadForm sends the
+// request straight to Supabase (public/fc-store.js). Phones get the form near
+// the top as well, where ad clicks land.
+
+// The industry photos are generated (Z-Image Turbo, Apache 2.0), not real
+// shops or people. Swap in real client photos when you have them.
+const niches = [
+  { label: 'Barbershops & salons', img: '/img/niche-salon.jpg' },
+  { label: 'Auto repair & detailing', img: '/img/niche-auto.jpg' },
+  { label: 'Pet groomers', img: '/img/niche-groomer.jpg' },
+  { label: 'Tattoo studios', img: '/img/niche-tattoo.jpg' },
+  { label: 'Gyms & martial arts', img: '/img/niche-gym.jpg' },
+];
+
+const faqs = [
+  {
+    q: 'Do I have to switch from Square, Booksy or Vagaro?',
+    a: "No. We build around the tools you already use, and if something can't connect we'll tell you at the audit, before you pay anything.",
+  },
+  {
+    q: 'Is there a monthly fee?',
+    a: "Not unless you want one. You pay once for the build and it's yours to keep. Monthly care is optional: it covers the texts your workflows send, the software behind them, monitoring, fixes and small tweaks. Skip it and we set everything up on your own accounts, so you pay those small usage costs directly.",
+  },
+  {
+    q: 'What happens at the free audit?',
+    a: "One of us comes to your business for about 30 minutes, sees how your day runs, and points out what's worth automating. Afterward you get a fixed quote. No obligation.",
+  },
+  {
+    q: 'Do I pay before I see it working?',
+    a: 'No. You try a working demo of your dashboard and texts first, then decide.',
+  },
+  {
+    q: 'I just need a website. Do you do that?',
+    a: "Yes. A one-page site with your hours, prices, booking and map is typically $300–$600. Up to 5 pages is $600–$1,200. Or $0 down at around $59/mo with hosting and edits included.",
+  },
+  {
+    q: 'Where do you work?',
+    a: "We're based in the San Fernando Valley and come to your business for the audit.",
+  },
+];
 ---
 
 <Layout title="FutureClarity Technologies" main="#top">
   <Header />
 
   <main id="top" tabindex="-1">
-    <!-- HERO. Wider screens: the centered pitch with the lens and two buttons.
-         Phones: a short pitch, then the form (so an ad click lands on it), then the promises. -->
+    <!-- HERO: the niche and the problem in the headline, a real shop, and the
+         product shown working on top of it. -->
     <section class="hero">
-      <div class="wrap">
-        <svg class="mark" viewBox="150 30 300 220" aria-hidden="true">
-          <path
-            class="lens-anim"
-            d="M300,58 Q352,140 300,222 Q248,140 300,58 Z"
-            fill="url(#lensFill)"
-            filter="url(#lensGlow)"></path>
-          <line
-            class="beam-anim"
-            x1="150"
-            y1="194"
-            x2="450"
-            y2="86"
-            stroke="url(#beamFill)"
-            stroke-width="2.5"
-            filter="url(#lensGlow)"></line>
-        </svg>
-        <div class="label c">Dashboards &amp; automations for local businesses</div>
-        <h1>Your business, <span class="grad">on one dashboard.</span></h1>
-        <p class="sub">
-          <span class="sub-wide"
-            >We build you a custom dashboard and set up the automations behind it, around what your
-            business needs. Bookings, reminders, reviews and follow-ups run on their own, and you see
-            it all in one place.</span
-          ><span class="sub-phone"
-            >Missed calls get texted back, clients get reminders, reviews get asked for. Automatically,
-            on one screen built for your business.</span
-          >
-        </p>
-        <div class="ctas">
-          <a class="btn btn-primary" href="#contact">Book a free audit</a>
-          <a class="btn" href="#how">See how it works</a>
-        </div>
-        <div class="hero-form">
-          <LeadForm id="hf" title="Book your free audit" />
-        </div>
-        <div class="who" aria-label="Who we work with">
-          <span class="on">Barbershops &amp; salons</span><span>Auto repair &amp; detailing</span><span
-          >Pet groomers</span><span>Tattoo studios</span><span>Fitness &amp; martial arts</span><span
-          >Any appointment or walk-in business</span>
-        </div>
-        <div class="meta">
-          <span>Free audit &amp; <b>fixed quote</b></span><span>Monthly care <b>optional</b></span><span
-          >Demo <b>before you pay</b></span>
-        </div>
-        <!-- phones: what you can count on, and who it's for, under the form -->
-        <div class="hero-notes">
-          <ul class="promises">
-            <li>Free audit at your business, then a fixed quote</li>
-            <li>Try a working demo before you pay</li>
-            <li>Monthly care is optional</li>
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="kicker">For barbershops, salons &amp; auto shops in the San Fernando Valley</p>
+          <h1>Stop losing customers to missed calls and no-shows.</h1>
+          <p class="lede">
+            We set up automatic text-backs, appointment reminders and review requests for your business,
+            and show it all on one simple screen. One fixed price. Yours to keep.
+          </p>
+          <div class="ctas">
+            <a class="btn btn-primary btn-lg" href="#contact" data-to-form>Book a free audit</a>
+            <a class="call-line" href="tel:+18189397964">or call or text <b>(818) 939-7964</b></a>
+          </div>
+          <ul class="checks">
+            <li>Free 30-minute visit to your shop</li>
+            <li>Try it working before you pay</li>
+            <li>No monthly contract</li>
           </ul>
-          <p class="for">
-            Made for barbershops, salons, auto shops, pet groomers, tattoo studios, gyms and any
-            appointment or walk-in business.
-          </p>
+        </div>
+        <div class="hero-media">
+          <!-- generated photo (Z-Image Turbo, Apache 2.0): not a real shop or real people -->
+          <img
+            src="/img/hero-shop.jpg"
+            srcset="/img/hero-shop-640.jpg 640w, /img/hero-shop.jpg 960w"
+            sizes="(max-width: 900px) 100vw, 520px"
+            alt="A barber giving a client a fade in a busy neighborhood barbershop while two customers wait"
+            width="960"
+            height="1147"
+            fetchpriority="high"
+          />
+          <!-- the product, shown working: an example text-back and review -->
+          <div class="chip sms" aria-hidden="true">
+            <span class="chip-k">Missed call · texted back</span>
+            "Sorry we missed you! Book your next cut here: valleyfades.com/book"
+          </div>
+          <div class="chip review" aria-hidden="true">
+            <span class="stars">★★★★★</span>
+            <span>New Google review</span>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- 01 HOW IT WORKS -->
-    <section id="how" style="padding-top:40px">
+    <!-- phones: the form right under the hero, where an ad click lands -->
+    <div class="wrap phone-form" id="start">
+      <LeadForm id="hf" title="Book your free audit" />
+    </div>
+
+    <!-- WHO IT'S FOR -->
+    <section class="niches" aria-labelledby="niches-h">
+      <div class="wrap">
+        <h2 id="niches-h" class="h-sm">Made for businesses that run on appointments and walk-ins</h2>
+        <ul class="niche-grid">
+          {
+            niches.map((n) => (
+              <li>
+                <img src={n.img} alt="" loading="lazy" width="560" height="700" />
+                <span>{n.label}</span>
+              </li>
+            ))
+          }
+          <li class="niche-any"><span>Any appointment or walk-in business</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- WHAT IT FIXES: each problem in the owner's words, then what we set up -->
+    <section id="how" class="fixes">
       <div class="wrap">
         <div class="head">
-          <div class="label">01 · How it works</div>
-          <h2>A dashboard up front. Automations behind it.</h2>
-          <p class="sub">
-            You get one screen built for your business. Behind it, we set up the workflows that do
-            the repeat work for you, connected to the tools you already use.
-          </p>
+          <p class="kicker">How it works</p>
+          <h2>The busywork that costs you customers, handled automatically.</h2>
         </div>
-        <div class="fb">
-          <div class="dash glass" aria-label="Example dashboard for a barbershop">
-            <div class="side-label">
-              <span>Front end · your dashboard</span><em>Example: a barbershop</em>
-            </div>
-            <div class="title"><b>Today at the shop</b><span>Thu · 4 chairs</span></div>
-            <div class="tiles">
-              <div class="tile"><b>23</b><span>cuts today</span></div>
-              <div class="tile g"><b>$640</b><span>taken today</span></div>
-              <div class="tile w"><b>3</b><span>missed calls, texted back</span></div>
-              <div class="tile"><b>+4</b><span>new reviews this week</span></div>
-            </div>
-            <div class="sched">
-              <div><i>10:00</i><span>Marcos · fade</span><em class="ok">Confirmed</em></div>
-              <div><i>10:30</i><span>Walk-in · beard trim</span><em>Walk-in</em></div>
-              <div><i>11:00</i><span>Chris · kid's cut</span><em class="new">Booked online</em></div>
-              <div><i>11:30</i><span>Open chair · Luis</span><em>Rebook list: 17</em></div>
-            </div>
-          </div>
-          <div class="back glass" aria-label="Automations running behind the dashboard">
-            <div class="side-label"><span>Back end · your workflows</span></div>
-            <div class="auto">
-              <i>01</i>
-              <div>
-                Online booking + reminders
-                <small>Confirms each booking and texts a reminder the day before.</small>
-              </div>
-            </div>
-            <div class="auto">
-              <i>02</i>
-              <div>
-                Missed-call text-back
-                <small>Every missed caller gets a booking link in seconds.</small>
-              </div>
-            </div>
-            <div class="auto">
-              <i>03</i>
-              <div>
-                Review requests
-                <small>A thank-you text with your review link after each visit.</small>
-              </div>
-            </div>
-            <div class="auto">
-              <i>04</i>
-              <div>
-                Rebooking nudges
-                <small>"Time for your next cut?" a few weeks after each visit.</small>
-              </div>
-            </div>
-            <p class="note">
-              Every business gets a different set. <b>An auto shop</b> might get "your car is ready"
-              texts and estimate requests instead.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- 02 CUSTOM -->
-    <section id="custom" class="custom">
-      <div class="wrap">
-        <div class="band">
-          <div class="band-copy">
-            <div class="label">02 · Built around you</div>
-            <h2>Tell us what you need. <span class="grad">We build the workflow.</span></h2>
-            <p class="sub">
-              You tell us what slows you down or what you wish you could see at a glance. Our
-              developers build the automation behind it and put the results on your dashboard.
-            </p>
-            <div class="ctas-left">
-              <a class="btn btn-primary" href="#contact">Tell us what you need</a>
-            </div>
-          </div>
-          <div class="flow" aria-label="Example: from a request to a working workflow">
-            <div class="bubble">
-              <span class="whoby">What the owner asked for</span>
-              "Text clients a reminder the day before, and show me each barber's total at the end of
-              the day."
-            </div>
-            <div class="beam-line" aria-hidden="true"></div>
-            <div class="stages">
-              <span><i>01</i>Planned</span>
-              <span><i>02</i>Built</span>
-              <span><i>03</i>On your dashboard</span>
-              <span class="on"><i>✓</i>Live</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 03 WEBSITES & APPS -->
-    <section id="web">
-      <div class="wrap">
-        <div class="head">
-          <div class="label">03 · Websites &amp; apps</div>
-          <h2>The rest of how customers find you.</h2>
-          <p class="sub">
-            Your dashboard runs the business. Your website and app are what customers see first, so
-            we fix those too.
-          </p>
-        </div>
-        <div class="duo">
-          <div class="card glass">
-            <div class="tag">Websites</div>
-            <h3>New site or a full revamp</h3>
-            <p>A fast, phone-first site with your real hours, prices and a booking button that works.</p>
-            <ul>
-              <li>Built new, or rebuilt from the site you have now</li>
-              <li>Same name, address, phone and hours as your Google, Apple Maps and Yelp listings</li>
-              <li>Booking linked straight to your dashboard</li>
-            </ul>
-            <div class="prices">
-              <div>
-                <b>$300–$600</b><span>Landing page: one page with hours, prices, booking and map</span>
-              </div>
-              <div><b>$600–$1,200</b><span>Small website: up to 5 pages</span></div>
-              <div>
-                <b>$0 down</b><span
-                >Around $59/mo with hosting and edits included, if you'd rather spread it out</span>
-              </div>
-            </div>
-          </div>
-          <div class="card glass">
-            <div class="tag">Apps</div>
-            <h3>App cleanup</h3>
+        <div class="fix">
+          <div class="fix-copy">
+            <h3>Missed calls shouldn't mean missed bookings.</h3>
             <p>
-              Already have an app that's slow, buggy or out of date? We clean it up instead of
-              starting over.
+              When you're with a client and can't pick up, the caller gets a text with your booking link
+              within seconds, instead of calling the shop down the street.
             </p>
-            <ul>
-              <li>Fix broken screens, sign-ins and checkout flows</li>
-              <li>Speed it up and update the design</li>
-              <li>Connect it to your dashboard and workflows</li>
-            </ul>
-            <div class="prices">
-              <div>
-                <b>$1,500–$4,000</b><span>Typical range. Fixed quote after a free review of your app</span>
-              </div>
-            </div>
+            <p class="fix-tag">Missed-call text-back</p>
+          </div>
+          <div class="phone" aria-label="Example text messages after a missed call">
+            <div class="ph-top"><b>Valley Fades</b><span>Example</span></div>
+            <p class="sys">Missed call · 2:14 PM</p>
+            <p class="out">Hi, it's Valley Fades. Sorry we missed you! Book your next cut here: valleyfades.com/book</p>
+            <p class="in extra">Thanks, just booked Thursday at 4</p>
+          </div>
+        </div>
+
+        <div class="fix flip">
+          <div class="fix-copy">
+            <h3>No-shows leave chairs empty.</h3>
+            <p>
+              Every booking gets a confirmation and a reminder the day before. Clients confirm or reschedule
+              with one reply, so you can fill the gap.
+            </p>
+            <p class="fix-tag">Booking reminders</p>
+          </div>
+          <div class="phone" aria-label="Example appointment reminder text">
+            <div class="ph-top"><b>Valley Fades</b><span>Example</span></div>
+            <p class="out">Reminder: your fade with Marcos is tomorrow at 10:00 AM. Reply C to confirm or R to reschedule.</p>
+            <p class="in">C</p>
+            <p class="out extra">You're confirmed. See you tomorrow!</p>
+          </div>
+        </div>
+
+        <div class="fix">
+          <div class="fix-copy">
+            <h3>Happy customers rarely leave reviews on their own.</h3>
+            <p>
+              After each visit, a thank-you text asks for a review with a direct link. More reviews means
+              you show up higher when people nearby search.
+            </p>
+            <p class="fix-tag">Review requests</p>
+          </div>
+          <div class="phone" aria-label="Example review request text">
+            <div class="ph-top"><b>Valley Fades</b><span>Example</span></div>
+            <p class="out">Thanks for coming in today, Chris! Would you leave us a quick Google review? It really helps: g.page/valleyfades</p>
+            <div class="ph-review"><span class="stars">★★★★★</span>New review posted</div>
+          </div>
+        </div>
+
+        <div class="fix flip">
+          <div class="fix-copy">
+            <h3>Regulars drift away without a nudge.</h3>
+            <p>
+              A few weeks after each visit, clients get a friendly "time for your next one?" text with
+              their usual time, so regulars stay regular.
+            </p>
+            <p class="fix-tag">Rebooking nudges</p>
+          </div>
+          <div class="phone" aria-label="Example rebooking text">
+            <div class="ph-top"><b>Valley Fades</b><span>Example</span></div>
+            <p class="out">Hey Luis, it's been 4 weeks since your last cut. Want your usual Saturday 11 AM? Book: valleyfades.com/book</p>
+            <p class="in extra">Yes please</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 04 PRICING -->
-    <section id="pricing" style="padding-top:20px">
+    <!-- ONE SCREEN: the dashboard, shown plainly -->
+    <section class="board">
+      <div class="wrap board-grid">
+        <div>
+          <p class="kicker">Your dashboard</p>
+          <h2>See your day on one screen.</h2>
+          <p class="lede">
+            Bookings, takings, missed calls and new reviews, in one place you can check from your phone.
+            We build it around what you want to see, and every business gets a different set.
+          </p>
+        </div>
+        <div class="dash" aria-label="Example dashboard for a barbershop">
+          <div class="dash-top"><b>Today at the shop</b><span>Example · Thu</span></div>
+          <div class="tiles">
+            <div><b>23</b><span>cuts today</span></div>
+            <div><b class="g">$640</b><span>taken today</span></div>
+            <div><b>3</b><span>missed calls texted back</span></div>
+            <div><b>+4</b><span>new reviews this week</span></div>
+          </div>
+          <ul class="sched">
+            <li><i>10:00</i><span>Marcos · fade</span><em class="ok">Confirmed</em></li>
+            <li><i>10:30</i><span>Walk-in · beard trim</span><em>Walk-in</em></li>
+            <li><i>11:00</i><span>Chris · kid's cut</span><em class="new">Booked online</em></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING: shown openly, framed against monthly subscriptions -->
+    <section id="pricing" class="pricing">
       <div class="wrap">
         <div class="head">
-          <div class="label">04 · Pricing</div>
-          <h2>What it usually costs.</h2>
-          <p class="sub">
-            Every business needs something different, so these are typical ranges. Yours could come
-            in lower or higher. After your free audit you get a fixed quote before any work starts.
+          <p class="kicker">Pricing</p>
+          <h2>Pay once. It's yours.</h2>
+          <p class="lede">
+            Most text-back tools are a monthly subscription. Ours is a one-time build, with optional care.
+            These are typical ranges; after your free audit you get a fixed quote before any work starts.
           </p>
-          <span class="pill">Founding clients · pricing toward the low end</span>
         </div>
         <div class="plans">
-          <div class="plan glass">
-            <div class="tag">Starter</div>
-            <h3>Dashboard + 1 workflow</h3>
-            <div class="price"><span class="typ">Typically</span>$400–$800</div>
-            <div class="mo">Optional care: around $49/mo</div>
+          <div class="plan">
+            <h3>Starter</h3>
+            <p class="what">Dashboard + 1 automation</p>
+            <p class="price">$400–$800</p>
+            <p class="care">Optional care: about $49/mo</p>
             <ul>
-              <li>Your custom dashboard</li>
               <li>1 automation, such as booking + reminders</li>
-              <li>Yours to keep, no monthly fee required</li>
             </ul>
-            <a class="btn" href="#contact">Get a quote</a>
+            <a class="btn" href="#contact" data-to-form>Get a quote</a>
           </div>
-          <div class="plan glass hot">
-            <div class="tag">Most popular</div>
-            <h3>Dashboard + 3 workflows</h3>
-            <div class="price"><span class="typ">Typically</span>$1,000–$1,800</div>
-            <div class="mo">Optional care: around $99/mo</div>
+          <div class="plan hot">
+            <p class="badge">Most popular</p>
+            <h3>Standard</h3>
+            <p class="what">Dashboard + 3 automations</p>
+            <p class="price">$1,000–$1,800</p>
+            <p class="care">Optional care: about $99/mo</p>
             <ul>
-              <li>Your custom dashboard</li>
-              <li>3 automations</li>
+              <li>3 automations, such as text-back, reminders and reviews</li>
               <li>Weekly numbers email</li>
-              <li>Yours to keep, no monthly fee required</li>
             </ul>
-            <a class="btn btn-primary" href="#contact">Get a quote</a>
+            <a class="btn btn-primary" href="#contact" data-to-form>Get a quote</a>
           </div>
-          <div class="plan glass">
-            <div class="tag">Growth</div>
-            <h3>Dashboard + up to 5 workflows</h3>
-            <div class="price"><span class="typ">Typically</span>$1,800–$3,000</div>
-            <div class="mo">Optional care: around $179/mo</div>
+          <div class="plan">
+            <h3>Growth</h3>
+            <p class="what">Dashboard + up to 5 automations</p>
+            <p class="price">$1,800–$3,000</p>
+            <p class="care">Optional care: about $179/mo</p>
             <ul>
-              <li>Your custom dashboard</li>
               <li>Up to 5 automations</li>
-              <li>With care: 1 new workflow each month</li>
+              <li>With care: 1 new automation each month</li>
             </ul>
-            <a class="btn" href="#contact">Get a quote</a>
+            <a class="btn" href="#contact" data-to-form>Get a quote</a>
           </div>
         </div>
-        <p class="swipe-hint">Swipe to compare plans</p>
-        <p class="carenote">
-          Care is optional. It covers the texts your workflows send, the software behind them,
-          monitoring, fixes when a connected app changes, and small tweaks. Skip it and we set
-          everything up on your own accounts, so you pay those small usage costs directly. Add or
-          cancel care anytime.
+        <div class="extras">
+          <div>
+            <h3>Websites</h3>
+            <p>
+              One page with hours, prices, booking and map: <b>$300–$600</b>. Up to 5 pages:
+              <b>$600–$1,200</b>. Or <b>$0 down</b> at about $59/mo with hosting and edits included.
+            </p>
+          </div>
+          <div>
+            <h3>App cleanup</h3>
+            <p>
+              Already have an app that's slow or buggy? We fix it instead of starting over. Typically
+              <b>$1,500–$4,000</b>, fixed quote after a free review.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESS: a real sequence, so it gets numbers -->
+    <section class="steps-sec">
+      <div class="wrap">
+        <h2 class="h-sm">Three steps, no surprises</h2>
+        <ol class="steps">
+          <li><b>Free audit</b><span>We visit your shop for 30 minutes and see where customers slip through.</span></li>
+          <li><b>Working demo</b><span>You try your texts and dashboard before you pay anything.</span></li>
+          <li><b>Go live</b><span>We switch it on and check in after. Add care if you want us to keep watch.</span></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- WHY US: the three ways a shop handles what it can't get to, side by side -->
+    <section id="why" class="why">
+      <div class="wrap">
+        <div class="head">
+          <p class="kicker">Why owners choose this</p>
+          <h2>Better than voicemail. Cheaper than a front desk.</h2>
+          <p class="lede">What happens to the calls, bookings and reviews you can't get to, three ways.</p>
+        </div>
+        <table class="compare">
+          <thead>
+            <tr>
+              <th scope="col"><span class="sr">What happens</span></th>
+              <th scope="col">Voicemail</th>
+              <th scope="col">Front-desk help</th>
+              <th scope="col" class="us">FutureClarity</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">A call you can't pick up</th>
+              <td data-l="Voicemail">Many callers hang up and call the next shop</td>
+              <td data-l="Front desk">Answered while someone's on shift</td>
+              <td data-l="FutureClarity" class="us">Texted your booking link within seconds, day or night</td>
+            </tr>
+            <tr>
+              <th scope="row">Appointment reminders</th>
+              <td data-l="Voicemail">Only if you remember to send them</td>
+              <td data-l="Front desk">When they have a spare minute</td>
+              <td data-l="FutureClarity" class="us">Sent for every booking, automatically</td>
+            </tr>
+            <tr>
+              <th scope="row">Asking for reviews</th>
+              <td data-l="Voicemail">Rarely happens</td>
+              <td data-l="Front desk">Sometimes, if they remember</td>
+              <td data-l="FutureClarity" class="us">A thank-you text after every visit</td>
+            </tr>
+            <tr>
+              <th scope="row">Bringing regulars back</th>
+              <td data-l="Voicemail">Up to the client</td>
+              <td data-l="Front desk">Hard to keep track of</td>
+              <td data-l="FutureClarity" class="us">A nudge when they're due</td>
+            </tr>
+            <tr>
+              <th scope="row">What it costs</th>
+              <td data-l="Voicemail">Free, but you lose bookings</td>
+              <td data-l="Front desk">Wages, every week</td>
+              <td data-l="FutureClarity" class="us">One fixed price from $400, yours to keep</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="past">
+          Past work you can check:
+          <a href="https://www.thewhitesquirrelllc.com/" target="_blank" rel="noopener noreferrer">The White Squirrel ↗</a>
+          (a gift shop's website) ·
+          <a href="https://apps.apple.com/us/app/captain-fripps-lost-treasures/id6752260563" target="_blank" rel="noopener noreferrer"
+            >Captain Fripp's Lost Treasures ↗</a
+          >
+          (an iOS app)
         </p>
-        <div class="fine">
-          <span>
-            <b>Websites</b> typically $300–$1,200, or $0 down around $59/mo · <b>App cleanup</b>
-            typically $1,500–$4,000
-          </span>
-          <a href="#web">See websites &amp; apps →</a>
-        </div>
       </div>
     </section>
 
-    <!-- 05 PROCESS -->
-    <section id="process">
-      <div class="wrap">
-        <div class="head">
-          <div class="label">05 · Process</div>
-          <h2>Three steps.</h2>
+    <!-- FAQ -->
+    <section id="faq" class="faq">
+      <div class="wrap faq-grid">
+        <div>
+          <p class="kicker">FAQ</p>
+          <h2>Questions owners ask us</h2>
+          <p class="lede">Something else? Call or text <a href="tel:+18189397964">(818) 939-7964</a>.</p>
         </div>
-        <div class="steps">
-          <div class="step">
-            <div class="dot">01</div>
-            <h3>Free audit</h3>
-            <p>We visit, see how your day runs, and find what to automate.</p>
-          </div>
-          <div class="step on">
-            <div class="dot">02</div>
-            <h3>Working demo</h3>
-            <p>You try your dashboard and workflows before you pay.</p>
-          </div>
-          <div class="step">
-            <div class="dot">03</div>
-            <h3>Launch</h3>
-            <p>It goes live. Add care if you want us to keep watch.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 06 WORKING WITH US -->
-    <section id="working" style="padding-top:20px">
-      <div class="wrap">
-        <div class="head">
-          <div class="label">06 · Working with us</div>
-          <h2>Real people, not a ticket queue.</h2>
-          <p class="sub">You'll always know who to call, and you'll get a straight answer.</p>
-        </div>
-        <div class="ways">
-          <div class="way glass">
-            <div class="ic" aria-hidden="true">◎</div>
-            <h3>We come to you</h3>
-            <p>Your audit happens at your business, on your schedule, so we see how your day really runs.</p>
-          </div>
-          <div class="way glass">
-            <div class="ic" aria-hidden="true">✆</div>
-            <h3>A direct line</h3>
-            <p>Call or text the people doing the work. No call centers, no support tickets.</p>
-          </div>
-          <div class="way glass">
-            <div class="ic" aria-hidden="true">¶</div>
-            <h3>Plain language</h3>
-            <p>No tech jargon. We explain what we're building, why, and what it costs before we start.</p>
-          </div>
-          <div class="way glass">
-            <div class="ic" aria-hidden="true">↻</div>
-            <h3>We check in</h3>
-            <p>After launch, we check in to see what's working and what to add to your dashboard next.</p>
-          </div>
+        <div class="qs">
+          {
+            faqs.map((f) => (
+              <details>
+                <summary>{f.q}</summary>
+                <p>{f.a}</p>
+              </details>
+            ))
+          }
         </div>
       </div>
     </section>
 
     <!-- CONTACT -->
     <section id="contact" class="contact">
-      <div class="wrap">
-        <div class="label c">Get started</div>
-        <h2>Book your free audit.</h2>
-        <p class="sub">
-          <span class="sub-wide"
-            >30 minutes at your business. No obligation. Next, you'll pick what you'd like built so we
-            can prep before we meet.</span
-          ><span class="sub-phone"
-            >30 minutes at your business. No obligation. Send this once and we'll call or text within one
-            business day to pick a time.</span
-          >
-        </p>
-        <!-- wider screens: the original two-step form (step 2 is /plan.html) -->
-        <form id="lead" class="glass" novalidate>
-          <div class="two">
-            <label class="fld"
-              ><span>Your name</span><input id="f-name" name="name" autocomplete="name" required /></label
-            >
-            <label class="fld"
-              ><span>Business name</span><input id="f-business" name="business" autocomplete="organization" required /></label
-            >
-          </div>
-          <label class="fld"
-            ><span>Email or phone</span><input id="f-contact" name="contact" autocomplete="email" required /></label
-          >
-          <div class="two">
-            <label class="fld"
-              ><span>Website <i>optional</i></span><input id="f-site" name="website" autocomplete="url" inputmode="url" /></label
-            >
-            <label class="fld"><span>App name <i>optional</i></span><input id="f-app" name="app" /></label>
-          </div>
-          <label class="fld"
-            ><span>What do you wish ran itself? <i>optional</i></span><textarea
-              id="f-msg"
-              name="msg"
-              rows="3"
-              placeholder="Or what would you want on your dashboard?"></textarea></label
-          >
-          <button class="btn btn-primary" type="submit">Book my free audit</button>
-          <p class="consent">
-            We'll use your details only to set up your audit, and we may call, text or email you about it.
-            Reply STOP to any text to stop. Msg &amp; data rates may apply. <a href="/privacy/">Privacy Policy</a>
+      <div class="wrap contact-grid">
+        <div>
+          <p class="kicker">Get started</p>
+          <h2>Book your free audit.</h2>
+          <p class="lede">
+            30 minutes at your business, no obligation. Send this and we'll call or text within one business
+            day to pick a time.
           </p>
-          <div id="formerr" role="alert">
-            Add your name, business name and an email or phone so we can reach you.
-          </div>
-          <div id="thanks" role="status">
-            <p>Got it. Next, pick what you'd like us to build.</p>
-            <a class="btn btn-primary" id="toPlan" href="/plan.html">Continue to step 2</a>
-          </div>
-        </form>
-        <!-- phones: the one-step form -->
-        <div class="contact-phone"><LeadForm id="cf" /></div>
-        <div class="direct">
-          <div class="dline">
-            <span class="dl">Call or text</span><a class="sel" id="c-phone" href="tel:+18189397964"
-            >(818) 939-7964</a
-            ><button class="copy" data-copy="(818) 939-7964" type="button">Copy</button>
-          </div>
-          <div class="dline">
-            <span class="dl">Email</span><a class="sel" id="c-email" href="mailto:beng@futureclaritytechnologies.com"
-            >beng@futureclaritytechnologies.com</a
-            ><button class="copy" data-copy="beng@futureclaritytechnologies.com" type="button">Copy</button>
+          <div class="direct">
+            <p><span>Call or text</span><a href="tel:+18189397964">(818) 939-7964</a></p>
+            <p>
+              <span>Email</span><a href="mailto:beng@futureclaritytechnologies.com"
+                >beng@futureclaritytechnologies.com</a
+              >
+            </p>
           </div>
         </div>
+        <LeadForm id="cf" />
       </div>
     </section>
   </main>
 
   <Footer />
-
 </Layout>
 
 <script is:inline src="/fc-config.js"></script>
@@ -444,62 +416,46 @@ import LeadForm from '../components/LeadForm.astro';
   // ---- in-page navigation -------------------------------------------------
   const header = document.querySelector('header')!;
   const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const phone = () => window.matchMedia('(max-width: 640px)').matches;
 
   function goTo(id: string) {
     let y = 0;
     if (id !== '#top') {
       const sec = document.querySelector(id);
       if (!sec) return false;
-      // Boxed sections line up by the box, not the title inside it.
-      const mark = sec.querySelector('.band, .label, h2') || sec;
-      y = mark.getBoundingClientRect().top + window.pageYOffset - header.getBoundingClientRect().height - 16;
+      y = sec.getBoundingClientRect().top + window.pageYOffset - header.getBoundingClientRect().height - 12;
     }
     window.scrollTo({ top: Math.max(0, y), behavior: reduce ? 'auto' : 'smooth' });
-    if (id === '#contact') {
-      setTimeout(
-        () =>
-          ['f-name', 'cf-name']
-            .map((id) => document.getElementById(id))
-            .find((el) => el && el.offsetParent)
-            ?.focus({ preventScroll: true }),
-        reduce ? 0 : 650
-      );
-    }
     return true;
   }
 
   document.addEventListener('click', (e) => {
-    const a = (e.target as HTMLElement).closest('a[href^="#"]');
+    const a = (e.target as HTMLElement).closest('a[href^="#"]') as HTMLAnchorElement | null;
     if (!a || a.classList.contains('skip')) return;
-    const id = a.getAttribute('href');
+    let id = a.getAttribute('href');
     if (!id || id.length < 2) return;
-    if (goTo(id)) e.preventDefault();
+    // "Book a free audit" buttons go to the nearest form: on phones, the one under the hero.
+    const toForm = a.hasAttribute('data-to-form') || id === '#contact';
+    if (toForm && phone()) id = '#start';
+    if (!goTo(id)) return;
+    e.preventDefault();
+    if (toForm) {
+      const input = document.getElementById(id === '#start' ? 'hf-name' : 'cf-name');
+      setTimeout(() => input?.focus({ preventScroll: true }), reduce ? 0 : 650);
+    }
   });
 
   // Highlight the section you are in.
   const links = Array.from(document.querySelectorAll('header nav a'));
   const secs = links.map((a) => document.querySelector(a.getAttribute('href') || ''));
-
   function mark() {
     const line = header.getBoundingClientRect().height + 40;
     let cur = -1;
     secs.forEach((s, i) => {
       if (s && s.getBoundingClientRect().top <= line) cur = i;
     });
-    links.forEach((a, i) => {
-      const on = i === cur;
-      a.classList.toggle('on', on);
-      if (on && window.innerWidth <= 900) {
-        const n = a.parentNode as HTMLElement;
-        const el = a as HTMLElement;
-        const l = el.offsetLeft - 16;
-        const outOfView =
-          el.offsetLeft < n.scrollLeft || el.offsetLeft + el.offsetWidth > n.scrollLeft + n.clientWidth;
-        if (Math.abs(n.scrollLeft - l) > 4 && outOfView) n.scrollTo({ left: l, behavior: 'auto' });
-      }
-    });
+    links.forEach((a, i) => a.classList.toggle('on', i === cur));
   }
-
   let ticking = false;
   window.addEventListener(
     'scroll',
@@ -515,26 +471,9 @@ import LeadForm from '../components/LeadForm.astro';
   );
   mark();
 
-  // ---- copy buttons -------------------------------------------------------
-  document.querySelectorAll<HTMLButtonElement>('.copy').forEach((b) => {
-    b.addEventListener('click', () => {
-      const t = b.getAttribute('data-copy') || '';
-      const done = () => {
-        b.textContent = 'Copied';
-        setTimeout(() => (b.textContent = 'Copy'), 1800);
-      };
-      try {
-        navigator.clipboard.writeText(t).then(done, () => (b.textContent = 'Select it above'));
-      } catch {
-        b.textContent = 'Select it above';
-      }
-    });
-  });
-
   // ---- header call to action ---------------------------------------------
-  // On a phone the header holds the page's actions: Call to begin with, and a
-  // Free audit button once neither form is on screen. (Not a bar along the
-  // bottom: iOS Safari's floating toolbar sits on top of one.)
+  // On a phone the header holds Call to begin with, and a Free audit button
+  // once neither form is on screen.
   if ('IntersectionObserver' in window) {
     const onScreen = new Map<Element, boolean>();
     const io = new IntersectionObserver((entries) => {
@@ -545,10 +484,8 @@ import LeadForm from '../components/LeadForm.astro';
   }
 
   // ---- where the visitor came from -----------------------------------------
-  // Ad links carry utm_* tags or a click id (gclid and friends); other sites
-  // show up as the referrer. Saved for 30 days so a visitor who clicks an ad,
-  // leaves and comes back still counts for that ad, and sent with the request
-  // as scope.src so the dashboard can say which ad brought each lead.
+  // Ad links carry utm_* tags or a click id; other sites show up as the
+  // referrer. Saved for 30 days and sent with the request as scope.src.
   const SRC_KEY = 'fc-src';
   const SRC_DAYS = 30;
   const TAGS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid', 'fbclid', 'msclkid'];
@@ -569,7 +506,6 @@ import LeadForm from '../components/LeadForm.astro';
     try { saved = JSON.parse(localStorage.getItem(SRC_KEY) || 'null'); } catch {}
     if (saved && Date.now() - Date.parse(saved.at || '') > SRC_DAYS * 864e5) saved = null;
 
-    // A new ad click replaces the old one; a plain referrer only fills a gap.
     const isAd = TAGS.some((k) => now[k]);
     if (isAd || (!saved && now.ref)) {
       saved = { ...now, at: new Date().toISOString() };
@@ -579,25 +515,51 @@ import LeadForm from '../components/LeadForm.astro';
   }
   const source = readSource();
 
+  // ---- what visitors do ----------------------------------------------------
+  // Sent to Google Analytics only if the visitor allowed it (Consent.astro).
+  // Never include names, phone numbers or emails here.
+  const track = (name: string, params: Record<string, unknown> = {}) => (window as any).fcTrack?.(name, params);
+  const placeOf = (el: Element) => el.closest('header, footer, section, .phone-form')?.className.split(' ')[0] || 'page';
+
+  document.addEventListener('click', (e) => {
+    const a = (e.target as HTMLElement).closest('a') as HTMLAnchorElement | null;
+    if (!a) return;
+    const href = a.getAttribute('href') || '';
+    if (href.startsWith('tel:')) track('phone_click', { place: placeOf(a) });
+    else if (href.startsWith('mailto:')) track('email_click', { place: placeOf(a) });
+    else if (a.hasAttribute('data-to-form') || href.endsWith('#contact')) track('cta_click', { place: placeOf(a), label: (a.textContent || '').trim().slice(0, 40) });
+    else if (a.target === '_blank') track('outbound_click', { url: a.href.slice(0, 100) });
+  });
+  document.querySelectorAll('#faq details').forEach((d) =>
+    d.addEventListener('toggle', () => {
+      if ((d as HTMLDetailsElement).open) track('faq_open', { question: (d.querySelector('summary')?.textContent || '').slice(0, 80) });
+    })
+  );
+  // How far people read: each main section, once, when most of it is on screen.
+  if ('IntersectionObserver' in window) {
+    const seen = new IntersectionObserver(
+      (entries) =>
+        entries.forEach((en) => {
+          if (!en.isIntersecting) return;
+          track('view_section', { section: en.target.id });
+          seen.unobserve(en.target);
+        }),
+      { threshold: 0.35 }
+    );
+    ['how', 'pricing', 'why', 'faq', 'contact'].forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) seen.observe(el);
+    });
+  }
+
   // ---- lead forms ---------------------------------------------------------
-  // Wider screens: #lead is step 1 of booking. Nothing is sent from it: the
-  // details are handed to /plan.html, which sends the whole request to Supabase
-  // on its Send button.
-  // Phones: the form[data-lead] forms send the request straight to Supabase
-  // (public/fc-store.js) in one submit, then thank the visitor in place.
-
-  const form = document.getElementById('lead') as HTMLFormElement | null;
-
   const forms = Array.from(document.querySelectorAll<HTMLFormElement>('form[data-lead]'));
   const BOOKED_KEY = 'fc-booked';
 
-  // Team shortcut: typing the dashboard code as the whole message opens
+  // Team shortcut: typing the dashboard code as the whole note opens
   // /dashboard/ instead of booking. The code is checked by the database
-  // (supabase/dashboard_code.sql); neither the code nor a hash of it is in
-  // this page. Only a short single-word message is checked, so real
-  // enquiries never reach the database from here.
+  // (supabase/dashboard_code.sql); only a short single-word note is checked.
   const CODE_KEY = 'fc-dashboard-code';
-
   async function tryDashboardCode(text: string) {
     const t = text.trim();
     if (t.length < 6 || t.length > 64 || /\s/.test(t)) return false;
@@ -617,57 +579,24 @@ import LeadForm from '../components/LeadForm.astro';
     }
   }
 
-  if (form) {
-    const val = (id: string) => (document.getElementById(id) as HTMLInputElement).value.trim();
+  // ---- phone or email ------------------------------------------------------
+  type Via = 'phone' | 'email';
+  const viaOf = (f: HTMLFormElement): Via =>
+    f.querySelector<HTMLInputElement>('input[name="via"]:checked')?.value === 'email' ? 'email' : 'phone';
+  // A phone number with its area code, or something shaped like an email address.
+  const reachable = (via: Via, s: string) =>
+    via === 'email' ? /^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i.test(s) : s.replace(/\D/g, '').length >= 10;
 
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      if (await tryDashboardCode(val('f-msg'))) {
-        window.location.href = '/dashboard/';
-        return;
-      }
-
-      const required = ['f-name', 'f-business', 'f-contact'];
-      const missing = required.filter((id) => {
-        const el = document.getElementById(id) as HTMLInputElement;
-        const empty = !el.value.trim();
-        el.setAttribute('aria-invalid', empty ? 'true' : 'false');
-        return empty;
+  document.querySelectorAll<HTMLElement>('[data-via-group]').forEach((g) => {
+    g.addEventListener('change', (e) => {
+      const r = e.target as HTMLInputElement;
+      if (r.name !== 'via') return;
+      g.querySelectorAll<HTMLInputElement>('input[name="phone"], input[name="email"]').forEach((i) => {
+        i.hidden = i.name !== r.value;
+        i.removeAttribute('aria-invalid');
       });
-
-      const err = document.getElementById('formerr')!;
-      const thanks = document.getElementById('thanks')!;
-
-      if (missing.length) {
-        err.style.display = 'block';
-        thanks.style.display = 'none';
-        document.getElementById(missing[0])?.focus();
-        return;
-      }
-      err.style.display = 'none';
-
-      const payload = {
-        name: val('f-name'),
-        business: val('f-business'),
-        contact: val('f-contact'),
-        website: val('f-site'),
-        app: val('f-app'),
-        msg: val('f-msg'),
-      };
-
-      // Hand the details to step 2, which greets them by name and pre-fills
-      // the form. Both storages: sessionStorage can be unavailable in some
-      // private-browsing modes.
-      const handoff = JSON.stringify(payload);
-      try { sessionStorage.setItem('fc-audit-request', handoff); } catch {}
-      try { localStorage.setItem('fc-audit-request', handoff); } catch {}
-      thanks.style.display = 'block';
-      window.location.href = '/plan.html';
     });
-  }
-  // A phone number (7+ digits) or something shaped like an email address.
-  const reachable = (s: string) => s.replace(/\D/g, '').length >= 7 || /^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i.test(s);
+  });
 
   // Both forms switch to the thank-you, so nobody sends the same request twice.
   function showDone(name: string, focus?: HTMLFormElement) {
@@ -687,6 +616,7 @@ import LeadForm from '../components/LeadForm.astro';
   } catch {}
 
   forms.forEach((form) => {
+    form.addEventListener('focusin', () => track('form_start', { form: form.id }), { once: true });
     const el = (name: string) => form.elements.namedItem(name) as HTMLInputElement;
     const val = (name: string) => el(name).value.trim();
     const err = form.querySelector<HTMLElement>('.formerr')!;
@@ -694,7 +624,6 @@ import LeadForm from '../components/LeadForm.astro';
     const btn = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
     let sending = false;
 
-    // A field stops looking wrong as soon as it's being fixed.
     form.addEventListener('input', (e) => (e.target as HTMLElement).removeAttribute('aria-invalid'));
 
     form.querySelectorAll<HTMLButtonElement>('[data-pick]').forEach((b) => {
@@ -710,9 +639,10 @@ import LeadForm from '../components/LeadForm.astro';
         return;
       }
 
-      const bad = ['name', 'business', 'contact'].filter((n) => {
+      const via = viaOf(form);
+      const bad = ['name', 'business', via].filter((n) => {
         const v = val(n);
-        const wrong = !v || (n === 'contact' && !reachable(v));
+        const wrong = !v || (n === via && !reachable(via, v));
         el(n).setAttribute('aria-invalid', wrong ? 'true' : 'false');
         return wrong;
       });
@@ -737,7 +667,7 @@ import LeadForm from '../components/LeadForm.astro';
       const payload = {
         name,
         business: val('business'),
-        contact: val('contact'),
+        contact: val(via),
         needs,
         scope: {
           wf: keys.filter((k) => k !== 'website' && k !== 'app'),
@@ -763,6 +693,7 @@ import LeadForm from '../components/LeadForm.astro';
         try { sessionStorage.setItem(BOOKED_KEY, name); } catch {}
         fail.hidden = true;
         showDone(name, form);
+        track('generate_lead', { form: form.id, contact_by: via, interests: keys.join(',') || 'none' });
       } catch {
         btn.textContent = 'Try again';
         fail.hidden = false;

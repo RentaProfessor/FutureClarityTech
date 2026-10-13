@@ -3,8 +3,8 @@ dist/
 # generated types
 .astro/
 
-# dependencies
-node_modules/
+# dependencies (a worktree may link to another checkout's, so no trailing slash)
+node_modules
 
 # logs
 npm-debug.log*

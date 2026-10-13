@@ -1,43 +1,56 @@
 ---
 // The privacy policy California's Online Privacy Protection Act (CalOPPA) requires of any site
 // that collects personal information, written to match what this site and the team tools
-// actually do. Change it when that changes (new analytics, a new provider, texting campaigns).
+// actually do. Change it when that changes: a new analytics or ad tool, a new provider, or
+// texting campaigns. The cookie table must list everything Consent.astro and the pages store.
 import Doc from '../layouts/Doc.astro';
+
+const email = 'beng@futureclaritytechnologies.com';
 ---
 
 <Doc
   title="Privacy Policy"
   kicker="Legal"
-  updated="October 6, 2026"
-  description="What FutureClarity Technologies collects when you book a free audit or contact us, how we use it, who helps us run things, and your choices."
+  updated="October 12, 2026"
+  description="What FutureClarity Technologies collects when you visit or book a free audit, the cookies we use and only with your OK, who helps us run things, and your choices."
 >
   <p>
-    FutureClarity Technologies ("we", "us") builds custom dashboards, automations, websites and app
-    fixes for local businesses. This policy explains what we collect through
-    futureclaritytechnologies.com and in our work, how we use it, and the choices you have. If
-    anything here is unclear, email <a href="mailto:beng@futureclaritytechnologies.com">beng@futureclaritytechnologies.com</a>
+    FutureClarity Technologies ("we", "us") builds automations, dashboards, websites and app fixes for
+    local businesses. This policy explains what we collect through futureclaritytechnologies.com and in
+    our work, how we use it, and the choices you have. Questions? Email <a href={`mailto:${email}`}>{email}</a>
     or call <a href="tel:+18189397964">(818) 939-7964</a>.
   </p>
+
+  <div class="summary">
+    <h2>The short version</h2>
+    <ul>
+      <li>We collect what you send us to book an audit, and use it to help you.</li>
+      <li>We count visits without cookies. Google Analytics and Google Ads load only if you say yes.</li>
+      <li>We don't sell your information or use it to show you ads on other sites.</li>
+      <li>We never share your phone number or texting consent with anyone for their marketing.</li>
+      <li>You can change your cookie choices, or ask us to delete your information, any time.</li>
+    </ul>
+  </div>
 
   <h2>What we collect</h2>
   <ul>
     <li>
-      <strong>When you book a free audit or contact us:</strong> your name, your business's name, the
-      email or phone number you give us, your website or app if you mention them, what you tell us
-      you need, the services you pick, and the price range the site showed you.
+      <strong>When you book a free audit:</strong> your name, your business's name, the phone number or
+      email you choose to give us, the services you pick, any note you add, and which ad or website
+      brought you to us, if any.
     </li>
     <li>
       <strong>When you call, text or email us:</strong> your contact details and what you send.
     </li>
     <li>
-      <strong>When you visit the site:</strong> our host processes standard technical details, such as
-      your IP address, browser type and the pages you request, to deliver the site and protect it
-      from abuse. We don't use analytics, advertising or tracking cookies.
+      <strong>When you visit the site:</strong> our host, Cloudflare, processes standard technical
+      details, such as your IP address, browser type and the pages you request, to deliver the site and
+      protect it from abuse. Cloudflare Web Analytics also gives us visit counts (pages viewed, the site
+      you came from, device and browser type, and country) without cookies and without identifying you.
     </li>
     <li>
-      <strong>In your browser:</strong> while you book, the details from step 1 are kept in your
-      browser's own storage (not a cookie) so step 2 can fill them in. They're removed when you send
-      your request.
+      <strong>Only if you allow it:</strong> Google Analytics and Google Ads cookies. See
+      <a href="#cookies">Cookies and similar tools</a>.
     </li>
     <li>
       <strong>About businesses we might work with:</strong> we use publicly available business
@@ -47,30 +60,70 @@ import Doc from '../layouts/Doc.astro';
     </li>
   </ul>
 
+  <h2 id="cookies">Cookies and similar tools</h2>
+  <p>
+    The first time you visit, we ask before anything from Google loads. "Accept all", "Reject all" and
+    "Choose" are equally easy, and nothing is turned on until you pick. Change your mind any time with
+    <button type="button" class="linkish" data-cookie-settings>Cookie settings</button>, also in the
+    footer of every page.
+  </p>
+  <div class="table-wrap" tabindex="0" role="region" aria-label="Cookies and browser storage we use">
+    <table>
+      <thead>
+        <tr><th scope="col">What</th><th scope="col">Set by</th><th scope="col">Why</th><th scope="col">How long</th><th scope="col">Needs your OK?</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>fc-consent</code> (browser storage)</td><td>Us</td><td>Remembers your cookie choices</td><td>12 months</td><td>No, needed to respect them</td></tr>
+        <tr><td><code>fc-src</code> (browser storage)</td><td>Us</td><td>Which ad or website brought you, sent along with your audit request so we know which ads work. It stays on this site.</td><td>30 days</td><td>No</td></tr>
+        <tr><td><code>fc-booked</code> (browser storage, this tab only)</td><td>Us</td><td>Stops the form asking twice after you send it</td><td>Until you close the tab</td><td>No, needed</td></tr>
+        <tr><td><code>_ga</code>, <code>_ga_…</code> cookies</td><td>Google Analytics</td><td>Counts visits and how pages are used, so we can improve the site</td><td>About 13 months</td><td>Yes: "Analytics"</td></tr>
+        <tr><td><code>_gcl_au</code> and other Google Ads cookies</td><td>Google Ads</td><td>Tells us which ad led to a booked audit</td><td>Up to 90 days</td><td>Yes: "Advertising"</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    If you allow analytics, we record things like which pages you view, which buttons you tap (such as
+    "Book a free audit" or our phone number), and when an audit request is sent. We never send your name,
+    phone number, email or notes to Google. If you allow advertising, Google Ads learns that a visit from
+    one of our ads led to a booked audit. We turn off ad personalization, so we don't use it to show you
+    ads elsewhere. Google handles this data under its
+    <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">privacy policy</a>,
+    and you can also block Google Analytics everywhere with Google's
+    <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer">opt-out add-on</a>.
+  </p>
+  <p>Our team's own tools, such as our dashboard, also use browser storage to keep team members signed in.</p>
+
   <h2>How we use it</h2>
   <ul>
     <li>To reply to you, set up and run your free audit, prepare your quote, and provide the work you hire us for.</li>
+    <li>To understand which pages and ads bring people to us, and improve the site.</li>
     <li>To contact businesses about our services, by phone, in person, or by email with an easy way to opt out.</li>
     <li>To keep the site and our records secure, and to meet our legal obligations.</li>
   </ul>
-  <p>
-    <strong>We don't sell your personal information</strong>, and we don't share it with anyone for
-    advertising.
-  </p>
 
   <h2>Calls and texts</h2>
   <p>
     If you give us your phone number when you book or contact us, we may call or text you about your
-    request. We don't send marketing texts without your permission. Reply STOP to any text from us
-    and we'll stop texting you. Message and data rates may apply.
+    request, sometimes using automated tools. We don't send marketing texts without your permission. How
+    often we text depends on your request. Reply STOP to any text from us and we'll stop texting you, or
+    HELP for help. Message and data rates may apply. See our <a href="/terms/">Terms</a> for more about
+    texts.
+  </p>
+  <p>
+    <strong>We don't share mobile numbers or text-message consent with anyone for their marketing.</strong>
+    Your text-message opt-in and consent are never shared with or sold to third parties. The providers
+    that carry our messages handle them only to deliver them.
   </p>
 
   <h2>Who helps us run things</h2>
-  <p>We use a few service providers, who handle information only to provide their service to us:</p>
+  <p>
+    We don't sell personal information. We use a few service providers, who handle information only to
+    provide their service to us:
+  </p>
   <ul>
-    <li><strong>Cloudflare</strong> hosts the website and protects it from abuse.</li>
+    <li><strong>Cloudflare</strong> hosts the website, protects it from abuse, and gives us cookie-free visit counts.</li>
     <li><strong>Supabase</strong> stores audit requests and our client and outreach records.</li>
-    <li><strong>Google Fonts</strong> serves the site's fonts, so Google receives your IP address and browser details when a page loads.</li>
+    <li><strong>Google</strong> serves the site's fonts (so Google receives your IP address and browser details when a page loads) and, only if you allow it, runs Google Analytics and Google Ads.</li>
     <li>Our <strong>email and phone providers</strong> carry the messages we send and receive.</li>
   </ul>
   <p>
@@ -80,62 +133,67 @@ import Doc from '../layouts/Doc.astro';
 
   <h2>When we build for a client</h2>
   <p>
-    Our dashboards and automations handle our clients' customer information, such as names and
-    phone numbers for booking reminders. We handle it only to provide the services, following the
-    client's instructions. The client's own privacy policy covers how they use it.
+    Our dashboards and automations handle our clients' customer information, such as names and phone
+    numbers for booking reminders. We handle it only to provide the services, following the client's
+    instructions. The client's own privacy policy covers how they use it.
   </p>
 
-  <h2>Your choices</h2>
+  <h2>Your choices and rights</h2>
   <ul>
+    <li>Change or withdraw your cookie choices any time with <button type="button" class="linkish" data-cookie-settings>Cookie settings</button>.</li>
     <li>
-      Ask to see, correct or delete the personal information we hold about you, or tell us to stop
-      contacting you, by emailing <a href="mailto:beng@futureclaritytechnologies.com">beng@futureclaritytechnologies.com</a>
-      or calling <a href="tel:+18189397964">(818) 939-7964</a>. We'll reply promptly, and within 45 days.
+      Ask to know what personal information we hold about you, to get a copy, to correct it or to delete
+      it, or tell us to stop contacting you. Email <a href={`mailto:${email}`}>{email}</a> or call
+      <a href="tel:+18189397964">(818) 939-7964</a>. We'll confirm the request comes from you, usually by
+      replying to the email or phone number we have on file, and respond within 45 days. Someone you
+      authorize can make a request for you.
     </li>
     <li>Every sales email from us includes a way to opt out, and we honor it.</li>
     <li>We won't treat you differently for making any of these requests.</li>
     <li>
-      California residents: we don't share personal information with other companies for their own
-      marketing (California Civil Code § 1798.83).
+      California residents: we don't sell personal information or share it for cross-context behavioral
+      advertising, and we don't share it with other companies for their own marketing (California Civil
+      Code § 1798.83).
     </li>
   </ul>
 
-  <h2>Do Not Track and Global Privacy Control</h2>
+  <h2>Global Privacy Control and Do Not Track</h2>
   <p>
-    We don't track you over time or across other websites, and we don't sell or share personal
-    information, so there is nothing for a Do Not Track or Global Privacy Control signal to switch
-    off. Your browser can send them; nothing changes.
+    If your browser sends a Global Privacy Control or Do Not Track signal, we keep advertising cookies off
+    automatically, and the cookie choices show that. We treat the signal as a request to opt out of any
+    sale or sharing of your information. You can still choose whether to allow analytics.
   </p>
 
   <h2>How long we keep it</h2>
   <p>
-    We keep audit requests, client records and outreach notes as long as we need them for the work,
-    our records and our legal obligations, then delete them. You can ask us to delete yours sooner.
+    We keep audit requests, client records and outreach notes as long as we need them for the work, our
+    records and our legal obligations, then delete them. Google Analytics keeps visit data for no more
+    than 14 months. Cookie-free visit counts are kept only as totals. You can ask us to delete your
+    information sooner.
   </p>
 
   <h2>Security</h2>
   <p>
-    The site uses HTTPS, the database that holds audit requests is locked so only our team can read
-    it, and access is limited to the people who need it. No system is perfectly secure, but we take
+    The site uses HTTPS, the database that holds audit requests is locked so only our team can read it,
+    and access is limited to the people who need it. No system is perfectly secure, but we take
     reasonable steps to protect what you share with us.
   </p>
 
   <h2>Children</h2>
   <p>
-    Our site and services are for businesses. They aren't directed to children, and we don't
-    knowingly collect information from anyone under 16.
+    Our site and services are for businesses. They aren't directed to children, and we don't knowingly
+    collect information from anyone under 16.
   </p>
 
   <h2>Changes</h2>
   <p>
-    When we change this policy, we'll post the new version here with a new date. If a change affects
-    how we use information you've already given us, we'll ask first.
+    When we change this policy, we'll post the new version here with a new date. If a change affects how
+    we use information you've already given us, we'll ask first.
   </p>
 
   <h2>Contact</h2>
   <p>
     FutureClarity Technologies, San Fernando Valley, California ·
-    <a href="mailto:beng@futureclaritytechnologies.com">beng@futureclaritytechnologies.com</a> ·
-    <a href="tel:+18189397964">(818) 939-7964</a>
+    <a href={`mailto:${email}`}>{email}</a> · <a href="tel:+18189397964">(818) 939-7964</a>
   </p>
 </Doc>

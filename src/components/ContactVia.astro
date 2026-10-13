@@ -1,0 +1,41 @@
+---
+// How to reach you: phone or email, picked first. Each choice has its own
+// field, so the keyboard, autofill and the check all match what's typed. The
+// script in index.astro shows the picked field and sends it as the request's
+// contact. Used by both free-audit forms.
+export interface Props {
+  // prefix for the field ids, unique on the page
+  id: string;
+}
+
+const { id } = Astro.props;
+---
+
+<div class="fld via" data-via-group>
+  <div class="via-row">
+    <span id={`${id}-via-l`}>Best way to reach you</span>
+    <div class="seg" role="radiogroup" aria-labelledby={`${id}-via-l`}>
+      <label><input type="radio" name="via" value="phone" checked /><span>Phone</span></label>
+      <label><input type="radio" name="via" value="email" /><span>Email</span></label>
+    </div>
+  </div>
+  <input
+    id={`${id}-phone`}
+    name="phone"
+    type="tel"
+    inputmode="tel"
+    autocomplete="tel"
+    placeholder="Your mobile number"
+    aria-label="Phone number"
+  />
+  <input
+    id={`${id}-email`}
+    name="email"
+    type="email"
+    inputmode="email"
+    autocomplete="email"
+    placeholder="you@yourbusiness.com"
+    aria-label="Email address"
+    hidden
+  />
+</div>
