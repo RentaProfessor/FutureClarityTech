@@ -1,0 +1,162 @@
+---
+// The cookie banner, and the only place Google's tags are loaded. Nothing
+// from Google loads until the visitor says yes ("basic" consent mode): that
+// keeps third-party tracking off for anyone who hasn't agreed, which is what
+// California's privacy laws (CIPA, CPRA) reward. A Global Privacy Control or
+// Do Not Track signal keeps advertising off.
+//
+// Pages report what people do through window.fcTrack(name, params). Calls are
+// dropped unless the visitor allowed analytics, so pages can call it freely.
+// Never pass names, phone numbers or emails: Google's rules forbid it.
+import { ANALYTICS } from '../analytics';
+
+const config = { ...ANALYTICS, preview: import.meta.env.DEV };
+---
+
+<div class="consent-ui" id="cc" role="region" aria-label="Cookie choices" hidden>
+  <div class="cc-main">
+    <p class="cc-h">Cookies</p>
+    <p>
+      We'd like to use cookies to count visits and see which ads bring people here. Nothing loads until
+      you choose. <a href="/privacy/#cookies">Details</a>
+    </p>
+    <div class="cc-btns">
+      <button type="button" class="btn" data-cc="accept">Accept all</button>
+      <button type="button" class="btn" data-cc="reject">Reject all</button>
+      <button type="button" class="cc-link" data-cc="choose" aria-expanded="false" aria-controls="cc-pick">Choose</button>
+    </div>
+  </div>
+  <form class="cc-pick" id="cc-pick" hidden>
+    <label class="cc-row">
+      <input type="checkbox" checked disabled />
+      <span><b>Needed to run the site</b>Remembers your choices here and your audit request. Always on.</span>
+    </label>
+    <label class="cc-row">
+      <input type="checkbox" name="analytics" />
+      <span><b>Analytics</b>Google Analytics counts visits and which pages help, so we can improve the site.</span>
+    </label>
+    <label class="cc-row">
+      <input type="checkbox" name="ads" />
+      <span><b>Advertising</b>Google Ads tells us which ads lead to booked audits, so we spend less on ones that don't.<i data-cc-gpc hidden> Off because your browser sends a privacy signal.</i></span>
+    </label>
+    <button type="submit" class="btn btn-primary">Save my choices</button>
+  </form>
+</div>
+
+<script is:inline define:vars={{ config }}>
+  (function () {
+    var KEY = 'fc-consent';
+    var MAX_AGE = 365 * 864e5; // ask again after a year
+    var ui = document.getElementById('cc');
+    var hasTools = !!(config.ga4Id || config.adsId);
+    // A browser privacy signal (Global Privacy Control, or Do Not Track) keeps advertising off.
+    var signal = navigator.globalPrivacyControl === true || navigator.doNotTrack === '1' || window.doNotTrack === '1';
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { window.dataLayer.push(arguments); }
+
+    var state = null;
+    try {
+      state = JSON.parse(localStorage.getItem(KEY) || 'null');
+      if (state && (state.v !== 1 || Date.now() - Date.parse(state.at) > MAX_AGE)) state = null;
+    } catch (e) { state = null; }
+    if (state && signal) state.ads = false;
+
+    var loaded = false;
+    function load() {
+      if (loaded || !hasTools || !state || !(state.analytics || state.ads)) return;
+      loaded = true;
+      var grant = function (on) { return on ? 'granted' : 'denied'; };
+      gtag('consent', 'default', {
+        analytics_storage: grant(state.analytics),
+        ad_storage: grant(state.ads),
+        ad_user_data: grant(state.ads),
+        ad_personalization: 'denied',
+      });
+      gtag('js', new Date());
+      // Cookies last about 13 months, not Google's default two years.
+      if (state.analytics && config.ga4Id) gtag('config', config.ga4Id, { cookie_expires: 395 * 86400 });
+      if (state.ads && config.adsId) gtag('config', config.adsId, { allow_ad_personalization_signals: false });
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(config.ga4Id || config.adsId);
+      document.head.appendChild(s);
+    }
+
+    // What pages call. A booked audit also counts as a Google Ads conversion.
+    window.fcTrack = function (name, params) {
+      if (!loaded) return;
+      if (state.analytics) gtag('event', name, params || {});
+      if (name === 'generate_lead' && state.ads && config.adsId && config.adsLeadLabel) {
+        gtag('event', 'conversion', { send_to: config.adsId + '/' + config.adsLeadLabel });
+      }
+    };
+
+    // Turning something off after it loaded: tell Google, clear its cookies, reload clean.
+    function clearGoogleCookies() {
+      document.cookie.split(';').forEach(function (c) {
+        var name = c.split('=')[0].trim();
+        if (/^(_ga|_gid|_gcl_|_gat)/.test(name)) {
+          ['', '; domain=' + location.hostname, '; domain=.' + location.hostname.replace(/^www\./, '')].forEach(function (d) {
+            document.cookie = name + '=; Max-Age=0; path=/' + d;
+          });
+        }
+      });
+    }
+
+    function save(analytics, ads) {
+      var before = state;
+      state = { v: 1, analytics: !!analytics, ads: !!ads && !signal, at: new Date().toISOString() };
+      try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+      hide();
+      var turnedOff = before && ((before.analytics && !state.analytics) || (before.ads && !state.ads));
+      if (loaded && turnedOff) {
+        gtag('consent', 'update', { analytics_storage: state.analytics ? 'granted' : 'denied', ad_storage: state.ads ? 'granted' : 'denied', ad_user_data: state.ads ? 'granted' : 'denied' });
+        clearGoogleCookies();
+        location.reload();
+        return;
+      }
+      load();
+    }
+
+    var pick = document.getElementById('cc-pick');
+    var chooseBtn = ui.querySelector('[data-cc="choose"]');
+    function show(withChoices) {
+      ui.hidden = false;
+      pick.elements.analytics.checked = !!(state && state.analytics);
+      pick.elements.ads.checked = !!(state && state.ads);
+      pick.elements.ads.disabled = signal;
+      ui.querySelector('[data-cc-gpc]').hidden = !signal;
+      pick.hidden = !withChoices;
+      chooseBtn.setAttribute('aria-expanded', String(!!withChoices));
+      (withChoices ? pick.elements.analytics : ui.querySelector('[data-cc="accept"]')).focus({ preventScroll: true });
+    }
+    function hide() { ui.hidden = true; }
+
+    ui.querySelector('[data-cc="accept"]').addEventListener('click', function () { save(true, true); });
+    ui.querySelector('[data-cc="reject"]').addEventListener('click', function () { save(false, false); });
+    chooseBtn.addEventListener('click', function () {
+      var open = pick.hidden;
+      pick.hidden = !open;
+      chooseBtn.setAttribute('aria-expanded', String(open));
+    });
+    pick.addEventListener('submit', function (e) {
+      e.preventDefault();
+      save(pick.elements.analytics.checked, pick.elements.ads.checked);
+    });
+
+    // The footer's "Cookie settings" link reopens this.
+    window.fcConsent = { open: function () { show(true); } };
+    document.addEventListener('click', function (e) {
+      var t = e.target.closest && e.target.closest('[data-cookie-settings]');
+      if (t) { e.preventDefault(); show(true); }
+    });
+
+    // Ask only when there's something to ask about (always in the local preview).
+    if (state) load();
+    else if (hasTools || config.preview) {
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function () { ui.hidden = false; });
+      else ui.hidden = false;
+    }
+  })();
+</script>

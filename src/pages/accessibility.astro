@@ -1,45 +1,69 @@
 ---
 // Accessibility statement: the standard we aim for, how the site is tested, and how to reach a
-// person if something doesn't work. Update "Last updated" when the site is re-tested.
+// person if something doesn't work. Update "Last updated" when the site is re-tested, and keep
+// "How we test" true to what was actually checked.
 import Doc from '../layouts/Doc.astro';
+
+const email = 'beng@futureclaritytechnologies.com';
 ---
 
 <Doc
   title="Accessibility"
   kicker="Accessibility"
-  updated="October 6, 2026"
-  description="FutureClarity Technologies wants everyone to be able to use its website. The standard we aim for, how we test, and how to reach us if something gets in your way."
+  updated="October 12, 2026"
+  description="FutureClarity Technologies wants everyone to be able to use its website. The standard we aim for, how we test, and how to reach a person if something gets in your way."
 >
   <p>
-    We want everyone to be able to use futureclaritytechnologies.com, including people who use a
-    screen reader, a keyboard, voice control or magnification.
+    We want everyone to be able to use futureclaritytechnologies.com and book a free audit, including
+    people who use a screen reader, a keyboard, voice control, magnification or captions.
   </p>
+
+  <div class="summary">
+    <h2>Need help right now?</h2>
+    <p>
+      Call or text <a href="tel:+18189397964">(818) 939-7964</a> or email <a href={`mailto:${email}`}>{email}</a>.
+      We'll book your audit, answer questions, or send anything on this site in another format.
+    </p>
+  </div>
 
   <h2>What we aim for</h2>
   <p>
-    We aim to meet the Web Content Accessibility Guidelines (WCAG) 2.1 at level AA. The site is built
-    with a clear page structure and headings, labeled form fields, text that contrasts with its
-    background, visible focus for keyboard users, a "Skip to content" link, and no flashing content.
-    It also respects your device's "reduce motion" setting.
+    We aim to meet the Web Content Accessibility Guidelines (WCAG) 2.1 at level AA. In practice, that
+    means:
   </p>
+  <ul>
+    <li>A clear page structure with headings, landmarks and a "Skip to content" link.</li>
+    <li>Every form field has a visible label, and errors say what to fix.</li>
+    <li>Text contrasts with its background, and links aren't marked by color alone.</li>
+    <li>Everything works with a keyboard, with a visible focus outline, including the cookie choices.</li>
+    <li>Pages reflow on small screens and when text is enlarged, without sideways scrolling.</li>
+    <li>Photos have text descriptions, and decorative images are hidden from screen readers.</li>
+    <li>No flashing content, and the site respects your device's "reduce motion" setting.</li>
+  </ul>
 
   <h2>How we test</h2>
   <p>
-    We check the site with automated accessibility testing (axe) and by using it with only a keyboard,
-    on desktop and phone screen sizes, and we re-check when we make changes.
+    We check pages with automated accessibility testing (axe) and by using them with only a keyboard, on
+    desktop and phone screen sizes, and we re-check when we make changes. Automated tools can't catch
+    everything, so we also welcome reports from the people who use the site.
+  </p>
+
+  <h2>Known limits</h2>
+  <p>
+    Google's cookie and analytics tools, which load only if you allow them, and the websites we link to
+    are run by other companies, so we can't promise how accessible they are.
   </p>
 
   <h2>If something doesn't work for you</h2>
   <p>
-    Tell us and we'll fix it, or get you what you need another way, such as booking your audit over
-    the phone. Email <a href="mailto:beng@futureclaritytechnologies.com">beng@futureclaritytechnologies.com</a>
-    or call or text <a href="tel:+18189397964">(818) 939-7964</a>. We aim to reply within two business
-    days.
+    Tell us what page you were on and what went wrong, and we'll fix it or get you what you need another
+    way. Email <a href={`mailto:${email}`}>{email}</a> or call or text
+    <a href="tel:+18189397964">(818) 939-7964</a>. We aim to reply within two business days.
   </p>
 
   <h2>The sites we build</h2>
   <p>
-    The websites and dashboards we build for clients are held to the same standard, and we're happy
-    to talk through accessibility for yours.
+    The websites and dashboards we build for clients are held to the same standard, and we're happy to
+    talk through accessibility for yours.
   </p>
 </Doc>

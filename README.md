@@ -37,6 +37,22 @@ npm run preview  # preview the production build
 - `public/dashboard/audit.js`: makes the Lead Finder's downloadable audit PDFs, in
   the browser.
 
+## Visit tracking and cookies
+
+- **Cookie-free visit counts:** Cloudflare Web Analytics. Turn it on in Cloudflare >
+  Workers & Pages > this project > Metrics > Web Analytics. No cookies, no banner needed.
+  The Privacy Policy already describes it, so turn it on before this version goes live.
+- **Google Analytics 4 and Google Ads:** paste the IDs into `src/analytics.ts`. They load
+  only after a visitor accepts in the cookie banner (`src/components/Consent.astro`); until
+  an ID is set, the banner doesn't show on the live site. In GA4, set Admin > Data
+  retention to 14 months, to match the Privacy Policy.
+- **Events** (sent only with consent, never with names, phones or emails): `cta_click`,
+  `phone_click`, `email_click`, `form_start`, `generate_lead` (also the Google Ads
+  conversion), `faq_open`, `view_section`, `outbound_click`. Mark `generate_lead` as a key
+  event in GA4.
+- If you add any other tracking tool, add it to the cookie table in `src/pages/privacy.astro`
+  and to the CSP in `public/_headers`, and load it through `Consent.astro`.
+
 ## SEO notes
 
 These are load-bearing. Read the comments before changing any of them.
