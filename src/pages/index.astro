@@ -47,36 +47,6 @@ const faqs = [
 ---
 
 <Layout title="FutureClarity Technologies" main="#top">
-  <!-- PREVIEW ONLY: ?bg=mist|stone|navy tries a background option. Remove once one is picked.
-       It never runs on the live domain, only on localhost and Cloudflare preview links. -->
-  <script is:inline>
-    (() => {
-      const preview = !/(^|\.)futureclaritytechnologies\.com$/.test(location.hostname);
-      try { const b = new URLSearchParams(location.search).get('bg'); if (preview && b) document.documentElement.dataset.bg = b; } catch (e) {}
-      // a switcher in the corner, so all three can be flipped through in one tab
-      if (preview) addEventListener('DOMContentLoaded', () => {
-        const bar = document.createElement('div');
-        bar.setAttribute('aria-label', 'Preview background');
-        bar.style.cssText = 'position:fixed;left:16px;bottom:16px;z-index:50;display:flex;gap:4px;padding:4px;border-radius:12px;background:#12142a;box-shadow:0 8px 24px rgba(0,0,0,.3);font:600 14px system-ui,sans-serif';
-        [['', 'White'], ['mist', 'Mist'], ['stone', 'Stone'], ['navy', 'Navy']].forEach(([id, label]) => {
-          const b = document.createElement('button');
-          b.type = 'button';
-          b.textContent = label;
-          b.style.cssText = 'border:0;border-radius:9px;padding:8px 12px;cursor:pointer;color:#fff;background:transparent';
-          const paint = () => (b.style.background = (document.documentElement.dataset.bg || '') === id ? '#3a3fc4' : 'transparent');
-          b.addEventListener('click', () => {
-            if (id) document.documentElement.dataset.bg = id; else delete document.documentElement.dataset.bg;
-            history.replaceState(null, '', id ? '?bg=' + id : location.pathname);
-            bar.querySelectorAll('button').forEach((x) => x.dispatchEvent(new Event('paint')));
-          });
-          b.addEventListener('paint', paint);
-          paint();
-          bar.appendChild(b);
-        });
-        document.body.appendChild(bar);
-      });
-    })();
-  </script>
   <Header />
 
   <main id="top" tabindex="-1">

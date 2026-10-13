@@ -4,18 +4,19 @@
 
 /* Light, photo-led, plain-spoken: the way the companies that win this market
    (Booksy, Kukui, GlossGenius, Shop Marketing Pros) present themselves. One
-   brand color (the logo's indigo), green only for "it worked". */
+   brand color (the logo's indigo), green only for "it worked". The page sits on a cool
+   gray ("mist") so the white cards and form stand out. */
 :root {
-  --bg: #ffffff;
-  --soft: #f3f4f8;
+  --bg: #eceef4;
+  --soft: #e1e4ee;
   --card: #ffffff;
-  --header: rgba(255, 255, 255, 0.96);
-  --field-line: #cfd2e0;
+  --header: rgba(236, 238, 244, 0.95);
+  --field-line: #c3c8da;
   --deep: #12142a;
   --ink: #12142a;
   --body: #3d4157;
-  --muted: #646a82;
-  --line: #e2e4ee;
+  --muted: #555b73;
+  --line: #d5d9e6;
   --brand: #3a3fc4;
   --brand-dark: #2d3199;
   --brand-soft: #ecedfc;
@@ -28,28 +29,6 @@
   --sans: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   color-scheme: light;
 }
-
-
-/* PREVIEW ONLY: background options, picked with ?bg= (see index.astro). Remove
-   the ones not chosen. */
-html[data-bg="mist"] {
-  --bg: #eceef4; --soft: #e1e4ee; --card: #ffffff; --line: #d5d9e6;
-  --header: rgba(236, 238, 244, 0.95); --field-line: #c3c8da; --muted: #555b73;
-}
-html[data-bg="stone"] {
-  --bg: #ebe8e2; --soft: #e0dcd3; --card: #faf9f6; --line: #d6d0c4;
-  --header: rgba(235, 232, 226, 0.95); --field-line: #c6bfb1;
-  --ink: #18181f; --body: #3f3e48; --muted: #57555f; --deep: #18181f;
-}
-html[data-bg="navy"] {
-  --bg: #0e1124; --soft: #141834; --card: #1a1f3e; --line: #2a3058;
-  --header: rgba(14, 17, 36, 0.94); --field-line: #3a4170;
-  --ink: #f2f3fa; --body: #c3c7db; --muted: #979db8;
-  --brand: #5a60ea; --brand-dark: #4a50d6; --brand-soft: #232858; --brand-text: #a5a9ff;
-  --good: #4fd19c; --good-soft: #13372a; --deep: #080a18;
-  color-scheme: dark;
-}
-html[data-bg="navy"] .logo .wm { color: #f2f3fa; }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-padding-top: 84px; }
