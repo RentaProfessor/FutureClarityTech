@@ -544,13 +544,16 @@ const faqs = [
   const forms = Array.from(document.querySelectorAll<HTMLFormElement>('form[data-lead]'));
   const BOOKED_KEY = 'fc-booked';
 
-  // Team shortcut: typing the dashboard code as the whole note opens
-  // /dashboard/ instead of booking. The code is checked by the database
-  // (supabase/dashboard_code.sql); only a short single-word note is checked.
+  // Team shortcut: type the dashboard code into any field of either form (name,
+  // business or note), leave the phone/email empty, and press the button: it
+  // opens /dashboard/ instead of booking. Spaces and capitals don't matter; the
+  // database checks the code (supabase/dashboard_code.sql). Real requests always
+  // have a phone or email, so they never go through this check.
   const CODE_KEY = 'fc-dashboard-code';
   async function tryDashboardCode(text: string) {
     const t = text.trim();
-    if (t.length < 6 || t.length > 64 || /\s/.test(t)) return false;
+    const bare = t.replace(/\s/g, '');
+    if (bare.length < 6 || t.length > 64) return false;
     const cfg = (window as any).FC_CONFIG;
     if (!cfg?.supabaseUrl || !cfg?.supabaseKey) return false;
     try {
@@ -622,9 +625,13 @@ const faqs = [
       e.preventDefault();
       if (sending) return;
 
-      if (await tryDashboardCode(val('msg'))) {
-        window.location.href = '/dashboard/';
-        return;
+      if (!val('phone') && !val('email')) {
+        for (const n of ['name', 'business', 'msg']) {
+          if (val(n) && (await tryDashboardCode(val(n)))) {
+            window.location.href = '/dashboard/';
+            return;
+          }
+        }
       }
 
       const via = viaOf(form);
