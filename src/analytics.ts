@@ -12,7 +12,7 @@ export const ANALYTICS = {
   ga4Id: '',
   // Google Ads > Tools > Data manager > Google tag: "AW-XXXXXXXXX"
   adsId: '',
-  // Google Ads > Goals > Conversions > your "Booked audit" action > tag setup:
+  // Google Ads > Goals > Conversions > your "Quote request" action > tag setup:
   // the part after the slash in send_to, e.g. "AbC-D_efG-h12_34-567"
   adsLeadLabel: '',
 };

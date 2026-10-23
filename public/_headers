@@ -7,9 +7,8 @@
   Cross-Origin-Opener-Policy: same-origin
   Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com https://googleads.g.doubleclick.net https://www.google.com https://www.googleadservices.com; connect-src 'self' https://bzudkcybqhmqrybskwfn.supabase.co https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://www.google.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://cloudflareinsights.com; form-action 'self'; frame-src https://td.doubleclick.net https://www.googletagmanager.com; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests
 
-# connect-src: the homepage (the free-audit form and the dashboard-code check),
-# /plan.html and /dashboard/
-# talk to the Supabase project only, over https. The Lead Finder's business list
+# connect-src: the homepage (the free-quote form and the dashboard-code check)
+# and /dashboard/ talk to the Supabase project only, over https. The Lead Finder's business list
 # is served from this site (/data/places/), so it needs nothing else. No form
 # posts anywhere off-site, so form-action is 'self'.
 #
@@ -53,15 +52,9 @@
 /accessibility/
   Cache-Control: public, max-age=0, must-revalidate
 
-# Step 2 of the audit booking and the team dashboard are app pages, not
-# content: keep them out of search results. noindex (not a robots.txt
-# Disallow) so crawlers can still fetch them and see the instruction.
-# Cloudflare Pages serves /plan.html at /plan, so both paths are listed.
-/plan
-  X-Robots-Tag: noindex, nofollow
-  Cache-Control: public, max-age=0, must-revalidate
-/plan.html
-  X-Robots-Tag: noindex, nofollow
+# The team dashboard is an app page, not content: keep it out of search
+# results. noindex (not a robots.txt Disallow) so crawlers can still fetch it
+# and see the instruction.
 /dashboard
   X-Robots-Tag: noindex, nofollow
 /dashboard/*

@@ -12,8 +12,8 @@ const { home = true } = Astro.props;
 const base = home ? '' : '/';
 
 const links = [
+  { href: `${base}#services`, label: 'Services' },
   { href: `${base}#how`, label: 'How it works' },
-  { href: `${base}#pricing`, label: 'Pricing' },
   { href: `${base}#why`, label: 'Why us' },
   { href: `${base}#faq`, label: 'FAQ' },
 ];
@@ -31,7 +31,7 @@ const links = [
       <a class="hcall" href="tel:+18189397964" aria-label="Call (818) 939-7964">
         <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#phoneIcon"></use></svg><span class="lbl">Call</span>
       </a>
-      <a class="btn btn-primary" href={`${base}#contact`}>Book a free audit</a>
+      <a class="btn btn-primary" href={`${base}#contact`}>Get a free quote</a>
       <a class="hphone" href="tel:+18189397964" aria-label="Call or text (818) 939-7964"
         ><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#phoneIcon"></use></svg>(818) 939-7964</a
       >

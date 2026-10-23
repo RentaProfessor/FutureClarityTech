@@ -12,7 +12,7 @@ export interface Props {
 
 const {
   title,
-  description = 'FutureClarity builds local businesses a custom dashboard and the automations behind it, plus websites and app cleanups. See it working before you pay.',
+  description = 'FutureClarity Technologies builds and fixes websites and apps, and handles SEO, hosting, site moves, edits and automations. Based in the San Fernando Valley. Free consultation and quote.',
   main = '#main',
 } = Astro.props;
 
@@ -36,7 +36,7 @@ const structuredData = {
       logo: new URL('/favicon-192.png', Astro.site).href,
       image: new URL('/og.png', Astro.site).href,
       description:
-        'FutureClarity Technologies builds custom dashboards and the automations behind them for appointment-based local businesses, and also builds websites and cleans up existing apps.',
+        'FutureClarity Technologies is a web and app development company in the San Fernando Valley, California. It builds and fixes websites and apps, and provides SEO, hosting, site migrations, edits and business automations.',
       email: 'beng@futureclaritytechnologies.com',
       telephone: '+1-818-939-7964',
       contactPoint: {
@@ -47,13 +47,14 @@ const structuredData = {
         availableLanguage: 'English',
       },
       knowsAbout: [
-        'Business dashboards',
-        'Workflow automation',
-        'Online booking and appointment reminders',
-        'Missed-call text-back',
-        'Review requests',
         'Website design and development',
-        'Mobile app maintenance',
+        'Mobile app development',
+        'Web app development',
+        'Website and app repair',
+        'Search engine optimization',
+        'Website hosting',
+        'Website migration',
+        'Business automation',
       ],
     },
     {
@@ -78,11 +79,11 @@ const structuredData = {
     <meta name="format-detection" content="telephone=no" />
     <meta name="theme-color" content="#eceef4" />
     <link rel="canonical" href={canonical} />
-    <link rel="icon" href="/favicon.ico?v=3" sizes="48x48" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3" />
-    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png?v=3" />
-    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png?v=3" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3" />
+    <link rel="icon" href="/favicon.ico?v=4" sizes="48x48" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=4" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png?v=4" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png?v=4" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=4" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
 

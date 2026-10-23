@@ -11,3 +11,8 @@
 # a 301 passes its ranking signals to the homepage and keeps old links working.
 /portfolio  /  301
 /portfolio/*  /  301
+
+# /plan.html was the old step 2 of booking, with price estimates. The site no
+# longer shows prices (every project gets a free quote), so it goes to the form.
+/plan.html  /#contact  301
+/plan  /#contact  301
