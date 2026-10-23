@@ -2,30 +2,31 @@
    the plain CSS below. */
 @import "tailwindcss";
 
-/* Light and plain-spoken. One brand color (the logo's
-   indigo), green only for "it worked". The page sits on a cool gray ("mist") so
-   the white cards and form stand out. */
+/* Light and plain-spoken. One brand color, the logo's green; "it worked" checks use
+   the same family. The page sits on a soft green-gray so the white cards and form
+   stand out. Colors match the green globe logo and the Yelp/LinkedIn assets. */
 :root {
-  --bg: #eceef4;
-  --soft: #e1e4ee;
+  --bg: #eceeeb;
+  --soft: #e3e8e4;
   --card: #ffffff;
-  --header: rgba(236, 238, 244, 0.95);
-  --field-line: #c3c8da;
-  --deep: #12142a;
-  --ink: #12142a;
-  --body: #3d4157;
-  --muted: #555b73;
-  --line: #d5d9e6;
-  --brand: #3a3fc4;
-  --brand-dark: #2d3199;
-  --brand-soft: #ecedfc;
-  --brand-text: #3a3fc4;
+  --header: rgba(236, 238, 235, 0.95);
+  --field-line: #c3cdc6;
+  --deep: #0c2a1f;
+  --ink: #0f2a20;
+  --body: #3b4a43;
+  --muted: #55635c;
+  --line: #d3dad5;
+  --brand: #127453;
+  --brand-dark: #0d5b41;
+  --brand-soft: #e2efe8;
+  --brand-text: #127453;
   --good: #0e7350;
   --good-soft: #e2f4ec;
   --star: #f2a516;
   --max: 1140px;
   --display: "Barlow", "Helvetica Neue", Arial, sans-serif;
   --sans: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --brand-face: "Outfit", "Public Sans", system-ui, sans-serif;
   color-scheme: light;
 }
 
@@ -96,9 +97,11 @@ header .logo { justify-self: start; }
 header nav { justify-self: center; }
 .hright { justify-self: end; display: flex; align-items: center; gap: 20px; }
 .logo { display: flex; align-items: center; gap: 10px; }
-.logo svg { width: 30px; height: 35px; }
-.logo .wm { font-family: var(--display); font-weight: 600; font-size: 17px; letter-spacing: 0.16em; color: var(--ink); white-space: nowrap; }
-.logo .wm span { color: var(--brand-text); }
+.logo .mark { width: 48px; height: auto; }
+/* the brand lockup from the logo files: the name, with TECHNOLOGIES spaced out under it */
+.logo .wm { display: grid; color: var(--ink); white-space: nowrap; }
+.logo .wm b { font-family: var(--brand-face); font-weight: 600; font-size: 19px; line-height: 1; }
+.logo .wm small { font-family: var(--brand-face); font-weight: 500; font-size: 7.5px; letter-spacing: 0.42em; color: var(--muted); margin-top: 4px; }
 header nav { display: flex; gap: 26px; font-size: 15px; font-weight: 500; color: var(--body); }
 header nav a { padding: 6px 0; border-bottom: 2px solid transparent; }
 header nav a:hover, header nav a.on { color: var(--ink); border-color: var(--brand-text); }
@@ -133,7 +136,7 @@ header .btn { min-height: 42px; padding: 0 18px; font-size: 15px; }
   position: absolute;
   background: var(--card);
   border-radius: 14px;
-  box-shadow: 0 12px 32px rgba(18, 20, 42, 0.16), 0 1px 3px rgba(18, 20, 42, 0.08);
+  box-shadow: 0 12px 32px rgba(15, 42, 32, 0.16), 0 1px 3px rgba(15, 42, 32, 0.08);
   font-size: 14.5px;
   line-height: 1.45;
   color: var(--ink);
@@ -181,7 +184,7 @@ header .btn { min-height: 42px; padding: 0 18px; font-size: 15px; }
   border-radius: 28px;
   background: var(--card);
   border: 1px solid var(--line);
-  box-shadow: 0 18px 50px rgba(18, 20, 42, 0.12);
+  box-shadow: 0 18px 50px rgba(15, 42, 32, 0.12);
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -235,18 +238,18 @@ header .btn { min-height: 42px; padding: 0 18px; font-size: 15px; }
 .qs details p { padding: 0 0 22px; max-width: 620px; }
 
 /* -------------------------------------------------------------- contact -- */
-.contact { background: var(--deep); color: #c9ccdd; }
+.contact { background: var(--deep); color: #c6d6ce; }
 .contact h2 { color: #fff; }
-.contact .kicker { color: #aeb2f5; }
-.contact .lede { color: #c9ccdd; }
+.contact .kicker { color: #8fdcb8; }
+.contact .lede { color: #c6d6ce; }
 .contact-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 56px; align-items: start; }
 .direct { margin-top: 32px; display: grid; gap: 14px; }
 .direct p { display: grid; gap: 2px; }
-.direct span { font-size: 14px; color: #9a9fb8; }
+.direct span { font-size: 14px; color: #9fb8ad; }
 .direct a { font-size: 20px; font-weight: 600; color: #fff; overflow-wrap: anywhere; }
 
 /* ---------------------------------------------------------- lead form ---- */
-.lead { background: var(--card); color: var(--body); border-radius: 18px; padding: 30px; box-shadow: 0 18px 50px rgba(18, 20, 42, 0.12); border: 1px solid var(--line); }
+.lead { background: var(--card); color: var(--body); border-radius: 18px; padding: 30px; box-shadow: 0 18px 50px rgba(15, 42, 32, 0.12); border: 1px solid var(--line); }
 .lead-fields { display: grid; gap: 14px; }
 .lead[hidden], .lead [hidden] { display: none !important; }
 .lead-head h2 { font-size: 28px; margin-bottom: 2px; }
@@ -264,14 +267,14 @@ input, textarea {
   width: 100%;
 }
 input::placeholder, textarea::placeholder { color: var(--muted); }
-input:focus, textarea:focus { outline: none; border-color: var(--brand-text); box-shadow: 0 0 0 3px rgba(58, 63, 196, 0.18); }
+input:focus, textarea:focus { outline: none; border-color: var(--brand-text); box-shadow: 0 0 0 3px rgba(18, 116, 83, 0.18); }
 input[aria-invalid="true"] { border-color: #c2382c; }
 .via-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
 .seg { display: inline-flex; padding: 3px; border-radius: 10px; background: var(--soft); border: 1px solid var(--line); }
 .seg label { position: relative; cursor: pointer; }
 .seg input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
 .seg span { display: inline-flex; align-items: center; min-height: 34px; padding: 0 14px; border-radius: 8px; font-size: 14.5px; font-weight: 600; color: var(--muted); }
-.seg input:checked + span { background: var(--card); color: var(--ink); box-shadow: 0 1px 3px rgba(18, 20, 42, 0.14); }
+.seg input:checked + span { background: var(--card); color: var(--ink); box-shadow: 0 1px 3px rgba(15, 42, 32, 0.14); }
 .seg input:focus-visible + span { outline: 3px solid var(--brand); outline-offset: 1px; }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .more summary { cursor: pointer; display: inline-flex; align-items: center; min-height: 40px; list-style: none; font-size: 15px; font-weight: 600; color: var(--brand-text); }
@@ -350,7 +353,7 @@ footer .legal a { display: inline-flex; align-items: center; min-height: 32px; }
   color: var(--body);
   border: 1px solid var(--line);
   border-radius: 16px;
-  box-shadow: 0 20px 50px rgba(18, 20, 42, 0.22);
+  box-shadow: 0 20px 50px rgba(15, 42, 32, 0.22);
   padding: 20px;
   font-size: 15px;
   line-height: 1.5;
@@ -414,7 +417,8 @@ footer .legal .linkish { display: inline-flex; align-items: center; min-height: 
   /* the header: the logo and a Call button. The forms on the page do the booking. */
   header .wrap { height: 62px; gap: 8px; }
   header .btn { display: none; }
-  .logo .wm { font-size: 13.5px; letter-spacing: 0.1em; }
+  .logo .mark { width: 42px; }
+  .logo .wm b { font-size: 17px; }
   .hcall {
     display: inline-flex;
     align-items: center;
@@ -476,7 +480,7 @@ footer .legal .linkish { display: inline-flex; align-items: center; min-height: 
 
 @media (max-width: 360px) {
   h1 { font-size: 34px; }
-  .logo .wm { font-size: 12.5px; letter-spacing: 0.1em; }
+  .logo .wm b { font-size: 16px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
