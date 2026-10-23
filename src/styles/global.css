@@ -127,12 +127,8 @@ header .btn { min-height: 42px; padding: 0 18px; font-size: 15px; }
 .checks li { display: flex; align-items: center; gap: 8px; }
 .checks li::before { content: ""; width: 18px; height: 18px; border-radius: 50%; background: var(--good-soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.5l2.5 2.5L12 5.5' fill='none' stroke='%230e7350' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/14px no-repeat; flex: none; }
 
-.hero-media { position: relative; container-type: inline-size; }
-/* a plain browser window */
-.browser { background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; box-shadow: 0 18px 50px rgba(18, 20, 42, 0.14); }
-.browser .bar { display: flex; align-items: center; gap: 6px; padding: 10px 14px; border-bottom: 1px solid var(--line); background: var(--soft); }
-.browser .bar i { width: 10px; height: 10px; border-radius: 50%; background: #c9cddb; }
-.browser .bar span { margin-left: 10px; flex: 1; font-size: 13px; color: var(--muted); background: var(--card); border-radius: 6px; padding: 3px 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hero-media { position: relative; }
+.hero-media img { width: 100%; height: auto; }
 .chip {
   position: absolute;
   background: var(--card);
@@ -142,55 +138,8 @@ header .btn { min-height: 42px; padding: 0 18px; font-size: 15px; }
   line-height: 1.45;
   color: var(--ink);
 }
-.chip.sms { left: -36px; bottom: -30px; max-width: 270px; padding: 14px 16px; }
+.chip.sms { left: -28px; bottom: -6%; max-width: 270px; padding: 14px 16px; }
 .chip-k { display: block; font-size: 12.5px; font-weight: 600; color: var(--good); margin-bottom: 4px; }
-/* the illustration: a made-up business's website, and its app on a phone. Sized in container
-   units so it scales down as one picture; the px values are for browsers without them. */
-.browser { container-type: inline-size; }
-.mock { aspect-ratio: 880 / 560; display: grid; grid-template-rows: auto 1fr auto; gap: 18px; gap: 3.6cqw; padding: 16px 20px 20px; padding: 3.2cqw 4cqw 4cqw; font-size: 13px; font-size: 2.6cqw; color: var(--muted); }
-.m-nav { display: flex; align-items: center; gap: 14px; gap: 3cqw; }
-.m-nav b { margin-right: auto; font-family: var(--display); font-size: 16px; font-size: 3.4cqw; color: var(--ink); }
-.mock em { font-style: normal; font-weight: 600; color: #fff; background: var(--brand); border-radius: 7px; border-radius: 1.4cqw; padding: 5px 12px; padding: 1.1cqw 2.6cqw; }
-.m-hero { display: grid; grid-template-columns: 1.1fr 1fr; gap: 20px; gap: 4cqw; align-items: center; }
-.m-copy strong { display: block; font-family: var(--display); font-size: 27px; font-size: 5.4cqw; line-height: 1.08; color: var(--ink); }
-.m-copy small { display: block; margin-top: 10px; margin-top: 2cqw; font-size: 14px; font-size: 2.8cqw; }
-.m-copy em { display: inline-block; margin-top: 14px; margin-top: 3cqw; padding: 7px 15px; padding: 1.5cqw 3cqw; }
-.m-pic { position: relative; overflow: hidden; height: 100%; min-height: 130px; min-height: 26cqw; border-radius: 12px; border-radius: 2.4cqw; background: linear-gradient(135deg, #c9d1f5, #8d9de6 55%, #4d74d6); }
-.m-pic::after { content: ""; position: absolute; right: -14%; bottom: -30%; width: 70%; aspect-ratio: 1; border-radius: 50%; background: rgba(255, 255, 255, 0.22); }
-.m-tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; gap: 2.4cqw; }
-.m-tiles span { background: var(--soft); border-radius: 9px; border-radius: 1.8cqw; padding: 26px 12px 10px; padding: 5cqw 2.4cqw 2cqw; font-weight: 600; color: var(--ink); }
-.app-phone {
-  container-type: inline-size;
-  position: absolute;
-  right: -30px;
-  bottom: -46px;
-  width: 30%;
-  aspect-ratio: 9 / 18;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  gap: 1.35cqw;
-  padding: 18px 9px 9px;
-  padding: 4.2cqw 2.1cqw 2.1cqw;
-  background: var(--card);
-  border: 6px solid var(--ink);
-  border-radius: 24px;
-  box-shadow: 0 18px 44px rgba(18, 20, 42, 0.22);
-  font-size: 11px;
-  font-size: 2.3cqw;
-  color: var(--ink);
-}
-.app-phone::before { content: ""; position: absolute; top: 6px; top: 4cqw; left: 50%; transform: translateX(-50%); width: 34%; height: 5%; height: 4cqw; border-radius: 99px; background: var(--ink); }
-.ap-title { font-family: var(--display); font-size: 15px; font-size: 11cqw; }
-.ap-card { background: var(--brand); color: #fff; border-radius: 10px; border-radius: 7cqw; padding: 8px; padding: 6cqw; }
-.ap-card span { display: block; opacity: 0.8; }
-.ap-card b { font-size: 13px; font-size: 9cqw; }
-.ap-row { display: flex; align-items: center; gap: 6px; gap: 4cqw; background: var(--soft); border-radius: 8px; border-radius: 5cqw; padding: 7px; padding: 5cqw; white-space: nowrap; }
-.ap-row i { flex: none; width: 8px; height: 8px; width: 6cqw; height: 6cqw; border-radius: 50%; background: var(--good); }
-.ap-tabs { margin-top: auto; display: flex; justify-content: space-around; }
-.ap-tabs i { width: 11px; height: 11px; width: 8cqw; height: 8cqw; border-radius: 3px; border-radius: 2.4cqw; background: var(--line); }
-.ap-tabs i:first-child { background: var(--brand); }
-
 /* phones only: the form under the hero */
 .phone-form { display: none; }
 
@@ -198,7 +147,7 @@ header .btn { min-height: 42px; padding: 0 18px; font-size: 15px; }
    the first screen of a laptop too. */
 @media (min-width: 901px) {
   .hero { padding: clamp(36px, 7vh, 80px) 0 clamp(56px, 9vh, 96px); }
-  .hero-grid { grid-template-columns: 1.05fr 0.95fr; gap: 64px; }
+  .hero-grid { grid-template-columns: 0.92fr 1.08fr; gap: 44px; }
   .hero h1 { font-size: clamp(44px, min(5.4vw, 6.8vh), 64px); }
   .hero .lede { font-size: clamp(17px, 2.5vh, 20px); max-width: 600px; }
   .hero .ctas { margin-top: clamp(20px, 3.4vh, 32px); }
@@ -438,7 +387,6 @@ footer .legal .linkish { display: inline-flex; align-items: center; min-height: 
 @media (max-width: 1080px) {
   .hphone { display: none; }
   .chip.sms { left: 16px; }
-  .app-phone { right: -8px; }
 }
 
 @media (max-width: 900px) {
@@ -493,16 +441,12 @@ footer .legal .linkish { display: inline-flex; align-items: center; min-height: 
   .hero-grid { gap: 0; }
   .hero-copy { display: contents; }
   .hero h1 { order: 1; font-size: min(38px, 9.6vw); } /* three lines on a 375px iPhone too */
-  .hero-media { order: 2; margin: 22px 0 40px; }
+  .hero-media { order: 2; margin: 22px 0 26px; }
   .hero .ctas { order: 3; }
   .hero .lede { order: 4; margin-top: 22px; }
   .hero .checks { order: 5; }
-  .browser { border-radius: 12px; }
-  .browser .bar { padding: 7px 10px; }
-  .browser .bar span { font-size: 12px; }
-  /* phones: the website and the app only; the edit bubble would crowd them */
+  /* phones: just the picture; the edit bubble would crowd it */
   .chip.sms { display: none; }
-  .app-phone { right: 6px; bottom: -30px; border-width: 4px; border-radius: 16px; }
   .phone-form { display: block; margin-top: 28px; }
   .lead { padding: 22px 18px; }
   .lead-head h2 { font-size: 26px; }
