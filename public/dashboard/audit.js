@@ -177,7 +177,7 @@
   const severity = c => SEVERITY.find(([min]) => (c.w || 0) >= min);
   const SOURCE = { live: 'Checked live', domain: 'Domain records', maps: 'Google Maps', listing: 'Map listing' };
   const M = 50, CW = PAGE_W - 2 * M, BOTTOM = PAGE_H - 58;
-  const SITE = 'futureclaritytechnologies.com', PHONE = '(818) 939-7964';
+  const SITE = 'futureclaritytechnologies.com', PHONE = '(818) 585-0475';
 
   // The logo's gradients (src/components/SvgDefs.astro), in its SVG units. The beam fades to
   // transparent on the site; on white paper that's a fade to white.
