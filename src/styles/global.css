@@ -5,7 +5,7 @@
 /* ------------------------------------------------------------------ fonts --
    Self-hosted (public/fonts, latin subset, SIL Open Font License). Nothing is
    fetched from Google, so no visitor IP goes to a third party before consent,
-   and the CSP only needs font-src 'self'. Only the weights the CSS uses. */
+   and the CSP's font-src 'self' covers them (the staff dashboard still uses Google Fonts). Only the weights the CSS uses. */
 @font-face { font-family: "Barlow"; font-style: normal; font-weight: 500; font-display: swap; src: url(/fonts/barlow-latin-500-normal.woff2) format("woff2"); }
 @font-face { font-family: "Barlow"; font-style: normal; font-weight: 600; font-display: swap; src: url(/fonts/barlow-latin-600-normal.woff2) format("woff2"); }
 @font-face { font-family: "Barlow"; font-style: normal; font-weight: 700; font-display: swap; src: url(/fonts/barlow-latin-700-normal.woff2) format("woff2"); }
@@ -42,7 +42,7 @@
   --on-night: #e6f4ec;
   --on-night-dim: #a3bcb0; /* 9:1 on --night */
   --error: #b42318;
-  --star: #c98a00;         /* review stars: 3:1+ against white (non-text) */
+  --star: #a87200;         /* review stars: 3.6:1 against white (non-text) */
   --display: "Barlow", "Helvetica Neue", Arial, sans-serif;
   --cond: "Barlow Condensed", "Arial Narrow", "Helvetica Neue", sans-serif;
   --sans: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -92,10 +92,10 @@ h3 { font-size: 22px; font-weight: 700; }
 .brand-name { display: grid; gap: 7px; font: 800 21px/0.95 var(--display); letter-spacing: -0.03em; white-space: nowrap; }
 .brand-name em { font-style: normal; color: var(--emerald); }
 .brand-name small { font: 600 9px/1 var(--mono); letter-spacing: 0.56em; padding-left: 2px; }
-.site-head nav { display: flex; justify-content: center; gap: clamp(22px, 2.4vw, 44px); font: 500 15px/1 var(--sans); }
-.site-head nav a { position: relative; padding-block: 10px; }
-.site-head nav a::after { content: ""; position: absolute; bottom: 2px; left: 0; right: 0; height: 2px; background: var(--emerald); transform: scaleX(0); transform-origin: left; transition: transform 0.2s; }
-.site-head nav a:hover::after, .site-head nav a.on::after { transform: scaleX(1); }
+.site-head .bar nav { display: flex; justify-content: center; gap: clamp(22px, 2.4vw, 44px); font: 500 15px/1 var(--sans); }
+.site-head .bar nav a { position: relative; padding-block: 10px; }
+.site-head .bar nav a::after { content: ""; position: absolute; bottom: 2px; left: 0; right: 0; height: 2px; background: var(--emerald); transform: scaleX(0); transform-origin: left; transition: transform 0.2s; }
+.site-head .bar nav a:hover::after, .site-head .bar nav a.on::after { transform: scaleX(1); }
 .hright { display: flex; align-items: center; gap: 24px; }
 .hphone { display: inline-flex; align-items: center; gap: 7px; font: 600 15px/1 var(--sans); white-space: nowrap; }
 .hphone svg { width: 15px; height: 15px; fill: var(--emerald); flex: none; }
@@ -133,7 +133,7 @@ h3 { font-size: 22px; font-weight: 700; }
 .rv-stars { color: var(--star); font-size: 15px; letter-spacing: 2px; line-height: 1; }
 .review-card blockquote p { font: 500 15px/1.4 var(--sans); color: #102f23; }
 .rv-by { font-size: 13px; color: #4f6158; margin-top: 2px; }
-.example-caption { position: absolute; right: 4%; bottom: 18px; font: 500 10px/1.3 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: #3d5a4a; }
+.example-caption { position: absolute; right: 4%; bottom: 18px; padding: 5px 9px; border-radius: 6px; background: rgba(255, 255, 255, 0.92); font: 500 10px/1.3 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: #3d5a4a; }
 
 .hero-bottom { border-block: 1px solid #dcebe2; background: #edf7f0; }
 .hero-bottom .wrap { display: flex; justify-content: space-between; align-items: center; gap: 24px; max-width: 1430px; padding-block: 18px; font: 500 11px/1.4 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: #48655a; }
@@ -335,7 +335,7 @@ textarea { min-height: 96px; resize: vertical; }
   .site-head .bar { gap: 20px; }
   .brand-name { font-size: 18px; }
   .logo .mark { width: 54px; }
-  .site-head nav { gap: 20px; }
+  .site-head .bar nav { gap: 20px; }
   .hphone { display: none; }
   .hero-inner { padding-left: 5%; padding-right: 5%; }
   .hero-copy { width: 42%; }
@@ -365,7 +365,7 @@ textarea { min-height: 96px; resize: vertical; }
 @media (max-width: 900px) {
   :root { --head-h: 74px; }
   .site-head .bar { grid-template-columns: 1fr auto; gap: 12px; padding-inline: 18px; }
-  .site-head nav { display: none; }
+  .site-head .bar nav { display: none; }
   .brand-name { font-size: 16px; gap: 5px; }
   .brand-name small { font-size: 7px; letter-spacing: 0.4em; }
   .logo { gap: 6px; }
@@ -429,8 +429,13 @@ textarea { min-height: 96px; resize: vertical; }
 @media (prefers-reduced-motion: no-preference) {
   .hero-copy { animation: hero-enter 0.7s ease-out both; }
   .review-card { animation: card-enter 0.9s 0.15s ease-out both; }
-  @keyframes hero-enter { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+  /* movement only, no fade: the headline is visible from the first paint */
+  @keyframes hero-enter { from { transform: translateY(12px); } to { transform: none; } }
   @keyframes card-enter { from { opacity: 0; translate: 0 14px; } to { opacity: 1; translate: 0 0; } }
+}
+@media print {
+  .js [data-rv], .js .phone .msg-out, .js .phone .msg-in, .js .phone .sys { opacity: 1 !important; transform: none !important; clip-path: none !important; }
+  .site-head { position: static; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

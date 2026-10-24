@@ -442,7 +442,14 @@ const heroSet = (ext: string) => [900, 1400, 1774].map((w) => `/img/hero-devices
   // Sent to Google Analytics only if the visitor allowed it (Consent.astro).
   // Never include names, phone numbers or emails here.
   const track = (name: string, params: Record<string, unknown> = {}) => (window as any).fcTrack?.(name, params);
-  const placeOf = (el: Element) => el.closest('header, footer, section, .phone-form')?.className.split(' ')[0] || 'page';
+  // Where a click happened, by section: the section's id (hero, services, why, faq, contact…), or header/footer.
+  const placeOf = (el: Element) => {
+    const box = el.closest('header, footer, section, .phone-form');
+    if (!box) return 'page';
+    if (box.matches('header')) return 'header';
+    if (box.matches('footer')) return 'footer';
+    return box.id === 'start' ? 'phone-form' : box.id || 'page';
+  };
 
   document.addEventListener('click', (e) => {
     const a = (e.target as HTMLElement).closest('a') as HTMLAnchorElement | null;

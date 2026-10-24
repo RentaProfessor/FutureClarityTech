@@ -22,8 +22,8 @@
 /_astro/*
   Cache-Control: public, max-age=31536000, immutable
 
-# Self-hosted fonts and images never change at a given URL (a new file gets a new
-# name), so they can be cached hard too.
+# Self-hosted fonts never change at a given URL, so cache them hard. Images get a
+# week: give a replaced picture a new file name so nobody sees the old one.
 /fonts/*
   Cache-Control: public, max-age=31536000, immutable
 /img/*

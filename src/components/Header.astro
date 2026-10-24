@@ -65,6 +65,11 @@ const links = [
         toggle.focus();
       }
     });
+    // a tap outside the open menu closes it
+    document.addEventListener('click', (e) => {
+      const t = e.target as Node;
+      if (!menu.hidden && !menu.contains(t) && !toggle.contains(t)) set(false);
+    });
     window.matchMedia('(min-width: 901px)').addEventListener('change', (e) => e.matches && set(false));
   }
 </script>
