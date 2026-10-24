@@ -9,9 +9,9 @@ const { home = true } = Astro.props;
 const year = new Date().getFullYear();
 ---
 
-<footer>
+<footer class="site-foot">
   <div class="wrap">
-    <LogoMark href={home ? '#top' : '/'} label="Future Clarity Technologies" />
+    <LogoMark href={home ? '#top' : '/'} />
     <span>Websites, apps, SEO, hosting &amp; automations</span>
   </div>
   <!-- The privacy link has to stand out from the text around it (California's CalOPPA). -->

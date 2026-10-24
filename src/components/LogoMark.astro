@@ -1,14 +1,14 @@
 ---
 interface Props {
   href?: string;
-  label?: string;
 }
 
-// The spoken name includes the visible words "Future Clarity" so voice control can find it (WCAG 2.5.3).
-const { href = '#top', label = 'Future Clarity Technologies, home' } = Astro.props;
+// The link's name is its visible text, "FUTURE CLARITY TECHNOLOGIES", so screen readers and
+// voice control ("click Future Clarity") both find it (WCAG 2.5.3). The picture is decorative.
+const { href = '#top' } = Astro.props;
 ---
 
-<a href={href} class="logo" aria-label={label}>
-  <img class="mark" src="/img/logo-globe.webp" alt="" width="48" height="35" />
-  <span class="wm"><b>Future Clarity</b><small>TECHNOLOGIES</small></span>
+<a href={href} class="logo">
+  <img class="mark" src="/img/logo-mark.webp" alt="" width="174" height="128" />
+  <span class="brand-name"><span>FUTURE <em>CLARITY</em></span> <small>TECHNOLOGIES</small></span>
 </a>

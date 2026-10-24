@@ -5,8 +5,8 @@ import Footer from '../components/Footer.astro';
 import LeadForm from '../components/LeadForm.astro';
 
 // Asking for a free quote is one step on every screen size: LeadForm sends the
-// request straight to Supabase (public/fc-store.js). Phones get the form near
-// the top as well, where ad clicks land.
+// request straight to Supabase (public/fc-store.js). Phones get the form right
+// under the hero as well, where ad clicks land.
 
 // What we do. No prices anywhere on the site: every project starts with a free
 // consultation and a free quote.
@@ -73,72 +73,119 @@ const faqs = [
     a: "We're based in the San Fernando Valley and work with businesses anywhere by phone and video. If you're local, we're happy to meet in person.",
   },
 ];
+
+// The hero picture: AVIF where supported, WebP otherwise, three widths.
+const heroSizes = '(max-width: 900px) 170vw, 100vw';
+const heroSet = (ext: string) => [900, 1400, 1774].map((w) => `/img/hero-devices-${w}.${ext} ${w}w`).join(', ');
 ---
 
 <Layout title="FutureClarity Technologies · Websites, Apps & SEO" main="#top">
+  <link
+    slot="head"
+    rel="preload"
+    as="image"
+    type="image/avif"
+    imagesrcset={heroSet('avif')}
+    imagesizes={heroSizes}
+    fetchpriority="high"
+  />
+  <link slot="head" rel="preload" href="/fonts/barlow-condensed-latin-900-normal.woff2" as="font" type="font/woff2" crossorigin />
+
   <Header />
 
   <main id="top" tabindex="-1">
-    <!-- HERO: what we do in the headline, and a website and an app beside it -->
-    <section class="hero">
-      <div class="wrap hero-grid">
+    <!-- HERO: the company name, what we do, and a sample website and app beside it -->
+    <section class="light-hero" id="hero" aria-labelledby="hero-title">
+      <!-- Decorative: made-up businesses (Northside Dental, Ironwood) shown as examples of our work.
+           The caption below says so, which keeps the mockups from reading as client claims. -->
+      <div class="hero-art" aria-hidden="true">
+        <picture>
+          <source type="image/avif" srcset={heroSet('avif')} sizes={heroSizes} />
+          <img
+            src="/img/hero-devices-1400.webp"
+            srcset={heroSet('webp')}
+            sizes={heroSizes}
+            alt=""
+            width="1774"
+            height="887"
+            fetchpriority="high"
+            decoding="async"
+          />
+        </picture>
+      </div>
+      <div class="hero-inner">
         <div class="hero-copy">
           <p class="kicker">Web &amp; app development · San Fernando Valley</p>
-          <h1>Websites and apps, built right and kept running.</h1>
-          <p class="lede">
-            We build new sites and apps, fix the ones you have, and handle the rest: SEO, hosting, moving
-            hosts and everyday edits. We automate the busywork too.
+          <h1 class="hero-title" id="hero-title">
+            <span>Future</span><span class="outline">Clarity</span><small>Technologies</small>
+          </h1>
+          <h2>Websites and apps,<br />built right and<br />kept running.</h2>
+          <p class="hero-description">
+            We build new sites and apps, fix the ones you have, and handle the rest: SEO, hosting, moving hosts and
+            everyday edits. We automate the busywork too.
           </p>
-          <div class="ctas">
-            <a class="btn btn-primary btn-lg" href="#contact" data-to-form>Get a free quote</a>
-            <a class="call-line" href="tel:+18185850475">or call or text <b>(818) 585-0475</b></a>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#contact" data-to-form>Get a free quote <span class="arrow" aria-hidden="true">→</span></a>
+            <span class="hero-call">or call or text <a href="tel:+18185850475">(818) 585-0475</a></span>
           </div>
-          <ul class="checks">
+          <ul class="hero-checks">
             <li>Free consultation</li>
             <li>Free quote before any work starts</li>
             <li>One team for build, fixes and upkeep</li>
           </ul>
         </div>
-        <!-- what we make: a website and an app for a made-up barbershop (public/img/hero-sample.webp;
-             the photo in it is generated, not a real shop or real people) -->
-        <div class="hero-media" aria-hidden="true">
-          <img
-            src="/img/hero-sample.webp"
-            alt=""
-            width="1320"
-            height="940"
-            fetchpriority="high"
-          />
-          <div class="chip sms">
-            <span class="chip-k">Edit request · done</span>
-            "Can you add our holiday hours?" Done, and live on your site.
-          </div>
-        </div>
       </div>
+      <!-- A real customer review, quoted with ellipses where words were left out. Keep it word for word
+           from the Yelp review; don't add to it or change its meaning (FTC endorsement rules). -->
+      <figure class="review-card" aria-label="Five-star review from Jen W. on Yelp">
+        <span class="rv-yelp">Yelp</span>
+        <div>
+          <p class="rv-head">
+            <span class="rv-stars" role="img" aria-label="5 out of 5 stars">★★★★★</span><span>5-star review</span>
+          </p>
+          <blockquote>
+            <p>
+              “…handled the entire process… and got everything completed in just one day… professional, responsive, and
+              efficient throughout the entire process.”
+            </p>
+          </blockquote>
+          <p class="rv-by">— Jen W.</p>
+        </div>
+      </figure>
+      <p class="example-caption">Illustrative website &amp; app concepts</p>
     </section>
+    <div class="hero-bottom">
+      <div class="wrap">
+        <span><i aria-hidden="true"></i>Built locally.&nbsp;<b>Ready for anywhere.</b></span>
+        <span>Websites · Apps · Automations</span>
+        <span>From the first idea to everyday upkeep</span>
+      </div>
+    </div>
 
     <!-- phones: the form right under the hero, where an ad click lands -->
-    <div class="wrap phone-form" id="start">
-      <LeadForm id="hf" title="Get your free quote" />
+    <div class="phone-form" id="start">
+      <div class="wrap"><LeadForm id="hf" title="Get your free quote" /></div>
     </div>
 
     <!-- WHAT WE DO -->
-    <section id="services" class="services">
+    <section id="services" class="sec white services">
       <div class="wrap">
         <div class="head">
-          <p class="kicker">What we do</p>
-          <h2>Websites and apps, and everything that keeps them working.</h2>
-          <p class="lede">Start with one thing or hand us all of it. Every project starts with a free consultation and a free quote.</p>
+          <p class="kicker" data-rv>What we do</p>
+          <h2 data-rv="px">Websites and apps, and everything that keeps them working.</h2>
+          <p class="lede" data-rv style="--i:1">
+            Start with one thing or hand us all of it. Every project starts with a free consultation and a free quote.
+          </p>
         </div>
         <ul class="svc-grid">
           {
-            services.map((s) => (
-              <li class="svc">
+            services.map((s, i) => (
+              <li class="svc" data-rv style={`--i:${i % 3}`}>
                 <h3>{s.title}</h3>
                 <p>{s.text}</p>
                 <ul>
-                  {s.items.map((i) => (
-                    <li>{i}</li>
+                  {s.items.map((item) => (
+                    <li>{item}</li>
                   ))}
                 </ul>
               </li>
@@ -149,71 +196,70 @@ const faqs = [
     </section>
 
     <!-- AUTOMATIONS: still part of what we do, shown with one example -->
-    <section id="automations" class="auto">
+    <section id="automations" class="sec night auto">
       <div class="wrap fix">
         <div class="fix-copy">
-          <p class="kicker">Automations</p>
-          <h2>We automate the busywork, too.</h2>
-          <p>
-            When you can't pick up, callers get a text with your booking link. Every booking gets a reminder,
-            and happy customers get a quick review request. It runs on its own, built around the tools you
-            already use.
+          <p class="kicker" data-rv>Automations</p>
+          <h2 data-rv="px">We automate the busywork, too.</h2>
+          <p data-rv style="--i:1">
+            When you can't pick up, callers get a text with your booking link. Every booking gets a reminder, and happy
+            customers get a quick review request. It runs on its own, built around the tools you already use.
           </p>
-          <ul class="tags">
+          <ul class="tags" data-rv style="--i:2">
             <li>Missed-call text-back</li>
             <li>Booking reminders</li>
             <li>Review requests</li>
             <li>Rebooking nudges</li>
           </ul>
         </div>
-        <div class="phone" aria-label="Example text messages after a missed call">
-          <div class="ph-top"><b>Valley Fades</b><span>Example</span></div>
+        <div class="phone" id="phoneDemo" role="img" aria-label="Example: after a missed call, the business texts a booking link and the caller replies that they booked">
+          <div class="ph-top"><b>Northside Dental</b><span>Example</span></div>
           <p class="sys">Missed call · 2:14 PM</p>
-          <p class="out">Hi, it's Valley Fades. Sorry we missed you! Book your next cut here: valleyfades.com/book</p>
-          <p class="in extra">Thanks, just booked Thursday at 4</p>
+          <p class="msg-out">Hi, it's Northside Dental. Sorry we missed your call! Book your visit here: northsidedental.com/book</p>
+          <p class="msg-in">Thanks, just booked Thursday at 1:15</p>
         </div>
       </div>
     </section>
 
-    <!-- PROCESS: a real sequence, so it gets numbers -->
-    <section id="how" class="steps-sec">
+    <!-- HOW IT WORKS: a real sequence, so it gets numbers -->
+    <section id="how" class="sec steps-sec">
       <div class="wrap">
-        <div class="head">
-          <p class="kicker">How it works</p>
-          <h2>From first call to launch, no surprises.</h2>
+        <div class="head center">
+          <p class="kicker" data-rv>How it works</p>
+          <h2 data-rv="px">From first call to launch, no surprises.</h2>
         </div>
         <ol class="steps">
-          <li><b>Free consultation</b><span>Tell us what you need by phone, video or in person. We'll ask questions and give you honest advice.</span></li>
-          <li><b>Free quote</b><span>You get a clear quote before any work starts. No obligation.</span></li>
-          <li><b>We build it</b><span>We keep you posted as we go, and you review everything before it goes live.</span></li>
-          <li><b>We keep it running</b><span>Hosting, edits and fixes after launch, if you want us to look after it.</span></li>
+          <li data-rv style="--i:0"><b>Free consultation</b><span>Tell us what you need by phone, video or in person. We'll ask questions and give you honest advice.</span></li>
+          <li data-rv style="--i:1"><b>Free quote</b><span>You get a clear quote before any work starts. No obligation.</span></li>
+          <li data-rv style="--i:2"><b>We build it</b><span>We keep you posted as we go, and you review everything before it goes live.</span></li>
+          <li data-rv style="--i:3"><b>We keep it running</b><span>Hosting, edits and fixes after launch, if you want us to look after it.</span></li>
         </ol>
       </div>
     </section>
 
     <!-- WHY US -->
-    <section id="why" class="why">
+    <section id="why" class="sec night why">
       <div class="wrap">
         <div class="head">
-          <p class="kicker">Why FutureClarity</p>
-          <h2>A local team that picks up the phone.</h2>
+          <p class="kicker" data-rv>Why FutureClarity</p>
+          <h2 data-rv="px">A local team that picks up the phone.</h2>
         </div>
         <ul class="why-grid">
-          <li><b>One team for all of it</b><span>Design, code, SEO, hosting and fixes in one place, so nothing falls between vendors.</span></li>
-          <li><b>Plain answers</b><span>We explain things without the jargon, and you get a quote before any work starts.</span></li>
-          <li><b>You own what we build</b><span>Your domain, your site, your app and your accounts stay yours.</span></li>
-          <li><b>Easy to reach</b><span>Based in the San Fernando Valley. Call or text <a href="tel:+18185850475">(818) 585-0475</a>.</span></li>
+          <li data-rv style="--i:0"><b>One team for all of it</b><span>Design, code, SEO, hosting and fixes in one place, so nothing falls between vendors.</span></li>
+          <li data-rv style="--i:1"><b>Plain answers</b><span>We explain things without the jargon, and you get a quote before any work starts.</span></li>
+          <li data-rv style="--i:2"><b>You own what we build</b><span>Your domain, your site, your app and your accounts stay yours.</span></li>
+          <li data-rv style="--i:3"><b>Easy to reach</b><span>Based in the San Fernando Valley. Call or text <a href="tel:+18185850475">(818) 585-0475</a>.</span></li>
         </ul>
       </div>
     </section>
 
     <!-- FAQ -->
-    <section id="faq" class="faq">
+    <section id="faq" class="sec faq">
       <div class="wrap faq-grid">
         <div>
-          <p class="kicker">FAQ</p>
-          <h2>Questions people ask us</h2>
-          <p class="lede">Something else? Call or text <a href="tel:+18185850475">(818) 585-0475</a>.</p>
+          <p class="kicker" data-rv>FAQ</p>
+          <h2 data-rv="px">Questions people ask us</h2>
+          <p class="lede" data-rv style="--i:1">Something else? Call or text <a href="tel:+18185850475">(818) 585-0475</a>.</p>
         </div>
         <div class="qs">
           {
@@ -229,25 +275,23 @@ const faqs = [
     </section>
 
     <!-- CONTACT -->
-    <section id="contact" class="contact">
+    <section id="contact" class="sec white contact">
       <div class="wrap contact-grid">
         <div>
-          <p class="kicker">Get started</p>
-          <h2>Get your free quote.</h2>
-          <p class="lede">
+          <p class="kicker" data-rv>Get started</p>
+          <h2 data-rv="px">Get your free quote.</h2>
+          <p class="lede" data-rv style="--i:1">
             Tell us a little about your project. We'll call or text within one business day to set up a free
             consultation. No obligation.
           </p>
-          <div class="direct">
+          <div class="direct" data-rv style="--i:2">
             <p><span>Call or text</span><a href="tel:+18185850475">(818) 585-0475</a></p>
             <p>
-              <span>Email</span><a href="mailto:beng@futureclaritytechnologies.com"
-                >beng@futureclaritytechnologies.com</a
-              >
+              <span>Email</span><a href="mailto:beng@futureclaritytechnologies.com">beng@futureclaritytechnologies.com</a>
             </p>
           </div>
         </div>
-        <LeadForm id="cf" />
+        <LeadForm id="cf" title="Tell us about your project" />
       </div>
     </section>
   </main>
@@ -260,7 +304,7 @@ const faqs = [
 
 <script>
   // ---- in-page navigation -------------------------------------------------
-  const header = document.querySelector('header')!;
+  const header = document.querySelector('.site-head')!;
   const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const phone = () => window.matchMedia('(max-width: 640px)').matches;
 
@@ -292,7 +336,7 @@ const faqs = [
   });
 
   // Highlight the section you are in.
-  const links = Array.from(document.querySelectorAll('header nav a'));
+  const links = Array.from(document.querySelectorAll('.site-head .bar nav a'));
   const secs = links.map((a) => document.querySelector(a.getAttribute('href') || ''));
   function mark() {
     const line = header.getBoundingClientRect().height + 40;
@@ -316,6 +360,51 @@ const faqs = [
     { passive: true }
   );
   mark();
+
+  // ---- scroll reveals and the texting demo ---------------------------------
+  // Only with IntersectionObserver and without reduced motion; otherwise
+  // everything is simply visible (the CSS hides nothing without .js).
+  if ('IntersectionObserver' in window && !reduce) {
+    document.documentElement.classList.add('js');
+    const rv = new IntersectionObserver(
+      (entries) =>
+        entries.forEach((en) => {
+          if (!en.isIntersecting) return;
+          en.target.classList.add('in');
+          rv.unobserve(en.target);
+        }),
+      { rootMargin: '0px 0px -35px 0px' }
+    );
+    // A heading that wipes in starts fully clipped, which never counts as visible,
+    // so watch its parent instead.
+    document.querySelectorAll<HTMLElement>('[data-rv]').forEach((el) => {
+      if (el.dataset.rv !== 'px') return rv.observe(el);
+      const parent = el.parentElement!;
+      const io = new IntersectionObserver(
+        (entries) => {
+          if (entries.some((en) => en.isIntersecting)) {
+            el.classList.add('in');
+            io.disconnect();
+          }
+        },
+        { rootMargin: '0px 0px -35px 0px' }
+      );
+      io.observe(parent);
+    });
+    const demo = document.getElementById('phoneDemo');
+    if (demo) {
+      const io = new IntersectionObserver(
+        (entries) => {
+          if (entries.some((en) => en.isIntersecting)) {
+            demo.classList.add('in-view');
+            io.disconnect();
+          }
+        },
+        { threshold: 0.25 }
+      );
+      io.observe(demo);
+    }
+  }
 
   // ---- where the visitor came from -----------------------------------------
   // Ad links carry utm_* tags or a click id; other sites show up as the

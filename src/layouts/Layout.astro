@@ -7,12 +7,15 @@ export interface Props {
   description?: string;
   // where "Skip to content" goes: the page's <main>
   main?: string;
+  // the 404 page: keep it out of search results and give it no canonical URL
+  noindex?: boolean;
 }
 
 const {
   title,
   description = 'FutureClarity Technologies builds and fixes websites and apps, and handles SEO, hosting, site moves, edits and automations. Based in the San Fernando Valley. Free consultation and quote.',
   main = '#main',
+  noindex = false,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -31,8 +34,10 @@ const structuredData = {
       '@type': 'Organization',
       '@id': new URL('/#organization', Astro.site).href,
       name: 'FutureClarity Technologies',
+      // the spelling the page headline and logo use, so both names map to this company
+      alternateName: 'Future Clarity Technologies',
       url: new URL('/', Astro.site).href,
-      logo: new URL('/favicon-192.png', Astro.site).href,
+      logo: new URL('/img/logo-mark.png', Astro.site).href,
       image: new URL('/og.png', Astro.site).href,
       description:
         'FutureClarity Technologies is a web and app development company in the San Fernando Valley, California. It builds and fixes websites and apps, and provides SEO, hosting, site migrations, edits and business automations.',
@@ -76,8 +81,8 @@ const structuredData = {
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="format-detection" content="telephone=no" />
-    <meta name="theme-color" content="#eceeeb" />
-    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#f4fbf7" />
+    {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
     <link rel="icon" href="/favicon.ico?v=5" sizes="48x48" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=5" />
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png?v=5" />
@@ -92,14 +97,16 @@ const structuredData = {
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={new URL('/og.png', Astro.site)} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="FutureClarity Technologies: websites and apps, built right and kept running" />
+    <meta property="og:locale" content="en_US" />
     <meta name="twitter:card" content="summary_large_image" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Barlow:wght@500;600;700&family=Public+Sans:wght@400;500;600&family=Outfit:wght@500;600&display=swap"
-      rel="stylesheet"
-    />
+    <!-- Fonts are self-hosted (src/styles/global.css). The two every page shows first load early. -->
+    <link rel="preload" href="/fonts/public-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/barlow-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <slot name="head" />
 
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)} is:inline />
   </head>
