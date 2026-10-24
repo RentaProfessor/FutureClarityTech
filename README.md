@@ -18,14 +18,20 @@ npm run preview  # preview the production build
 ## Where things live
 
 - `src/pages/index.astro`: the whole site — one page, anchored sections
-  (`#how`, `#custom`, `#web`, `#pricing`, `#process`, `#working`, `#contact`)
+  (`#hero`, `#services`, `#automations`, `#how`, `#why`, `#faq`, `#contact`)
 - `src/pages/404.astro`: real 404 page, so unmatched paths return HTTP 404
   instead of a soft 404
 - `src/pages/privacy.astro`, `terms.astro`, `accessibility.astro` and their
   layout `src/layouts/Doc.astro`: the legal pages. See "Compliance" below.
-- `src/components/`: `Header`, `Footer`, `LogoMark`, and `SvgDefs` (the shared
-  gradients and glow filter the lens mark depends on)
-- `src/layouts/Layout.astro`: HTML shell, meta tags, font loading, JSON-LD
+- `src/components/`: `Header` (with the phone menu), `Footer`, `LogoMark`,
+  `LeadForm`, `ContactVia` and `Consent` (the cookie banner)
+- `src/layouts/Layout.astro`: HTML shell, meta tags, font preloads, JSON-LD
+- `public/fonts/`: the self-hosted fonts (Barlow, Barlow Condensed, Public Sans,
+  JetBrains Mono; latin subset, SIL Open Font License). Nothing loads from Google
+  Fonts on the public pages.
+- `public/img/hero-devices-*.avif|webp`: the hero picture in three widths. To
+  replace it, export a new 1774×887 picture and regenerate all six files with
+  the same names, or update `heroSet` in `index.astro`.
 - `src/styles/global.css`: design tokens and every component class
 - `public/`: favicons, Cloudflare `_headers` and `_redirects`, `robots.txt`
 - `functions/_middleware.js`: 301s any `*.pages.dev` hostname to the custom
@@ -135,7 +141,7 @@ terms once.
   so it stands out. It's in every page's footer and next to the Send buttons on
   both booking steps. It describes what the site actually does: no analytics,
   advertising or tracking cookies; requests stored in Supabase; hosting by
-  Cloudflare; fonts from Google; outreach using public business information.
+  Cloudflare; fonts served from this site; outreach using public business information.
   **Update it before** adding analytics or a chat widget, switching providers, or
   texting anyone who didn't ask.
 - **Terms** at `/terms/`. Prices are typical ranges and the written quote
@@ -150,8 +156,13 @@ terms once.
   desktop and phone width, form fields have visible labels, and every page has
   a "Skip to content" link. Re-check after design changes with the free axe
   DevTools or WAVE browser extension.
-- **No cookie banner needed:** the site sets no tracking cookies and doesn't sell
-  or share personal information.
+- **Reviews and examples (FTC endorsement rules).** The hero quotes a real Yelp
+  review word for word, with "…" only where words were left out. Never add to a
+  quote, change its meaning, or show a review that isn't real. The laptop and phone
+  in the hero show made-up businesses; the "Illustrative website & app concepts"
+  caption must stay readable next to them.
+- **Cookie banner:** shows only once a Google Analytics or Ads ID is set in
+  `src/analytics.ts`; until then the site sets no tracking cookies.
 
 ## Lead Finder: find businesses to call
 

@@ -40,11 +40,12 @@ const picks = [
       )
     }
     <label class="fld"
-      ><span>Your name</span><input id={`${id}-name`} name="name" autocomplete="name" required /></label
+      ><span>Your name</span><input id={`${id}-name`} type="text" name="name" autocomplete="name" required /></label
     >
     <label class="fld"
       ><span>Business name</span><input
         id={`${id}-business`}
+        type="text"
         name="business"
         autocomplete="organization"
         required
@@ -68,7 +69,7 @@ const picks = [
         placeholder="Tell us about your project, or paste your current site's address"></textarea>
     </details>
     <!-- Bots fill every field; people never see this one. -->
-    <label class="hp" aria-hidden="true">Leave this empty<input name="company_site" tabindex="-1" autocomplete="off" /></label>
+    <label class="hp" aria-hidden="true">Leave this empty<input type="text" name="company_site" tabindex="-1" autocomplete="off" /></label>
     <button class="btn btn-primary" type="submit">Get my free quote</button>
     <!-- Consent sits right under the button it applies to (TCPA, carrier texting rules). -->
     <p class="consent">

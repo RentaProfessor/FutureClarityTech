@@ -16,6 +16,9 @@ export default defineConfig({
   // the lossless compression every page here was written for.
   compressHTML: true,
   integrations: [sitemap()],
+  // The stylesheet is small (about 7 KB compressed): inlining it removes the
+  // one render-blocking request, so the first screen paints sooner on phones.
+  build: { inlineStylesheets: 'always' },
   vite: {
     plugins: [tailwindcss()],
     // Vite 8 targets 2023+ browsers by default and rewrites media queries as

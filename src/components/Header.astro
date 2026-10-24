@@ -2,8 +2,8 @@
 import LogoMark from './LogoMark.astro';
 
 interface Props {
-  // On the homepage the nav scrolls to in-page sections. Anywhere else (the
-  // 404 page) the same links have to navigate home first, so they are
+  // On the homepage the nav scrolls to in-page sections. Anywhere else (404,
+  // legal pages) the same links have to navigate home first, so they are
   // prefixed with "/" and the browser handles the jump natively.
   home?: boolean;
 }
@@ -19,30 +19,57 @@ const links = [
 ];
 ---
 
-<!-- Three parts: the logo at the left edge, the sections centered on the page, and the
-     button with the phone number after it at the right edge. -->
-<header>
-  <div class="wrap">
+<!-- logo | sections | phone number and button. Under 900px the sections move into a menu. -->
+<header class="site-head">
+  <div class="bar">
     <LogoMark href={home ? '#top' : '/'} />
     <nav aria-label="Sections">
       {links.map((link) => <a href={link.href}>{link.label}</a>)}
     </nav>
     <div class="hright">
-      <a class="hcall" href="tel:+18185850475" aria-label="Call (818) 585-0475">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#phoneIcon"></use></svg><span class="lbl">Call</span>
-      </a>
-      <a class="btn btn-primary" href={`${base}#contact`}>Get a free quote</a>
       <a class="hphone" href="tel:+18185850475" aria-label="Call or text (818) 585-0475"
-        ><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#phoneIcon"></use></svg>(818) 585-0475</a
+        ><svg viewBox="0 0 24 24" aria-hidden="true"
+          ><path
+            d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2Z"
+          ></path></svg
+        >(818) 585-0475</a
+      >
+      <a class="btn btn-primary" href={`${base}#contact`} data-to-form>Get a free quote</a>
+      <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"
+        ><span></span><span></span><span></span></button
       >
     </div>
   </div>
-  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-    <defs>
-      <path
-        id="phoneIcon"
-        d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2Z"
-      ></path>
-    </defs>
-  </svg>
+  <nav class="mobile-nav" id="mobile-menu" aria-label="Menu" hidden>
+    {links.map((link) => <a href={link.href}>{link.label}</a>)}
+    <a href={`${base}#contact`} data-to-form>Get a free quote</a>
+    <a href="tel:+18185850475">Call or text (818) 585-0475</a>
+  </nav>
 </header>
+
+<script>
+  // The phone menu: opens and closes, closes on a link, Escape, or a wider window.
+  const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  if (toggle && menu) {
+    const set = (open: boolean) => {
+      menu.hidden = !open;
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    };
+    toggle.addEventListener('click', () => set(menu.hidden));
+    menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => set(false)));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !menu.hidden) {
+        set(false);
+        toggle.focus();
+      }
+    });
+    // a tap outside the open menu closes it
+    document.addEventListener('click', (e) => {
+      const t = e.target as Node;
+      if (!menu.hidden && !menu.contains(t) && !toggle.contains(t)) set(false);
+    });
+    window.matchMedia('(min-width: 901px)').addEventListener('change', (e) => e.matches && set(false));
+  }
+</script>
