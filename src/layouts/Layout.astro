@@ -13,7 +13,8 @@ export interface Props {
 
 const {
   title,
-  description = 'FutureClarity Technologies builds and fixes websites and apps, and handles SEO, hosting, site moves, edits and automations. Based in the San Fernando Valley. Free consultation and quote.',
+  // under ~155 characters, or Google cuts it off in results
+  description = 'Websites and apps for San Fernando Valley businesses: new builds, fixes, SEO, hosting, site moves, edits and automations. Free consultation and free quote.',
   main = '#main',
   noindex = false,
 } = Astro.props;
@@ -24,9 +25,9 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 // before; this is what feeds brand panels and AI summaries alongside the page
 // copy. Deliberately an Organization rather than a LocalBusiness: a
 // LocalBusiness without a real postal address or service area fails
-// validation's recommended fields. Add the address and areaServed here once
-// they are settled, and keep the name, phone and email byte-identical to the
-// Google Business Profile listing.
+// validation's recommended fields. Add the address here once it is settled,
+// and keep the name, phone, email and service area matching the Google
+// Business Profile listing (a service-area business covering Los Angeles).
 const structuredData = {
   '@context': 'https://schema.org',
   '@graph': [
@@ -50,6 +51,10 @@ const structuredData = {
         contactType: 'sales',
         availableLanguage: 'English',
       },
+      areaServed: [
+        { '@type': 'Place', name: 'San Fernando Valley, CA' },
+        { '@type': 'City', name: 'Los Angeles, CA' },
+      ],
       knowsAbout: [
         'Website design and development',
         'Mobile app development',
