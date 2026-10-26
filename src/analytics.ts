@@ -9,7 +9,7 @@
 // one of these IDs is filled in, the banner doesn't show on the live site.
 export const ANALYTICS = {
   // Google Analytics 4 > Admin > Data streams > your web stream: "G-XXXXXXXXXX"
-  ga4Id: '',
+  ga4Id: 'G-HHSX8K9X0T',
   // Google Ads > Tools > Data manager > Google tag: "AW-XXXXXXXXX"
   adsId: '',
   // Google Ads > Goals > Conversions > your "Quote request" action > tag setup:
