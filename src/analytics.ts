@@ -11,8 +11,8 @@ export const ANALYTICS = {
   // Google Analytics 4 > Admin > Data streams > your web stream: "G-XXXXXXXXXX"
   ga4Id: 'G-HHSX8K9X0T',
   // Google Ads > Tools > Data manager > Google tag: "AW-XXXXXXXXX"
-  adsId: '',
+  adsId: 'AW-18500484094',
   // Google Ads > Goals > Conversions > your "Quote request" action > tag setup:
   // the part after the slash in send_to, e.g. "AbC-D_efG-h12_34-567"
-  adsLeadLabel: '',
+  adsLeadLabel: 'DzmACJz7vK4dEP732_VE',
 };
