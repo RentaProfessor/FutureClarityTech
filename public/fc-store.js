@@ -156,13 +156,24 @@
   function tellAuth(who) { codeWatchers.forEach(function (cb) { cb(who); }); }
   var TEAM = 'Team';
   var liveStore = {
-    // Plain request with the public key: visitors can only add a row, never read one back.
+    // The site's /api/lead (functions/api/lead.js) saves the request and emails the team.
+    // If it can't be reached (it doesn't exist in a local `astro dev` preview, or it's down),
+    // save straight to Supabase with the public key: visitors can only add a row, never read one back.
     submit: function (req) {
-      return fetch(BASE + '/rest/v1/requests', {
-        method: 'POST',
-        headers: { apikey: cfg.supabaseKey, Authorization: 'Bearer ' + cfg.supabaseKey, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
-        body: JSON.stringify(toDb(customerFields(req)))
-      }).then(function (r) { if (!r.ok) throw new Error('Request failed (' + r.status + ')'); });
+      var body = JSON.stringify(toDb(customerFields(req)));
+      function direct() {
+        return fetch(BASE + '/rest/v1/requests', {
+          method: 'POST',
+          headers: { apikey: cfg.supabaseKey, Authorization: 'Bearer ' + cfg.supabaseKey, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
+          body: body
+        }).then(function (r) { if (!r.ok) throw new Error('Request failed (' + r.status + ')'); });
+      }
+      return fetch('/api/lead', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: body })
+        .then(function (r) {
+          if (r.ok) return;
+          if (r.status === 400) throw new Error('Request failed (400)'); // the database would refuse it too
+          return direct();
+        }, direct);
     },
     onAuth: function (cb) {
       codeWatchers.push(cb);
