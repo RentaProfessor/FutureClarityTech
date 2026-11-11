@@ -35,9 +35,19 @@ const structuredData = {
       '@type': 'Organization',
       '@id': new URL('/#organization', Astro.site).href,
       name: 'FutureClarity Technologies',
-      // the spelling the page headline and logo use, so both names map to this company
-      alternateName: 'Future Clarity Technologies',
+      // the other ways people write the name (the Google, Yelp and Bing listings use
+      // "Future Clarity Technologies"), so every spelling maps to this company
+      alternateName: ['Future Clarity Technologies', 'FutureClarity', 'Future Clarity Tech'],
+      // the name on the Google Business Profile
+      legalName: 'Future Clarity Technologies LLC',
       url: new URL('/', Astro.site).href,
+      // this company's listings, so Google treats the site and the Google Business Profile
+      // (its Maps "cid" link) as one company and shows the listing for searches of the name.
+      // Add Bing Places, LinkedIn and others here once they're live.
+      sameAs: [
+        'https://maps.google.com/?cid=7473577754901020062',
+        'https://www.yelp.com/biz/future-clarity-technologies-los-angeles',
+      ],
       logo: new URL('/img/logo-mark.png', Astro.site).href,
       image: new URL('/og.png', Astro.site).href,
       description:
@@ -71,6 +81,8 @@ const structuredData = {
       '@id': new URL('/#website', Astro.site).href,
       url: new URL('/', Astro.site).href,
       name: 'FutureClarity Technologies',
+      // Google's site-name feature reads these too
+      alternateName: ['Future Clarity Technologies', 'FutureClarity'],
       description,
       publisher: { '@id': new URL('/#organization', Astro.site).href },
       inLanguage: 'en-US',
