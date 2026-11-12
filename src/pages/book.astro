@@ -1,0 +1,39 @@
+---
+// futureclaritytechnologies.com/book: a short link to send people who ask when we're free. It sends
+// them straight on to the Google Calendar booking page (src/booking.ts), which is made for phones.
+// It's a page rather than a _redirects entry so that a texted or emailed link still shows our name
+// and picture in its preview: link previews read this page's tags and don't follow a meta refresh.
+import { BOOKING_URL } from '../booking';
+
+const title = 'Book a free 15-minute call · FutureClarity Technologies';
+const description = "Pick a time that works for you and we'll call you. Websites, apps, SEO and hosting. No obligation.";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <meta http-equiv="refresh" content={`0; url=${BOOKING_URL}`} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="FutureClarity Technologies" />
+    <meta property="og:title" content="Book a free 15-minute call" />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL('/og.png', Astro.site)} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="FutureClarity Technologies: websites and apps, built right and kept running" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <style>
+      body { margin: 0; min-height: 100vh; display: grid; place-items: center; font: 16px/1.5 system-ui, sans-serif; color: #0c2a1f; background: #f4fbf7; }
+      a { color: #0b7352; font-weight: 600; }
+    </style>
+  </head>
+  <body>
+    <p>Opening our booking calendar… <a href={BOOKING_URL}>Tap here if it doesn't open</a>.</p>
+  </body>
+</html>

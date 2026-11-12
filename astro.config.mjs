@@ -15,7 +15,8 @@ export default defineConfig({
   // and a link that starts on the next line ("Our<a>Privacy Policy</a>"). Keep
   // the lossless compression every page here was written for.
   compressHTML: true,
-  integrations: [sitemap()],
+  // /book is a short link that forwards to the booking calendar, not a page to rank.
+  integrations: [sitemap({ filter: (page) => !page.endsWith('/book/') })],
   // The stylesheet is small (about 7 KB compressed): inlining it removes the
   // one render-blocking request, so the first screen paints sooner on phones.
   build: { inlineStylesheets: 'always' },
