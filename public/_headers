@@ -5,16 +5,18 @@
   Strict-Transport-Security: max-age=31536000
   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
   Cross-Origin-Opener-Policy: same-origin
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com https://googleads.g.doubleclick.net https://www.google.com https://www.googleadservices.com; connect-src 'self' https://bzudkcybqhmqrybskwfn.supabase.co https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://www.google.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://cloudflareinsights.com; form-action 'self'; frame-src https://td.doubleclick.net https://www.googletagmanager.com; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com https://googleads.g.doubleclick.net https://www.google.com https://www.googleadservices.com; connect-src 'self' https://bzudkcybqhmqrybskwfn.supabase.co https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://www.google.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://cloudflareinsights.com; form-action 'self'; frame-src https://td.doubleclick.net https://www.googletagmanager.com https://calendar.google.com; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests
 
 # connect-src: the homepage (the free-quote form and the dashboard-code check)
 # and /dashboard/ talk to the Supabase project only, over https. The Lead Finder's business list
 # is served from this site (/data/places/), so it needs nothing else. No form
 # posts anywhere off-site, so form-action is 'self'.
 #
-# Google Analytics / Google Ads (script, img, connect and the two frame-src
-# hosts) are allowed here, but the pages only load them after a visitor says
-# yes in the cookie banner (src/components/Consent.astro). Cloudflare Web
+# Google Analytics / Google Ads (script, img, connect and the doubleclick and
+# googletagmanager frame-src hosts) are allowed here, but the pages only load
+# them after a visitor says yes in the cookie banner (src/components/Consent.astro).
+# frame-src calendar.google.com is the homepage's booking calendar, which loads
+# only when the visitor asks for it or has said yes to Google tools. Cloudflare Web
 # Analytics (static.cloudflareinsights.com, cloudflareinsights.com) is
 # cookie-free. Any other embed stays blocked — never '*'.
 

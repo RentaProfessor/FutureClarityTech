@@ -212,6 +212,18 @@ h3 { font-size: 22px; font-weight: 700; }
 
 /* contact */
 .contact-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 6vw, 72px); align-items: start; }
+/* the booking calendar needs about 680px for Google's month-plus-two-days layout */
+@media (min-width: 901px) { .contact-book { grid-template-columns: minmax(0, 1fr) minmax(0, 680px); gap: clamp(32px, 4vw, 56px); } }
+.contact-panel { display: grid; gap: 14px; }
+.contact-way { justify-self: start; }
+.booker { display: grid; justify-items: center; gap: 18px; padding: 56px 24px; text-align: center; border: 1px solid var(--line); border-radius: 16px; background: var(--paper); }
+.booker p { color: var(--muted); max-width: 320px; }
+.booker .btn { min-height: 54px; padding: 0 23px; gap: 18px; }
+.booker .arrow { font-size: 24px; line-height: 16px; font-weight: 400; }
+.booker.open { display: block; padding: 0; border: 0; background: none; }
+.booker iframe { display: block; width: 100%; height: 760px; border: 0; border-radius: 16px; background: #fff; box-shadow: 0 0 0 1px rgba(12, 42, 31, 0.1); }
+.booker-note { margin-top: 10px; font-size: 13px; color: var(--muted); }
+.booker-note a { color: var(--ink); font-weight: 600; }
 .direct { margin-top: 30px; display: grid; gap: 14px; }
 .direct p { display: grid; gap: 4px; }
 .direct span { font: 600 11px/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }

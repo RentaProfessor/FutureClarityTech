@@ -1,6 +1,6 @@
 ---
-// The cookie banner, and the only place Google's tags are loaded. Nothing
-// from Google loads until the visitor says yes ("basic" consent mode): that
+// The cookie banner, and the only place Google's tags are loaded. No Google
+// tag loads until the visitor says yes ("basic" consent mode): that
 // keeps third-party tracking off for anyone who hasn't agreed, which is what
 // California's privacy laws (CIPA, CPRA) reward. A Global Privacy Control or
 // Do Not Track signal keeps advertising off.
@@ -117,6 +117,7 @@ const config = { ...ANALYTICS, preview: import.meta.env.DEV };
         return;
       }
       load();
+      document.dispatchEvent(new CustomEvent('fc-consent'));
     }
 
     var pick = document.getElementById('cc-pick');
@@ -145,8 +146,13 @@ const config = { ...ANALYTICS, preview: import.meta.env.DEV };
       save(pick.elements.analytics.checked, pick.elements.ads.checked);
     });
 
-    // The footer's "Cookie settings" link reopens this.
-    window.fcConsent = { open: function () { show(true); } };
+    // The footer's "Cookie settings" link reopens this. allowsGoogle lets the homepage show its Google
+    // booking calendar straight away to visitors who already said yes to Google tools; a "fc-consent"
+    // event tells it when that changes.
+    window.fcConsent = {
+      open: function () { show(true); },
+      allowsGoogle: function () { return !!(state && (state.analytics || state.ads)); },
+    };
     document.addEventListener('click', function (e) {
       var t = e.target.closest && e.target.closest('[data-cookie-settings]');
       if (t) { e.preventDefault(); show(true); }

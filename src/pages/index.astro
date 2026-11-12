@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import LeadForm from '../components/LeadForm.astro';
+import { BOOKING_URL } from '../booking';
 
 // Asking for a free quote is one step on every screen size: LeadForm sends the
 // request straight to Supabase (public/fc-store.js). Phones get the form right
@@ -125,7 +126,9 @@ const heroSet = (ext: string) => [900, 1400, 1774].map((w) => `/img/hero-devices
             everyday edits. We automate the busywork too.
           </p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#contact" data-to-form>Get a free quote <span class="arrow" aria-hidden="true">→</span></a>
+            <a class="btn btn-primary" href="#book" data-book
+              >Book a free consultation <span class="arrow" aria-hidden="true">→</span></a
+            >
             <span class="hero-call">or call or text <a href="tel:+18185850475">(818) 585-0475</a></span>
           </div>
           <ul class="hero-checks">
@@ -164,7 +167,7 @@ const heroSet = (ext: string) => [900, 1400, 1774].map((w) => `/img/hero-devices
 
     <!-- phones: the form right under the hero, where an ad click lands -->
     <div class="phone-form" id="start">
-      <div class="wrap"><LeadForm id="hf" title="Get your free quote" /></div>
+      <div class="wrap"><LeadForm id="hf" title="Rather send a message?" note="Tell us what you need. We'll reply within one business day." /></div>
     </div>
 
     <!-- WHAT WE DO -->
@@ -276,13 +279,13 @@ const heroSet = (ext: string) => [900, 1400, 1774].map((w) => `/img/hero-devices
 
     <!-- CONTACT -->
     <section id="contact" class="sec white contact">
-      <div class="wrap contact-grid">
+      <div class="wrap contact-grid contact-book">
         <div>
           <p class="kicker" data-rv>Get started</p>
-          <h2 data-rv="px">Get your free quote.</h2>
+          <h2 data-rv="px">Book your free consultation.</h2>
           <p class="lede" data-rv style="--i:1">
-            Tell us a little about your project. We'll call or text within one business day to set up a free
-            consultation. No obligation.
+            Pick a time for a free 15-minute call. We'll call you, talk through what you need, and follow up with a
+            free quote. No obligation.
           </p>
           <div class="direct" data-rv style="--i:2">
             <p><span>Call or text</span><a href="tel:+18185850475">(818) 585-0475</a></p>
@@ -291,7 +294,36 @@ const heroSet = (ext: string) => [900, 1400, 1774].map((w) => `/img/hero-devices
             </p>
           </div>
         </div>
-        <LeadForm id="cf" title="Tell us about your project" />
+        <!--
+          Booking first: a booked call beats waiting for a callback. "Send a message" swaps in the form for
+          anyone not ready to talk, so the two never stack. Our open times come from Google Calendar's booking
+          page in a frame, about 680px wide so Google shows the month beside two days of times. It loads only
+          when the visitor asks for it (any booking button, or "See open times") or has already said yes to
+          Google tools in the cookie banner, so nothing reaches Google before they choose.
+        -->
+        <div class="contact-panel" data-rv style="--i:1">
+          <div class="seg contact-way" role="radiogroup" aria-label="How would you like to start?">
+            <label><input type="radio" name="contact-way" value="book" checked /><span>Book a call</span></label>
+            <label><input type="radio" name="contact-way" value="message" /><span>Send a message</span></label>
+          </div>
+          <div data-way-panel="book">
+            <div class="booker" id="book" data-src={`${BOOKING_URL}?gv=true`}>
+              <p>See this week's open times and pick one that works for you.</p>
+              <button type="button" class="btn btn-primary" data-open-booker
+                >See open times <span class="arrow" aria-hidden="true">→</span></button
+              >
+            </div>
+            <p class="booker-note">
+              Booking is handled by Google Calendar.
+              <a href={BOOKING_URL} target="_blank" rel="noopener" data-book
+                >Open it in a new tab<span class="sr"> (opens in a new tab)</span></a
+              >
+            </p>
+          </div>
+          <div data-way-panel="message" hidden>
+            <LeadForm id="cf" title="Send us a message" note="Tell us what you need. We'll reply within one business day." />
+          </div>
+        </div>
       </div>
     </section>
   </main>
@@ -324,7 +356,7 @@ const heroSet = (ext: string) => [900, 1400, 1774].map((w) => `/img/hero-devices
     if (!a || a.classList.contains('skip')) return;
     let id = a.getAttribute('href');
     if (!id || id.length < 2) return;
-    // "Get a free quote" buttons go to the nearest form: on phones, the one under the hero.
+    // "Send us a message" links go to the nearest form: on phones, the one under the hero.
     const toForm = a.hasAttribute('data-to-form') || id === '#contact';
     if (toForm && phone()) id = '#start';
     if (!goTo(id)) return;
@@ -457,9 +489,59 @@ const heroSet = (ext: string) => [900, 1400, 1774].map((w) => `/img/hero-devices
     const href = a.getAttribute('href') || '';
     if (href.startsWith('tel:')) track('phone_click', { place: placeOf(a) });
     else if (href.startsWith('mailto:')) track('email_click', { place: placeOf(a) });
+    else if (a.hasAttribute('data-book')) track('book_click', { place: a.closest('.lead-done') ? 'after-request' : placeOf(a) });
     else if (a.hasAttribute('data-to-form') || href.endsWith('#contact')) track('cta_click', { place: placeOf(a), label: (a.textContent || '').trim().slice(0, 40) });
     else if (a.target === '_blank') track('outbound_click', { url: a.href.slice(0, 100) });
   });
+
+  // ---- the booking calendar ------------------------------------------------
+  // Google Calendar's booking page in a frame, put in place of the "See open times" button. It loads
+  // only once the visitor asks (a booking button, the "See open times" button, or arriving at /#book from
+  // another page) or has said yes to Google tools in the cookie banner.
+  // The contact section's "Book a call / Send a message" switch shows one of the two at a time.
+  const setWay = (way: string) => {
+    document.querySelectorAll<HTMLElement>('[data-way-panel]').forEach((p) => (p.hidden = p.dataset.wayPanel !== way));
+    const radio = document.querySelector<HTMLInputElement>(`input[name="contact-way"][value="${way}"]`);
+    if (radio) radio.checked = true;
+  };
+  document.querySelectorAll<HTMLInputElement>('input[name="contact-way"]').forEach((r) =>
+    r.addEventListener('change', () => {
+      setWay(r.value);
+      track('contact_way', { way: r.value });
+    })
+  );
+  // Before the page scrolls to a link's target (capture runs first), show the side it points at.
+  document.addEventListener(
+    'click',
+    (e) => {
+      const a = (e.target as HTMLElement).closest('a');
+      const href = a?.getAttribute('href') || '';
+      if (a?.hasAttribute('data-book') && href.endsWith('#book')) setWay('book');
+      else if (a && (a.hasAttribute('data-to-form') || href.endsWith('#contact')) && !phone()) setWay('message');
+    },
+    true
+  );
+
+  const booker = document.getElementById('book');
+  const openBooker = (how: string) => {
+    if (!booker || booker.querySelector('iframe')) return;
+    const frame = document.createElement('iframe');
+    frame.src = booker.dataset.src!;
+    frame.title = 'Pick a time for a free 15-minute call';
+    booker.replaceChildren(frame);
+    booker.classList.add('open');
+    track('booker_open', { how });
+  };
+  document.addEventListener('click', (e) => {
+    const t = e.target as HTMLElement;
+    if (t.closest('[data-open-booker]')) openBooker('see-times');
+    else if ((t.closest('a[data-book]')?.getAttribute('href') || '').endsWith('#book')) openBooker('button');
+  });
+  if (location.hash === '#book') openBooker('link');
+  const allowsGoogle = () => (window as any).fcConsent?.allowsGoogle?.() === true;
+  if (allowsGoogle()) openBooker('auto');
+  document.addEventListener('fc-consent', () => allowsGoogle() && openBooker('auto'));
+
   document.querySelectorAll('#faq details').forEach((d) =>
     d.addEventListener('toggle', () => {
       if ((d as HTMLDetailsElement).open) track('faq_open', { question: (d.querySelector('summary')?.textContent || '').slice(0, 80) });

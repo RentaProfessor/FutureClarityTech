@@ -34,7 +34,7 @@ const links = [
           ></path></svg
         >(818) 585-0475</a
       >
-      <a class="btn btn-primary" href={`${base}#contact`} data-to-form>Get a free quote</a>
+      <a class="btn btn-primary" href={`${base}#book`} data-book>Book a free call</a>
       <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"
         ><span></span><span></span><span></span></button
       >
@@ -42,7 +42,8 @@ const links = [
   </div>
   <nav class="mobile-nav" id="mobile-menu" aria-label="Menu" hidden>
     {links.map((link) => <a href={link.href}>{link.label}</a>)}
-    <a href={`${base}#contact`} data-to-form>Get a free quote</a>
+    <a href={`${base}#book`} data-book>Book a free call</a>
+    <a href={`${base}#contact`} data-to-form>Send us a message</a>
     <a href="tel:+18185850475">Call or text (818) 585-0475</a>
   </nav>
 </header>
