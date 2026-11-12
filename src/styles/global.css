@@ -221,7 +221,8 @@ h3 { font-size: 22px; font-weight: 700; }
 .booker .btn { min-height: 54px; padding: 0 23px; gap: 18px; }
 .booker .arrow { font-size: 24px; line-height: 16px; font-weight: 400; }
 .booker.open { display: block; padding: 0; border: 0; background: none; }
-.booker iframe { display: block; width: 100%; height: 760px; border: 0; border-radius: 16px; background: #fff; box-shadow: 0 0 0 1px rgba(12, 42, 31, 0.1); }
+/* tall enough for Google's whole calendar with a fully open day (13 hourly times), so it never scrolls on its own */
+.booker iframe { display: block; width: 100%; height: 1160px; border: 0; background: #fff; }
 .booker-note { margin-top: 10px; font-size: 13px; color: var(--muted); }
 .booker-note a { color: var(--ink); font-weight: 600; }
 .direct { margin-top: 30px; display: grid; gap: 14px; }

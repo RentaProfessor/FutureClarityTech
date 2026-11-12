@@ -307,7 +307,7 @@ const heroSet = (ext: string) => [900, 1400, 1774].map((w) => `/img/hero-devices
             <label><input type="radio" name="contact-way" value="message" /><span>Send a message</span></label>
           </div>
           <div data-way-panel="book">
-            <div class="booker" id="book" data-src={`${BOOKING_URL}?gv=true`}>
+            <div class="booker" id="book" data-src={`${BOOKING_URL}?gv=true`} data-page={BOOKING_URL}>
               <p>See this week's open times and pick one that works for you.</p>
               <button type="button" class="btn btn-primary" data-open-booker
                 >See open times <span class="arrow" aria-hidden="true">→</span></button
@@ -510,32 +510,49 @@ const heroSet = (ext: string) => [900, 1400, 1774].map((w) => `/img/hero-devices
       track('contact_way', { way: r.value });
     })
   );
+  const booker = document.getElementById('book');
+  // On phones a calendar frame inside the page fights the page's scrolling, so booking opens Google's
+  // own full-screen booking page in a new tab instead.
+  const openPage = (place: string) => {
+    window.open(booker?.dataset.page, '_blank', 'noopener');
+    track('book_click', { place, how: 'page' });
+  };
+
   // Before the page scrolls to a link's target (capture runs first), show the side it points at.
   document.addEventListener(
     'click',
     (e) => {
       const a = (e.target as HTMLElement).closest('a');
       const href = a?.getAttribute('href') || '';
-      if (a?.hasAttribute('data-book') && href.endsWith('#book')) setWay('book');
-      else if (a && (a.hasAttribute('data-to-form') || href.endsWith('#contact')) && !phone()) setWay('message');
+      if (a?.hasAttribute('data-book') && href.endsWith('#book')) {
+        if (phone()) {
+          e.preventDefault();
+          e.stopPropagation();
+          openPage(a.closest('.lead-done') ? 'after-request' : placeOf(a));
+        } else setWay('book');
+      } else if (a && (a.hasAttribute('data-to-form') || href.endsWith('#contact')) && !phone()) setWay('message');
     },
     true
   );
 
-  const booker = document.getElementById('book');
+  // The frame is tall enough for the whole calendar (a fully open day included) and has no scrollbar
+  // of its own, so scrolling over it always moves the page.
   const openBooker = (how: string) => {
-    if (!booker || booker.querySelector('iframe')) return;
+    if (!booker || phone() || booker.querySelector('iframe')) return;
     const frame = document.createElement('iframe');
     frame.src = booker.dataset.src!;
     frame.title = 'Pick a time for a free 15-minute call';
+    frame.setAttribute('scrolling', 'no');
     booker.replaceChildren(frame);
     booker.classList.add('open');
     track('booker_open', { how });
   };
   document.addEventListener('click', (e) => {
     const t = e.target as HTMLElement;
-    if (t.closest('[data-open-booker]')) openBooker('see-times');
-    else if ((t.closest('a[data-book]')?.getAttribute('href') || '').endsWith('#book')) openBooker('button');
+    if (t.closest('[data-open-booker]')) {
+      if (phone()) openPage('see-times');
+      else openBooker('see-times');
+    } else if ((t.closest('a[data-book]')?.getAttribute('href') || '').endsWith('#book')) openBooker('button');
   });
   if (location.hash === '#book') openBooker('link');
   const allowsGoogle = () => (window as any).fcConsent?.allowsGoogle?.() === true;
