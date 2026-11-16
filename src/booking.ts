@@ -1,4 +1,4 @@
-// The free 15-minute quote call: a Google Calendar booking page on
+// The free 30-minute quote call: a Google Calendar booking page on
 // brett@futureclaritytechnologies.com. Bookings land on that calendar, and anything already on it
 // (classes, other calls) is blocked out. The homepage shows it in a frame (#book), loaded only when a
 // visitor asks for it or has said yes to Google tools, so nothing reaches Google before they choose.

@@ -284,7 +284,7 @@ const heroSet = (ext: string) => [900, 1400, 1774].map((w) => `/img/hero-devices
           <p class="kicker" data-rv>Get started</p>
           <h2 data-rv="px">Book your free consultation.</h2>
           <p class="lede" data-rv style="--i:1">
-            Pick a time for a free 15-minute call. We'll call you, talk through what you need, and follow up with a
+            Pick a time for a free 30-minute call. We'll call you, talk through what you need, and follow up with a
             free quote. No obligation.
           </p>
           <div class="direct" data-rv style="--i:2">
@@ -541,7 +541,7 @@ const heroSet = (ext: string) => [900, 1400, 1774].map((w) => `/img/hero-devices
     if (!booker || phone() || booker.querySelector('iframe')) return;
     const frame = document.createElement('iframe');
     frame.src = booker.dataset.src!;
-    frame.title = 'Pick a time for a free 15-minute call';
+    frame.title = 'Pick a time for a free 30-minute call';
     frame.setAttribute('scrolling', 'no');
     booker.replaceChildren(frame);
     booker.classList.add('open');
